@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+{% block content %}
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-mv95{font-weight:bold;background-color:#27ae60;color:#000000;text-align:center}
+.tg .tg-6gnk{font-style:italic;background-color:#ffffff}
+.tg .tg-zouf{font-weight:bold;background-color:#e74c3c;color:#000000;text-align:center}
+.tg .tg-cxkv{background-color:#ffffff}
+.tg .tg-9tj9{font-weight:bold;background-color:#FFF742;color:#000000;text-align:center}
+.tg .tg-fs8g{font-weight:bold;font-family:"Lucida Sans Unicode", "Lucida Grande", sans-serif !important;;background-color:#000000;color:#ffffff;text-align:center}
+.tg .tg-stq5{font-weight:bold;background-color:#FFF742;color:#000000}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-fs8g" rowspan="3"><br><br><br><br><br>Player<br></th>
+    <th class="tg-zouf" colspan="13">RED DICE &nbsp; &nbsp; &nbsp; &nbsp;</th>
+    <th class="tg-mv95" colspan="10">GREEN DICE</th>
+  </tr>
+  <tr>
+    <td class="tg-9tj9" rowspan="2"><br><br>Total</td>
+    <td class="tg-9tj9" colspan="3">Hits</td>
+    <td class="tg-9tj9" colspan="3">Crits</td>
+    <td class="tg-9tj9" colspan="3">Focus</td>
+    <td class="tg-9tj9" colspan="3">Blanks</td>
+    <td class="tg-stq5" rowspan="2"><br><br>Total</td>
+    <td class="tg-9tj9" colspan="3">Evades</td>
+    <td class="tg-9tj9" colspan="3">Eyes</td>
+    <td class="tg-9tj9" colspan="3">Blanks</td>
+  </tr>
+  <tr>
+    <td class="tg-6gnk">Expected</td>
+    <td class="tg-6gnk">Actual</td>
+    <td class="tg-cxkv">+/-</td>
+    <td class="tg-cxkv">Expected</td>
+    <td class="tg-cxkv">Actual</td>
+    <td class="tg-cxkv">+/-</td>
+    <td class="tg-cxkv">Expected</td>
+    <td class="tg-cxkv">Actual</td>
+    <td class="tg-cxkv">+/-</td>
+    <td class="tg-cxkv">Expected</td>
+    <td class="tg-cxkv">Actual</td>
+    <td class="tg-cxkv">+/-</td>
+    <td class="tg-cxkv">Expected</td>
+    <td class="tg-cxkv">Actual</td>
+    <td class="tg-cxkv">+/-</td>
+    <td class="tg-cxkv">Expected</td>
+    <td class="tg-6gnk">Actual</td>
+    <td class="tg-6gnk">+/-</td>
+    <td class="tg-6gnk">Expected</td>
+    <td class="tg-6gnk">Actual</td>
+    <td class="tg-6gnk">+/-</td>
+  </tr>
+
+  {%  for result in results  %}
+  <tr>
+    <td class="tg-031e">{{ result.player }}</td>
+    <td class="tg-031e">{{ result.total_reds }}</td>
+    <td class="tg-031e">{{ result.expected_red_hits() }}</td>
+    <td class="tg-031e">{{ result.red_hits }}</td>
+    <td class="tg-031e">{{ result.red_hit_differential() }}</td>
+    <td class="tg-031e">{{ result.expected_red_crits() }}</td>
+    <td class="tg-031e">{{ result.red_crits }}</td>
+    <td class="tg-031e">{{ result.red_crit_differential() }}</td>
+    <td class="tg-031e">{{ result.expected_red_eyes() }}</td>
+    <td class="tg-031e">{{ result.red_eyes }}</td>
+    <td class="tg-031e">{{ result.red_focus_differential() }}</td>
+    <td class="tg-031e">{{ result.expected_red_misses()}}</td>
+    <td class="tg-031e">{{ result.red_blanks }}</td>
+    <td class="tg-031e">{{ result.red_blank_differential() }}</td>
+    <td class="tg-031e">{{ result.total_greens }}</td>
+    <td class="tg-031e">{{ result.expected_green_evades() }}</td>
+    <td class="tg-031e">{{ result.green_evades }}</td>
+    <td class="tg-031e">{{ result.green_evade_differential() }}</td>
+    <td class="tg-031e">{{ result.expected_green_eyes() }}</td>
+    <td class="tg-031e">{{ result.green_eyes }}</td>
+    <td class="tg-031e">{{ result.green_eyes_differential() }}</td>
+    <td class="tg-031e">{{ result.expected_green_blanks() }}</td>
+    <td class="tg-031e">{{ result.green_blanks }}</td>
+    <td class="tg-031e">{{ result.green_blank_differential() }}</td>
+  </tr>
+ {% endfor %}
+</table>
+    <img src="{{ url_for('static', filename=imagesrc) }}" alt="Image Placeholder">
+{%  endblock %}
