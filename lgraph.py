@@ -135,10 +135,14 @@ class LuckGraphs:
         #fig.tight_layout()
         self.fig = fig
 
+
     def get_output(self):
         canvas = FigureCanvas(self.fig)
         output = StringIO.StringIO()
         canvas.print_png( output )
+        plt.clf()
+        plt.cla()
+
         return output
 
 
