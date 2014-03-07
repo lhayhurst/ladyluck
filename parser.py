@@ -2,7 +2,7 @@
 from __future__ import print_function
 import re
 from fsm import fsm
-from model import DiceRoll, Turn
+from model import DiceRoll, AttackSet
 
 
 class LogFileParser:
@@ -227,7 +227,7 @@ class LogFileParser:
         else:
             RuntimeError("Third player detected, bombing out!")
 
-        self.current_turn = Turn(attacking_player, defending_player)
+        self.current_turn = AttackSet(attacking_player, defending_player)
 
         dice_rolled = self.get_dice_rolled( value )
 

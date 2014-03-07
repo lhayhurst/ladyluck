@@ -5,17 +5,23 @@ class DiceRoll:
         self.num = num
         self.values.append( result )
 
+    HIT = "Hit"
+    CRIT = "Crit"
+    BLANK = "Blank"
+    FOCUS = "Focus"
+    EVADE = "Evade"
+
     def value_is(self, value):
         return self.values[-1] == value
 
     def is_crit(self):
-        return self.value_is("Crit")
+        return self.value_is(DiceRoll.CRIT)
 
     def is_hit(self):
-        return self.value_is("Hit")
+        return self.value_is(DiceRoll.HIT)
 
     def is_evade(self):
-        return self.value_is("Evade")
+        return self.value_is(DiceRoll.EVADE)
 
     def add_value(self, value):
         self.values.append(value)
@@ -30,7 +36,7 @@ class DiceRoll:
         return self.values[0]
 
 
-class Turn:
+class AttackSet:
     def __init__(self, attacking_player, defending_player ):
         self.attack_rolls  = []
         self.defense_rolls = []

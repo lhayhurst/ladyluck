@@ -1,4 +1,6 @@
 import re
+import unittest
+from model import DiceRoll, AttackSet
 
 
 class DiceStats:
@@ -48,9 +50,9 @@ class DiceStats:
     RED_EYE_WEIGHT = .5
     RED_BLANK_WEIGHT = 0
 
-    EVADE_WEIGHT = 0.59375
-    GREEN_EYE_WEIGHT = 0.34375
-    GREEN_BLANK_WEIGHT = -1.40625
+    EVADE_WEIGHT = 1
+    GREEN_EYE_WEIGHT = 0.25
+    GREEN_BLANK_WEIGHT = 0
 
 
     def add_roll(self, roll, type):
@@ -77,136 +79,38 @@ class DiceStats:
             else:
                 RuntimeError ("unknown dice type, wtf?!")
 
-    def expected_red_hits(self, total=None):
-        t = 0
-        if total == None:
-            t = self.total_reds
-        else:
-            t = total
+    def expected_red_hits(self):
+        t = self.total_reds
         return t * (3.0 / 8.0)
 
-    def expected_red_misses(self, total=None):
-        t = 0
-        if total == None:
-            t = self.total_reds
-        else:
-            t = total
+    def expected_red_misses(self):
+        t = self.total_reds
         return t * (2.0 / 8.0)
 
-    def expected_red_crits(self, total=None ):
-        t = 0
-        if total == None:
-            t = self.total_reds
-        else:
-            t = total
+    def expected_red_crits(self ):
+        t = self.total_reds
         return t * (1.0 / 8.0)
 
-    def expected_red_eyes(self, total = None ):
-        t = 0
-        if total == None:
-            t = self.total_reds
-        else:
-            t = total
+    def expected_red_eyes(self):
+        t = self.total_reds
         return t * (2.0 / 8.0)
 
-    def expected_green_evades(self, total=None):
-        t = 0
-        if total == None:
-            t = self.total_greens
-        else:
-            t = total
+    def expected_green_evades(self):
+        t = self.total_greens
         return t * (3.0 / 8.0)
 
-    def expected_green_blanks(self, total=None):
-        t = 0
-        if total == None:
-            t = self.total_greens
-        else:
-            t = total
+    def expected_green_blanks(self):
+        t = self.total_greens
         return t * (3.0 / 8.0)
 
-    def expected_green_eyes(self, total=None):
-        t = 0
-        if total == None:
-            t = self.total_greens
-        else:
-            t = total
+    def expected_green_eyes(self ):
+        t = self.total_greens
         return t * (2.0 / 8.0)
-
-    def print_stats( self ):
-
-        print ("Player {0}".format(self.player) )
-        print("RED DICE")
-        print ("\tTotal rolls: {0}".format(self.total_reds) )
-        print ("\tHits: {0} (Expected: {1})".format( self.red_hits, self.expected_red_hits()) )
-        print ("\tCrits: {0} (Expected: {1})".format( self.red_crits, self.expected_red_crits()) )
-        print ("\tEyes: {0} (Expected: {1})".format( self.red_eyes, self.expected_red_eyes()) )
-        print ("\tBlanks: {0} (Expected: {1})".format( self.red_blanks, self.expected_red_misses()) )
-
-        expected_green_evades = self.expected_green_evades()
-        expected_green_blanks = self.expected_green_blanks()
-        expected_green_eyes  = self.expected_green_eyes()
-
-        print("GREEN DICE")
-        print ("\tTotal rolls: {0}".format(self.total_greens) )
-        print ("\tEvades: {0} (Expected: {1})".format( self.green_evades, expected_green_evades) )
-        print ("\tEyes: {0} (Expected: {1})".format( self.green_eyes, expected_green_eyes) )
-        print ("\tBlanks: {0} (Expected: {1})".format( self.green_blanks, expected_green_blanks) )
-
 
     def sub(self, from_text, to_text, text ):
         text = re.sub( from_text, to_text, text, re.M)
         return text
 
-    def print_stats_html(self, player2):
-
-        total_reds = self.total_reds
-        total_greens   = self.total_greens
-
-
-        htmlfile = open( "template.html")
-        html     = htmlfile.read()
-
-        html = self.sub( "\$P1", self.player, html )
-        html = self.sub( r'\$P2', player2.player, html )
-        html = self.sub( r'\$PL1_RED_TOTAL', str(total_reds), html )
-        html = self.sub( r'\$PL2_GREEN_TOTAL', str(player2.total_greens), html)
-        html = self.sub( r'\$PLAYER_ONE_RED_HIT', str(self.red_hits), html  )
-        html = self.sub( r'\$PLAYER1_RED_HITS_EXPECTED', str(self.expected_red_hits()), html )
-        html = self.sub( r'\$PLAYER1_RED_CRIT', str(self.red_crits), html)
-        html = self.sub( r'\$PL1_CRITS_EXP', str(self.expected_red_crits()), html )
-        html = self.sub( r'\$PLAYER2_GREEN_EVADES', str(player2.green_evades), html)
-
-        html = self.sub( r'\$PL1_RED_FOCUS', str(self.red_eyes), html)
-        html = self.sub( r'\$RED_FOCUS_EXP_PL1', str(self.expected_red_eyes()), html)
-        html = self.sub( r'\$PL2_GREEN_FOCUS', str(player2.green_eyes), html)
-        html = self.sub( r'\$GREEN_FOCUS_EXP_PL2', str(player2.expected_green_eyes()), html)
-
-        html = self.sub( r'\$PL1_RED_BLANK', str(self.red_blanks ), html)
-        html = self.sub( r'\$RED_BLANK_EXP_PL1', str(self.expected_red_misses()), html)
-        html = self.sub( r'\$PL2_GREEN_BLANK', str(player2.green_blanks), html)
-        html = self.sub( r'\$GREEN_BLANK_EXP_PL2', str(player2.expected_green_blanks()), html)
-
-        #DO THE OTHER SIDE
-        html = self.sub( r'\$PL2_RED_TOTAL', str(player2.total_reds), html )
-        html = self.sub( r'\$PL1_GREEN_TOTAL', str(self.total_greens), html)
-        html = self.sub( r'\$PLAYER_TWO_RED_HIT', str(player2.red_hits), html  )
-        html = self.sub( r'\$PLAYER2_RED_HITS_EXPECTED', str(player2.expected_red_hits()), html )
-        html = self.sub( r'\$PLAYER2_RED_CRIT', str(player2.red_crits), html)
-        html = self.sub( r'\$PL2_CRITS_EXP', str(player2.expected_red_crits()), html )
-        html = self.sub( r'\$PLAYER1_GREEN_EVADES', str(self.green_evades), html)
-
-        html = self.sub( r'\$PL2_RED_FOCUS', str(player2.red_eyes), html)
-        html = self.sub( r'\$RED_FOCUS_EXP_PL2', str(player2.expected_red_eyes()), html)
-        html = self.sub( r'\$PL1_GREEN_FOCUS', str(self.green_eyes), html)
-        html = self.sub( r'\$GREEN_FOCUS_EXP_PL1', str(self.expected_green_eyes()), html)
-
-        html = self.sub( r'\$PL2_RED_BLANK', str(player2.red_blanks ), html)
-        html = self.sub( r'\$RED_BLANK_EXP_PL2', str(player2.expected_red_misses()), html)
-        html = self.sub( r'\$PL1_GREEN_BLANK', str(self.green_blanks), html)
-        html = self.sub( r'\$GREEN_BLANK_EXP_PL1', str(self.expected_green_blanks()), html)
-
-        return html
 
 class LuckStats:
 
@@ -220,7 +124,7 @@ class LuckStats:
         self.red_turns = []
         self.green_turns = []
 
-    def add_turn_luck(self):
+    def add_attack_set_luck(self):
         self.red_turns.append( self.red_luck[-1] )
         self.green_turns.append( self.green_luck[-1])
 
@@ -265,14 +169,159 @@ class LuckStats:
 
         self.red_luck.append(luck)
 
-    def add_dice_set(self, set_num, dice_roll_set):
+    def add_roll(self, result, type):
+        self.dice_stats.add_roll(result, type)
 
-        for roll in dice_roll_set.attack_rolls:
+    def add_dice_set(self, set_num, set):
+
+        for roll in set.attack_rolls:
             self.dice_stats.add_roll( roll, 'Attack')
             self.add_attack_luck_record()
-        for roll in dice_roll_set.defense_rolls:
+        for roll in set.defense_rolls:
             self.dice_stats.add_roll( roll, 'Defend')
             self.add_defense_luck_record()
 
-    def add_roll(self, result, type):
-        self.dice_stats.add_roll(result, type)
+
+    def last_attack_set_red_luck(self):
+        return self.red_luck[-1]
+
+    def last_attack_set_green_luck(self):
+        return self.green_luck[-1]
+
+
+class TestStats(unittest.TestCase):
+
+    def test_greens(self):
+        t = AttackSet("P1", "P2")
+        t.add_defense_roll(DiceRoll( DiceRoll.EVADE, 1, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.EVADE, 2, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.EVADE, 3, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.EVADE, 4, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.EVADE, 5, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.EVADE, 6, "P1" ))
+
+        stats = LuckStats("P1")
+        stats.add_dice_set(1, t)
+        stats.add_defense_luck_record()
+        stats.add_attack_set_luck()
+        self.assertEqual( stats.last_attack_set_green_luck(), 3.375)
+
+        t = AttackSet("P1", "P2")
+        t.add_defense_roll(DiceRoll( DiceRoll.FOCUS, 1, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.FOCUS, 2, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.FOCUS, 3, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.FOCUS, 4, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.FOCUS, 5, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.FOCUS, 6, "P1" ))
+
+        stats.add_dice_set(2, t)
+        stats.add_defense_luck_record()
+        stats.add_attack_set_luck()
+        self.assertEqual( stats.last_attack_set_green_luck(), 2.25)
+
+        t = AttackSet("P1", "P2")
+        t.add_defense_roll(DiceRoll( DiceRoll.BLANK, 1, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.BLANK, 2, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.BLANK, 3, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.BLANK, 4, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.BLANK, 5, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.BLANK, 6, "P1" ))
+
+        stats.add_dice_set(3, t)
+        stats.add_defense_luck_record()
+        stats.add_attack_set_luck()
+        self.assertEqual( stats.last_attack_set_green_luck(), -0.375)
+
+        t = AttackSet("P1", "P2")
+        t.add_defense_roll(DiceRoll( DiceRoll.EVADE, 1, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.EVADE, 2, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.FOCUS, 3, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.FOCUS, 4, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.BLANK, 5, "P1" ))
+        t.add_defense_roll(DiceRoll( DiceRoll.BLANK, 6, "P1" ))
+
+        stats.add_dice_set(4, t)
+        stats.add_defense_luck_record()
+        stats.add_attack_set_luck()
+        self.assertEqual( stats.last_attack_set_green_luck(), -0.5)
+
+
+    def test_reds(self):
+        t = AttackSet("P1", "P2")
+        t.add_attack_roll(DiceRoll( DiceRoll.HIT, 1, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.HIT, 2, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.HIT, 3, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.CRIT, 4, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.FOCUS, 5, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.FOCUS, 6, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.BLANK, 7, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.BLANK, 8, "P1" ))
+
+        stats = LuckStats("P1")
+        stats.add_dice_set(1, t)
+        stats.add_attack_luck_record()
+        stats.add_attack_set_luck()
+        self.assertEqual( stats.last_attack_set_red_luck(), 0)
+
+        t = AttackSet("P1", "P2")
+        t.add_attack_roll(DiceRoll( DiceRoll.HIT, 1, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.HIT, 2, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.HIT, 3, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.HIT, 4, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.HIT, 5, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.HIT, 6, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.HIT, 7, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.HIT, 8, "P1" ))
+
+        stats.add_dice_set(2, t)
+        stats.add_attack_luck_record()
+        stats.add_attack_set_luck()
+        self.assertEqual( stats.last_attack_set_red_luck(), 2.75)
+
+        t = AttackSet("P1", "P2")
+        t.add_attack_roll(DiceRoll( DiceRoll.CRIT, 1, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.CRIT, 2, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.CRIT, 3, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.CRIT, 4, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.CRIT, 5, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.CRIT, 6, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.CRIT, 7, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.CRIT, 8, "P1" ))
+
+        stats.add_dice_set(3, t)
+        stats.add_attack_luck_record()
+        stats.add_attack_set_luck()
+        self.assertEqual( stats.last_attack_set_red_luck(), 7.5)
+
+        t = AttackSet("P1", "P2")
+        t.add_attack_roll(DiceRoll( DiceRoll.FOCUS, 1, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.FOCUS, 2, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.FOCUS, 3, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.FOCUS, 4, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.FOCUS, 5, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.FOCUS, 6, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.FOCUS, 7, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.FOCUS, 8, "P1" ))
+
+        stats.add_dice_set(4, t)
+        stats.add_attack_luck_record()
+        stats.add_attack_set_luck()
+        self.assertEqual( stats.last_attack_set_red_luck(), 6.25)
+
+        t = AttackSet("P1", "P2")
+        t.add_attack_roll(DiceRoll( DiceRoll.BLANK, 1, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.BLANK, 2, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.BLANK, 3, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.BLANK, 4, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.BLANK, 5, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.BLANK, 6, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.BLANK, 7, "P1" ))
+        t.add_attack_roll(DiceRoll( DiceRoll.BLANK, 8, "P1" ))
+
+        stats.add_dice_set(5, t)
+        stats.add_attack_luck_record()
+        stats.add_attack_set_luck()
+        self.assertEqual( stats.last_attack_set_red_luck(), 1)
+
+if __name__ == "__main__":
+    unittest.main()

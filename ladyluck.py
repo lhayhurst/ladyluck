@@ -1,7 +1,7 @@
 import os
 import pickle
 import uuid
-from flask import Flask, render_template, request, url_for, redirect, make_response
+from flask import Flask, render_template, request, url_for, redirect, make_response, flash
 import shutil
 from werkzeug.utils import secure_filename
 from lgraph import LuckGraphs
@@ -25,15 +25,17 @@ if not app.debug:
     app.logger.addHandler(mail_handler)
 
 
-@app.route('/chat', methods=['GET'])
-def chatpost():
-  return render_template( 'chatpost.html')
+@app.route('/new', methods=['GET'])
+def new():
+  return render_template('new.html')
 
 
 
 @app.route('/add_game', methods=['POST'])
 def add_game():
     input = request.form['chatlog']
+    if len(input) == 0:
+        return redirect(url_for('new'))
     parser = LogFileParser()
     parser.read_input_from_string(input)
     parser.run_finite_state_machine()

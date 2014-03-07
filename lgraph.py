@@ -70,8 +70,8 @@ class LuckGraphs:
                         turn.num_uncancelled_hits() + self.player1_num_uncancelled_hits[-1])
                     self.player2_num_uncancelled_hits.append(self.player2_num_uncancelled_hits[-1])
 
-            self.player1_stats.add_turn_luck()
-            self.player2_stats.add_turn_luck()
+            self.player1_stats.add_attack_set_luck()
+            self.player2_stats.add_attack_set_luck()
 
     def create_graphs(self):
         fig = plt.figure(1, figsize=(17.1, 8))
