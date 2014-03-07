@@ -75,7 +75,11 @@ def game():
     summary_stats = pickle.load( open(full_pickle_path, 'r') )
     filename = secure_filename( uuid + '.png')
 
-    return render_template( 'result.html', imagesrc=filename, results=summary_stats)
+    return render_template( 'result.html',
+                             imagesrc=filename,
+                             results=summary_stats,
+                             player1=summary_stats[0].player,
+                             player2=summary_stats[1].player)
 
 def get_summary_stats(turns):
 
