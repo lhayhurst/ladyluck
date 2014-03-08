@@ -51,7 +51,7 @@ class DiceStats:
     RED_BLANK_WEIGHT = 0
 
     EVADE_WEIGHT = 1
-    GREEN_EYE_WEIGHT = 0.25
+    GREEN_EYE_WEIGHT = 0.75
     GREEN_BLANK_WEIGHT = 0
 
 
