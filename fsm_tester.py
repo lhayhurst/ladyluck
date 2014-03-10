@@ -124,7 +124,7 @@ class TestFsm(unittest.TestCase):
 
     def test_mu0n_v_paul_game(self):
         parser = LogFileParser()
-        parser.read_input_from_file("logfiles/muon_v_paul.txt")
+        parser.read_input_from_file("logfiles/ricky_v_val.txt")
         parser.run_finite_state_machine()
 
 

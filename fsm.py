@@ -62,7 +62,7 @@ class fsm(object):
                 current, next, condition = self.nextStates[0]
                 callback = None
 
-            print("transitioning from state {0} to state {1} given input {2}".format( self.currentState, next, value ) )
+            #print("transitioning from state {0} to state {1} given input {2}".format( self.currentState, next, value ) )
 
             self.currentState, changed = (next,True)\
             if self.currentState != next else (next, False)
