@@ -69,29 +69,37 @@ def add_game():
     if len(input) == 0:
         return redirect(url_for('new'))
     parser = LogFileParser()
-    parser.read_input_from_string(input)
-    parser.run_finite_state_machine()
-    graphs = LuckGraphs(parser.turns)
 
-    #build the stats graphs
-    output = graphs.get_output()
-    output.seek(0)
-    game_uuid = uuid.uuid4()
-    filename = secure_filename( str(game_uuid) + '.png')
-    full_pwd = os.path.join( static_dir, filename)
-    fd = open( full_pwd, 'w')
-    shutil.copyfileobj( output, fd )
+    try:
+        parser.read_input_from_string(input)
+        parser.run_finite_state_machine()
+        graphs = LuckGraphs(parser.turns)
 
-    pickled_game_name = secure_filename(str(game_uuid) + '.pik' )
-    full_pickle_path  = os.path.join( static_dir, pickled_game_name)
-    pickle.dump( parser, open(full_pickle_path, 'wb') )
+        #build the stats graphs
+        output = graphs.get_output()
+        output.seek(0)
+        game_uuid = uuid.uuid4()
+        filename = secure_filename( str(game_uuid) + '.png')
+        full_pwd = os.path.join( static_dir, filename)
+        fd = open( full_pwd, 'w')
+        shutil.copyfileobj( output, fd )
 
-    #build the summary stats
-    summary_stats = get_summary_stats(parser.turns, winner)
-    pickled_game_name = secure_filename(str(game_uuid) + '.pik' )
-    full_pickle_path  = os.path.join( static_dir, pickled_game_name)
-    pickle.dump( summary_stats, open(full_pickle_path, 'wb') )
+        pickled_game_name = secure_filename(str(game_uuid) + '.pik' )
+        full_pickle_path  = os.path.join( static_dir, pickled_game_name)
+        pickle.dump( parser, open(full_pickle_path, 'wb') )
 
+        #build the summary stats
+        summary_stats = get_summary_stats(parser.turns, winner)
+        pickled_game_name = secure_filename(str(game_uuid) + '.pik' )
+        full_pickle_path  = os.path.join( static_dir, pickled_game_name)
+        pickle.dump( summary_stats, open(full_pickle_path, 'wb') )
+    except Exception as inst:
+        error_dir = os.path.join( static_dir, "bad_chat_logs")
+        error_file = os.path.join( error_dir, str(uuid.uuid4() ) + ".txt" )
+        fd = open( error_file, 'w' )
+        fd.write( input )
+        fd.close()
+        return render_template( 'game_error.html' )
 
     return redirect( url_for('game', id=str(game_uuid)) )
 

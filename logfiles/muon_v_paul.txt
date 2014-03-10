@@ -1,0 +1,463 @@
+ - Star Wars X-Wing Miniatures Game version 5.0.1
+ - Extension Crazy_Toms_Playmats_-5.0.0 v5.0.0 loaded
+ - Extension Gabriel's_Map_Pack_-5.0.0 v5.0.0 loaded
+ - Extension Yagyu's_Map_Pack_-5.0.0 v5.0.0 loaded
+
+  Welcome to the VASSAL server
+
+
+ For help, see the VASSAL Forum at http://www.vassalengine.org/forum
+
+ - Loading QF - Paul vs Mu0n.vlog ...
+ - This game was saved with extension 'A-Wing_Booster_-4.0' loaded. You do not have this extension loaded. Place the file into the 'D:\My Documents\X-wing Miniatures\VASSAL x-wing\edit attempt\Star_Wars_X-Wing_Miniatures_Game-5.0.1_ext' folder to load it
+ - This game was saved with extension 'B-Wing_Booster_-4.5.1' loaded. You do not have this extension loaded. Place the file into the 'D:\My Documents\X-wing Miniatures\VASSAL x-wing\edit attempt\Star_Wars_X-Wing_Miniatures_Game-5.0.1_ext' folder to load it
+ - This game was saved with extension 'Explodey_Things_-4.5.1' loaded. You do not have this extension loaded. Place the file into the 'D:\My Documents\X-wing Miniatures\VASSAL x-wing\edit attempt\Star_Wars_X-Wing_Miniatures_Game-5.0.1_ext' folder to load it
+ - This game was saved with extension 'Firespray-31_Booster_-4.5.1' loaded. You do not have this extension loaded. Place the file into the 'D:\My Documents\X-wing Miniatures\VASSAL x-wing\edit attempt\Star_Wars_X-Wing_Miniatures_Game-5.0.1_ext' folder to load it
+ - This game was saved with extension 'HWK-290_Booster_-4.5.1' loaded. You do not have this extension loaded. Place the file into the 'D:\My Documents\X-wing Miniatures\VASSAL x-wing\edit attempt\Star_Wars_X-Wing_Miniatures_Game-5.0.1_ext' folder to load it
+ - This game was saved with extension 'Lambda_Shuttle_-4.5.1' loaded. You do not have this extension loaded. Place the file into the 'D:\My Documents\X-wing Miniatures\VASSAL x-wing\edit attempt\Star_Wars_X-Wing_Miniatures_Game-5.0.1_ext' folder to load it
+ - This game was saved with extension 'Tie_Advanced_Booster_-4.0' loaded. You do not have this extension loaded. Place the file into the 'D:\My Documents\X-wing Miniatures\VASSAL x-wing\edit attempt\Star_Wars_X-Wing_Miniatures_Game-5.0.1_ext' folder to load it
+ - This game was saved with extension 'Tie_Bomber_Booster_-4.5.1' loaded. You do not have this extension loaded. Place the file into the 'D:\My Documents\X-wing Miniatures\VASSAL x-wing\edit attempt\Star_Wars_X-Wing_Miniatures_Game-5.0.1_ext' folder to load it
+ - This game was saved with extension 'Tie_Fighter_Booster_-4.0' loaded. You do not have this extension loaded. Place the file into the 'D:\My Documents\X-wing Miniatures\VASSAL x-wing\edit attempt\Star_Wars_X-Wing_Miniatures_Game-5.0.1_ext' folder to load it
+ - This game was saved with extension 'Tie_Interceptor_Booster_-4.0' loaded. You do not have this extension loaded. Place the file into the 'D:\My Documents\X-wing Miniatures\VASSAL x-wing\edit attempt\Star_Wars_X-Wing_Miniatures_Game-5.0.1_ext' folder to load it
+ - This game was saved with extension 'X-Wing_Booster_-4.0' loaded. You do not have this extension loaded. Place the file into the 'D:\My Documents\X-wing Miniatures\VASSAL x-wing\edit attempt\Star_Wars_X-Wing_Miniatures_Game-5.0.1_ext' folder to load it
+ - This game was saved with extension 'Y-Wing_Booster-4.2' loaded. You do not have this extension loaded. Place the file into the 'D:\My Documents\X-wing Miniatures\VASSAL x-wing\edit attempt\Star_Wars_X-Wing_Miniatures_Game-5.0.1_ext' folder to load it
+ - This game was saved with extension 'Yagyu's_Map_Pack_-4.0' loaded. You do not have this extension loaded. Place the file into the 'D:\My Documents\X-wing Miniatures\VASSAL x-wing\edit attempt\Star_Wars_X-Wing_Miniatures_Game-5.0.1_ext' folder to load it
+ - This game was saved with extension 'YT-1300_Booster_-4.5.1' loaded. You do not have this extension loaded. Place the file into the 'D:\My Documents\X-wing Miniatures\VASSAL x-wing\edit attempt\Star_Wars_X-Wing_Miniatures_Game-5.0.1_ext' folder to load it
+ - Bad Data in Module: Image not found Up-Ion_Cannon.png
+ - Bad Data in Module: Image not found Up-Advanced-Sensors.png
+ - Bad Data in Module: Image not found Up-Ion_Cannon_Turret.png
+ - Bad Data in Module: Image not found Pilot_Roark_Garnet.png
+ - Bad Data in Module: Image not found Pilot-Rookie_Pilot.png
+ - Bad Data in Module: Image not found Pilot_Ibtisam.png
+ - Bad Data in Module: Image not found Move-wheel_Back.png
+ - Bad Data in Module: Image not found Move-wheel.png
+ - Bad Data in Module: Image not found Pilot-Biggs_Darklighter.png
+ - Bad Data in Module: Image not found Pilot_Dagger_Squadron.png
+ - Loaded QF - Paul vs Mu0n.vlog
+ - Bad Data in Module: Image not found move_2_S.png
+ - Bad Data in Module: Image not found move_1_T.png
+ - Bad Data in Module: Image not found move_2_B.png
+ - Bad Data in Module: Image not found move_1_S.png
+<Mu0n> - started my log too
+<Paul Heaver> - ok
+<Mu0n> - k
+<Paul Heaver> - ok
+<Mu0n> - k
+<Paul Heaver> - ok
+<Paul Heaver> - so your 2's, my 2, your 4 (roark's 4 right?), mine, then  5 and your 6?
+<Mu0n> - roark is 4 yes
+<Mu0n> - sounds right
+<Mu0n> - k
+<Paul Heaver> - hmmm
+<Paul Heaver> - ok
+<Mu0n> - k
+<Paul Heaver> - ok
+<Mu0n> - set
+<Paul Heaver> - dials then
+<Mu0n> - GLHF gg no zerg 6 pool rush
+<Paul Heaver> - ......haha
+<Mu0n> - rdy
+<Paul Heaver> - same
+* --- Pilot Name (Rook1) performs move: 2 - Left Turn
+ - Bad Data in Module: Image not found Action-target_Lock.png
+* --- Pilot Name (Rook2) performs move: 1 - Forward
+<Mu0n> - k
+* --- Rookie (R) performs move: 4 - Forward
+<Paul Heaver> - ok
+* --- Pilot Name (Roark) performs move: 1 - Forward
+<Mu0n> - k
+* --- Dagger 2 (D2) performs move: 2 - Right Bank
+* --- Dagger 1 (D1) performs move: 2 - Right Bank
+* --- Biggs (B) performs move: 4 - Forward
+<Paul Heaver> - ok
+* --- Pilot Name (Ibtie) performs move: 2 - Right Bank
+<Mu0n> - k dials!
+<Mu0n> - rdy
+<Paul Heaver> - same
+* --- Pilot Name (Rook1) performs move: 4 - Forward
+* --- Pilot Name (Rook2) performs move: 2 - Forward
+<Mu0n> - k
+* --- Rookie (R) performs move: 3 - Right Bank
+<Paul Heaver> - ok
+* --- Pilot Name (Roark) performs move: 2 - Left Turn
+<Mu0n> - k
+<Paul Heaver> - both B's are using advanced sensors to roll left
+* --- Dagger 2 (D2) performs move: 3 - Forward
+* --- Dagger 1 (D1) performs move: 3 - Forward
+* --- Biggs (B) performs move: 3 - Right Bank
+<Paul Heaver> - ok
+<Paul Heaver> - whee asteroids
+* --- Pilot Name (Ibtie) performs move: 1 - Forward
+<Mu0n> - k
+<Paul Heaver> - so close
+<Mu0n> - rdy
+<Paul Heaver> - I'm a little slow this time
+<Mu0n> - np
+<Paul Heaver> - ok all set
+<Paul Heaver> - this is somewhat complex now. :)
+* --- Pilot Name (Rook1) performs move: 4 - Forward
+* --- Pilot Name (Rook1) performs move: 4 - Koiogran
+* --- Pilot Name (Rook2) performs move: 2 - Right Bank
+<Mu0n> - thinking
+<Paul Heaver> - sure
+<Mu0n> - k
+* --- Rookie (R) performs move: 4 - Forward
+<Paul Heaver> - oops!
+* *** Paul Heaver Rolls to Attack: [Hit], [], [], [], []  ***
+<Paul Heaver> - that's a poor start
+<Paul Heaver> -
+<Paul Heaver> - I was sure he would dodge that
+<Mu0n> - roark next
+<Paul Heaver> - well, my 2's done
+* --- Pilot Name (Roark) performs move: 2 - Right Turn
+<Mu0n> - k
+<Mu0n> - daggers are up
+* --- Dagger 2 (D2) performs move: 3 - Forward
+<Paul Heaver> - thinking on barrel or not
+<Paul Heaver> - nah, going to TL
+<Paul Heaver> - Ibtie if in range, otherwise rookie 2
+<Mu0n> - k
+<Paul Heaver> - other one will barrel left before moving
+* --- Dagger 1 (D1) performs move: 3 - Right Bank
+<Paul Heaver> - like so?
+<Mu0n> - yes
+<Paul Heaver> - biggs'll smack him
+* --- Biggs (B) performs move: 3 - Forward
+<Paul Heaver> - I'm normally better at this. :)
+<Mu0n> - ok
+<Paul Heaver> - ok
+<Mu0n> - thinking about adv sensors
+<Mu0n> - pre-BR left
+* --- Pilot Name (Ibtie) performs move: 3 - Right Bank
+<Mu0n> - roark gives ps12 to rook2
+<Mu0n> - 3v2 against biggs
+<Paul Heaver> - ok
+* *** Mu0n Rolls to Attack: [Focus], [Blank], [Hit], [], []  ***
+<Mu0n> - keep focus
+<Mu0n> - 1h
+* *** Paul Heaver Rolls to Defend: [Focus], [Blank], [], [], []  ***
+<Paul Heaver> - 1s gone
+<Mu0n> - only target for ibtie is biggs?
+<Paul Heaver> - correct
+<Mu0n> - ion cannon at biggs
+<Mu0n> - 3v3 through rock
+<Paul Heaver> - ok
+<Mu0n> - 1 rr due to stress
+* *** Mu0n Rolls to Attack: [Blank], [Hit], [Crit], [], []  ***
+<Paul Heaver> - yup
+* *** Mu0n Re-Rolls Attack Die 1 (Blank) and gets a [Hit] ***
+* *** Paul Heaver Rolls to Defend: [Blank], [Blank], [Blank], [], []  ***
+<Paul Heaver> - haha
+<Paul Heaver> - get ioned biggs
+<Paul Heaver> - biggs vs rookie, 3v2
+* *** Paul Heaver Rolls to Attack: [Focus], [Focus], [Hit], [], []  ***
+<Paul Heaver> - 1h
+* *** Mu0n Rolls to Defend: [Evade], [Evade], [], [], []  ***
+<Mu0n> - roark has no shot
+<Paul Heaver> - d2 fires at ... roark or rook1...
+<Paul Heaver> - rook1 if possible
+<Paul Heaver> - nope
+<Paul Heaver> - roark it is
+<Mu0n> - 3v4
+* *** Paul Heaver Rolls to Attack: [Hit], [Hit], [Hit], [], []  ***
+<Paul Heaver> - 3h
+* *** Mu0n Rolls to Defend: [Evade], [Evade], [Blank], [Focus], []  ***
+<Mu0n> - focus
+<Paul Heaver> - sure, d1 vs ibtie if possible
+<Paul Heaver> - yup. 3c2
+* *** Paul Heaver Rolls to Attack: [Hit], [Blank], [Focus], [], []  ***
+<Paul Heaver> - 1h
+* *** Mu0n Rolls to Defend: [Focus], [Evade], [], [], []  ***
+<Mu0n> - and dials
+<Paul Heaver> - ok, that's all.  Took 3 and dealt 0, not my best start. :)
+<Mu0n> - rdy
+<Paul Heaver> - ok
+* --- Pilot Name (Rook1) performs move: 1 - Left Bank
+* --- Pilot Name (Rook2) performs move: 4 - Forward
+* --- Pilot Name (Rook2) performs move: 4 - Koiogran
+<Mu0n> - k
+* --- Rookie (R) performs move: 3 - Right Bank
+<Paul Heaver> - ok
+* --- Pilot Name (Roark) performs move: 2 - Right Turn
+<Mu0n> - k
+<Paul Heaver> - pre-focus D2
+* --- Dagger 2 (D2) performs move: 1 - Right Turn
+* --- Dagger 1 (D1) performs move: 1 - Forward
+<Paul Heaver> - d1 will...
+<Paul Heaver> - TL roark
+* --- Biggs (B) performs move: 1 - Forward
+<Paul Heaver> - ok ioned biggs is done
+* --- Pilot Name (Ibtie) performs move: 2 - Right Bank
+<Mu0n> - ps12 to...
+<Mu0n> - rook1
+<Paul Heaver> - ok
+<Mu0n> - rook1 to your R
+<Paul Heaver> - 4v2
+* *** Mu0n Rolls to Attack: [Focus], [Hit], [Blank], [Hit], []  ***
+<Mu0n> - focus
+<Mu0n> - 3h
+* *** Paul Heaver Rolls to Defend: [Evade], [Blank], [], [], []  ***
+<Paul Heaver> - 2h happen
+<Mu0n> - ibtisam has to shoot biggs or R alternatively...
+<Paul Heaver> - yes
+<Mu0n> - ok I'll try to finish off the rookie with mains
+<Paul Heaver> - sure
+<Mu0n> - 4v2 with 1 rr
+* *** Mu0n Rolls to Attack: [Hit], [Hit], [Crit], [Focus], []  ***
+* *** Mu0n Re-Rolls Attack Die 4 (Focus) and gets a [Blank] ***
+<Paul Heaver> - oh no
+<Mu0n> - 2h 1c
+* *** Paul Heaver Rolls to Defend: [Blank], [Evade], [], [], []  ***
+<Paul Heaver> - dead rook
+<Mu0n> - biggs is up
+<Paul Heaver> - knew I shouldn't have risked him farther up like that
+<Paul Heaver> - oh well
+<Paul Heaver> - if he can shoot ibtie he will otherwise roark
+<Paul Heaver> - 3v1 on ib
+* *** Paul Heaver Rolls to Attack: [Blank], [Hit], [Focus], [], []  ***
+<Paul Heaver> - 1h
+* *** Mu0n Rolls to Defend: [Blank], [], [], [], []  ***
+* *** Mu0n Re-Rolls Defense Die 1 (Blank) and gets a [Evade] ***
+<Mu0n> - safe
+<Paul Heaver> - nice
+<Mu0n> - roark ions d2
+<Paul Heaver> - your roark
+<Mu0n> - I'll check rock
+<Paul Heaver> - no he doesn't
+<Paul Heaver> - biggs
+<Mu0n> - ah true
+<Mu0n> - thanks
+<Mu0n> - so it's main weapons
+<Paul Heaver> - 1v3
+<Paul Heaver> - yes
+<Mu0n> - no rock
+* *** Mu0n Rolls to Attack: [Focus], [], [], [], []  ***
+<Mu0n> - miss
+<Mu0n> - your daggers
+<Paul Heaver> - d2 on ib
+<Paul Heaver> - 4v1
+* *** Paul Heaver Rolls to Attack: [Crit], [Blank], [Blank], [Crit], []  ***
+<Paul Heaver> - reroll blanks
+* *** Paul Heaver Re-Rolls Attack Die 2 (Blank) and gets a [Crit] ***
+* *** Paul Heaver Re-Rolls Attack Die 3 (Blank) and gets a [Crit] ***
+<Paul Heaver> - hahah
+<Mu0n> - v nice
+<hothie> - wow
+<niceas> - ouch
+<Paul Heaver> - wish she didn't have shields
+* *** Mu0n Rolls to Defend: [Focus], [], [], [], []  ***
+<Mu0n> - rr
+<Paul Heaver> - yup
+* *** Mu0n Rolls to Defend: [Evade], [], [], [], []  ***
+<Mu0n> - -3s
+<Paul Heaver> - d1 on ib too, 4v1
+* *** Paul Heaver Rolls to Attack: [Crit], [Hit], [Focus], [Blank], []  ***
+<Paul Heaver> - 1h1c
+* *** Mu0n Rolls to Defend: [Evade], [], [], [], []  ***
+<Mu0n> - shields--
+<Paul Heaver> - man, ibtie's a dodging machine
+<Mu0n> - against D1
+<Mu0n> - through rock
+<Mu0n> - 3v2
+* *** Mu0n Rolls to Attack: [Blank], [Hit], [Focus], [], []  ***
+<Mu0n> - 1h
+* *** Paul Heaver Rolls to Defend: [Evade], [Blank], [], [], []  ***
+<Paul Heaver> - dodged
+<Mu0n> - set
+<Paul Heaver> - yeah same
+* --- Pilot Name (Rook2) performs move: 1 - Forward
+* --- Pilot Name (Rook1) performs move: 2 - Right Bank
+<Mu0n> - k
+<Mu0n> - roark next
+<Paul Heaver> - yes
+* --- Pilot Name (Roark) performs move: 2 - Left Turn
+<Mu0n> - k
+<Paul Heaver> - daggers
+<Paul Heaver> - d2 bumps ibtie
+<Paul Heaver> - d1 prefocus
+* --- Dagger 1 (D1) performs move: 1 - Right Bank
+<Paul Heaver> - like so?
+<Mu0n> - sure
+* --- Biggs (B) performs move: 2 - Forward
+<Paul Heaver> - biggs prays for good rolls
+<Paul Heaver> - :)
+<Mu0n> - ibtie is jammed
+<Paul Heaver> - yup
+<Mu0n> - ps12 to rook1
+<Paul Heaver> - yup
+<Mu0n> - rook1 shoots biggs
+<Mu0n> - 4v2
+* *** Mu0n Rolls to Attack: [Hit], [Blank], [Hit], [Blank], []  ***
+<Mu0n> - 2h
+* *** Paul Heaver Rolls to Defend: [Focus], [Focus], [], [], []  ***
+<Paul Heaver> - focus
+<Mu0n> - ibtisam will main weapons to biggs
+* *** Mu0n Rolls to Attack: [Hit], [Hit], [Hit], [Focus], []  ***
+* *** Paul Heaver Rolls to Defend: [Blank], [Evade], [], [], []  ***
+<Paul Heaver> - biggs lives!
+<Paul Heaver> - shoots rook
+<Paul Heaver> - 4v2
+* *** Paul Heaver Rolls to Attack: [Hit], [Crit], [Crit], [Crit], []  ***
+<Paul Heaver> - hahaha
+* *** Mu0n Rolls to Defend: [Blank], [Blank], [], [], []  ***
+<niceas> - !
+<hothie> - O_O
+<WookieProdigy> - ouch
+<Paul Heaver> - angry biggs
+<Paul Heaver> - what are the crits?
+<Mu0n> - munitions failure
+<Paul Heaver> - oh there they are
+<Mu0n> - does nothing in this case
+<Paul Heaver> - I was zoomed in
+<Mu0n> - dead
+<Paul Heaver> - wow
+<Paul Heaver> - I've been flying like crap, but dice rolls help
+<Paul Heaver> - roark now?
+<Mu0n> - roark ions biggs
+* *** Mu0n Rolls to Attack: [Focus], [Hit], [Blank], [], []  ***
+<Mu0n> - focus
+* *** Paul Heaver Rolls to Defend: [Evade], [Evade], [], [], []  ***
+<Paul Heaver> - sure biggs
+<Paul Heaver> - um, ok.
+<Paul Heaver> - daggers
+<Paul Heaver> - d2 on roark
+<Paul Heaver> - 4v2
+* *** Paul Heaver Rolls to Attack: [Hit], [Focus], [Crit], [Crit], []  ***
+<Paul Heaver> - 1h2c
+* *** Mu0n Rolls to Defend: [Focus], [Evade], [], [], []  ***
+<Mu0n> - blinded
+<Paul Heaver> - sure
+<Paul Heaver> - d1 on ibtie
+<Paul Heaver> - 4v1
+* *** Paul Heaver Rolls to Attack: [Hit], [Crit], [Hit], [Crit], []  ***
+<Paul Heaver> - wow
+<niceas> - ,,,
+* *** Mu0n Rolls to Defend: [Blank], [], [], [], []  ***
+<Mu0n> - dead
+<Wookie Hunter> - omg
+<Paul Heaver> - I so did not deserve those rolls
+<Mu0n> - rook2 at biggs
+<Paul Heaver> - yeah
+* *** Mu0n Rolls to Attack: [Blank], [Focus], [Hit], [], []  ***
+<Mu0n> - focus
+* *** Paul Heaver Rolls to Defend: [Evade], [Evade], [], [], []  ***
+<Paul Heaver> - omg
+<Mu0n> - dials
+<Mu0n> - k
+<Paul Heaver> - same
+* --- Pilot Name (Rook2) performs move: 3 - Forward
+* --- Pilot Name (Roark) performs move: 2 - Right Bank
+<Mu0n> - done
+<Paul Heaver> - daggers
+* --- Dagger 2 (D2) performs move: 1 - Right Bank
+<Paul Heaver> - rolling
+* --- Dagger 1 (D1) performs move: 2 - Right Turn
+* --- Biggs (B) performs move: 4 - Forward
+* --- Biggs (B) performs move: 4 - Koiogran
+<Mu0n> - ps12 to rook2
+<Paul Heaver> - ok
+<Mu0n> - 3v2
+* *** Mu0n Rolls to Attack: [Hit], [Hit], [Focus], [], []  ***
+<Mu0n> - focus
+<Paul Heaver> - he dies
+<Paul Heaver> - daggers on roark
+<Mu0n> - no
+<Mu0n> - roark first
+<Paul Heaver> - sorry yes
+<Mu0n> - blind shoots
+<Mu0n> - your shots now
+<Paul Heaver> - ok
+<Paul Heaver> - d1 4v2
+* *** Paul Heaver Rolls to Attack: [Hit], [Hit], [Hit], [Crit], []  ***
+<Paul Heaver> - sure why not
+* *** Mu0n Rolls to Defend: [Focus], [Evade], [], [], []  ***
+<Mu0n> - focus
+<Mu0n> - ps0
+<Paul Heaver> - yup
+<Paul Heaver> - d2 next
+<Paul Heaver> - 3v2
+* *** Paul Heaver Rolls to Attack: [Focus], [Hit], [Hit], [], []  ***
+<Paul Heaver> - 2h
+* *** Mu0n Rolls to Defend: [Blank], [Evade], [], [], []  ***
+<Mu0n> - dead
+<Mu0n> - set
+<Paul Heaver> - me too
+* --- Pilot Name (Rook2) performs move: 3 - Left Turn
+<Mu0n> - k
+<Paul Heaver> - ok d1 will pre TL, d2 will preroll
+* --- Dagger 1 (D1) performs move: 2 - Forward
+* --- Dagger 2 (D2) performs move: 2 - Forward
+<Paul Heaver> - ok daggers shoot
+<Paul Heaver> - d2
+<Paul Heaver> - 3v3
+* *** Paul Heaver Rolls to Attack: [Hit], [Focus], [Blank], [], []  ***
+<Paul Heaver> - 1h
+* *** Mu0n Rolls to Defend: [Focus], [Focus], [Blank], [], []  ***
+<Paul Heaver> - 3v3 no rock?
+<Mu0n> - looks like it
+* *** Paul Heaver Rolls to Attack: [Crit], [Focus], [Hit], [], []  ***
+<Paul Heaver> - save tl
+<Paul Heaver> - 1h1c
+* *** Mu0n Rolls to Defend: [Focus], [Evade], [Evade], [], []  ***
+<Paul Heaver> - dodged
+<Mu0n> - sety
+<Paul Heaver> - same
+* --- Pilot Name (Rook2) performs move: 4 - Forward
+* --- Pilot Name (Rook2) performs move: 4 - Koiogran
+* --- Dagger 2 (D2) performs move: 1 - Left Bank
+* --- Dagger 1 (D1) performs move: 2 - Forward
+<Paul Heaver> - thinking on roll vs focus
+<Paul Heaver> - focus
+<Paul Heaver> - d2 starts
+<Paul Heaver> - nope
+<Paul Heaver> - and nope
+<Paul Heaver> - so dials
+<Mu0n> - I can't see D1 anymore
+<Mu0n> - nm
+<Mu0n> - clicked on him
+<Paul Heaver> - ok, stealth modes off?
+<Mu0n> - set
+<Paul Heaver> - same
+* --- Pilot Name (Rook2) performs move: 1 - Forward
+<Mu0n> - k
+<Paul Heaver> - ok d1 prefocus before running through that roid
+* --- Dagger 1 (D1) performs move: 3 - Forward
+* *** Paul Heaver Rolls to Attack: [Hit], [], [], [], []  ***
+<Paul Heaver> - d2 will pre TL rook2
+* --- Dagger 2 (D2) performs move: 3 - Forward
+<Paul Heaver> - oh yeah was that in range?
+* UNDO: <Paul Heaver> - oh yeah was that in range?
+<Mu0n> - yup
+* --- Dagger 2 (D2) performs move: 3 - Forward
+<Paul Heaver> - minor details. :)
+<Paul Heaver> - d2 will start
+<Paul Heaver> - 3v2
+* *** Paul Heaver Rolls to Attack: [Focus], [Hit], [Blank], [], []  ***
+<Paul Heaver> - tl the eye and blank
+* *** Paul Heaver Re-Rolls Attack Die 1 (Focus) and gets a [Crit] ***
+* *** Paul Heaver Re-Rolls Attack Die 3 (Blank) and gets a [Focus] ***
+<Paul Heaver> - 1h1c
+* *** Mu0n Rolls to Defend: [Blank], [Blank], [], [], []  ***
+<Mu0n> - atk at 2
+<Paul Heaver> - d1
+<Paul Heaver> - 4v2
+* *** Paul Heaver Rolls to Attack: [Crit], [Hit], [Blank], [Crit], []  ***
+<Paul Heaver> - tl blank
+* *** Paul Heaver Re-Rolls Attack Die 3 (Blank) and gets a [Blank] ***
+<Paul Heaver> - 1h2c
+* *** Mu0n Rolls to Defend: [Evade], [Evade], [], [], []  ***
+* *** Mu0n Rolls to Attack: [Hit], [], [], [], []  ***
+<Mu0n> - gg
+<Paul Heaver> - yeah
+<Paul Heaver> - that one round...
+<Mu0n> - you played very well
+<Mu0n> - you hedged your bets right
+<Mu0n> - your list was offensive
+<Mu0n> - gl on the rest of the playoffs
+
+Click here to Reply or Forward
+4.56 GB (30%) of 15 GB used
+Manage
+©2014 Google - Terms & Privacy
+Last account activity: 28 minutes ago
+Details
