@@ -58,7 +58,10 @@ def new():
   return render_template('new.html')
 
 
-@app.route("/")
+@app.route('/')
+def index():
+    return redirect(url_for('new') )
+
 @app.route('/add_game', methods=['POST'])
 def add_game():
     input = request.form['chatlog']
