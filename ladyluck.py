@@ -57,7 +57,7 @@ def games():
 def new():
   return render_template('new.html')
 
-
+#redirect '/' to new
 @app.route('/')
 def index():
     return redirect(url_for('new') )
