@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3>Games</h3>
+  <ul>
+  {%  for game in games  %}
+  <li>
+      <a href="{{ game['guid'] }}">{{ game['text'] }}</a>
+  </li>
+  {%  endfor %}
+  </ul>
+{% endblock %}

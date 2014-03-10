@@ -1,17 +1,27 @@
-<!doctype html>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html>
-<head>
-{% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<title>{% block title %}{% endblock %} - My Webpage</title>
-{% endblock %}
-</head>
-<body>
-<div id="content">{% block content %}{% endblock %}</div>
-<div id="footer">
-{% block footer %}
-&copy; Copyright 2014 by Lyle Hayhurst</a>.
-{% endblock %}
-</div>
-</body>
+	<head>
+		<title>Lady luck</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15" />
+		<link rel="stylesheet" href="static/style.css" />
+	</head>
+	<body>
+	<div id="conteneur" style="overflow:hidden; width:85%;">
+		  <div id="header">Lady luck</div>
+
+		  <div id="haut" >
+			<ul class="menuhaut" >
+				<li><a href="new">Input a new game</a></li>
+				<li><a href="games">Browse games</a></li>
+				<li><a href="about">About</a></li>
+
+			</ul>
+     </div>
+     <div id="centre" >
+      {% block content %}{% endblock %}</div>
+	</div>
+	</body>
 </html>
+
