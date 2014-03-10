@@ -4,7 +4,6 @@ import uuid
 import time
 from flask import Flask, render_template, request, url_for, redirect, make_response, flash
 import shutil
-from flask.ext.cache import Cache
 from werkzeug.utils import secure_filename
 from lgraph import LuckGraphs
 from parser import LogFileParser
@@ -15,7 +14,6 @@ UPLOAD_FOLDER = "static"
 ALLOWED_EXTENSIONS = set( ['png'])
 
 app    = Flask(__name__)
-cache  = Cache()
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 here = os.path.dirname(__file__)
@@ -44,7 +42,6 @@ def get_all_games():
     return ret
 
 
-@app.route("/")
 @app.route("/about")
 def about():
     return render_template('about.html')
@@ -61,7 +58,7 @@ def new():
   return render_template('new.html')
 
 
-
+@app.route("/")
 @app.route('/add_game', methods=['POST'])
 def add_game():
     input = request.form['chatlog']
