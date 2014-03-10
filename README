@@ -1,34 +1,5 @@
-This is a simple script based on Paul Heaver's program dice die roll counter (see https://teamcovenant.com/pheaver/2013/10/22/vassal-die-roll-counter/)
+Web site for showing X-Wing dice luck.
 
-It does a couple of things that Paul's program doesn't do: 1) it ignores UNDO die rolls and 2) it outputs expected values.
+See http://sozin.pythonanywhere.com/about
 
-To use it, cut and paste the vassal chat window and place it in a file.  then run main.py --input_file=filename.  If you don't provide an input file it will default to log.txt.
-
-Player Aeneas
-RED DICE
-	Total rolls: 49
-	Hits: 20 (Expected: 18.375)
-	Blanks: 11 (Expected: 12.25)
-	Eyes: 14 (Expected: 12.25)
-	Crits: 4 (Expected: 6.125)
-GREEN DICE
-	Total rolls: 26
-	Evades: 9 (Expected: 9.75)
-	Blanks: 10 (Expected: 9.75)
-	Eyes: 7 (Expecteda: 6.5)
-
-
-Player Legion
-RED DICE
-	Total rolls: 45
-	Hits: 20 (Expected: 16.875)
-	Blanks: 4 (Expected: 11.25)
-	Eyes: 13 (Expected: 11.25)
-	Crits: 8 (Expected: 5.625)
-GREEN DICE
-	Total rolls: 17
-	Evades: 7 (Expected: 6.375)
-	Blanks: 8 (Expected: 6.375)
-	Eyes: 2 (Expected: 4.25)
-
-This file was modified by PyCharm 2.6.3 for binding GitHub repository
+If you'd like to contribute to this site, please contact me on github.

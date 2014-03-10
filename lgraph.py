@@ -105,7 +105,7 @@ class LuckGraphs:
         ax1.bar(x_axis_values, player1_adv, color='r')
         ax1.bar(x_axis_values, player2_adv, color='g')
 
-        ax1.set_xlabel("Turns")
+        ax1.set_xlabel("Attack sets")
         ax1.set_ylabel("Luck")
         ax1.grid(True)
 
