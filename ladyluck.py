@@ -64,7 +64,8 @@ def index():
 
 @app.route('/add_game', methods=['POST'])
 def add_game():
-    input = request.form['chatlog']
+    input  = request.form['chatlog']
+    winner = request.form['winner']
     if len(input) == 0:
         return redirect(url_for('new'))
     parser = LogFileParser()
@@ -86,7 +87,7 @@ def add_game():
     pickle.dump( parser, open(full_pickle_path, 'wb') )
 
     #build the summary stats
-    summary_stats = get_summary_stats(parser.turns)
+    summary_stats = get_summary_stats(parser.turns, winner)
     pickled_game_name = secure_filename(str(game_uuid) + '.pik' )
     full_pickle_path  = os.path.join( static_dir, pickled_game_name)
     pickle.dump( summary_stats, open(full_pickle_path, 'wb') )
@@ -104,14 +105,21 @@ def game():
         return redirect(url_for('add_game'))
     summary_stats = pickle.load( open(full_pickle_path, 'r') )
     filename = secure_filename( uuid + '.png')
-
+    winner = None
+    if len(summary_stats) == 3: #backwards compat hack
+        winner = "Unknown"
+    else:
+        winner = summary_stats[3]
+        if winner == None or len(winner) == 0:
+           winner = "Unknown"
     return render_template( 'result.html',
                              imagesrc=filename,
                              results=(summary_stats[0],summary_stats[1]),
                              player1=summary_stats[0].player,
-                             player2=summary_stats[1].player)
+                             player2=summary_stats[1].player,
+                             winner=winner)
 
-def get_summary_stats(turns):
+def get_summary_stats(turns, winner):
 
     player1_stats = None
     player2_stats = None
@@ -144,6 +152,7 @@ def get_summary_stats(turns):
     ret.append(player1_stats)
     ret.append(player2_stats)
     ret.append(time.strftime("%m-%d-%Y"))
+    ret.append(winner)
     return ret
 
 
