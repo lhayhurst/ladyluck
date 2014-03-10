@@ -84,10 +84,6 @@ def add_game():
         fd = open( full_pwd, 'w')
         shutil.copyfileobj( output, fd )
 
-        pickled_game_name = secure_filename(str(game_uuid) + '.pik' )
-        full_pickle_path  = os.path.join( static_dir, pickled_game_name)
-        pickle.dump( parser, open(full_pickle_path, 'wb') )
-
         #build the summary stats
         summary_stats = get_summary_stats(parser.turns, winner)
         pickled_game_name = secure_filename(str(game_uuid) + '.pik' )
