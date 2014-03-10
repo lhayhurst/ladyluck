@@ -71,6 +71,13 @@ def add_game():
     parser = LogFileParser()
 
     try:
+
+        #save the input file away
+        game_uuid = uuid.uuid4()
+        chat_log = os.path.join( static_dir, "chat_logs", str(game_uuid) + ".chatlog" )
+        chat_ds = { 'winner' : winner, 'text' : input.encode( 'ascii', 'ignore ') }
+        pickle.dump( chat_ds, open(chat_log, 'wb'))
+
         parser.read_input_from_string(input)
         parser.run_finite_state_machine()
         graphs = LuckGraphs(parser.turns)
@@ -78,7 +85,6 @@ def add_game():
         #build the stats graphs
         output = graphs.get_output()
         output.seek(0)
-        game_uuid = uuid.uuid4()
         filename = secure_filename( str(game_uuid) + '.png')
         full_pwd = os.path.join( static_dir, filename)
         fd = open( full_pwd, 'w')
@@ -89,6 +95,7 @@ def add_game():
         pickled_game_name = secure_filename(str(game_uuid) + '.pik' )
         full_pickle_path  = os.path.join( static_dir, pickled_game_name)
         pickle.dump( summary_stats, open(full_pickle_path, 'wb') )
+
     except Exception as inst:
         error_dir = os.path.join( static_dir, "bad_chat_logs")
         error_file = os.path.join( error_dir, str(uuid.uuid4() ) + ".txt" )
