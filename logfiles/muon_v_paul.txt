@@ -379,7 +379,7 @@
 * *** Paul Heaver Rolls to Attack: [Focus], [Hit], [Hit], [], []  ***
 <Paul Heaver> - 2h
 * *** Mu0n Rolls to Defend: [Blank], [Evade], [], [], []  ***
-<Mu0n> - dead
+<Mu0n> - dead!
 <Mu0n> - set
 <Paul Heaver> - me too
 * --- Pilot Name (Rook2) performs move: 3 - Left Turn

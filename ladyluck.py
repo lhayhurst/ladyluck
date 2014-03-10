@@ -97,7 +97,7 @@ def add_game():
         error_dir = os.path.join( static_dir, "bad_chat_logs")
         error_file = os.path.join( error_dir, str(uuid.uuid4() ) + ".txt" )
         fd = open( error_file, 'w' )
-        fd.write( input )
+        fd.write( input.encode('ascii', 'ignore') )
         fd.close()
         return render_template( 'game_error.html' )
 
