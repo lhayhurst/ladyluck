@@ -111,6 +111,12 @@ class LogFileParser:
                 self.add_defense_modification
             ),
             (
+                LogFileParser.PLAYER_DEFENDING,
+                LogFileParser.PLAYER_DEFENDING,
+                lambda x: self.player_is_defending(x),
+                self.add_defense
+            ),
+            (
                 LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE,
                 LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE,
                 lambda x: self.player_is_modifying_defense_dice(x),
@@ -301,7 +307,7 @@ class LogFileParser:
         rs.add_attack_reroll(dice_num, dice_val)
 
     def get_defense_dice_rerolled(self, line):
-        dice_rolled = re.findall(r'.*?Re-Rolls\s+Defense\s+Dice\s+(\d+).*?and\s+gets\s+a\s+\[(.*?)\]', line)
+        dice_rolled = re.findall(r'.*?Re-Rolls\s+Defense\s+Die\s+(\d+).*?and\s+gets\s+a\s+\[(.*?)\]', line)
         return dice_rolled
 
     def get_defense_dice_changed_by_set(self, line):
@@ -309,12 +315,17 @@ class LogFileParser:
         return dice_rolled
 
     def add_defense_modification(self,fss,value):
+        print(value)
         dice = []
         if self.player_rerolled_defense_dice(value):
             dice = self.get_defense_dice_rerolled(value)
         elif self.player_turned_defense_dice(value):
             dice = self.get_defense_dice_changed_by_set(value)
+
         dice_num = dice[0][0]
         dice_val = dice[0][1]
         rs = self.current_turn
         rs.add_defense_reroll(dice_num, dice_val)
+
+if __name__ == "__main__":
+    unittest.main()

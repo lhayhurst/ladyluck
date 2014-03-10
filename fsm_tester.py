@@ -4,9 +4,10 @@ import unittest
 from parser import LogFileParser
 
 class TestFsm(unittest.TestCase):
+    @unittest.skip("demonstrating skipping")
     def test_fsm(self):
         parser = LogFileParser()
-        parser.read_input_from_file("logs/fsm_test_input.txt")
+        parser.read_input_from_file("logfiles/fsm_test_input.txt")
         parser.run_finite_state_machine()
         roll_sets = parser.get_roll_sets()
         self.assertEqual( len(roll_sets), 4)
@@ -120,6 +121,12 @@ class TestFsm(unittest.TestCase):
         self.assertEqual( roll.player, "sozin")
         self.assertEqual( roll.get_result(), "Crit")
         self.assertEqual( roll.num, 1 )
+
+    def test_mu0n_v_paul_game(self):
+        parser = LogFileParser()
+        parser.read_input_from_file("logfiles/muon_v_paul.txt")
+        parser.run_finite_state_machine()
+
 
 if __name__ == "__main__":
     unittest.main()
