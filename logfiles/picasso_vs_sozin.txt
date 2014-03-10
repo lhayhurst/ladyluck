@@ -1,0 +1,732 @@
+- Star Wars X-Wing Miniatures Game version 5.0.0
+ - Extension Crazy_Toms_Playmats_-5.0.0 v5.0.0 loaded
+ - Extension Yagyu's_Map_Pack_-5.0.0 v5.0.0 loaded
+
+  Welcome to the VASSAL server
+
+
+ For help, see the VASSAL Forum at http://www.vassalengine.org/forum
+
+ - Sending game info to Ryan Krippendorf...
+<sozin> - heya
+ - Sending game info to Ryan Krippendorf...
+ - Loading DutchsDaggersv5.vlog ...
+ - Loaded DutchsDaggersv5.vlog: 100 pts
+ - Sending game info to wilson ...
+<sozin> - great is the eternal struggle against ... bedtime.
+<Ryan Krippendorf> - LOL
+<Ryan Krippendorf> - I'm at 99
+<sozin> - hundo!
+ - Loading mu0n setup file.vlog ...
+ - Loaded mu0n setup file.vlog
+ - Bad Data in Module: Image not found move_1_S.png
+ - Bad Data in Module: Image not found move_2_S.png
+ - Bad Data in Module: Image not found move_2_B.png
+ - Bad Data in Module: Image not found move_1_T.png
+<sozin> - you get init.
+<Ryan Krippendorf> - k, I'll take right side
+<Ryan Krippendorf> - set
+<sozin> - set
+<Ryan Krippendorf> - set
+<sozin> - set
+<Ryan Krippendorf> - set
+<sozin> - set
+<sozin> - ok, APs!
+<Ryan Krippendorf> - I'm going to tweak a bit but go ahead
+<sozin> - set
+<Ryan Krippendorf> - set
+<Ryan Krippendorf> - Good luck
+<sozin> - you too!
+<Ryan Krippendorf> - set
+<sozin> - me 2
+<Ryan Krippendorf> - ok APs
+* --- AP (#4) performs move: 5 - Forward
+* --- AP (#3) performs move: 5 - Forward
+* --- AP (#1) performs move: 5 - Forward
+* --- AP (#2) performs move: 5 - Forward
+* --- AP (#5) performs move: 3 - Right Turn
+<Ryan Krippendorf> - br
+<Ryan Krippendorf> - set
+* --- DAGGER2 (2) performs move: 1 - Forward
+* --- DAGGER1 (1) performs move: 1 - Forward
+* ---  () performs move: 1 - Forward
+* ---  () performs move: 1 - Forward
+<sozin> - set
+* --- Howlrunner (#7) performs move: 5 - Forward
+* --- Mauler (#6) performs move: 5 - Forward
+<Ryan Krippendorf> - set
+<Ryan Krippendorf> - dials
+<Ryan Krippendorf> - Set
+<Ryan Krippendorf> - So is this going to end up as one of your pod casts?
+<sozin> - probably not, I'm focusing on the hi lo tourney games
+<Ryan Krippendorf> - k
+<sozin> - unless you want it to be :P
+<Ryan Krippendorf> - NO!
+<sozin> - i feel kinda bad, i think some folks were bothered a tiny bit
+<sozin> - i'm so used to chess where everyone's games get inspected ad naseum.
+<Ryan Krippendorf> - Oh wow
+<sozin> - set
+<Ryan Krippendorf> - ok
+<Ryan Krippendorf> - Shoot 5 is wrong, it is the same as all the others
+<sozin> - -nods-
+* --- AP (#5) performs move: 3 - Right Bank
+* --- AP (#3) performs move: 3 - Right Bank
+* --- AP (#4) performs move: 3 - Right Bank
+* --- AP (#2) performs move: 3 - Right Bank
+* --- AP (#1) performs move: 3 - Right Bank
+ - Sending game info to hothie...
+<sozin> - hi doug!!!
+<hothie> - hey.
+<sozin> - I was very tempted to fly HSF here :P
+ - Sending game info to Captain Typo...
+<Ryan Krippendorf> - lol
+* ---  () performs move: 2 - Left Turn
+* ---  () performs move: 2 - Left Turn
+* --- DAGGER2 (2) performs move: 2 - Left Turn
+* --- DAGGER1 (1) performs move: 2 - Left Turn
+<Ryan Krippendorf> - EPIC
+<hothie> - lyle, are you planning on the March 22nd tourney in Janesville, WI?
+<Ryan Krippendorf> - Hi doug
+<Ryan Krippendorf> - Is everyone going to this SC
+<sozin> - no ... olga is not entirely pleased with all the weekend gaming I've been doing :-(
+<sozin> - also I work so much during the week, I end up missing katherine a ton
+<hothie> - hm, ok, cause some of the omaha crew and I might be road tripping to that one
+<hothie> - ok, np
+<sozin> - tx for asking though, wish I could do it
+<sozin> - set btw
+* --- Mauler (#6) performs move: 3 - Right Bank
+* --- Howlrunner (#7) performs move: 3 - Right Bank
+<hothie> - yeah, my wife isn't pleased with ne being gone practically every saturday in march, either
+<Ryan Krippendorf> - Set
+<hothie> - but the rest of the summer will be fairly light
+<Captain Typo> - Janesville? which game store?
+<hothie> - kryptonite kollectibles? I think
+<Captain Typo> - ah
+<Ryan Krippendorf> - Correct
+<Captain Typo> - 3 1/2 hour drive for me
+<hothie> - 6 1/2 for omaha, but they're thinking about it anyway
+<sozin> - those dudes are hardcore
+<sozin> - as are you :-)
+ - Sending game info to Robert...
+<hothie> - well, tentative plan is for them to crash at my place firday night, we all leave from here sat morn, it's about 4 1/2 from here, play come back sat nite, crash here, then they leave back to omaha sun morn
+<Captain Typo> - sniff sniff................it smells like Galictic Funk
+<hothie> - xwingtoman and legionthree has said they're interested, not sure about other yet
+<sozin> - set
+<sozin> - matt won the dice dojo tourney on sat
+<sozin> - went 3-0 with bloody daggers
+<hothie> - cool, he is a killer with those daggers
+<sozin> - dom was in NC doing warhammer masters
+<Ryan Krippendorf> - Jake won saturday at Barristers
+<Ryan Krippendorf> - set
+<sozin> - go for it
+<Ryan Krippendorf> - 1s going
+<Captain Typo> - Jake from Chicago?
+<sozin> - Jake's a madison guy
+<Ryan Krippendorf> - Jake from Milwaukee
+<Captain Typo> - ah
+<Ryan Krippendorf> - Atomic Boxer
+<hothie> - milwaukee
+* --- AP (#5) performs move: 4 - Forward
+<Captain Typo> - wow
+<hothie> - ya know, the rigning National Champ
+<hothie> - ~reigning
+* --- AP (#3) performs move: 5 - Forward
+* --- AP (#4) performs move: 5 - Forward
+<sozin> - oh noes
+* *** Ryan Krippendorf Rolls to Attack: [Hit], [], [], [], [], [], [] ***
+* *** Ryan Krippendorf Rolls to Attack: [Blank], [], [], [], [], [], [] ***
+<Captain Typo> - reigning?? as in Paul Heaver?
+<sozin> - paul's WC
+<hothie> - national champ, paul is worlkd champ
+<Captain Typo> - oooooohhhhhhhhhhhhh
+<sozin> - jake won nationals at gencon last year
+<sozin> - speaking of which ... who is going?
+* --- AP (#1) performs move: 5 - Forward
+<sozin> - I've booked my tickets!!
+<Ryan Krippendorf> - BR
+<hothie> - i'm not sure if I'll be there or not
+<Ryan Krippendorf> - I got mine
+<sozin> - aww
+<hothie> - wife is a vendor at a con near chicago that weekend, so I get to babysit
+* --- AP (#2) performs move: 5 - Forward
+<hothie> - although i MAY be able to leave just fo saturday
+<sozin> - -nods-
+<Ryan Krippendorf> - K
+<Captain Typo> - are you guys from Wisconsin?
+<Ryan Krippendorf> - I am
+<hothie> - I'm in Iowa
+<Captain Typo> - it cold up here
+<Ryan Krippendorf> - Freezing
+* --- DAGGER2 (2) performs move: 2 - Right Turn
+<hothie> - ahem, below freezing
+* --- DAGGER1 (1) performs move: 2 - Right Turn
+* ---  () performs move: 2 - Right Turn
+* ---  () performs move: 2 - Right Turn
+<sozin> - lock on #3
+<sozin> - pass lock to #1
+<sozin> - set
+<Ryan Krippendorf> - Hoth like conditions
+* --- Mauler (#6) performs move: 5 - Forward
+<sozin> - chicago has been so brutally bad this winter.  at one point I gave up - existentially
+<hothie> - snowing again here tonight
+<hothie> - which I'm sure you'll get in a few hours
+<Captain Typo> - Thursday night, my Tauntaun will freeze
+<Ryan Krippendorf> - ok?
+<sozin> - shore
+* --- Howlrunner (#7) performs move: 5 - Forward
+<hothie> - but hey, at least you'll be luke warm...*rimshot
+<sozin> - I see my subversive agent's plan to slip psychadelics into the imperial cantina worked ! :P
+<Captain Typo> - lol
+<Ryan Krippendorf> - ok
+<sozin> - action for howl?
+<Ryan Krippendorf> - bumped
+<sozin> - ah.
+<sozin> - close one.
+<sozin> - ok combat!
+<Ryan Krippendorf> - ST
+<Ryan Krippendorf> - 3=8, 1=7
+<sozin> - k
+<Ryan Krippendorf> - 8s
+<Captain Typo> - use TL on him first
+<Captain Typo> - then the arc
+<Ryan Krippendorf> - k
+<Captain Typo> - that help with the vassal bug
+<Captain Typo> - *helps
+ - Sending game info to bcrow...
+<sozin> - its the best bug of all.
+<Captain Typo> - :P
+<Ryan Krippendorf> - 2, 2v3
+<sozin> - hey, robert, that you? (vorpal)
+* *** Ryan Krippendorf Rolls to Attack: [Hit], [Crit], [], [], [], [], [] ***
+* *** sozin Rolls to Defend: [Evade], [Blank], [Evade], [], [], [], [] ***
+<Ryan Krippendorf> - 2v1 on 2
+* *** Ryan Krippendorf Rolls to Attack: [Hit], [Crit], [], [], [], [], [] ***
+* *** sozin Rolls to Defend: [Blank], [], [], [], [], [], [] ***
+<sozin> - 2s
+<Ryan Krippendorf> - 7s
+<Ryan Krippendorf> - 2v2 on 2
+* *** Ryan Krippendorf Rolls to Attack: [Crit], [Hit], [], [], [], [], [] ***
+<Ryan Krippendorf> - Wow
+<sozin> - nice attack dice :P
+* *** sozin Rolls to Defend: [Evade], [Blank], [], [], [], [], [] ***
+<sozin> - 1s
+<sozin> - I'm writing a little program to graph all this nice and pretty
+<Ryan Krippendorf> - ok, all you
+<hothie> - night guys
+<Ryan Krippendorf> - later doug
+<sozin> - prototype: https://docs.google.com/spreadsheet/ccc?key=0AgjR2KvZS6uAdFpwTDY2QkZ1RmUzb2xZekRKcGF1YXc&usp=drive_web#gid=1
+<sozin> - later doug!
+<sozin> - ok
+<Captain Typo> - night
+<sozin> - dutch on #3
+<sozin> - 2 v 3
+<Ryan Krippendorf> - k
+* *** sozin Rolls to Attack: [Focus], [Focus], [], [], [], [], [] ***
+<sozin> - tl
+* *** sozin Re-Rolls Attack Die 1 [Focus] and gets a [Hit] ***
+* *** sozin Re-Rolls Attack Die 2 [Focus] and gets a [Focus] ***
+<sozin> - 1h
+* *** Ryan Krippendorf Rolls to Defend: [Focus], [Blank], [Focus], [], [], [], [] ***
+<Ryan Krippendorf> - take 1
+<sozin> - #1 on #3, 3 v 3
+* *** sozin Rolls to Attack: [Hit], [Blank], [Blank], [], [], [], [] ***
+<sozin> - TL
+* *** sozin Re-Rolls Attack Die 2 [Blank] and gets a [Focus] ***
+* *** sozin Re-Rolls Attack Die 3 [Blank] and gets a [Focus] ***
+<sozin> - focus
+* *** sozin turns Attack Die 2 [Focus] into a [Hit] ***
+* *** sozin turns Attack Die 3 [Focus] into a [Hit] ***
+* *** Ryan Krippendorf Rolls to Defend: [Blank], [Focus], [Focus], [], [], [], [] ***
+<Ryan Krippendorf> - dead
+<sozin> - red on #4
+ - Sending game info to bcrow...
+<sozin> - 3 v 3
+* *** sozin Rolls to Attack: [Blank], [Focus], [Blank], [], [], [], [] ***
+<sozin> - focus, 1h
+* *** Ryan Krippendorf Rolls to Defend: [Blank], [Blank], [Evade], [], [], [], [] ***
+<Ryan Krippendorf> - evaded
+<sozin> - #2 on #4, 3 v 3
+* *** sozin Rolls to Attack: [Focus], [Blank], [Hit], [], [], [], [] ***
+<sozin> - focus, 2h
+* *** Ryan Krippendorf Rolls to Defend: [Evade], [Focus], [Evade], [], [], [], [] ***
+<Ryan Krippendorf> - evaded
+<sozin> - k
+<Ryan Krippendorf> - 2v2?
+<Ryan Krippendorf> - on2
+<sozin> - yep
+* *** Ryan Krippendorf Rolls to Attack: [Blank], [Focus], [], [], [], [], [] ***
+<Ryan Krippendorf> - HR
+* *** Ryan Krippendorf Re-Rolls Attack Die 1 [Blank] and gets a [Blank] ***
+<Ryan Krippendorf> - fcs
+<Ryan Krippendorf> - 1h
+* *** sozin Rolls to Defend: [Focus], [Evade], [], [], [], [], [] ***
+<sozin> - eavded
+ - Sending game info to bcrow...
+<sozin> - anyone else experiencing lag?
+<Ryan Krippendorf> - yes
+<sozin> - must be the server.
+<Ryan Krippendorf> - 2v1 on 2
+<sozin> - yep
+* *** Ryan Krippendorf Rolls to Attack: [Focus], [Hit], [], [], [], [], [] ***
+<Ryan Krippendorf> - fcs
+* *** sozin Rolls to Defend: [Evade], [], [], [], [], [], [] ***
+<sozin> - 1s
+<sozin> - dials!
+<sozin> - set
+ - Sending game info to JRMan...
+<Ryan Krippendorf> - Here goes nothing
+<Ryan Krippendorf> - 1s
+* --- AP (#4) performs move: 2 - Forward
+* --- AP (#5) performs move: 2 - Left Bank
+* --- AP (#1) performs move: 3 - Right Bank
+<sozin> - looks good
+<Ryan Krippendorf> - ok?
+<sozin> - jah man
+<Ryan Krippendorf> - set
+<sozin> - ok
+* --- DAGGER1 (1) performs move: 1 - Left Bank
+* --- DAGGER2 (2) performs move: 3 - Forward
+* ---  () performs move: 1 - Forward
+* ---  () performs move: 1 - Forward
+<sozin> - TL #4
+<Ryan Krippendorf> - k
+<sozin> - pass action to ... hmm ...
+<sozin> - actually gonna check the lock distance on #1
+<sozin> - yeah lock E1
+<sozin> - #1
+<sozin> - then pass lock lock to dagger1, lock same target
+<sozin> - actually howlrunner is looking juicy.  gonna lock her.
+<sozin> - set
+<Ryan Krippendorf> - k
+* --- Mauler (#6) performs move: 3 - Forward
+<Ryan Krippendorf> - look ok?
+<sozin> - sure
+<Ryan Krippendorf> - 1=8
+<Ryan Krippendorf> - 2=7
+<sozin> - scootin' her just a tiny bit
+<Ryan Krippendorf> - k
+<Ryan Krippendorf> - 2v1 on 1
+* *** Ryan Krippendorf Rolls to Attack: [Hit], [Crit], [], [], [], [], [] ***
+* *** sozin Rolls to Defend: [Evade], [], [], [], [], [], [] ***
+<sozin> - 1s
+<sozin> - my evade dice are hot.
+<sozin> - and every attack dice you roll is hit, crit almost :P
+<Ryan Krippendorf> - lol
+<Ryan Krippendorf> - 1 on the x, 3v2
+<sozin> - this will be a good sample set for my chat log stats generator
+* *** Ryan Krippendorf Rolls to Attack: [Hit], [Hit], [Focus], [], [], [], [] ***
+<Ryan Krippendorf> - HR
+* *** Ryan Krippendorf Re-Rolls Attack Die 3 [Focus] and gets a [Focus] ***
+ - Sending game info to wilson ...
+<Ryan Krippendorf> - 2h
+* *** sozin Rolls to Defend: [Focus], [Focus], [], [], [], [], [] ***
+<sozin> - spend focus
+<Ryan Krippendorf> - k
+<Ryan Krippendorf> - 7s
+<Ryan Krippendorf> - mm, on 2, 4v1
+* *** Ryan Krippendorf Rolls to Attack: [Focus], [Focus], [Focus], [Focus], [], [], [] ***
+<Ryan Krippendorf> - Spend it
+<sozin> - oh boy.
+<sozin> - come on, evade!
+* *** sozin Rolls to Defend: [Focus], [], [], [], [], [], [] ***
+<sozin> - awwww
+<sozin> - yes dead
+<sozin> - k
+<Ryan Krippendorf> - ok
+<Ryan Krippendorf> - dutch
+<sozin> - on #1
+<Ryan Krippendorf> - oh wait
+<Ryan Krippendorf> - 2
+<Ryan Krippendorf> - I forgot to shoot 2
+<sozin> - yep do it
+<Ryan Krippendorf> - 2v2 on the x
+* *** Ryan Krippendorf Rolls to Attack: [Hit], [Focus], [], [], [], [], [] ***
+<Ryan Krippendorf> - Hr
+* *** Ryan Krippendorf Re-Rolls Attack Die 2 [Focus] and gets a [Focus] ***
+<Ryan Krippendorf> - 1h
+* *** sozin Rolls to Defend: [Evade], [Focus], [], [], [], [], [] ***
+<sozin> - ok
+<sozin> - dutch on #1
+<Ryan Krippendorf> - k
+<sozin> - 3 v 3
+<Ryan Krippendorf> - k
+* *** sozin Rolls to Attack: [Blank], [Hit], [Blank], [], [], [], [] ***
+* *** sozin Re-Rolls Attack Die 1 [Blank] and gets a [Blank] ***
+* *** sozin Re-Rolls Attack Die 3 [Blank] and gets a [Blank] ***
+<sozin> - 1h
+* *** Ryan Krippendorf Rolls to Defend: [Focus], [Evade], [Evade], [], [], [], [] ***
+<sozin> - #1 howl
+<sozin> - 3 v 3
+<Ryan Krippendorf> - k
+* *** sozin Rolls to Attack: [Hit], [Blank], [Hit], [], [], [], [] ***
+<sozin> - tl
+* *** sozin Re-Rolls Attack Die 2 [Blank] and gets a [Crit] ***
+* *** Ryan Krippendorf Rolls to Defend: [Evade], [Focus], [Evade], [], [], [], [] ***
+<Ryan Krippendorf> - 1c
+<sozin> - After executing a red maneuver, roll 1 attack die.  On a (hit) result, suffer 1 damage.
+<sozin> - red on howl
+<sozin> - 3 v 3
+* *** sozin Rolls to Attack: [Focus], [Crit], [Hit], [], [], [], [] ***
+<sozin> - hmc
+<sozin> - h,c
+* *** Ryan Krippendorf Rolls to Defend: [Evade], [Blank], [Blank], [], [], [], [] ***
+<sozin> - k
+<Ryan Krippendorf> - lol
+<Ryan Krippendorf> - She is still kicking
+<sozin> - ok #4, E5
+<sozin> - #5
+<Ryan Krippendorf> - 5 at the B
+<Ryan Krippendorf> - 2v1
+* *** Ryan Krippendorf Rolls to Attack: [Crit], [Focus], [], [], [], [], [] ***
+<Ryan Krippendorf> - fcs
+* *** sozin Rolls to Defend: [Evade], [], [], [], [], [], [] ***
+<sozin> - ,1s
+<Ryan Krippendorf> - 3v2 on the x
+* *** Ryan Krippendorf Rolls to Attack: [Hit], [Focus], [Hit], [], [], [], [] ***
+<Ryan Krippendorf> - spend it
+* *** sozin Rolls to Defend: [Evade], [Focus], [], [], [], [], [] ***
+<sozin> - h,s
+ - Sending game info to Jake Pichelmeyer...
+ - Sending game info to Jake Pichelmeyer...
+<Jake Pichelmeyer> - Hey guys
+<sozin> - hiya
+<sozin> - set
+<sozin> - hmm 1s
+<Ryan Krippendorf> - Set
+<sozin> - rethinking my dagger.
+<Ryan Krippendorf> - How did things go with Paul Jake?
+<Jake Pichelmeyer> - It went well. We traded Biggs early then danced around for a while. It finally ended with 3 of my almost dead ships against his 1 Dagger. Fun time :)
+<sozin> - .set
+<Ryan Krippendorf> - wow
+<Ryan Krippendorf> - 1s
+* --- AP (#4) performs move: 3 - Forward
+* --- AP (#4) performs move: 3 - Koiogran
+* --- AP (#1) performs move: 4 - Forward
+* --- AP (#1) performs move: 4 - Koiogran
+* --- AP (#2) performs move: 4 - Forward
+* --- AP (#2) performs move: 4 - Koiogran
+* --- AP (#5) performs move: 1 - Left Turn
+<sozin> - did #2 bump?
+<Ryan Krippendorf> - He shouldn't have. they were touching, but it looks like it
+<sozin> - yeppers.
+<sozin> - cool
+<sozin> - ok my dudes.
+<Ryan Krippendorf> - k
+* ---  () performs move: 2 - Forward
+ - Sending game info to Rinehart...
+* --- DAGGER1 (1) performs move: 2 - Forward
+* ---  () performs move: 2 - Forward
+<sozin> - i got a bad feeling about this
+<sozin> - set
+* --- Mauler (#6) performs move: 4 - Forward
+* --- Mauler (#6) performs move: 4 - Koiogran
+<sozin> - whew
+ - Sending game info to Jake Pichelmeyer...
+<sozin> - and she's stressed
+<Ryan Krippendorf> - 5=8, 4=7
+<sozin> - cool
+<Ryan Krippendorf> - nothing
+* *** Ryan Krippendorf Rolls to Attack: [Hit], [], [], [], [], [], [] ***
+<Ryan Krippendorf> - Haul breach kills her
+<sozin> - aww.
+<sozin> - an ignoble finish
+<sozin> - ok
+<sozin> - enjoy your shootin'!
+<Ryan Krippendorf> - 4v1 on B
+* *** Ryan Krippendorf Rolls to Attack: [Blank], [Hit], [Focus], [Focus], [], [], [] ***
+<Ryan Krippendorf> - 1 hit
+* *** sozin Rolls to Defend: [Evade], [], [], [], [], [], [] ***
+<sozin> - I only have one face on my green die.  and it is evade.
+<Ryan Krippendorf> - 2v2 on x
+* *** Ryan Krippendorf Rolls to Attack: [Hit], [Hit], [], [], [], [], [] ***
+* *** sozin Rolls to Defend: [Focus], [Evade], [], [], [], [], [] ***
+<sozin> - 1h
+<Ryan Krippendorf> - check dutch?
+<sozin> - he's got it.
+<Ryan Krippendorf> - yup
+* *** sozin Rolls to Attack: [Blank], [Focus], [Focus], [], [], [], [] ***
+<Ryan Krippendorf> - 3v3
+<sozin> - k
+<Ryan Krippendorf> - 2v2 on the x
+* *** Ryan Krippendorf Rolls to Attack: [Focus], [Crit], [], [], [], [], [] ***
+<sozin> - grr
+<sozin> - ok
+<sozin> - here goes.
+* *** sozin Rolls to Defend: [Focus], [Focus], [], [], [], [], [] ***
+<sozin> - daed
+<Ryan Krippendorf> - k, dials
+<sozin> - set
+<Ryan Krippendorf> - Set.  Going ons
+* --- AP (#5) performs move: 4 - Forward
+* --- AP (#5) performs move: 4 - Koiogran
+* --- AP (#2) performs move: 2 - Right Bank
+* --- AP (#4) performs move: 2 - Right Bank
+* --- AP (#1) performs move: 3 - Forward
+<Ryan Krippendorf> - Set
+<Ryan Krippendorf> - Do nubs count?
+<sozin> - sadly they do.
+<sozin> - asked FFG that in the WC this year.
+<Ryan Krippendorf> - ok
+* --- DAGGER1 (1) performs move: 2 - Forward
+* --- DAGGER1 (1) performs move: 2 - Koiogran
+<sozin> - this is gonna be tight.
+* ---  () performs move: 4 - Forward
+* ---  () performs move: 4 - Koiogran
+<sozin> - wah-wah.
+* UNDO: <sozin> - wah-wah.
+* UNDO: * ---  () performs move: 4 - Koiogran
+* UNDO: * ---  () performs move: 4 - Forward
+<sozin> - set
+* --- Mauler (#6) performs move: 2 - Forward
+<Ryan Krippendorf> - br
+<sozin> - k
+<Ryan Krippendorf> - 5 is just in?
+<sozin> - looks like it yep
+<Ryan Krippendorf> - ok 5=7
+<Ryan Krippendorf> - mm on dutch 4v1
+* *** Ryan Krippendorf Rolls to Attack: [Blank], [Focus], [Blank], [Blank], [], [], [] ***
+<sozin> - tee hee.
+<Ryan Krippendorf> - 5 on dutch, 3v1
+<sozin> - can't dutch this!
+ - Sending game info to Rinehart...
+* *** Ryan Krippendorf Rolls to Attack: [Hit], [Crit], [Blank], [], [], [], [] ***
+* *** sozin Rolls to Defend: [Blank], [], [], [], [], [], [] ***
+<sozin> - 2s
+<sozin> - dutch on #5, 3 v 3
+* *** sozin Rolls to Attack: [Focus], [Hit], [Hit], [], [], [], [] ***
+<sozin> - 2h
+* *** Ryan Krippendorf Rolls to Defend: [Blank], [Blank], [Focus], [], [], [], [] ***
+<sozin> - dagger on mauler, 4 v 3
+* *** sozin Rolls to Attack: [Blank], [Crit], [Hit], [Focus], [], [], [] ***
+<sozin> - c,h
+* *** Ryan Krippendorf Rolls to Defend: [Evade], [Blank], [Blank], [], [], [], [] ***
+<Ryan Krippendorf> - 1c
+<sozin> - Reduce your agility value by 1 (to a minimum of "0").  Action: Roll 1 attack die, on a (hit) result, flip this card facedown.
+<Ryan Krippendorf> - dutch, 2v1 twice
+* *** Ryan Krippendorf Rolls to Attack: [Blank], [Blank], [], [], [], [], [] ***
+* *** Ryan Krippendorf Rolls to Attack: [Crit], [Hit], [], [], [], [], [] ***
+ - Sending game info to bcrow...
+* *** sozin Rolls to Defend: [Focus], [], [], [], [], [], [] ***
+<sozin> - 1s,1c
+<sozin> - After the round in which you receive this card, treat your pilot skill value as "0"
+<Ryan Krippendorf> - dials
+<sozin> - man vassal is laggy tonight
+<Ryan Krippendorf> - big time
+<sozin> - set
+ - Sending game info to KelvanTiberius...
+<sozin> - hey, ricky, how goes
+<KelvanTiberius> - Gentlemen!
+<Ryan Krippendorf> - Ok here goes nothing
+<Ryan Krippendorf> - ready
+<sozin> - dutch first.
+<Ryan Krippendorf> - yup
+* ---  () performs move: 2 - Forward
+<KelvanTiberius> - I'm doing well, I loved your second videocast
+<sozin> - ty!
+<KelvanTiberius> - good lord i've seen a lot of swarm tactics lately
+<sozin> - going to analyze one of your games next :-)
+* --- AP (#2) performs move: 4 - Forward
+* --- AP (#2) performs move: 4 - Koiogran
+<KelvanTiberius> - well so far mine haven't been that interesting
+* --- AP (#4) performs move: 2 - Forward
+<KelvanTiberius> - the first game i played on this one was awesome
+<sozin> - check this out (second tab in the spreadshet):
+<sozin> - https://docs.google.com/spreadsheet/ccc?key=0AgjR2KvZS6uAdFpwTDY2QkZ1RmUzb2xZekRKcGF1YXc&usp=drive_web#gid=1
+<sozin> - that's your attack stats vs Dekryr
+* --- AP (#1) performs move: 2 - Forward
+* --- AP (#5) performs move: 2 - Left Bank
+<KelvanTiberius> - for starters that's a cool chart
+<sozin> - you won this game
+<KelvanTiberius> - whats that showing?
+<sozin> - even though your attack luck died out
+<sozin> - its your positive "luck"
+<KelvanTiberius> - greens and reds?
+<sozin> - just reds.
+<KelvanTiberius> - interesting
+<sozin> - the calculation technique is in tab 1.
+<Ryan Krippendorf> - ok?
+<sozin> - jake was helping me think on how to incorp greens in today
+<sozin> - yes
+<KelvanTiberius> - yeah other than the luke 4 hit roll i didn't feel like i was lucky at all, but i rolled a lot of unmodified dice so i always feel like i deserve it.
+<KelvanTiberius> - don't mean to jack the chat room ryan if i'm in the way
+<sozin> - #5 needs to be further forward it seems
+<sozin> - as the nub ain't touchin
+<sozin> - there ya go
+<Ryan Krippendorf> - like so?
+<sozin> - holy crap vassal is slow
+<KelvanTiberius> - We gave you props on the podcast lyle, hopefully Greg finally edits it soon.
+<sozin> - ok how's the look
+<sozin> - wow thanks!
+<sozin> - I heard it ws about to be published
+<Ryan Krippendorf> - good
+<sozin> - that editing is annoying I have to say
+<sozin> - ok mauler go kill dutch!
+* --- Mauler (#6) performs move: 4 - Forward
+* --- Mauler (#6) performs move: 4 - Koiogran
+<KelvanTiberius> - Greg's got the raw audio just needs to clean up some stuff. I've gotta send him images.
+<Ryan Krippendorf> - MM on B 2v1
+* *** Ryan Krippendorf Rolls to Attack: [Crit], [Focus], [], [], [], [], [] ***
+* *** sozin Rolls to Defend: [Evade], [], [], [], [], [], [] ***
+<sozin> - one dice :-)
+<sozin> - on #4, 4 v 3
+* *** sozin Rolls to Attack: [Crit], [Crit], [Focus], [Hit], [], [], [] ***
+<Ryan Krippendorf> - k
+<sozin> - h, 2c
+* *** Ryan Krippendorf Rolls to Defend: [Focus], [Evade], [Blank], [], [], [], [] ***
+<sozin> - wow he went out in style
+ - Saving game ...
+<Ryan Krippendorf> - 2v1 on dutch
+ - Game Saved
+* *** Ryan Krippendorf Rolls to Attack: [Focus], [Focus], [], [], [], [], [] ***
+<Ryan Krippendorf> - spend it
+* *** sozin Rolls to Defend: [Focus], [], [], [], [], [], [] ***
+<sozin> - 2h
+<Ryan Krippendorf> - k
+<Ryan Krippendorf> - dials
+<sozin> - mauler has 2 hull btw
+ - Sending game info to Rurouni   (Esser915)...
+<Ryan Krippendorf> - Yea sorry I'm not used to updating it on the ships yet
+<sozin> - no sweat!
+<KelvanTiberius> - i only do it in my hand
+ - Sending game info to Rurouni   (Esser915)...
+<Ryan Krippendorf> - Set
+<sozin> - me to
+* ---  () performs move: 2 - Left Turn
+<sozin> - set
+* --- AP (#5) performs move: 1 - Right Turn
+* UNDO: * --- AP (#5) performs move: 1 - Right Turn
+* --- AP (#5) performs move: 1 - Left Turn
+* --- AP (#1) performs move: 2 - Forward
+* --- AP (#2) performs move: 3 - Forward
+<Ryan Krippendorf> - set
+* --- DAGGER1 (1) performs move: 2 - Forward
+* --- DAGGER1 (1) performs move: 2 - Koiogran
+ - Sending game info to Charlie...
+<sozin> - set
+* --- Mauler (#6) performs move: 3 - Forward
+<sozin> - dutch no shot
+<Ryan Krippendorf> - 1 a 7 with ST
+<Ryan Krippendorf> - MM on B, 4 v 1
+* *** Ryan Krippendorf Rolls to Attack: [Crit], [Hit], [Focus], [Hit], [], [], [] ***
+<Ryan Krippendorf> - Spend it
+<sozin> - eek
+* *** sozin Rolls to Defend: [Evade], [], [], [], [], [], [] ***
+<sozin> - -chuckles-
+<sozin> - ok
+<sozin> - 3s
+<Ryan Krippendorf> - 2v1 on dutch
+* *** Ryan Krippendorf Rolls to Attack: [Hit], [Blank], [], [], [], [], [] ***
+* *** sozin Rolls to Defend: [Evade], [], [], [], [], [], [] ***
+<Ryan Krippendorf> - ugh
+<sozin> - ok
+<sozin> - dagger on mauler
+<sozin> - 4 v 2
+<Ryan Krippendorf> - k
+* *** sozin Rolls to Attack: [Focus], [Crit], [Crit], [Crit], [], [], [] ***
+<Ryan Krippendorf> - WOW
+<sozin> - I really, really want him dead.
+<sozin> - focus
+* *** Ryan Krippendorf Rolls to Defend: [Evade], [Evade], [], [], [], [], [] ***
+* *** sozin turns Attack Die 1 [Focus] into a [Hit] ***
+<sozin> - another spectacular imperial death!!!
+<sozin> - ok, dials
+<Ryan Krippendorf> - set
+<Ryan Krippendorf> - ok so I'm thinking this list for my next store championship
+<sozin> - set
+<sozin> - it's pretty godo
+<sozin> - need to prctice your opening a bit
+<sozin> - set
+* ---  () performs move: 4 - Forward
+* ---  () performs move: 4 - Koiogran
+<Ryan Krippendorf> - I'm way better with it not on vassal
+<sozin> - -nods- makes sense
+<sozin> - vassal is fiddly.
+<Ryan Krippendorf> - I'm just not used to it
+* --- AP (#1) performs move: 2 - Left Turn
+* --- AP (#5) performs move: 3 - Right Turn
+* UNDO: * --- AP (#5) performs move: 3 - Right Turn
+* --- AP (#5) performs move: 3 - Left Turn
+* --- AP (#2) performs move: 3 - Left Bank
+<Ryan Krippendorf> - set
+* --- DAGGER1 (1) performs move: 1 - Forward
+<sozin> - got 'em in r1
+<sozin> - 4 v 3
+* *** sozin Rolls to Attack: [Hit], [Hit], [Hit], [Hit], [], [], [] ***
+* *** Ryan Krippendorf Rolls to Defend: [Evade], [Focus], [Focus], [], [], [], [] ***
+<Ryan Krippendorf> - dead
+<sozin> - ok imps
+<Ryan Krippendorf> - 2v2
+* *** Ryan Krippendorf Rolls to Attack: [Hit], [Blank], [], [], [], [], [] ***
+<Ryan Krippendorf> - 1h
+* *** sozin Rolls to Defend: [Focus], [Evade], [], [], [], [], [] ***
+<sozin> - c'mon dutch!
+<Ryan Krippendorf> - 2v1
+* *** Ryan Krippendorf Rolls to Attack: [Blank], [Blank], [], [], [], [], [] ***
+<Ryan Krippendorf> - ugh
+<sozin> - luck really spinning out of control here, this is a great data set
+<Ryan Krippendorf> - lol
+<sozin> - dutch shoots back, 2 v 3
+* *** sozin Rolls to Attack: [Focus], [Crit], [], [], [], [], [] ***
+* *** Ryan Krippendorf Rolls to Defend: [Blank], [Blank], [Focus], [], [], [], [] ***
+<Ryan Krippendorf> - fcs
+<Ryan Krippendorf> - dials
+<Ryan Krippendorf> - set
+<sozin> - hmm.
+<Ryan Krippendorf> - lol
+<Ryan Krippendorf> - Good game going,
+<Ryan Krippendorf> - edge has been swinging back and fourth
+<sozin> - hmm.
+<sozin> - critical moment here.
+<sozin> - ok set
+<Ryan Krippendorf> - go
+* ---  () performs move: 2 - Forward
+<sozin> - set
+* --- AP (#1) performs move: 3 - Forward
+* --- AP (#1) performs move: 3 - Koiogran
+* --- AP (#2) performs move: 4 - Forward
+<Ryan Krippendorf> - set
+* --- DAGGER1 (1) performs move: 2 - Forward
+* --- DAGGER1 (1) performs move: 2 - Koiogran
+<sozin> - 3 v 3
+<Ryan Krippendorf> - h
+* *** sozin Rolls to Attack: [Focus], [Blank], [Focus], [], [], [], [] ***
+<sozin> - I was agonizing of a hard 1 there
+<sozin> - would have been the right move (with a BR)
+<sozin> - ok
+<sozin> - your dudes
+<Ryan Krippendorf> - 2 on the B, 2v1
+* *** Ryan Krippendorf Rolls to Attack: [Hit], [Hit], [], [], [], [], [] ***
+* *** sozin Rolls to Defend: [Blank], [], [], [], [], [], [] ***
+<Ryan Krippendorf> - 2v1
+<Ryan Krippendorf> - on the B
+* *** Ryan Krippendorf Rolls to Attack: [Hit], [Hit], [], [], [], [], [] ***
+<sozin> - daed
+<sozin> - I'll tip it here
+<sozin> - nice game!!
+<Ryan Krippendorf> - Great Game
+* UNDO: <Ryan Krippendorf> - Great Game
+* UNDO: <sozin> - nice game!!
+* UNDO: <sozin> - I'll tip it here
+* UNDO: <sozin> - daed
+* UNDO: * *** Ryan Krippendorf Rolls to Attack: [Hit], [Hit], [], [], [], [], [] ***
+* UNDO: <Ryan Krippendorf> - on the B
+* UNDO: <Ryan Krippendorf> - 2v1
+* UNDO: * *** sozin Rolls to Defend: [Blank], [], [], [], [], [], [] ***
+* UNDO: * *** Ryan Krippendorf Rolls to Attack: [Hit], [Hit], [], [], [], [], [] ***
+* UNDO: <Ryan Krippendorf> - 2 on the B, 2v1
+* UNDO: <sozin> - your dudes
+* UNDO: <sozin> - ok
+* UNDO: <sozin> - would have been the right move (with a BR)
+* UNDO: <sozin> - I was agonizing of a hard 1 there
+* UNDO: * *** sozin Rolls to Attack: [Focus], [Blank], [Focus], [], [], [], [] ***
+* UNDO: <Ryan Krippendorf> - h
+* UNDO: <sozin> - 3 v 3
+* UNDO: * --- DAGGER1 (1) performs move: 2 - Koiogran
+* UNDO: * --- DAGGER1 (1) performs move: 2 - Forward
+* --- DAGGER1 (1) performs move: 1 - Left Turn
+<sozin> - yeah
+<sozin> - that's the move
+<sozin> - was worried about a 2 or 3 bank from you
+<Ryan Krippendorf> - wow
+<Ryan Krippendorf> - I almost did the two bank
+<sozin> - ye

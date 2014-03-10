@@ -1,0 +1,627 @@
+- Star Wars X-Wing Miniatures Game version 5.0.0
+ - Extension Crazy_Toms_Playmats_-5.0.0 v5.0.0 loaded
+ - Extension Gabriel's_Map_Pack_-5.0.0 v5.0.0 loaded
+ - Extension Yagyu's_Map_Pack_-5.0.0 v5.0.0 loaded
+
+  Welcome to the VASSAL server
+
+
+ For help, see the VASSAL Forum at http://www.vassalengine.org/forum
+
+ - Waiting for Game Info...
+ - Synchronization complete
+<KelvanTiberius> - hey dude
+<Val> - Good morning !
+<KelvanTiberius> - yes thank you
+<KelvanTiberius> - I'm gonna set up and then grab some coffee if that's ok w/ you
+<Val> - sure !
+<Val> - there is no hurry !
+ - Loading Shuttleswarm worlds.vlog ...
+ - Loaded Shuttleswarm worlds.vlog
+ - Bad Data in Module: Image not found Pilot-Howlrunner.png
+ - Bad Data in Module: Image not found Pilot-Backstabber.png
+ - Bad Data in Module: Image not found Pilot-Obsidian_Squadron.png
+ - Bad Data in Module: Image not found Pilot_Omicron_Group.png
+ - Bad Data in Module: Image not found Pilot-Academy_Pilot.png
+ - Bad Data in Module: Image not found Move-wheel_Back.png
+ - Bad Data in Module: Image not found Move-wheel.png
+<KelvanTiberius> - grr.... not a 5.0 list
+<KelvanTiberius> - N
+<KelvanTiberius> - P
+<KelvanTiberius> - ok coffee and lets do this
+<Val> - ok
+<KelvanTiberius> - ok i'm ready, you?
+<Val> - Sure. You got initiative, so I will take left and firts asteroid is yours
+<KelvanTiberius> - ok
+<Val> - Have a good game !
+<KelvanTiberius> - you too sir!
+<KelvanTiberius> - what country are you in? I never asked
+<Val> - France
+<KelvanTiberius> - fun, my girlfriend lived there for a while
+<KelvanTiberius> - she's a dual citizen
+<Val> - didn't get the chance to play this game before Vassal since there is very little players where I live
+<Val> - Whoo small world
+<KelvanTiberius> - set
+<Val> - set
+<KelvanTiberius> - began my logfile
+<KelvanTiberius> - my asteroid is set
+<Val> - set
+<KelvanTiberius> - set
+<Val> - set
+<KelvanTiberius> - my 1's,2,3, your 3's, my 6 and 8 your 8and 9
+<KelvanTiberius> - 1'a set
+<KelvanTiberius> - 2 set
+<KelvanTiberius> - 3 set
+<Val> - 3 set
+<Dodo> - Afternoon/morning all
+<Val> - Thank you sir
+<KelvanTiberius> - set
+<KelvanTiberius> - much bigger audience than would be expected for 9:30 on a sunday
+<hothie> - and 2:30 in England/France
+<Dodo> - 3:30 :P
+<hothie> - I was close
+<hothie> - :)
+<Val> - set
+<KelvanTiberius> - dials... good look have fun
+<Val> - Good luck and have fun
+<KelvanTiberius> - ready
+<Val> - rdy
+* --- Academy 2 (2) performs move: 5 - Forward
+* --- Academy 1 (1) performs move: 5 - Forward
+* --- OSP (4) performs move: 5 - Forward
+<KelvanTiberius> - your 3's
+* --- TIE Int (Avenger 1) performs move: 2 - Forward
+* --- TIE Int (Avenger 2) performs move: 2 - Forward
+<Val> - done
+* --- Backstabber (5) performs move: 3 - Right Bank
+* --- Howlrunner (7) performs move: 5 - Forward
+<KelvanTiberius> - and its the morning...
+<KelvanTiberius> - right your 8 and 9
+* --- TIE Ftr (Howlrunner) performs move: 2 - Forward
+* --- TIE Int (Soontir Fel) performs move: 5 - Forward
+<KelvanTiberius> - to those watching the log... I'm actually better than this... :\
+<Val> - Boost
+* --- TIE Int (Soontir Fel) performs move: 1 - Forward
+<Val> - and done
+<Val> - Back to dial ?
+<KelvanTiberius> - yup
+<Val> - set
+<KelvanTiberius> - ok
+* --- Academy 2 (2) performs move: 3 - Right Bank
+* --- Academy 1 (1) performs move: 3 - Right Bank
+* --- Omicron (3) performs move: 1 - Right Bank
+ - Bad Data in Module: Image not found Action-target_Lock.png
+* --- OSP (4) performs move: 3 - Right Bank
+<KelvanTiberius> - your 3's
+* --- TIE Int (Avenger 1) performs move: 5 - Forward
+* --- TIE Int (Avenger 2) performs move: 5 - Forward
+<Val> - done
+* --- Backstabber (5) performs move: 2 - Forward
+* --- Howlrunner (7) performs move: 3 - Right Bank
+<KelvanTiberius> - go ahead
+* --- TIE Ftr (Howlrunner) performs move: 5 - Forward
+* --- TIE Int (Soontir Fel) performs move: 5 - Forward
+<Val> - boost
+* --- TIE Int (Soontir Fel) performs move: 1 - Right Bank
+<Val> - Back to dial
+<KelvanTiberius> - set.. gulp
+<KelvanTiberius> - you?
+<Val> - rdy
+* --- Academy 2 (2) performs move: 2 - Right Turn
+* --- Academy 1 (1) performs move: 2 - Right Turn
+* --- Omicron (3) performs move: 1 - Right Bank
+* --- OSP (4) performs move: 3 - Right Turn
+<KelvanTiberius> - and your 3's
+* --- TIE Int (Avenger 1) performs move: 3 - Right Bank
+* --- TIE Int (Avenger 2) performs move: 3 - Right Bank
+<Val> - done
+* --- Backstabber (5) performs move: 1 - Right Turn
+* --- Howlrunner (7) performs move: 1 - Right Turn
+<KelvanTiberius> - your moves
+* --- TIE Ftr (Howlrunner) performs move: 3 - Right Bank
+* --- TIE Int (Soontir Fel) performs move: 3 - Right Bank
+<KelvanTiberius> - asteroids do not concern me admrial..
+<Val> - Well they are my best men !
+<Val> - shots ?
+<KelvanTiberius> - 1 hail mary
+<KelvanTiberius> - academy 1 on howl range 3 i'll say through a rock
+* *** KelvanTiberius Rolls to Attack: [Hit], [Hit], [], [], [], [], [] ***
+<Val> - my sweet asteroid
+<Val> - nice shot tex
+* *** Val Rolls to Defend: [Blank], [Focus], [Blank], [Blank], [Focus], [Focus], [] ***
+<KelvanTiberius> - haha
+<KelvanTiberius> - oh jeez
+<Val> - well
+<Val> - that's one hit
+<KelvanTiberius> - lol
+<KelvanTiberius> - did soontir boost and barrel roll last round?
+<Val> - nope just barrel
+<KelvanTiberius> - set if you are
+<Val> - sure
+<KelvanTiberius> - wait one sec
+<KelvanTiberius> - ready
+<Val> - your 1 then
+* --- Academy 2 (2) performs move: 5 - Forward
+* --- Omicron (3) performs move: 1 - Right Bank
+<KelvanTiberius> - hmmm no TL
+* --- OSP (4) performs move: 2 - Forward
+<KelvanTiberius> - your 3's
+* --- TIE Int (Avenger 1) performs move: 3 - Forward
+* --- TIE Int (Avenger 2) performs move: 3 - Forward
+<Val> - done
+* --- Backstabber (5) performs move: 1 - Right Turn
+<KelvanTiberius> - can't make it
+<KelvanTiberius> - gotta focus
+<Val> - you can't barrel roll left ?
+<KelvanTiberius> - hmmm
+<KelvanTiberius> - i'll do it anyway
+* --- Howlrunner (7) performs move: 2 - Forward
+<KelvanTiberius> - focus
+<Val> - my 8 ?
+<KelvanTiberius> - yes sorry
+<KelvanTiberius> - i had to go start the car outside for my girlfriend
+* --- TIE Ftr (Howlrunner) performs move: 3 - Forward
+<KelvanTiberius> - snowing over here
+<Val> - nice background then !
+<Val> - it's a shame you are covering the snow with howl blood !
+* --- TIE Int (Soontir Fel) performs move: 5 - Forward
+<KelvanTiberius> - one can only nome
+<KelvanTiberius> - hope*
+<Val> - boost right
+* --- TIE Int (Soontir Fel) performs move: 1 - Right Bank
+<Val> - not ther best place to be
+<KelvanTiberius> - fat Vader is hungry
+<Val> - lets push to barrel roll
+<Val> - Vader is quite fringhtening inded
+<KelvanTiberius> - lets pew some pews
+<Val> - sure
+<Val> - your howl then
+<KelvanTiberius> - range 2 at yours
+<KelvanTiberius> - no rock
+* *** KelvanTiberius Rolls to Attack: [Focus], [Blank], [], [], [], [], [] ***
+<KelvanTiberius> - focus
+* *** KelvanTiberius turns Attack Die 1 [Focus] into a [Hit] ***
+* *** Val Rolls to Defend: [Blank], [Focus], [Blank], [], [], [], [] ***
+<Val> - Focus
+* *** Val turns Defense Die 2 (Focus) into a [Evade] ***
+<KelvanTiberius> - now yours
+<Val> - Range 2 on Vader, 2v1
+* *** Val Rolls to Attack: [Hit], [Hit], [], [], [], [], [] ***
+* *** KelvanTiberius Rolls to Defend: [Evade], [], [], [], [], [], [] ***
+<KelvanTiberius> - 1 s
+<KelvanTiberius> - ok BS
+<KelvanTiberius> - on soontir
+<KelvanTiberius> - clips his back edge
+<KelvanTiberius> - range 3
+<KelvanTiberius> - out of arc
+* *** KelvanTiberius Rolls to Attack: [Crit], [Hit], [Focus], [], [], [], [] ***
+<KelvanTiberius> - HR
+* *** KelvanTiberius Re-Rolls Attack Die 3 [Focus] and gets a [Hit] ***
+<KelvanTiberius> - nice
+<Val> - some hot dice for sure
+* *** Val Rolls to Defend: [Focus], [Focus], [Evade], [Blank], [Evade], [], [] ***
+<KelvanTiberius> - i need all the help i can get
+<Val> - Focus
+<KelvanTiberius> - you got it though
+<Val> - That would have ended the game :-)
+<KelvanTiberius> - ok my obsidian on howl range 2 throught a rock
+* *** KelvanTiberius Rolls to Attack: [Focus], [Hit], [Blank], [], [], [], [] ***
+<KelvanTiberius> - too many dice
+* *** KelvanTiberius Rolls to Attack: [Crit], [Blank], [], [], [], [], [] ***
+<KelvanTiberius> - damn...
+* *** Val Rolls to Defend: [Blank], [Evade], [Evade], [Evade], [], [], [] ***
+<KelvanTiberius> - that'll do it
+<Val> - Av2 vs Vader, R2, 3v1
+* *** Val Rolls to Attack: [Hit], [Hit], [Hit], [], [], [], [] ***
+* *** KelvanTiberius Rolls to Defend: [Focus], [], [], [], [], [], [] ***
+<KelvanTiberius> - 3 s
+<Val> - So 1 left
+<KelvanTiberius> - yes
+<KelvanTiberius> - i keep my hp info in my hand btw
+<Val> - Can i update your base then ?
+<KelvanTiberius> - feels more like the table
+<KelvanTiberius> - sure
+<KelvanTiberius> - go nuts... i'm just super slow on it
+<KelvanTiberius> - next shot
+<KelvanTiberius> - ooh two whole green dice!
+<Val> - Av2 vs Vader, R3, 3v2
+* *** Val Rolls to Attack: [Blank], [Blank], [Hit], [], [], [], [] ***
+<Val> - HR
+<KelvanTiberius> - what luxury... 2 greens
+* *** Val Re-Rolls Attack Die 2 [Blank] and gets a [Blank] ***
+* *** KelvanTiberius Rolls to Defend: [Focus], [Focus], [], [], [], [], [] ***
+<KelvanTiberius> - no shields left
+<KelvanTiberius> - ok
+<KelvanTiberius> - no shot for the vadership
+<KelvanTiberius> - academies
+<KelvanTiberius> - #2 range 1 on howl
+* *** KelvanTiberius Rolls to Attack: [Focus], [Blank], [Focus], [], [], [], [] ***
+<KelvanTiberius> - focus
+* *** KelvanTiberius turns Attack Die 1 [Focus] into a [Hit] ***
+* *** KelvanTiberius turns Attack Die 3 [Focus] into a [Hit] ***
+* *** Val Rolls to Defend: [Focus], [Evade], [Blank], [], [], [], [] ***
+<KelvanTiberius> - no shot for 1
+<KelvanTiberius> - dials
+<KelvanTiberius> - i think i'm ready
+<Val> - going to be a mess, your 1 then
+<KelvanTiberius> - yes it will be
+<KelvanTiberius> - space bumper cars
+<Val> - so true
+* --- Academy 2 (2) performs move: 4 - Forward
+* --- Academy 2 (2) performs move: 4 - Koiogran
+* --- Academy 1 (1) performs move: 3 - Right Bank
+* *** KelvanTiberius Rolls to Attack: [Hit], [], [], [], [], [], [] ***
+<KelvanTiberius> - ill take rebel deck
+<KelvanTiberius> - did you take imp?
+<Val> - yup i took imp
+* --- OSP (4) performs move: 1 - Right Turn
+<KelvanTiberius> - wait shuttle
+* --- Omicron (3) performs move: 2 - Left Turn
+<KelvanTiberius> - your 3's
+<Val> - ready to bump
+<KelvanTiberius> - lol
+<KelvanTiberius> - gonna go grabe more coffee
+<Val> - How does it look ?
+<KelvanTiberius> - fine over here
+* --- TIE Int (Avenger 2) performs move: 1 - Right Turn
+* UNDO: * --- TIE Int (Avenger 2) performs move: 1 - Right Turn
+<Val> - This one will not go far ...
+<KelvanTiberius> - will you slighly turn hm
+<KelvanTiberius> - even if it's just a tidge
+<KelvanTiberius> - thjat's good
+<KelvanTiberius> - thank you!
+<Val> - np
+<KelvanTiberius> - i think i misread my spots
+<KelvanTiberius> - hmmm
+<KelvanTiberius> - Bs
+* --- Backstabber (5) performs move: 1 - Right Turn
+<KelvanTiberius> - nice
+<Val> - indeed
+* --- Howlrunner (7) performs move: 2 - Left Bank
+<KelvanTiberius> - done
+* --- TIE Ftr (Howlrunner) performs move: 2 - Right Turn
+* UNDO: * --- TIE Ftr (Howlrunner) performs move: 2 - Right Turn
+<Val> - sounds good ?
+<KelvanTiberius> - about as good as we can get it
+* --- TIE Int (Soontir Fel) performs move: 2 - Right Turn
+<KelvanTiberius> - shocking...
+<Val> - indeed
+<KelvanTiberius> - fire away soontir
+<Val> - evade, push for a focus, and get one free
+<KelvanTiberius> - got it
+<Val> - Range 2 vs Vader, 3v1
+* *** Val Rolls to Attack: [Blank], [Blank], [Hit], [], [], [], [] ***
+* *** KelvanTiberius Rolls to Defend: [Focus], [], [], [], [], [], [] ***
+<KelvanTiberius> - 1 damage
+<Val> - Not my day
+<KelvanTiberius> - i'll take it... im on the edge of my seat here
+<KelvanTiberius> - my howl on yours
+<KelvanTiberius> - range 1
+* *** KelvanTiberius Rolls to Attack: [Hit], [Focus], [Crit], [], [], [], [] ***
+<KelvanTiberius> - focus
+* *** KelvanTiberius turns Attack Die 2 [Focus] into a [Blank] ***
+* *** KelvanTiberius turns Attack Die 2 [Blank] into a [Hit] ***
+* *** Val Rolls to Defend: [Blank], [Evade], [Focus], [], [], [], [] ***
+<Val> - Dead Howl
+<KelvanTiberius> - got her
+<KelvanTiberius> - BS on soontir... in arc
+* *** KelvanTiberius Rolls to Attack: [Focus], [Focus], [], [], [], [], [] ***
+<KelvanTiberius> - focus
+* *** KelvanTiberius turns Attack Die 1 [Focus] into a [Hit] ***
+* *** KelvanTiberius turns Attack Die 2 [Focus] into a [Hit] ***
+* *** Val Rolls to Defend: [Evade], [Evade], [Blank], [Evade], [], [], [] ***
+<KelvanTiberius> - man
+<KelvanTiberius> - lol
+<KelvanTiberius> - ok my 3's
+<Val> - He can kill a shuttle but he good for evading ^^
+<KelvanTiberius> - on soontir range 3
+* *** KelvanTiberius Rolls to Attack: [Crit], [Hit], [], [], [], [], [] ***
+* *** Val Rolls to Defend: [Blank], [Blank], [Evade], [Blank], [], [], [] ***
+<KelvanTiberius> - that's the best i can do just about
+<Val> - Evade
+<KelvanTiberius> - still not good enough
+<KelvanTiberius> - your 3's
+<Val> - Range 1 on Howl then, 4v3
+* *** Val Rolls to Attack: [Focus], [Hit], [Focus], [Crit], [], [], [] ***
+* *** KelvanTiberius Rolls to Defend: [Evade], [Focus], [], [], [], [], [] ***
+<KelvanTiberius> - eat a crit
+<KelvanTiberius> - thrust control fire
+<KelvanTiberius> - next 3
+<Val> - Bs ranbge 1, 4v3
+* *** Val Rolls to Attack: [Focus], [Blank], [Hit], [Focus], [], [], [] ***
+* *** KelvanTiberius Rolls to Defend: [Blank], [Blank], [Focus], [], [], [], [] ***
+<KelvanTiberius> - take 1
+<KelvanTiberius> - my 2
+<KelvanTiberius> - range 1 on A2
+<KelvanTiberius> - 1
+<KelvanTiberius> - i meant range 2
+<KelvanTiberius> - apologies
+* *** KelvanTiberius Rolls to Attack: [Blank], [Focus], [Focus], [], [], [], [] ***
+<KelvanTiberius> - Vader
+<KelvanTiberius> - means nothing
+<KelvanTiberius> - ok
+<KelvanTiberius> - 2 on avenger 2 range 1
+* *** KelvanTiberius Rolls to Attack: [Hit], [Hit], [Blank], [], [], [], [] ***
+* *** Val Rolls to Defend: [Focus], [Evade], [Blank], [Blank], [], [], [] ***
+<Val> - Take one hit
+<KelvanTiberius> - 1 range 2 on a1
+* *** KelvanTiberius Rolls to Attack: [Crit], [Hit], [], [], [], [], [] ***
+<KelvanTiberius> - i'll take it
+* *** Val Rolls to Defend: [Evade], [Blank], [Focus], [Blank], [], [], [] ***
+<Val> - one crit
+<Val> - back to dial ?
+<KelvanTiberius> - yup
+<KelvanTiberius> - ready if you are
+<KelvanTiberius> - hmmm
+<KelvanTiberius> - ready when you are
+<Val> - let see
+<KelvanTiberius> - ready?
+<Val> - yup
+* --- Academy 2 (2) performs move: 3 - Left Turn
+<KelvanTiberius> - good?
+<Val> - good for me
+* --- Academy 1 (1) performs move: 3 - Right Bank
+<KelvanTiberius> - i'll leave hm
+<KelvanTiberius> - too many dials
+<KelvanTiberius> - where the hell is my omicron
+<KelvanTiberius> - if i deleted i'm sorry
+<KelvanTiberius> - no move
+<KelvanTiberius> - there it was...
+<Val> - for my information (i am quite new to the game) when you check for a barrel on one side you are no commited to do it ?
+* --- OSP (4) performs move: 2 - Forward
+<KelvanTiberius> - shit... new rules... can i just no action?
+<Val> - I am just asking, bnot saying it's the rule
+<KelvanTiberius> - tbh i kinda hate that addendum...
+<KelvanTiberius> - sozin? you know things
+<sozin> - hi sorry was socializing
+<sozin> - let me read
+<sozin> - when you check for a barrel roll, and you can do it, yu have to take it
+<KelvanTiberius> - word
+<KelvanTiberius> - so i can't no action
+<KelvanTiberius> - i thought the addendum only was in place if your opponent invoked it
+<KelvanTiberius> - the problem with vassal is I can't walk around and measure with my eyes like you can on the table
+<KelvanTiberius> - sigh
+<KelvanTiberius> - anyway
+<KelvanTiberius> - your 3's
+<Val> - how does it look ?
+<KelvanTiberius> - looks fine dude
+<KelvanTiberius> - damage from your crit
+<KelvanTiberius> - Stunned Pilot x2 After you execute a maneuver that causes you to overlap either another ship or obstacle token, suffer 1 damage.
+<Val> - true i was thinking that i had "blinded" lol
+<KelvanTiberius> - uh oh
+<KelvanTiberius> - lol we're even on the forgetting rules thing then :p
+<Val> - my fault :-)
+<KelvanTiberius> - so was me forgetting the addendum
+* --- Backstabber (5) performs move: 4 - Forward
+* --- Backstabber (5) performs move: 4 - Koiogran
+<KelvanTiberius> - i can't clear
+<KelvanTiberius> - soontir
+* --- TIE Int (Soontir Fel) performs move: 4 - Forward
+<Val> - Let's try to kill something before dying :-)
+<KelvanTiberius> - gulp
+<Val> - like an howlrunne
+<Val> - R1, 4v3
+* *** Val Rolls to Attack: [Hit], [Blank], [Hit], [Hit], [], [], [] ***
+* *** KelvanTiberius Rolls to Defend: [Blank], [Evade], [Focus], [], [], [], [] ***
+<KelvanTiberius> - dead
+<Val> - Who need a focus anyway !
+<Val> - You always draw some when you don't have it :-)
+<KelvanTiberius> - ok BS on Soontir
+* *** KelvanTiberius Rolls to Attack: [Blank], [Crit], [Hit], [Blank], [], [], [] ***
+* *** Val Rolls to Defend: [Evade], [Evade], [Blank], [Blank], [], [], [] ***
+<KelvanTiberius> - your 3's
+<KelvanTiberius> - i needed that
+<Val> - range 1 on vader, 4v1
+* *** Val Rolls to Attack: [Blank], [Blank], [Blank], [Focus], [], [], [] ***
+<Val> - oh well this one will cost me a ship
+<Val> - range 3 on BS than, 3v4
+* *** Val Rolls to Attack: [Blank], [Focus], [Blank], [], [], [], [] ***
+<KelvanTiberius> - luck swing
+<Val> - for sure
+<KelvanTiberius> - my ogp on A2 4v3
+* *** KelvanTiberius Rolls to Attack: [Crit], [Hit], [Hit], [Focus], [], [], [] ***
+<KelvanTiberius> - might not need vader
+* *** Val Rolls to Defend: [Blank], [Blank], [Blank], [], [], [], [] ***
+<KelvanTiberius> - ok 2 range 2 on soontir
+* *** KelvanTiberius Rolls to Attack: [Focus], [Hit], [], [], [], [], [] ***
+* *** Val Rolls to Defend: [Evade], [Blank], [Focus], [Blank], [], [], [] ***
+<Val> - Back to dial then
+<KelvanTiberius> - dials
+<KelvanTiberius> - ready if you are
+<Val> - rdy
+* --- Academy 2 (2) performs move: 1 - Right Turn
+<KelvanTiberius> - hmm... i may have over judge something...
+* --- Academy 1 (1) performs move: 1 - Right Turn
+<Val> - I hope so ... i need your help to come back in the game :-)
+* --- Omicron (3) performs move: 1 - Left Bank
+<KelvanTiberius> - damn i wanted to block
+<KelvanTiberius> - just misses
+<KelvanTiberius> - lol
+* *** KelvanTiberius Rolls to Attack: [Hit], [], [], [], [], [], [] ***
+* --- OSP (4) performs move: 4 - Forward
+* --- OSP (4) performs move: 4 - Koiogran
+<KelvanTiberius> - your 3
+* --- TIE Int (Avenger 1) performs move: 3 - Forward
+* --- TIE Int (Avenger 1) performs move: 3 - Koiogran
+<KelvanTiberius> - man that shuttle is all up in that asteroid
+<KelvanTiberius> - dead
+* UNDO: <KelvanTiberius> - dead
+* UNDO: <KelvanTiberius> - man that shuttle is all up in that asteroid
+<KelvanTiberius> - and just like i didn't want
+<KelvanTiberius> - late game soontir
+* --- TIE Int (Soontir Fel) performs move: 3 - Forward
+* --- TIE Int (Soontir Fel) performs move: 3 - Koiogran
+<KelvanTiberius> - wait my 6
+* UNDO: <KelvanTiberius> - wait my 6
+* UNDO: * --- TIE Int (Soontir Fel) performs move: 3 - Koiogran
+* UNDO: * --- TIE Int (Soontir Fel) performs move: 3 - Forward
+<Val> - I was thinking you told it was my turn
+<KelvanTiberius> - no worries
+* --- TIE Int (Soontir Fel) performs move: 3 - Forward
+* --- TIE Int (Soontir Fel) performs move: 3 - Koiogran
+<Val> - Range 1 on Acad 1 then
+<Val> - 4v3
+* *** Val Rolls to Attack: [Hit], [Hit], [Crit], [Hit], [], [], [] ***
+* *** KelvanTiberius Rolls to Defend: [Evade], [Focus], [Blank], [], [], [], [] ***
+<Val> - i will take it
+<KelvanTiberius> - dead
+<KelvanTiberius> - Bs range 2
+<KelvanTiberius> - soontir is stressed btw
+* *** KelvanTiberius Rolls to Attack: [Hit], [Focus], [], [], [], [], [] ***
+<Val> - yes sorry
+* *** Val Rolls to Defend: [Blank], [Blank], [Evade], [Focus], [], [], [] ***
+<KelvanTiberius> - range 3 shot
+* *** KelvanTiberius Rolls to Attack: [Focus], [Blank], [], [], [], [], [] ***
+<KelvanTiberius> - dials
+<KelvanTiberius> - effin soontir
+<KelvanTiberius> - ready
+<Val> - rdy
+* --- Academy 1 (1) performs move: 1 - Right Turn
+* --- Omicron (3) performs move: 1 - Forward
+* --- Backstabber (5) performs move: 4 - Forward
+* --- Backstabber (5) performs move: 4 - Koiogran
+<KelvanTiberius> - your move
+* --- TIE Int (Soontir Fel) performs move: 4 - Forward
+<Val> - Range 1 on  OSP, 4v3
+<KelvanTiberius> - roll it
+<Val> - i push etc as you guess
+<KelvanTiberius> - yeah
+<KelvanTiberius> - i followe
+* *** Val Rolls to Attack: [Focus], [Blank], [Hit], [Hit], [], [], [] ***
+<Val> - Focus
+* *** Val turns Attack Die 1 [Focus] into a [Hit] ***
+* *** KelvanTiberius Rolls to Defend: [Blank], [Blank], [Blank], [], [], [], [] ***
+<KelvanTiberius> - sigh
+<KelvanTiberius> - BS
+<Val> - Luck come and go that's amasing
+<KelvanTiberius> - rannge 2 out of arc
+* *** KelvanTiberius Rolls to Attack: [Blank], [Hit], [Hit], [], [], [], [] ***
+* *** Val Rolls to Defend: [Focus], [Evade], [Blank], [Focus], [], [], [] ***
+<Val> - focus
+<KelvanTiberius> - i hate you soontir fel
+<KelvanTiberius> - dials
+<Val> - As much as i love him
+<KelvanTiberius> - set
+<Val> - set
+* --- Academy 1 (1) performs move: 1 - Right Turn
+<KelvanTiberius> - good?
+<Val> - sure
+* --- Omicron (3) performs move: 2 - Right Turn
+* --- Backstabber (5) performs move: 2 - Left Bank
+<KelvanTiberius> - go ahead
+* --- TIE Int (Soontir Fel) performs move: 2 - Left Turn
+<Val> - Boost
+* --- TIE Int (Soontir Fel) performs move: 1 - Left Bank
+<Val> - back to dial
+<Val> - rdy
+* --- Academy 1 (1) performs move: 4 - Forward
+* --- Academy 1 (1) performs move: 4 - Koiogran
+* --- Backstabber (5) performs move: 1 - Left Turn
+* --- Omicron (3) performs move: 1 - Left Turn
+* UNDO: * --- Omicron (3) performs move: 1 - Left Turn
+* --- Omicron (3) performs move: 1 - Right Bank
+<KelvanTiberius> - i forgot the shuttle
+<KelvanTiberius> - lol
+<Val> - my 9 ?
+<KelvanTiberius> - yes sir
+* --- TIE Int (Soontir Fel) performs move: 3 - Left Bank
+* UNDO: * --- TIE Int (Soontir Fel) performs move: 3 - Left Bank
+<KelvanTiberius> - does he have a shot on the shuttle?
+<KelvanTiberius> - ok BS range 1 on soontir
+* *** KelvanTiberius Rolls to Attack: [Blank], [Blank], [Blank], [Focus], [], [], [] ***
+<KelvanTiberius> - sigh
+<KelvanTiberius> - you gotta be kidding me
+<Val> - Well that's not my fault !
+<KelvanTiberius> - no
+<KelvanTiberius> - it's not
+<Val> - But dice are playing alone here
+<KelvanTiberius> - man
+<KelvanTiberius> - that sucks
+<KelvanTiberius> - that's the second time too
+<KelvanTiberius> - ok
+<KelvanTiberius> - dials
+<KelvanTiberius> - ready?
+<Val> - sure
+* --- Academy 1 (1) performs move: 3 - Right Turn
+* --- Omicron (3) performs move: 2 - Right Turn
+* --- Backstabber (5) performs move: 1 - Left Turn
+<KelvanTiberius> - bump?
+<Val> - This time it looks like
+<KelvanTiberius> - go ahead sir
+* --- TIE Int (Soontir Fel) performs move: 2 - Forward
+<Val> - Rang 2, 3v1
+* *** Val Rolls to Attack: [Crit], [Focus], [Focus], [], [], [], [] ***
+<Val> - Focus
+* *** KelvanTiberius Rolls to Defend: [Blank], [], [], [], [], [], [] ***
+* *** Val turns Attack Die 2 [Focus] into a [Hit] ***
+* *** Val turns Attack Die 3 [Focus] into a [Hit] ***
+<KelvanTiberius> - bs range 2
+* *** KelvanTiberius Rolls to Attack: [Hit], [Crit], [Blank], [], [], [], [] ***
+* *** Val Rolls to Defend: [Focus], [Focus], [Evade], [Evade], [], [], [] ***
+<KelvanTiberius> - dials
+<Val> - rdy
+* --- Academy 1 (1) performs move: 2 - Right Bank
+* --- bs (5) performs move: 2 - Left Bank
+<KelvanTiberius> - go ahead
+* --- TIE Int (Soontir Fel) performs move: 4 - Forward
+<Val> - Boost left
+* --- TIE Int (Soontir Fel) performs move: 1 - Left Bank
+<KelvanTiberius> - range 1 by pixels
+<KelvanTiberius> - bs range 3 ourt of arc
+* *** KelvanTiberius Rolls to Attack: [Focus], [Blank], [Focus], [], [], [], [] ***
+<KelvanTiberius> - because BS can't hit anything
+<KelvanTiberius> - academy range 1
+* *** KelvanTiberius Rolls to Attack: [Focus], [Blank], [Hit], [], [], [], [] ***
+<KelvanTiberius> - focus
+* *** Val Rolls to Defend: [Evade], [Focus], [Blank], [Focus], [], [], [] ***
+<Val> - Evaded
+<KelvanTiberius> - set
+<Val> - rdy
+* --- Academy 1 (1) performs move: 1 - Left Turn
+* --- bs (5) performs move: 3 - Left Bank
+<KelvanTiberius> - go ahead
+* --- TIE Int (Soontir Fel) performs move: 2 - Left Turn
+<Val> - Barrel
+<KelvanTiberius> - bs range 3 out of arc
+* *** KelvanTiberius Rolls to Attack: [Hit], [Focus], [Blank], [], [], [], [] ***
+<KelvanTiberius> - focus
+* *** Val Rolls to Defend: [Evade], [Evade], [Focus], [Evade], [Focus], [], [] ***
+<KelvanTiberius> - ap range 2
+* *** KelvanTiberius Rolls to Attack: [Blank], [Focus], [], [], [], [å], [] ***
+<KelvanTiberius> - dials
+<KelvanTiberius> - set
+<Val> - set
+* --- Academy 1 (1) performs move: 1 - Left Turn
+* --- bs (5) performs move: 4 - Forward
+* --- bs (5) performs move: 4 - Koiogran
+<KelvanTiberius> - go ahead
+* --- TIE Int (Soontir Fel) performs move: 4 - Forward
+<Val> - Barrel right
+<Val> - good for me
+<KelvanTiberius> - dials
+<KelvanTiberius> - set
+<Val> - set
+* --- Academy 1 (1) performs move: 2 - Right Turn
+<KelvanTiberius> - let me make sure this is perfect
+<Val> - sure
+<KelvanTiberius> - cant pull it there
+* UNDO: <KelvanTiberius> - cant pull it there
+* --- bs (5) performs move: 1 - Right Turn
+<KelvanTiberius> - Safe
+<KelvanTiberius> - go ahead
+<Val> - indeed
+* --- TIE Int (Soontir Fel) performs move: 3 - Left Turn
+<Val> - checking for a boost left
+* --- TIE Int (Soontir Fel) performs move: 1 - Left Bank
+<Val> - good
+<KelvanTiberius> - fire away
+<Val> - Range 2 on BS, 3v3
+* *** Val Rolls to Attack: [Hit], [Hit], [Crit], [], [], [], [] ***
+<KelvanTiberius> - right
+* *** KelvanTiberius Rolls to Defend: [Evade], [Blank], [Focus], [], [], [], [] ***
+<KelvanTiberius> - dead
+<KelvanTiberius> - I concede
+ - Logfile written.
+<Val> - Sorry man, dices were so hot on my side
+<KelvanTiberius> - its ok
+<KelvanTiberius> - i am a little pissed about it but it's not your fault at all
