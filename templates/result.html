@@ -13,75 +13,87 @@
 .tg .tg-stq5{font-weight:bold;background-color:#FFF742;color:#000000}
 </style>
 <h2>{{player1}} vs {{ player2 }} - Winner: {{ winner }}</h2>
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-le6b{font-weight:bold;background-color:#2ecc71;color:#ffffff;text-align:center}
+.tg .tg-wtzb{font-weight:bold;background-color:#e74c3c;color:#ffffff;text-align:center}
+.tg .tg-tre1{font-weight:bold;background-color:#F0F6FA;color:#000000}
+.tg .tg-igor{font-weight:bold;background-color:#F0F6FA}
+.tg .tg-rh4c{background-color:#F0F6FA}
+</style>
 <table class="tg">
   <tr>
-    <th class="tg-fs8g" rowspan="3"><br><br><br><br><br>Player<br></th>
-    <th class="tg-zouf" colspan="13">RED DICE &nbsp; &nbsp; &nbsp; &nbsp;</th>
-    <th class="tg-mv95" colspan="10">GREEN DICE</th>
+    <th class="tg-wtzb" colspan="5">{{ player1 }} Red Dice: {{ p1stat.total_reds }} total</th>
   </tr>
   <tr>
-    <td class="tg-9tj9" rowspan="2"><br><br>Total</td>
-    <td class="tg-9tj9" colspan="3">Hits</td>
-    <td class="tg-9tj9" colspan="3">Crits</td>
-    <td class="tg-9tj9" colspan="3">Focus</td>
-    <td class="tg-9tj9" colspan="3">Blanks</td>
-    <td class="tg-stq5" rowspan="2"><br><br>Total</td>
-    <td class="tg-9tj9" colspan="3">Evades</td>
-    <td class="tg-9tj9" colspan="3">Eyes</td>
-    <td class="tg-9tj9" colspan="3">Blanks</td>
+    <td class="tg-tre1">Face</td>
+    <td class="tg-tre1">Expected</td>
+    <td class="tg-tre1">Actual</td>
+    <td class="tg-tre1">+/-</td>
+    <td class="tg-igor">Converted</td>
   </tr>
   <tr>
-    <td class="tg-6gnk">Expected</td>
-    <td class="tg-6gnk">Actual</td>
-    <td class="tg-cxkv">+/-</td>
-    <td class="tg-cxkv">Expected</td>
-    <td class="tg-cxkv">Actual</td>
-    <td class="tg-cxkv">+/-</td>
-    <td class="tg-cxkv">Expected</td>
-    <td class="tg-cxkv">Actual</td>
-    <td class="tg-cxkv">+/-</td>
-    <td class="tg-cxkv">Expected</td>
-    <td class="tg-cxkv">Actual</td>
-    <td class="tg-cxkv">+/-</td>
-    <td class="tg-cxkv">Expected</td>
-    <td class="tg-cxkv">Actual</td>
-    <td class="tg-cxkv">+/-</td>
-    <td class="tg-cxkv">Expected</td>
-    <td class="tg-6gnk">Actual</td>
-    <td class="tg-6gnk">+/-</td>
-    <td class="tg-6gnk">Expected</td>
-    <td class="tg-6gnk">Actual</td>
-    <td class="tg-6gnk">+/-</td>
+    <td class="tg-igor">Hit</td>
+    <td class="tg-031e">{{ p1stat.expected_red_hits() }}</td>
+    <td class="tg-031e">{{ p1stat.red_hits }}</td>
+    <td class="tg-031e">{{ p1stat.red_hit_differential() }}</td>
+    <td class="tg-031e"></td>
   </tr>
-
-  {%  for result in results  %}
   <tr>
-    <td class="tg-031e">{{ result.player }}</td>
-    <td class="tg-031e">{{ result.total_reds }}</td>
-    <td class="tg-031e">{{ result.expected_red_hits() }}</td>
-    <td class="tg-031e">{{ result.red_hits }}</td>
-    <td class="tg-031e">{{ result.red_hit_differential() }}</td>
-    <td class="tg-031e">{{ result.expected_red_crits() }}</td>
-    <td class="tg-031e">{{ result.red_crits }}</td>
-    <td class="tg-031e">{{ result.red_crit_differential() }}</td>
-    <td class="tg-031e">{{ result.expected_red_eyes() }}</td>
-    <td class="tg-031e">{{ result.red_eyes }}</td>
-    <td class="tg-031e">{{ result.red_focus_differential() }}</td>
-    <td class="tg-031e">{{ result.expected_red_misses()}}</td>
-    <td class="tg-031e">{{ result.red_blanks }}</td>
-    <td class="tg-031e">{{ result.red_blank_differential() }}</td>
-    <td class="tg-031e">{{ result.total_greens }}</td>
-    <td class="tg-031e">{{ result.expected_green_evades() }}</td>
-    <td class="tg-031e">{{ result.green_evades }}</td>
-    <td class="tg-031e">{{ result.green_evade_differential() }}</td>
-    <td class="tg-031e">{{ result.expected_green_eyes() }}</td>
-    <td class="tg-031e">{{ result.green_eyes }}</td>
-    <td class="tg-031e">{{ result.green_eyes_differential() }}</td>
-    <td class="tg-031e">{{ result.expected_green_blanks() }}</td>
-    <td class="tg-031e">{{ result.green_blanks }}</td>
-    <td class="tg-031e">{{ result.green_blank_differential() }}</td>
+    <td class="tg-igor">Crit</td>
+    <td class="tg-031e">{{ p1stat.expected_red_crits() }}</td>
+    <td class="tg-031e">{{ p1stat.red_crits }}</td>
+    <td class="tg-031e">{{ p1stat.red_crit_differential() }}</td>
+    <td class="tg-031e"></td>
   </tr>
- {% endfor %}
+  <tr>
+    <td class="tg-igor">Focus</td>
+    <td class="tg-031e">{{ p1stat.expected_red_misses() }}</td>
+    <td class="tg-031e">{{ p1stat.red_eyes }}</td>
+    <td class="tg-031e">{{ p1stat.red_focus_differential() }}</td>
+    <td class="tg-031e">{{ p1stat.red_focuses_converted() }}</td>
+  </tr>
+  <tr>
+    <td class="tg-igor">Blank</td>
+    <td class="tg-031e">{{ p1stat.red_blanks_expected() }}</td>
+    <td class="tg-031e">{{ p1stat.red_blanks }}</td>
+    <td class="tg-031e">{{ p1stat.red_blank_differential() }}</td>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+    <td class="tg-le6b" colspan="5">{{ player1 }} Green Dice: {{ p1stat.total_greens }} total</td>
+  </tr>
+  <tr>
+    <td class="tg-rh4c">Face</td>
+    <td class="tg-igor">Expected</td>
+    <td class="tg-igor">Actual</td>
+    <td class="tg-igor">+/-</td>
+    <td class="tg-igor">Converted</td>
+  </tr>
+  <tr>
+    <td class="tg-igor">Evade</td>
+    <td class="tg-031e">{{ p1stat.expected_green_evades() }}</td>
+    <td class="tg-031e">{{ p1stat.green_evades }}</td>
+    <td class="tg-031e">{{ p1stat.green_evade_differential() }}</td>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+    <td class="tg-igor">Focus</td>
+    <td class="tg-031e">{{ p1stat.expected_green_eyes() }}</td>
+    <td class="tg-031e">{{ p1stat.green_eyes }}</td>
+    <td class="tg-031e">{{ p1stat.green_eyes_differential() }}</td>
+    <td class="tg-031e">{{ p1stat.green_focuses_converted() }}</td>
+  </tr>
+  <tr>
+    <td class="tg-igor">Blank</td>
+    <td class="tg-031e">{{ p1stat.expected_green_blanks() }}</td>
+    <td class="tg-031e">{{ p1stat.green_blanks }}</td>
+    <td class="tg-031e">{{ p1stat.green_blank_differential() }}</td>
+    <td class="tg-031e"></td>
+  </tr>
 </table>
     <img src="{{ url_for('static', filename=imagesrc) }}" alt="Image Placeholder">
 {%  endblock %}

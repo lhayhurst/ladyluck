@@ -1,6 +1,7 @@
-
-
+import os
 import unittest
+import sqlalchemy
+from model import GameTape, GameTapeEntryType, DiceRoll
 from parser import LogFileParser
 
 class TestFsm(unittest.TestCase):
@@ -126,6 +127,82 @@ class TestFsm(unittest.TestCase):
         parser = LogFileParser()
         parser.read_input_from_file("logfiles/ricky_v_val.txt")
         parser.run_finite_state_machine()
+
+    def test_game_tape(self):
+        parser = LogFileParser()
+        parser.read_input_from_file("logfiles/fsm_test_input.txt")
+        parser.run_finite_state_machine()
+        game_tape = parser.game_tape
+
+        self.assertEqual( 24, game_tape.num_entries())
+
+        ge = game_tape.tape[ 0 ]
+        self.assertEqual( LogFileParser.PLAYER_ATTACKING, ge.game_state)
+        self.assertEqual( 1, ge.attack_set_number)
+        self.assertEqual( "Ryan Krippendorf", ge.player)
+        self.assertEqual( GameTapeEntryType.ATTACK_DICE, ge.entry_type)
+        self.assertEqual(1, ge.dice_number)
+        self.assertEqual( DiceRoll.FOCUS, ge.dice_value)
+
+        ge = game_tape.tape[ 1 ]
+        self.assertEqual( LogFileParser.PLAYER_ATTACKING, ge.game_state)
+        self.assertEqual( 1, ge.attack_set_number)
+        self.assertEqual( "Ryan Krippendorf", ge.player)
+        self.assertEqual( GameTapeEntryType.ATTACK_DICE, ge.entry_type)
+        self.assertEqual(2, ge.dice_number)
+        self.assertEqual( DiceRoll.BLANK, ge.dice_value)
+
+
+        ge = game_tape.tape[ 2 ]
+        self.assertEqual( LogFileParser.PLAYER_MODIFYING_ATTACK_DICE, ge.game_state)
+        self.assertEqual( 1, ge.attack_set_number)
+        self.assertEqual( "Ryan Krippendorf", ge.player)
+        self.assertEqual( GameTapeEntryType.ATTACK_DICE_MODIFICATION, ge.entry_type)
+        self.assertEqual(1, ge.dice_number)
+        self.assertEqual( DiceRoll.HIT, ge.dice_value)
+
+        ge = game_tape.tape[ 3 ]
+        self.assertEqual( LogFileParser.PLAYER_DEFENDING, ge.game_state)
+        self.assertEqual( 1, ge.attack_set_number)
+        self.assertEqual( "sozin", ge.player)
+        self.assertEqual( GameTapeEntryType.DEFENSE_DICE, ge.entry_type)
+        self.assertEqual(1, ge.dice_number)
+        self.assertEqual( DiceRoll.EVADE, ge.dice_value)
+
+        ge = game_tape.tape[ 4 ]
+        self.assertEqual( LogFileParser.PLAYER_DEFENDING, ge.game_state)
+        self.assertEqual( 1, ge.attack_set_number)
+        self.assertEqual( "sozin", ge.player)
+        self.assertEqual( GameTapeEntryType.DEFENSE_DICE, ge.entry_type)
+        self.assertEqual(2, ge.dice_number)
+        self.assertEqual( DiceRoll.BLANK, ge.dice_value)
+
+        #skip ahead a bit to look for interesting cases
+        ge = game_tape.tape[ 6 ]
+        self.assertEqual( LogFileParser.PLAYER_ATTACKING, ge.game_state)
+        self.assertEqual( 2, ge.attack_set_number)
+        self.assertEqual( "Ryan Krippendorf", ge.player)
+        self.assertEqual( GameTapeEntryType.ATTACK_DICE, ge.entry_type)
+        self.assertEqual(1, ge.dice_number)
+        self.assertEqual( DiceRoll.HIT, ge.dice_value)
+
+        ge = game_tape.tape[ 8 ]
+        self.assertEqual( LogFileParser.PLAYER_DEFENDING, ge.game_state)
+        self.assertEqual( 2, ge.attack_set_number)
+        self.assertEqual( "sozin", ge.player)
+        self.assertEqual( GameTapeEntryType.DEFENSE_DICE, ge.entry_type)
+        self.assertEqual(1, ge.dice_number)
+        self.assertEqual( DiceRoll.FOCUS, ge.dice_value)
+
+        ge = game_tape.tape[ 9 ]
+        self.assertEqual( LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE, ge.game_state)
+        self.assertEqual( 2, ge.attack_set_number)
+        self.assertEqual( "sozin", ge.player)
+        self.assertEqual( GameTapeEntryType.DEFENSE_DICE_MODIFICATION, ge.entry_type)
+        self.assertEqual(1, ge.dice_number)
+        self.assertEqual( DiceRoll.EVADE, ge.dice_value)
+
+
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 <sozin> - oh noes
 * *** Ryan Krippendorf Rolls to Attack: [Focus], [Blank], [], [], [], [], [] ***
-* *** Ryan Krippendorfozin turns Attack Die 1 (Focus) into a [Hit] ***
+* *** Ryan Krippendorf turns Attack Die 1 (Focus) into a [Hit] ***
 <sozin> rolling to defend!
 * *** sozin Rolls to Defend: [Evade], [Blank], [Evade], [], [], [], [] ***
 <Ryan Krippendorf> - 2v1 on 2
