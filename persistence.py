@@ -1,22 +1,23 @@
-from sqlalchemy.orm import sessionmaker, relationship
-import time
-from decl_enum import DeclEnum
-
 __author__ = 'lhayhurst'
 
-
+import time
+from decl_enum import DeclEnum
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, DateTime, Table, Enum
+from sqlalchemy import Column, Integer, String, DateTime, Table
 from sqlalchemy import ForeignKey
+from sqlalchemy.orm import sessionmaker, relationship
 
+#static database objects
 Base = declarative_base()
 Session = sessionmaker()
 
-player_table = "player"
-game_table   = "game"
+#TABLES
+game_roll_table = "game_roll"
 game_players_table = "game_players"
-game_tape_entry_table = "game_tape_entry"
-
+game_tape_entry_type_table = 'game_tape_entry_type'
+player_table = "player"
+dice_table = 'dice'
+game_table   = "game"
 GamePlayers = Table( game_players_table, Base.metadata,
     Column('game_id', Integer, ForeignKey('{0}.id'.format(game_table))),
     Column('player_id', Integer, ForeignKey('{0}.id'.format(player_table)))
@@ -33,7 +34,6 @@ class DiceFace(DeclEnum):
     BLANK = "B", "Blank"
     EVADE = "E", "Evade"
 
-game_tape_entry_type_table = 'game_tape_entry_type'
 class GameTapeEntryType(DeclEnum):
     ATTACK_DICE = "A", "Attack Dice"
     ATTACK_DICE_REROLL = "B", "Attack Dice Reroll"
@@ -45,7 +45,7 @@ class GameTapeEntryType(DeclEnum):
 class Player(Base):
     __tablename__ = player_table
     id = Column(Integer, primary_key=True)
-    name = Column(String(16), nullable = False, index=True)
+    name = Column(String(64), nullable = False, index=True)
 
     def __repr__(self):
         return "<Player(id={0}name={1}".format(self.id, self.name)
@@ -55,16 +55,15 @@ class Player(Base):
 
 
 
-dice_table = 'dice'
 class Dice(Base):
     __tablename__ = dice_table
     id        = Column(Integer, primary_key=True)
     dice_type = Column(DiceType.db_type())
     dice_face = Column(DiceFace.db_type())
 
-class GameTapeEntry(Base):
+class GameRoll(Base):
 
-    __tablename__ = game_tape_entry_table
+    __tablename__ = game_roll_table
     id             = Column(Integer, primary_key=True)
     game_id        = Column(Integer,ForeignKey('{0}.id'.format(game_table)) )
     player_id      = Column(Integer, ForeignKey('{0}.id'.format(player_table)))
@@ -81,7 +80,7 @@ class Game(Base):
     game_played_time = Column(DateTime)
     game_name = Column(String(128))
     game_players = relationship( Player.__name__, secondary=GamePlayers  ) #TODO: why 'Player' and not playertable?
-    game_tape    = relationship( GameTapeEntry.__name__, order_by="asc(GameTapeEntry.id)")
+    game_roll   = relationship( GameRoll.__name__, order_by="asc(GameRoll.id)")
 
     def __init__(self, player1, player2):
         self.game_played_time = time.strftime('%Y-%m-%d %H:%M:%S')

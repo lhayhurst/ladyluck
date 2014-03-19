@@ -1,25 +1,31 @@
+import sys
+
 __author__ = 'lhayhurst'
 
 from parser import LogFileParser
-from persistence import Base, Session, Dice, DiceType, DiceFace, Player, Game, GameTapeEntry, GameTapeEntryType
+from persistence import Base, Session, Dice, DiceType, DiceFace, Player, Game, GameRoll, GameTapeEntryType
 
 import os
 import unittest
 import sqlalchemy
 
-
-class TestPersistence(unittest.TestCase):
-
-    def setUp(self):
+class PersistenceManager:
+    def __init__(self, echo=False):
         url = os.getenv('DB_TEST_URL')
-        self.engine = sqlalchemy.create_engine(url, echo=True)
+        self.engine = sqlalchemy.create_engine(url, echo=echo)
         self.connection = self.engine.connect()
 
+        Session.configure(bind=self.engine)
+        self.session = Session()
+
+    def create_schema(self):
         Base.metadata.create_all(self.engine)
 
-        Session.configure(bind=self.engine)
+    def drop_schema(self):
+        Base.metadata.drop_all(self.engine)
 
-        self.session = Session()
+
+    def populate_reference_tables(self):
 
         self.session.add_all( [
             Dice( dice_type=DiceType.RED, dice_face=DiceFace.HIT ),
@@ -29,12 +35,27 @@ class TestPersistence(unittest.TestCase):
             Dice( dice_type=DiceType.GREEN, dice_face=DiceFace.EVADE ),
             Dice( dice_type=DiceType.GREEN, dice_face=DiceFace.FOCUS),
             Dice( dice_type=DiceType.GREEN, dice_face=DiceFace.BLANK ) ] )
+
+
+class TestPersistence(unittest.TestCase):
+
+    def setUp(self):
+        self.persistence_manager = PersistenceManager()
+
+        #just keep a top level reference to these guys for ease of use
+        self.engine = self.persistence_manager.engine
+        self.connection = self.persistence_manager.connection
+        self.session = self.persistence_manager.session
+
+        #and then create the database schema, reference tables
+        self.persistence_manager.create_schema()
+        self.persistence_manager.populate_reference_tables()
         self.session.commit()
 
     def tearDown(self):
 
         self.session.close_all()
-        Base.metadata.drop_all(self.engine)
+        self.persistence_manager.drop_schema()
 
     #@unittest.skip("because")
     def testDice(self):
@@ -81,7 +102,7 @@ class TestPersistence(unittest.TestCase):
             game_id = g.id
             dice = self.session.query(Dice).filter_by(dice_type=gt.dice_type, dice_face=gt.dice_face).first()
 
-            gte = GameTapeEntry( player_id=player_id,
+            gte = GameRoll( player_id=player_id,
                                  game_id=game_id,
                                  tape_type=gt.entry_type,
                                  dice_id=dice.id,
@@ -94,12 +115,12 @@ class TestPersistence(unittest.TestCase):
         my_g = self.session.query(Game).filter_by(id=g.id).first()
         self.assertTrue( g is not None )
 
-        my_tape = my_g.game_tape
-        self.assertTrue( my_tape is not None)
-        self.assertEqual( len(my_tape) , 24 )
+        my_game_roll = my_g.game_roll
+        self.assertTrue( my_game_roll is not None)
+        self.assertEqual( len(my_game_roll) , 24 )
 
         #* *** Ryan Krippendorf Rolls to Attack: [Focus], [Blank], [], [], [], [], [] ***
-        entry = my_tape[0]
+        entry = my_game_roll[0]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p1.name, entry.player.name)
         self.assertEqual( GameTapeEntryType.ATTACK_DICE, entry.tape_type)
@@ -108,7 +129,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceType.RED, entry.dice.dice_type)
         self.assertEqual( DiceFace.FOCUS, entry.dice.dice_face)
 
-        entry = my_tape[1]
+        entry = my_game_roll[1]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p1.name, entry.player.name)
         self.assertEqual( GameTapeEntryType.ATTACK_DICE, entry.tape_type)
@@ -118,7 +139,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceFace.BLANK, entry.dice.dice_face)
 
         #* *** Ryan Krippendorf turns Attack Die 1 (Focus) into a [Hit] ***
-        entry = my_tape[2]
+        entry = my_game_roll[2]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p1.name, entry.player.name)
         self.assertEqual( GameTapeEntryType.ATTACK_DICE_MODIFICATION, entry.tape_type)
@@ -128,7 +149,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceFace.HIT, entry.dice.dice_face)
 
         #* *** sozin Rolls to Defend: [Evade], [Blank], [Evade], [], [], [], [] ***
-        entry = my_tape[3]
+        entry = my_game_roll[3]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
         self.assertEqual( GameTapeEntryType.DEFENSE_DICE, entry.tape_type)
@@ -137,7 +158,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceType.GREEN, entry.dice.dice_type)
         self.assertEqual( DiceFace.EVADE, entry.dice.dice_face)
 
-        entry = my_tape[4]
+        entry = my_game_roll[4]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
         self.assertEqual( GameTapeEntryType.DEFENSE_DICE, entry.tape_type)
@@ -146,7 +167,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceType.GREEN, entry.dice.dice_type)
         self.assertEqual( DiceFace.BLANK, entry.dice.dice_face)
 
-        entry = my_tape[5]
+        entry = my_game_roll[5]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
         self.assertEqual( GameTapeEntryType.DEFENSE_DICE, entry.tape_type)
@@ -156,7 +177,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceFace.EVADE, entry.dice.dice_face)
 
         #* *** Ryan Krippendorf Rolls to Attack: [Hit], [Crit], [], [], [], [], [] ***
-        entry = my_tape[6]
+        entry = my_game_roll[6]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p1.name, entry.player.name)
         self.assertEqual( GameTapeEntryType.ATTACK_DICE, entry.tape_type)
@@ -165,7 +186,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceType.RED, entry.dice.dice_type)
         self.assertEqual( DiceFace.HIT, entry.dice.dice_face)
 
-        entry = my_tape[7]
+        entry = my_game_roll[7]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p1.name, entry.player.name)
         self.assertEqual( GameTapeEntryType.ATTACK_DICE, entry.tape_type)
@@ -175,7 +196,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceFace.CRIT, entry.dice.dice_face)
 
         #* *** sozin Rolls to Defend: [Focus], [], [], [], [], [], [] ***
-        entry = my_tape[8]
+        entry = my_game_roll[8]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
         self.assertEqual( GameTapeEntryType.DEFENSE_DICE, entry.tape_type)
@@ -185,7 +206,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceFace.FOCUS, entry.dice.dice_face)
 
         #* *** sozin turns Defense Die 1 (Focus) into a [Evade] ***
-        entry = my_tape[9]
+        entry = my_game_roll[9]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
         self.assertEqual( GameTapeEntryType.DEFENSE_DICE_MODIFICATION, entry.tape_type)
@@ -195,7 +216,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceFace.EVADE, entry.dice.dice_face)
 
         #* *** sozin Rolls to Attack: [Blank], [Blank], [], [], [], [], [] ***
-        entry = my_tape[10]
+        entry = my_game_roll[10]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
         self.assertEqual( GameTapeEntryType.ATTACK_DICE, entry.tape_type)
@@ -204,7 +225,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceType.RED, entry.dice.dice_type)
         self.assertEqual( DiceFace.BLANK, entry.dice.dice_face)
 
-        entry = my_tape[11]
+        entry = my_game_roll[11]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
         self.assertEqual( GameTapeEntryType.ATTACK_DICE, entry.tape_type)
@@ -214,7 +235,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceFace.BLANK, entry.dice.dice_face)
 
         #* *** sozin Re-Rolls Attack Die 1 [Focus] and gets a [Hit] ***
-        entry = my_tape[12]
+        entry = my_game_roll[12]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
         self.assertEqual( GameTapeEntryType.ATTACK_DICE_REROLL, entry.tape_type)
@@ -224,7 +245,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceFace.HIT, entry.dice.dice_face)
 
         #* *** sozin Re-Rolls Attack Die 2 [Focus] and gets a [Focus] ***
-        entry = my_tape[13]
+        entry = my_game_roll[13]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
         self.assertEqual( GameTapeEntryType.ATTACK_DICE_REROLL, entry.tape_type)
@@ -233,10 +254,10 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceType.RED, entry.dice.dice_type)
         self.assertEqual( DiceFace.FOCUS, entry.dice.dice_face)
 
-    @unittest.skip("because")
+    #@unittest.skip("because")
     def testGameWithPlayer(self):
         parser = LogFileParser()
-        parser.read_input_from_file("logfiles/fsm_test_input.txt")
+        parser.read_input_from_file("../logfiles/fsm_test_input.txt")
         parser.run_finite_state_machine()
         game_tape = parser.game_tape
         p1 = Player(name=game_tape.player1)
@@ -276,4 +297,16 @@ class TestPersistence(unittest.TestCase):
         #create a game entry
 
 if __name__ == "__main__":
-    unittest.main()
+    if sys.argv[1] == None or sys.argv[1] == 'test':
+        unittest.main()
+    elif sys.argv[1] == 'create':
+        pm = PersistenceManager(True)
+        pm.create_schema()
+        pm.populate_reference_tables()
+        pm.session.commit()
+        pm.session.close_all()
+    elif sys.argv[1] == 'destroy':
+        pm = PersistenceManager(True)
+        pm.drop_schema()
+        pm.session.commit()
+        pm.session.close_all()
