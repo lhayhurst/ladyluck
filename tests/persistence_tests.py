@@ -3,38 +3,9 @@ import sys
 __author__ = 'lhayhurst'
 
 from parser import LogFileParser
-from persistence import Base, Session, Dice, DiceType, DiceFace, Player, Game, GameRoll, GameTapeEntryType
-
-import os
+from persistence import Dice, DiceType, DiceFace, Player, Game, GameRoll, GameRollType, PersistenceManager
 import unittest
-import sqlalchemy
 
-class PersistenceManager:
-    def __init__(self, echo=False):
-        url = os.getenv('DB_TEST_URL')
-        self.engine = sqlalchemy.create_engine(url, echo=echo)
-        self.connection = self.engine.connect()
-
-        Session.configure(bind=self.engine)
-        self.session = Session()
-
-    def create_schema(self):
-        Base.metadata.create_all(self.engine)
-
-    def drop_schema(self):
-        Base.metadata.drop_all(self.engine)
-
-
-    def populate_reference_tables(self):
-
-        self.session.add_all( [
-            Dice( dice_type=DiceType.RED, dice_face=DiceFace.HIT ),
-            Dice( dice_type=DiceType.RED, dice_face=DiceFace.CRIT ),
-            Dice( dice_type=DiceType.RED, dice_face=DiceFace.FOCUS ),
-            Dice( dice_type=DiceType.RED, dice_face=DiceFace.BLANK ),
-            Dice( dice_type=DiceType.GREEN, dice_face=DiceFace.EVADE ),
-            Dice( dice_type=DiceType.GREEN, dice_face=DiceFace.FOCUS),
-            Dice( dice_type=DiceType.GREEN, dice_face=DiceFace.BLANK ) ] )
 
 
 class TestPersistence(unittest.TestCase):
@@ -102,13 +73,13 @@ class TestPersistence(unittest.TestCase):
             game_id = g.id
             dice = self.session.query(Dice).filter_by(dice_type=gt.dice_type, dice_face=gt.dice_face).first()
 
-            gte = GameRoll( player_id=player_id,
+            roll = GameRoll( player_id=player_id,
                                  game_id=game_id,
-                                 tape_type=gt.entry_type,
+                                 roll_type=gt.entry_type,
                                  dice_id=dice.id,
                                  attack_set_num=gt.attack_set_number,
                                  dice_num=gt.dice_num )
-            session.add(gte)
+            session.add(roll)
         session.commit()
 
         #now get 'em back
@@ -123,7 +94,7 @@ class TestPersistence(unittest.TestCase):
         entry = my_game_roll[0]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p1.name, entry.player.name)
-        self.assertEqual( GameTapeEntryType.ATTACK_DICE, entry.tape_type)
+        self.assertEqual( GameRollType.ATTACK_DICE, entry.roll_type)
         self.assertEqual( 1, entry.attack_set_num)
         self.assertEqual( 1, entry.dice_num)
         self.assertEqual( DiceType.RED, entry.dice.dice_type)
@@ -132,7 +103,7 @@ class TestPersistence(unittest.TestCase):
         entry = my_game_roll[1]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p1.name, entry.player.name)
-        self.assertEqual( GameTapeEntryType.ATTACK_DICE, entry.tape_type)
+        self.assertEqual( GameRollType.ATTACK_DICE, entry.roll_type)
         self.assertEqual( 1, entry.attack_set_num)
         self.assertEqual( 2, entry.dice_num)
         self.assertEqual( DiceType.RED, entry.dice.dice_type)
@@ -142,7 +113,7 @@ class TestPersistence(unittest.TestCase):
         entry = my_game_roll[2]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p1.name, entry.player.name)
-        self.assertEqual( GameTapeEntryType.ATTACK_DICE_MODIFICATION, entry.tape_type)
+        self.assertEqual( GameRollType.ATTACK_DICE_MODIFICATION, entry.roll_type)
         self.assertEqual( 1, entry.attack_set_num)
         self.assertEqual( 1, entry.dice_num)
         self.assertEqual( DiceType.RED, entry.dice.dice_type)
@@ -152,7 +123,7 @@ class TestPersistence(unittest.TestCase):
         entry = my_game_roll[3]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameTapeEntryType.DEFENSE_DICE, entry.tape_type)
+        self.assertEqual( GameRollType.DEFENSE_DICE, entry.roll_type)
         self.assertEqual( 1, entry.attack_set_num)
         self.assertEqual( 1, entry.dice_num)
         self.assertEqual( DiceType.GREEN, entry.dice.dice_type)
@@ -161,7 +132,7 @@ class TestPersistence(unittest.TestCase):
         entry = my_game_roll[4]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameTapeEntryType.DEFENSE_DICE, entry.tape_type)
+        self.assertEqual( GameRollType.DEFENSE_DICE, entry.roll_type)
         self.assertEqual( 1, entry.attack_set_num)
         self.assertEqual( 2, entry.dice_num)
         self.assertEqual( DiceType.GREEN, entry.dice.dice_type)
@@ -170,7 +141,7 @@ class TestPersistence(unittest.TestCase):
         entry = my_game_roll[5]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameTapeEntryType.DEFENSE_DICE, entry.tape_type)
+        self.assertEqual( GameRollType.DEFENSE_DICE, entry.roll_type)
         self.assertEqual( 1, entry.attack_set_num)
         self.assertEqual( 3, entry.dice_num)
         self.assertEqual( DiceType.GREEN, entry.dice.dice_type)
@@ -180,7 +151,7 @@ class TestPersistence(unittest.TestCase):
         entry = my_game_roll[6]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p1.name, entry.player.name)
-        self.assertEqual( GameTapeEntryType.ATTACK_DICE, entry.tape_type)
+        self.assertEqual( GameRollType.ATTACK_DICE, entry.roll_type)
         self.assertEqual( 2, entry.attack_set_num)
         self.assertEqual( 1, entry.dice_num)
         self.assertEqual( DiceType.RED, entry.dice.dice_type)
@@ -189,7 +160,7 @@ class TestPersistence(unittest.TestCase):
         entry = my_game_roll[7]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p1.name, entry.player.name)
-        self.assertEqual( GameTapeEntryType.ATTACK_DICE, entry.tape_type)
+        self.assertEqual( GameRollType.ATTACK_DICE, entry.roll_type)
         self.assertEqual( 2, entry.attack_set_num)
         self.assertEqual( 2, entry.dice_num)
         self.assertEqual( DiceType.RED, entry.dice.dice_type)
@@ -199,7 +170,7 @@ class TestPersistence(unittest.TestCase):
         entry = my_game_roll[8]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameTapeEntryType.DEFENSE_DICE, entry.tape_type)
+        self.assertEqual( GameRollType.DEFENSE_DICE, entry.roll_type)
         self.assertEqual( 2, entry.attack_set_num)
         self.assertEqual( 1, entry.dice_num)
         self.assertEqual( DiceType.GREEN, entry.dice.dice_type)
@@ -209,7 +180,7 @@ class TestPersistence(unittest.TestCase):
         entry = my_game_roll[9]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameTapeEntryType.DEFENSE_DICE_MODIFICATION, entry.tape_type)
+        self.assertEqual( GameRollType.DEFENSE_DICE_MODIFICATION, entry.roll_type)
         self.assertEqual( 2, entry.attack_set_num)
         self.assertEqual( 1, entry.dice_num)
         self.assertEqual( DiceType.GREEN, entry.dice.dice_type)
@@ -219,7 +190,7 @@ class TestPersistence(unittest.TestCase):
         entry = my_game_roll[10]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameTapeEntryType.ATTACK_DICE, entry.tape_type)
+        self.assertEqual( GameRollType.ATTACK_DICE, entry.roll_type)
         self.assertEqual( 3, entry.attack_set_num)
         self.assertEqual( 1, entry.dice_num)
         self.assertEqual( DiceType.RED, entry.dice.dice_type)
@@ -228,7 +199,7 @@ class TestPersistence(unittest.TestCase):
         entry = my_game_roll[11]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameTapeEntryType.ATTACK_DICE, entry.tape_type)
+        self.assertEqual( GameRollType.ATTACK_DICE, entry.roll_type)
         self.assertEqual( 3, entry.attack_set_num)
         self.assertEqual( 2, entry.dice_num)
         self.assertEqual( DiceType.RED, entry.dice.dice_type)
@@ -238,7 +209,7 @@ class TestPersistence(unittest.TestCase):
         entry = my_game_roll[12]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameTapeEntryType.ATTACK_DICE_REROLL, entry.tape_type)
+        self.assertEqual( GameRollType.ATTACK_DICE_REROLL, entry.roll_type)
         self.assertEqual( 3, entry.attack_set_num)
         self.assertEqual( 1, entry.dice_num)
         self.assertEqual( DiceType.RED, entry.dice.dice_type)
@@ -248,7 +219,7 @@ class TestPersistence(unittest.TestCase):
         entry = my_game_roll[13]
         self.assertEqual( g.id, entry.game_id)
         self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameTapeEntryType.ATTACK_DICE_REROLL, entry.tape_type)
+        self.assertEqual( GameRollType.ATTACK_DICE_REROLL, entry.roll_type)
         self.assertEqual( 3, entry.attack_set_num)
         self.assertEqual( 2, entry.dice_num)
         self.assertEqual( DiceType.RED, entry.dice.dice_type)
@@ -294,10 +265,9 @@ class TestPersistence(unittest.TestCase):
         vader = session.query(Player).filter_by(name=p1.name).first()
         self.assertEqual( my_player1.id, vader.id )
 
-        #create a game entry
 
 if __name__ == "__main__":
-    if sys.argv[1] == None or sys.argv[1] == 'test':
+    if len (sys.argv) == 1:
         unittest.main()
     elif sys.argv[1] == 'create':
         pm = PersistenceManager(True)

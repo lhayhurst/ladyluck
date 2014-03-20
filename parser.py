@@ -3,7 +3,7 @@ from __future__ import print_function
 import re
 from fsm import fsm
 from model import GameTape, GameTapeEntry
-from persistence import GameTapeEntryType, DiceType, DiceFace
+from persistence import GameRollType, DiceType, DiceFace
 
 
 class LogFileParser:
@@ -237,7 +237,7 @@ class LogFileParser:
                                                None,
                                                game_state.currentState,
                                                self.current_attack_set,
-                                               GameTapeEntryType.ATTACK_DICE,
+                                               GameRollType.ATTACK_DICE,
                                                DiceType.RED,
                                                dice_number,
                                                dice_value)  )
@@ -260,7 +260,7 @@ class LogFileParser:
                                                None,
                                                fss.currentState,
                                                self.current_attack_set,
-                                               GameTapeEntryType.DEFENSE_DICE,
+                                               GameRollType.DEFENSE_DICE,
                                                DiceType.GREEN,
                                                dice_number,
                                                dice_value) )
@@ -305,10 +305,10 @@ class LogFileParser:
         event_type = None
         if self.player_rerolled_attack_dice(value):
             dice = self.get_attack_dice_rerolled(value)
-            event_type = GameTapeEntryType.ATTACK_DICE_REROLL
+            event_type = GameRollType.ATTACK_DICE_REROLL
         elif self.player_turned_attack_dice(value):
             dice = self.get_attack_dice_changed_by_set(value)
-            event_type = GameTapeEntryType.ATTACK_DICE_MODIFICATION
+            event_type = GameRollType.ATTACK_DICE_MODIFICATION
 
         dice_number = int(dice[0][0])
         dice_value = LogFileParser.face_translate[dice[0][1]]
@@ -336,10 +336,10 @@ class LogFileParser:
         event_type = None
         if self.player_rerolled_defense_dice(value):
             dice = self.get_defense_dice_rerolled(value)
-            event_type = GameTapeEntryType.DEFENSE_DICE_REROLL
+            event_type = GameRollType.DEFENSE_DICE_REROLL
         elif self.player_turned_defense_dice(value):
             dice = self.get_defense_dice_changed_by_set(value)
-            event_type = GameTapeEntryType.DEFENSE_DICE_MODIFICATION
+            event_type = GameRollType.DEFENSE_DICE_MODIFICATION
 
         dice_number = int(dice[0][0])
         dice_value = LogFileParser.face_translate[dice[0][1]]

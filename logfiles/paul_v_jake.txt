@@ -6,7 +6,7 @@
 
   Welcome to the VASSAL server
 
-
+a
  For help, see the VASSAL Forum at http://www.vassalengine.org/forum
 
  - Waiting for Game Info...

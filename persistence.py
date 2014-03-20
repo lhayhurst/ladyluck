@@ -1,3 +1,6 @@
+import os
+import sqlalchemy
+
 __author__ = 'lhayhurst'
 
 import time
@@ -24,23 +27,23 @@ GamePlayers = Table( game_players_table, Base.metadata,
 )
 
 class DiceType(DeclEnum):
-    RED   = 'R', "Red Attack Dice"
-    GREEN = 'G', "Green Attack Dice"
+    RED   = 'R', "RED"
+    GREEN = 'G', "GREEN"
 
 class DiceFace(DeclEnum):
-    HIT   = 'H', "Hit"
-    CRIT  = "C", "Crit"
-    FOCUS = "F", "Focus"
-    BLANK = "B", "Blank"
-    EVADE = "E", "Evade"
+    HIT   = 'H', "HIT"
+    CRIT  = "C", "CRIT"
+    FOCUS = "F", "FOCUS"
+    BLANK = "B", "BLANK"
+    EVADE = "E", "EVADE"
 
-class GameTapeEntryType(DeclEnum):
-    ATTACK_DICE = "A", "Attack Dice"
-    ATTACK_DICE_REROLL = "B", "Attack Dice Reroll"
-    ATTACK_DICE_MODIFICATION = "C", "Attack Dice Modification"
-    DEFENSE_DICE = "D", "Defense Dice"
-    DEFENSE_DICE_REROLL = "E", "Defense Dice Reroll"
-    DEFENSE_DICE_MODIFICATION = "F", "Defense Dice Modification"
+class GameRollType(DeclEnum):
+    ATTACK_DICE = "A", "ATTACK"
+    ATTACK_DICE_REROLL = "B", "ATTACK REROLL"
+    ATTACK_DICE_MODIFICATION = "C", "ATTACK MODIFICATION"
+    DEFENSE_DICE = "D", "DEFENSE"
+    DEFENSE_DICE_REROLL = "E", "DEFENSE REROLL"
+    DEFENSE_DICE_MODIFICATION = "F", "DEFENSE MODIFICATION"
 
 class Player(Base):
     __tablename__ = player_table
@@ -67,7 +70,7 @@ class GameRoll(Base):
     id             = Column(Integer, primary_key=True)
     game_id        = Column(Integer,ForeignKey('{0}.id'.format(game_table)) )
     player_id      = Column(Integer, ForeignKey('{0}.id'.format(player_table)))
-    tape_type      = Column(GameTapeEntryType.db_type())
+    roll_type      = Column(GameRollType.db_type())
     dice_id        = Column(Integer, ForeignKey('{0}.id'.format(dice_table)))
     attack_set_num = Column(Integer)
     dice_num       = Column(Integer)
@@ -88,6 +91,41 @@ class Game(Base):
         self.game_players.append( player2 )
         self.game_name = "{0} v {1} ({2}".format(player1.name, player2.name, self.game_played_time )
 
+class PersistenceManager:
+    def __init__(self, echo=False):
+        url = os.getenv('DB_TEST_URL')
+        self.engine = sqlalchemy.create_engine(url, echo=echo)
+        self.connection = self.engine.connect()
+
+        Session.configure(bind=self.engine)
+        self.session = Session()
+
+    def create_schema(self):
+        Base.metadata.create_all(self.engine)
+
+    def drop_schema(self):
+        Base.metadata.drop_all(self.engine)
+
+
+    def populate_reference_tables(self):
+
+        self.session.add_all( [
+            Dice( dice_type=DiceType.RED, dice_face=DiceFace.HIT ),
+            Dice( dice_type=DiceType.RED, dice_face=DiceFace.CRIT ),
+            Dice( dice_type=DiceType.RED, dice_face=DiceFace.FOCUS ),
+            Dice( dice_type=DiceType.RED, dice_face=DiceFace.BLANK ),
+            Dice( dice_type=DiceType.GREEN, dice_face=DiceFace.EVADE ),
+            Dice( dice_type=DiceType.GREEN, dice_face=DiceFace.FOCUS),
+            Dice( dice_type=DiceType.GREEN, dice_face=DiceFace.BLANK ) ] )
+
+    def get_games(self):
+        return self.session.query(Game).all()
+
+    def get_game(self, game_id):
+        return self.session.query(Game).filter_by(id=game_id).first()
+
+    def get_dice(self, dice_type, dice_face):
+        return self.session.query(Dice).filter_by(dice_type=dice_type, dice_face=dice_face).first()
 
 
 
