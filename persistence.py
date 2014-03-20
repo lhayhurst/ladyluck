@@ -44,6 +44,14 @@ class DiceFace(DeclEnum):
     BLANK = "B", "BLANK"
     EVADE = "E", "EVADE"
 
+class DiceThrowType(DeclEnum):
+    ATTACK = 'A', 'ATTACK'
+    DEFEND = 'D', 'DEFEND'
+
+class DiceThrowAdjustment(DeclEnum):
+    REROLL  = 'R', 'REROLL'
+    CONVERT = 'C', 'CONVERT'
+
 class GameRollType(DeclEnum):
     ATTACK_DICE = "A", "ATTACK"
     ATTACK_DICE_REROLL = "B", "ATTACK REROLL"
@@ -62,7 +70,6 @@ class Player(Base):
 
     def __init__(self, name):
         self.name = name
-
 
 
 class Dice(Base):
@@ -136,6 +143,10 @@ class PersistenceManager:
 
     def get_dice(self, dice_type, dice_face):
         return self.session.query(Dice).filter_by(dice_type=dice_type, dice_face=dice_face).first()
+
+    def get_player(self, player):
+        return self.session.query(Player).filter_by(name=player.name).first()
+
 
 
 

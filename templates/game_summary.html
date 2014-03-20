@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<b> {{ player1 }} versus {{ player2 }}</b>
+<b> {{ player1 }} versus {{ player2 }}, won by {{ winner }} ( {{ game.game_played_time }} )</b>
 
 <p></p>
-<a href="/download-game?id={{ game_id }}">Download game as csv</a>
+<a href="/download-game?id={{ game.id }}">Download game as csv</a>
 
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}

@@ -68,7 +68,14 @@ def add_game():
     game_tape = parser.game_tape.tape
     p1 = Player(name=parser.game_tape.player1)
     p2 = Player(name=parser.game_tape.player2)
-    game = Game(p1, p2)
+
+    winning_player = None
+    if winner is not None:
+        if winner == p1.name:
+            winning_player = p1
+        elif winner == p2.name:
+            winning_player = p2
+    game = Game(p1, p2, winning_player)
 
     db.session.add(game)
     db.session.commit()
@@ -110,12 +117,18 @@ def game():
     game = db.get_game(id)
     if game == None:
         return redirect(url_for('add_game'))
+
     player1 = game.game_players[0]
     player2 = game.game_players[1]
+    winning_player = "Unknown"
+    if game.game_winner is not None:
+        winning_player = game.game_winner.name
+
     return render_template( 'game_summary.html',
-                            game_id=game.id,
+                            game=game,
                             player1=player1.name,
                             player2=player2.name,
+                            winner=winning_player,
                             rolls=game.game_roll)
 
 

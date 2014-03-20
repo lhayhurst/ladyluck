@@ -1,7 +1,5 @@
-import sys
-
 __author__ = 'lhayhurst'
-
+import sys
 from parser import LogFileParser
 from persistence import Dice, DiceType, DiceFace, Player, Game, GameRoll, GameRollType, PersistenceManager
 import unittest
@@ -71,7 +69,7 @@ class TestPersistence(unittest.TestCase):
             else:
                 self.fail("unknown player detected")
             game_id = g.id
-            dice = self.session.query(Dice).filter_by(dice_type=gt.dice_type, dice_face=gt.dice_face).first()
+            dice = self.persistence_manager.get_dice(gt.dice_type, gt.dice_face )
 
             roll = GameRoll( player_id=player_id,
                                  game_id=game_id,
@@ -83,7 +81,7 @@ class TestPersistence(unittest.TestCase):
         session.commit()
 
         #now get 'em back
-        my_g = self.session.query(Game).filter_by(id=g.id).first()
+        my_g = self.persistence_manager.get_game(g.id)
         self.assertTrue( g is not None )
 
         my_game_roll = my_g.game_roll
@@ -241,7 +239,7 @@ class TestPersistence(unittest.TestCase):
         session.commit()
 
 
-        my_g = session.query(Game).filter_by(game_name=g.game_name).first()
+        my_g = self.persistence_manager.get_game(g.id)
         self.assertTrue( my_g is not None)
         self.assertEqual( g.game_name, my_g.game_name)
         self.assertTrue( len(g.game_players) == 2 )
@@ -251,11 +249,11 @@ class TestPersistence(unittest.TestCase):
         self.assertTrue( g.game_winner.name == "Ryan Krippendorf")
 
 
-        my_player1 =    session.query(Player).filter_by(name=p1.name).first()
+        my_player1 = self.persistence_manager.get_player(p1)
         self.assertEqual("Ryan Krippendorf", my_player1.name)
         self.assertTrue( my_player1.id == g.game_players[0].id)
 
-        my_player2 =    session.query(Player).filter_by(name=p2.name).first()
+        my_player2 = self.persistence_manager.get_player(p2)
         self.assertEqual("sozin", my_player2.name)
         self.assertTrue( my_player2.id == g.game_players[1].id )
 
@@ -264,7 +262,7 @@ class TestPersistence(unittest.TestCase):
         session.add(p1)
         session.commit()
 
-        vader = session.query(Player).filter_by(name=p1.name).first()
+        vader = self.persistence_manager.get_player(p1)
         self.assertEqual( my_player1.id, vader.id )
 
 
