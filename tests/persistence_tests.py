@@ -233,7 +233,7 @@ class TestPersistence(unittest.TestCase):
         game_tape = parser.game_tape
         p1 = Player(name=game_tape.player1)
         p2 = Player(name=game_tape.player2)
-        g = Game(p1, p2)
+        g = Game(p1, p2, winner=p1)
 
 
         session = self.session
@@ -247,6 +247,8 @@ class TestPersistence(unittest.TestCase):
         self.assertTrue( len(g.game_players) == 2 )
         self.assertTrue( g.game_players[0].name == "Ryan Krippendorf")
         self.assertTrue( g.game_players[1].name == "sozin")
+        self.assertTrue( g.game_winner is not None)
+        self.assertTrue( g.game_winner.name == "Ryan Krippendorf")
 
 
         my_player1 =    session.query(Player).filter_by(name=p1.name).first()

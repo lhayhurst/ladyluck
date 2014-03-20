@@ -15,13 +15,20 @@ Base = declarative_base()
 Session = sessionmaker()
 
 #TABLES
-game_roll_table = "game_roll"
-game_players_table = "game_players"
-game_tape_entry_type_table = 'game_tape_entry_type'
-player_table = "player"
-dice_table = 'dice'
-game_table   = "game"
+game_roll_table            = "game_roll"
+game_players_table         = "game_players"
+game_winner_table          = "game_winner"
+game_roll_table            = 'game_roll_type'
+player_table               = "player"
+dice_table                 = 'dice'
+game_table                 = "game"
+
 GamePlayers = Table( game_players_table, Base.metadata,
+    Column('game_id', Integer, ForeignKey('{0}.id'.format(game_table))),
+    Column('player_id', Integer, ForeignKey('{0}.id'.format(player_table)))
+)
+
+GameWinner = Table(game_winner_table, Base.metadata,
     Column('game_id', Integer, ForeignKey('{0}.id'.format(game_table))),
     Column('player_id', Integer, ForeignKey('{0}.id'.format(player_table)))
 )
@@ -79,17 +86,20 @@ class GameRoll(Base):
 
 class Game(Base):
     __tablename__ = game_table
-    id = Column(Integer, primary_key=True)
+    id               = Column(Integer, primary_key=True)
     game_played_time = Column(DateTime)
-    game_name = Column(String(128))
-    game_players = relationship( Player.__name__, secondary=GamePlayers  ) #TODO: why 'Player' and not playertable?
-    game_roll   = relationship( GameRoll.__name__, order_by="asc(GameRoll.id)")
+    game_name        = Column(String(128))
+    game_players     = relationship( Player.__name__, secondary=GamePlayers  )
+    game_roll        = relationship( GameRoll.__name__, order_by="asc(GameRoll.id)")
+    game_winner      = relationship( Player.__name__, secondary=GameWinner, uselist=False )
 
-    def __init__(self, player1, player2):
+    def __init__(self, player1, player2, winner=None):
         self.game_played_time = time.strftime('%Y-%m-%d %H:%M:%S')
         self.game_players.append( player1 )
         self.game_players.append( player2 )
         self.game_name = "{0} v {1} ({2}".format(player1.name, player2.name, self.game_played_time )
+        if winner is not None:
+            self.game_winner = winner
 
 class PersistenceManager:
     def __init__(self, echo=False):
