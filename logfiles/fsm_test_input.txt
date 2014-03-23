@@ -12,11 +12,15 @@
 <Ryan Krippendorf> - k
 * *** sozin Rolls to Attack: [Blank], [Blank], [], [], [], [], [] ***
 <sozin> - tl
-* *** sozin Re-Rolls Attack Die 1 [Focus] and gets a [Hit] ***
+* *** sozin Re-Rolls Attack Die 1 [Blank] and gets a [Focus] ***
 * *** sozin Re-Rolls Attack Die 2 [Focus] and gets a [Focus] ***
-<sozin> - 1h
+* *** sozin turns Attack Die 1 (Focus) into a [Hit] ***
+* *** sozin turns Attack Die 2 (Focus) into a [Hit] ***
+<sozin> - 2h
 * *** Ryan Krippendorf Rolls to Defend: [Focus], [Blank], [Focus], [], [], [], [] ***
+* *** Ryan Krippendorf Re-Rolls Defense Die 2 (Blank) and gets a [Focus] ***
 * *** Ryan Krippendorf turns Defense Die 1 (Focus) into a [Evade] ***
+* *** Ryan Krippendorf turns Defense Die 2 (Focus) into a [Evade] ***
 * *** Ryan Krippendorf turns Defense Die 3 (Focus) into a [Evade] ***
 * *** sozin Rolls to Attack: [Crit], [], [], [], [], [], [] ***
 * *** Ryan Krippendorf Rolls to Defend: [Blank], [Blank], [Focus], [], [], [], [] ***

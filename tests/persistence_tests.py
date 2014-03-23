@@ -219,6 +219,111 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceFace.FOCUS, adjustment.from_dice.dice_face )
         self.assertEqual( DiceFace.EVADE, adjustment.to_dice.dice_face)
 
+        #* *** sozin Rolls to Attack: [Blank], [Blank], [], [], [], [], [] ***
+        #<sozin> - tl
+        #* *** sozin Re-Rolls Attack Die 1 [Blank] and gets a [Focus] ***
+        #* *** sozin Re-Rolls Attack Die 2 [Focus] and gets a [Focus] ***
+        #* *** sozin turns Attack Die 1 (Focus) into a [Hit] ***
+        #* *** sozin turns Attack Die 2 (Focus) into a [Hit] ***
+        throw = throws[4]
+        self.assertEqual( g.id, throw.game_id)
+        self.assertEqual( p2.name, throw.player.name)
+        self.assertEqual( DiceThrowType.ATTACK, throw.throw_type )
+        self.assertEqual( 3, throw.attack_set_num)
+        self.assertEqual( 2, len( throw.results))
+
+        result = throw.results[0]
+        self.assertEqual( 1, result.dice_num)
+        self.assertEqual( DiceType.RED, result.dice.dice_type)
+        self.assertEqual( DiceFace.BLANK, result.dice.dice_face)
+        self.assertEqual( 2, len (result.adjustments))
+
+        adjustment = result.adjustments[0]
+        self.assertEqual( adjustment.base_result_id, result.id)
+        self.assertEqual( DiceThrowAdjustmentType.REROLL, adjustment.adjustment_type)
+        self.assertEqual( DiceFace.BLANK, adjustment.from_dice.dice_face )
+        self.assertEqual( DiceFace.FOCUS, adjustment.to_dice.dice_face)
+
+        adjustment = result.adjustments[1]
+        self.assertEqual( adjustment.base_result_id, result.id)
+        self.assertEqual( DiceThrowAdjustmentType.CONVERT, adjustment.adjustment_type)
+        self.assertEqual( DiceFace.FOCUS, adjustment.from_dice.dice_face )
+        self.assertEqual( DiceFace.HIT, adjustment.to_dice.dice_face)
+
+        result = throw.results[1]
+        self.assertEqual( 2, result.dice_num)
+        self.assertEqual( DiceType.RED, result.dice.dice_type)
+        self.assertEqual( DiceFace.BLANK, result.dice.dice_face)
+        self.assertEqual( 2, len (result.adjustments))
+
+        adjustment = result.adjustments[0]
+        self.assertEqual( adjustment.base_result_id, result.id)
+        self.assertEqual( DiceThrowAdjustmentType.REROLL, adjustment.adjustment_type)
+        self.assertEqual( DiceFace.BLANK, adjustment.from_dice.dice_face )
+        self.assertEqual( DiceFace.FOCUS, adjustment.to_dice.dice_face)
+
+        adjustment = result.adjustments[1]
+        self.assertEqual( adjustment.base_result_id, result.id)
+        self.assertEqual( DiceThrowAdjustmentType.CONVERT, adjustment.adjustment_type)
+        self.assertEqual( DiceFace.FOCUS, adjustment.from_dice.dice_face )
+        self.assertEqual( DiceFace.HIT, adjustment.to_dice.dice_face)
+
+        #* *** Ryan Krippendorf Rolls to Defend: [Focus], [Blank], [Focus], [], [], [], [] ***
+        #* *** Ryan Krippendorf Re-Rolls Defense Die 2 (Blank) and gets a [Focus] ***
+        #* *** Ryan Krippendorf turns Defense Die 1 (Focus) into a [Evade] ***
+        #* *** Ryan Krippendorf turns Defense Die 2 (Focus) into a [Evade] ***
+        #* *** Ryan Krippendorf turns Defense Die 3 (Focus) into a [Evade] ***
+
+        throw = throws[5]
+        self.assertEqual( g.id, throw.game_id)
+        self.assertEqual( p1.name, throw.player.name)
+        self.assertEqual( DiceThrowType.DEFEND, throw.throw_type )
+        self.assertEqual( 3, throw.attack_set_num)
+        self.assertEqual( 3, len( throw.results))
+
+        result = throw.results[0]
+        self.assertEqual( 1, result.dice_num)
+        self.assertEqual( DiceType.GREEN, result.dice.dice_type)
+        self.assertEqual( DiceFace.FOCUS, result.dice.dice_face)
+        self.assertEqual( 1, len (result.adjustments))
+
+        adjustment = result.adjustments[0]
+        self.assertEqual( adjustment.base_result_id, result.id)
+        self.assertEqual( DiceThrowAdjustmentType.CONVERT, adjustment.adjustment_type)
+        self.assertEqual( DiceFace.FOCUS, adjustment.from_dice.dice_face )
+        self.assertEqual( DiceFace.EVADE, adjustment.to_dice.dice_face)
+
+        result = throw.results[1]
+        self.assertEqual( 2, result.dice_num)
+        self.assertEqual( DiceType.GREEN, result.dice.dice_type)
+        self.assertEqual( DiceFace.BLANK, result.dice.dice_face)
+        self.assertEqual( 2, len (result.adjustments))
+
+        adjustment = result.adjustments[0]
+        self.assertEqual( adjustment.base_result_id, result.id)
+        self.assertEqual( DiceThrowAdjustmentType.REROLL, adjustment.adjustment_type)
+        self.assertEqual( DiceFace.BLANK, adjustment.from_dice.dice_face )
+        self.assertEqual( DiceFace.FOCUS, adjustment.to_dice.dice_face)
+
+
+        adjustment = result.adjustments[1]
+        self.assertEqual( adjustment.base_result_id, result.id)
+        self.assertEqual( DiceThrowAdjustmentType.CONVERT, adjustment.adjustment_type)
+        self.assertEqual( DiceFace.FOCUS, adjustment.from_dice.dice_face )
+        self.assertEqual( DiceFace.EVADE, adjustment.to_dice.dice_face)
+
+        result = throw.results[2]
+        self.assertEqual( 3, result.dice_num)
+        self.assertEqual( DiceType.GREEN, result.dice.dice_type)
+        self.assertEqual( DiceFace.FOCUS, result.dice.dice_face)
+        self.assertEqual( 1, len (result.adjustments))
+
+        adjustment = result.adjustments[0]
+        self.assertEqual( adjustment.base_result_id, result.id)
+        self.assertEqual( DiceThrowAdjustmentType.CONVERT, adjustment.adjustment_type)
+        self.assertEqual( DiceFace.FOCUS, adjustment.from_dice.dice_face )
+        self.assertEqual( DiceFace.EVADE, adjustment.to_dice.dice_face)
+
 
 
 if __name__ == "__main__":

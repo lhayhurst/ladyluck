@@ -326,7 +326,16 @@ class LogFileParser:
         dice_value = LogFileParser.face_translate[dice[0][1]]
 
         modified_result = self.current_throw.results[ dice_number - 1 ]
-        from_dice       = modified_result.dice
+
+        #if there were no adjustments, then the from is just from the base result
+        #otherwise its from the last adjustment
+
+        from_dice = None
+        if len(modified_result.adjustments) == 0:
+            from_dice       = modified_result.dice
+        else:
+            from_dice       = modified_result.adjustments[-1].to_dice
+
         to_dice         = Dice(dice_type=DiceType.RED, dice_face=dice_value)
         modified_result.dice_result = to_dice
         adjustment = DiceThrowAdjustment(adjustment_type=adjustment_type,
@@ -358,7 +367,13 @@ class LogFileParser:
         dice_value = LogFileParser.face_translate[dice[0][1]]
 
         modified_result = self.current_throw.results[ dice_number - 1 ]
-        from_dice       = modified_result.dice
+
+        from_dice = None
+        if len(modified_result.adjustments) == 0:
+            from_dice       = modified_result.dice
+        else:
+            from_dice       = modified_result.adjustments[-1].to_dice
+
         to_dice         = Dice(dice_type=DiceType.GREEN, dice_face=dice_value)
         modified_result.dice_result = to_dice
         adjustment = DiceThrowAdjustment(adjustment_type=adjustment_type,
