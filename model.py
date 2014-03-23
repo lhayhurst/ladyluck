@@ -92,33 +92,6 @@ class AttackSet:
     def was_likely_an_asteroid_roll(self):
         return len(self.attack_rolls) == 1 and len( self.defense_rolls ) == 0
 
-class GameTapeEntry:
-    def __init__(self, player, round_number, game_state, attack_set_number, entry_type, dice_type, dice_num, dice_face):
-        self.player = player
-        self.round_number = round_number
-        self.game_state = game_state
-        self.attack_set_number = attack_set_number
-        self.entry_type = entry_type
-        self.dice_type = dice_type
-        self.dice_num  = dice_num
-        self.dice_face = dice_face
-
-class GameTape:
-    def __init__(self):
-        self.tape = []
-        self.player1 = None
-        self.player2 = None
-
-    def add(self, entry):
-        self.tape.append( entry )
-        if self.player1 == None:
-            self.player1 = entry.player
-        if self.player1 != None and self.player2 == None and self.player1 != entry.player:
-            self.player2 = entry.player
-
-    def num_entries(self):
-        return len(self.tape)
-
 class Game:
     def __init__(self, persistence_dir):
 

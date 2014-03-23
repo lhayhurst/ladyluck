@@ -1,17 +1,24 @@
 
 from __future__ import print_function
+from collections import OrderedDict
 import re
 from fsm import fsm
-from model import GameTape, GameTapeEntry
-from persistence import GameRollType, DiceType, DiceFace
+from persistence import DiceType, DiceFace, DiceThrowType, DiceThrowAdjustmentType, DiceThrow, Player, Dice, \
+    DiceThrowResult, DiceThrowAdjustment
 
 
 class LogFileParser:
 
     def __init__(self):
         self.lines = []
-        self.game_tape = GameTape()
+        self.game_tape = []
+        self.players = OrderedDict()
         self.current_attack_set = 0
+        self.current_throw = None
+
+
+    def get_players(self):
+        return self.players.keys()
 
     def read_input_from_string(self, input):
         lines = input.split('\n')[:-1]
@@ -205,7 +212,9 @@ class LogFileParser:
     def player_rolling_dice(self, line):
         match = re.match(r'^\* \*\*\*\s+(.*?)\s+[Rolls|Re-rolls|turns].*?\*\*\*',line)
         if match:
-            return match.group(1)
+            player = match.group(1)
+            self.players[player] = 1
+            return player
         else:
             return None
 
@@ -232,16 +241,18 @@ class LogFileParser:
         dice_rolled = self.get_dice_rolled( value )
 
         dice_number = 1
+        dice_throw = DiceThrow( throw_type=DiceThrowType.ATTACK, attack_set_num=self.current_attack_set, player=Player(name=attacking_player))
         for dice_value in dice_rolled:
-            self.game_tape.add( GameTapeEntry( attacking_player,
-                                               None,
-                                               game_state.currentState,
-                                               self.current_attack_set,
-                                               GameRollType.ATTACK_DICE,
-                                               DiceType.RED,
-                                               dice_number,
-                                               dice_value)  )
+
+            throw_result = DiceThrowResult(dice_num=dice_number,
+                                           dice=Dice( dice_type=DiceType.RED,
+                                                             dice_face=dice_value))
+            dice_throw.results.append(throw_result)
             dice_number += 1
+
+        self.game_tape.append(dice_throw)
+        self.current_throw = dice_throw
+
 
     def end_attack_set(self, fss, value):
         return True
@@ -255,16 +266,17 @@ class LogFileParser:
         defending_player = self.player_rolling_dice(value)
 
         dice_number = 1
+
+        dice_throw = DiceThrow( throw_type=DiceThrowType.DEFEND, attack_set_num=self.current_attack_set, player=Player(name=defending_player))
         for dice_value in dice_rolled:
-            self.game_tape.add( GameTapeEntry( defending_player,
-                                               None,
-                                               fss.currentState,
-                                               self.current_attack_set,
-                                               GameRollType.DEFENSE_DICE,
-                                               DiceType.GREEN,
-                                               dice_number,
-                                               dice_value) )
+
+            throw_result = DiceThrowResult(dice_num=dice_number,
+                                           dice=Dice( dice_type=DiceType.GREEN,
+                                                             dice_face=dice_value))
+            dice_throw.results.append(throw_result)
             dice_number += 1
+        self.game_tape.append(dice_throw)
+        self.current_throw = dice_throw
 
     def player_rerolled_defense_dice(self,line):
         return re.search(r'^\* \*\*\*\s+.*?\s+Re-Rolls\s+Defense\s+Die.*?\*\*\*',line)
@@ -302,26 +314,25 @@ class LogFileParser:
 
     def add_attack_modification(self,game_state,value):
         dice = []
-        event_type = None
+        adjustment_type = None
         if self.player_rerolled_attack_dice(value):
             dice = self.get_attack_dice_rerolled(value)
-            event_type = GameRollType.ATTACK_DICE_REROLL
+            adjustment_type = DiceThrowAdjustmentType.REROLL
         elif self.player_turned_attack_dice(value):
             dice = self.get_attack_dice_changed_by_set(value)
-            event_type = GameRollType.ATTACK_DICE_MODIFICATION
+            adjustment_type = DiceThrowAdjustmentType.CONVERT
 
         dice_number = int(dice[0][0])
         dice_value = LogFileParser.face_translate[dice[0][1]]
-        attacking_player = self.player_rolling_dice(value)
 
-        self.game_tape.add( GameTapeEntry( attacking_player,
-                                           None,
-                                           game_state.currentState,
-                                           self.current_attack_set,
-                                           event_type,
-                                           DiceType.RED,
-                                           dice_number,
-                                           dice_value)  )
+        modified_result = self.current_throw.results[ dice_number - 1 ]
+        from_dice       = modified_result.dice
+        to_dice         = Dice(dice_type=DiceType.RED, dice_face=dice_value)
+        modified_result.dice_result = to_dice
+        adjustment = DiceThrowAdjustment(adjustment_type=adjustment_type,
+                                        from_dice=from_dice,
+                                        to_dice=to_dice)
+        modified_result.adjustments.append( adjustment )
 
     def get_defense_dice_rerolled(self, line):
         dice_rolled = re.findall(r'.*?Re-Rolls\s+Defense\s+Die\s+(\d+).*?and\s+gets\s+a\s+\[(.*?)\]', line)
@@ -332,27 +343,25 @@ class LogFileParser:
         return dice_rolled
 
     def add_defense_modification(self,game_state,value):
+
         dice = []
-        event_type = None
+        adjustment_type = None
+
         if self.player_rerolled_defense_dice(value):
             dice = self.get_defense_dice_rerolled(value)
-            event_type = GameRollType.DEFENSE_DICE_REROLL
+            adjustment_type = DiceThrowAdjustmentType.REROLL
         elif self.player_turned_defense_dice(value):
             dice = self.get_defense_dice_changed_by_set(value)
-            event_type = GameRollType.DEFENSE_DICE_MODIFICATION
+            adjustment_type = DiceThrowAdjustmentType.CONVERT
 
         dice_number = int(dice[0][0])
         dice_value = LogFileParser.face_translate[dice[0][1]]
 
-        defending_player = self.player_rolling_dice(value)
-
-        self.game_tape.add( GameTapeEntry( defending_player,
-                                           None,
-                                           game_state.currentState,
-                                           self.current_attack_set,
-                                           event_type,
-                                           DiceType.GREEN,
-                                           dice_number,
-                                           dice_value ) )
-
-
+        modified_result = self.current_throw.results[ dice_number - 1 ]
+        from_dice       = modified_result.dice
+        to_dice         = Dice(dice_type=DiceType.GREEN, dice_face=dice_value)
+        modified_result.dice_result = to_dice
+        adjustment = DiceThrowAdjustment(adjustment_type=adjustment_type,
+                                        from_dice=from_dice,
+                                        to_dice=to_dice)
+        modified_result.adjustments.append( adjustment )

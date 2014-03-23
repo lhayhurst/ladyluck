@@ -1,7 +1,7 @@
 import os
 import unittest
 import sqlalchemy
-from model import GameTape, GameTapeEntryType, DiceRoll
+from model import DiceRoll
 from parser import LogFileParser
 
 class TestFsm(unittest.TestCase):
@@ -134,7 +134,7 @@ class TestFsm(unittest.TestCase):
         parser.run_finite_state_machine()
         game_tape = parser.game_tape
 
-        self.assertEqual( 24, game_tape.num_entries())
+        self.assertEqual( 24, len(game_tape) )
 
         ge = game_tape.tape[ 0 ]
         self.assertEqual( LogFileParser.PLAYER_ATTACKING, ge.game_state)

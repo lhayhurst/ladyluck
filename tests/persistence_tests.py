@@ -1,7 +1,8 @@
 __author__ = 'lhayhurst'
 import sys
 from parser import LogFileParser
-from persistence import Dice, DiceType, DiceFace, Player, Game, GameRoll, GameRollType, PersistenceManager
+from persistence import Dice, DiceType, DiceFace, Player, Game, PersistenceManager, DiceThrowType, \
+    DiceThrowAdjustmentType
 import unittest
 
 
@@ -9,7 +10,7 @@ import unittest
 class TestPersistence(unittest.TestCase):
 
     def setUp(self):
-        self.persistence_manager = PersistenceManager()
+        self.persistence_manager = PersistenceManager(True)
 
         #just keep a top level reference to these guys for ease of use
         self.engine = self.persistence_manager.engine
@@ -25,6 +26,9 @@ class TestPersistence(unittest.TestCase):
 
         self.session.close_all()
         self.persistence_manager.drop_schema()
+
+    def testSchemaConstruction(self):
+        self.assertTrue(True)
 
     #@unittest.skip("because")
     def testDice(self):
@@ -47,191 +51,16 @@ class TestPersistence(unittest.TestCase):
             self.assertEqual( dice.dice_type, DiceType.GREEN)
 
     #@unittest.skip("because")
-    def testTape(self):
-        parser = LogFileParser()
-        parser.read_input_from_file("../logfiles/fsm_test_input.txt")
-        parser.run_finite_state_machine()
-        game_tape = parser.game_tape.tape
-        p1 = Player(name=parser.game_tape.player1)
-        p2 = Player(name=parser.game_tape.player2)
-        g = Game(p1, p2)
-
-        session = self.session
-        session.add(g)
-        session.commit()
-
-        for gt in game_tape:
-            player_id = None
-            if gt.player == p1.name:
-                player_id = p1.id
-            elif gt.player == p2.name:
-                player_id = p2.id
-            else:
-                self.fail("unknown player detected")
-            game_id = g.id
-            dice = self.persistence_manager.get_dice(gt.dice_type, gt.dice_face )
-
-            roll = GameRoll( player_id=player_id,
-                                 game_id=game_id,
-                                 roll_type=gt.entry_type,
-                                 dice_id=dice.id,
-                                 attack_set_num=gt.attack_set_number,
-                                 dice_num=gt.dice_num )
-            session.add(roll)
-        session.commit()
-
-        #now get 'em back
-        my_g = self.persistence_manager.get_game(g.id)
-        self.assertTrue( g is not None )
-
-        my_game_roll = my_g.game_roll
-        self.assertTrue( my_game_roll is not None)
-        self.assertEqual( len(my_game_roll) , 24 )
-
-        #* *** Ryan Krippendorf Rolls to Attack: [Focus], [Blank], [], [], [], [], [] ***
-        entry = my_game_roll[0]
-        self.assertEqual( g.id, entry.game_id)
-        self.assertEqual( p1.name, entry.player.name)
-        self.assertEqual( GameRollType.ATTACK_DICE, entry.roll_type)
-        self.assertEqual( 1, entry.attack_set_num)
-        self.assertEqual( 1, entry.dice_num)
-        self.assertEqual( DiceType.RED, entry.dice.dice_type)
-        self.assertEqual( DiceFace.FOCUS, entry.dice.dice_face)
-
-        entry = my_game_roll[1]
-        self.assertEqual( g.id, entry.game_id)
-        self.assertEqual( p1.name, entry.player.name)
-        self.assertEqual( GameRollType.ATTACK_DICE, entry.roll_type)
-        self.assertEqual( 1, entry.attack_set_num)
-        self.assertEqual( 2, entry.dice_num)
-        self.assertEqual( DiceType.RED, entry.dice.dice_type)
-        self.assertEqual( DiceFace.BLANK, entry.dice.dice_face)
-
-        #* *** Ryan Krippendorf turns Attack Die 1 (Focus) into a [Hit] ***
-        entry = my_game_roll[2]
-        self.assertEqual( g.id, entry.game_id)
-        self.assertEqual( p1.name, entry.player.name)
-        self.assertEqual( GameRollType.ATTACK_DICE_MODIFICATION, entry.roll_type)
-        self.assertEqual( 1, entry.attack_set_num)
-        self.assertEqual( 1, entry.dice_num)
-        self.assertEqual( DiceType.RED, entry.dice.dice_type)
-        self.assertEqual( DiceFace.HIT, entry.dice.dice_face)
-
-        #* *** sozin Rolls to Defend: [Evade], [Blank], [Evade], [], [], [], [] ***
-        entry = my_game_roll[3]
-        self.assertEqual( g.id, entry.game_id)
-        self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameRollType.DEFENSE_DICE, entry.roll_type)
-        self.assertEqual( 1, entry.attack_set_num)
-        self.assertEqual( 1, entry.dice_num)
-        self.assertEqual( DiceType.GREEN, entry.dice.dice_type)
-        self.assertEqual( DiceFace.EVADE, entry.dice.dice_face)
-
-        entry = my_game_roll[4]
-        self.assertEqual( g.id, entry.game_id)
-        self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameRollType.DEFENSE_DICE, entry.roll_type)
-        self.assertEqual( 1, entry.attack_set_num)
-        self.assertEqual( 2, entry.dice_num)
-        self.assertEqual( DiceType.GREEN, entry.dice.dice_type)
-        self.assertEqual( DiceFace.BLANK, entry.dice.dice_face)
-
-        entry = my_game_roll[5]
-        self.assertEqual( g.id, entry.game_id)
-        self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameRollType.DEFENSE_DICE, entry.roll_type)
-        self.assertEqual( 1, entry.attack_set_num)
-        self.assertEqual( 3, entry.dice_num)
-        self.assertEqual( DiceType.GREEN, entry.dice.dice_type)
-        self.assertEqual( DiceFace.EVADE, entry.dice.dice_face)
-
-        #* *** Ryan Krippendorf Rolls to Attack: [Hit], [Crit], [], [], [], [], [] ***
-        entry = my_game_roll[6]
-        self.assertEqual( g.id, entry.game_id)
-        self.assertEqual( p1.name, entry.player.name)
-        self.assertEqual( GameRollType.ATTACK_DICE, entry.roll_type)
-        self.assertEqual( 2, entry.attack_set_num)
-        self.assertEqual( 1, entry.dice_num)
-        self.assertEqual( DiceType.RED, entry.dice.dice_type)
-        self.assertEqual( DiceFace.HIT, entry.dice.dice_face)
-
-        entry = my_game_roll[7]
-        self.assertEqual( g.id, entry.game_id)
-        self.assertEqual( p1.name, entry.player.name)
-        self.assertEqual( GameRollType.ATTACK_DICE, entry.roll_type)
-        self.assertEqual( 2, entry.attack_set_num)
-        self.assertEqual( 2, entry.dice_num)
-        self.assertEqual( DiceType.RED, entry.dice.dice_type)
-        self.assertEqual( DiceFace.CRIT, entry.dice.dice_face)
-
-        #* *** sozin Rolls to Defend: [Focus], [], [], [], [], [], [] ***
-        entry = my_game_roll[8]
-        self.assertEqual( g.id, entry.game_id)
-        self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameRollType.DEFENSE_DICE, entry.roll_type)
-        self.assertEqual( 2, entry.attack_set_num)
-        self.assertEqual( 1, entry.dice_num)
-        self.assertEqual( DiceType.GREEN, entry.dice.dice_type)
-        self.assertEqual( DiceFace.FOCUS, entry.dice.dice_face)
-
-        #* *** sozin turns Defense Die 1 (Focus) into a [Evade] ***
-        entry = my_game_roll[9]
-        self.assertEqual( g.id, entry.game_id)
-        self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameRollType.DEFENSE_DICE_MODIFICATION, entry.roll_type)
-        self.assertEqual( 2, entry.attack_set_num)
-        self.assertEqual( 1, entry.dice_num)
-        self.assertEqual( DiceType.GREEN, entry.dice.dice_type)
-        self.assertEqual( DiceFace.EVADE, entry.dice.dice_face)
-
-        #* *** sozin Rolls to Attack: [Blank], [Blank], [], [], [], [], [] ***
-        entry = my_game_roll[10]
-        self.assertEqual( g.id, entry.game_id)
-        self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameRollType.ATTACK_DICE, entry.roll_type)
-        self.assertEqual( 3, entry.attack_set_num)
-        self.assertEqual( 1, entry.dice_num)
-        self.assertEqual( DiceType.RED, entry.dice.dice_type)
-        self.assertEqual( DiceFace.BLANK, entry.dice.dice_face)
-
-        entry = my_game_roll[11]
-        self.assertEqual( g.id, entry.game_id)
-        self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameRollType.ATTACK_DICE, entry.roll_type)
-        self.assertEqual( 3, entry.attack_set_num)
-        self.assertEqual( 2, entry.dice_num)
-        self.assertEqual( DiceType.RED, entry.dice.dice_type)
-        self.assertEqual( DiceFace.BLANK, entry.dice.dice_face)
-
-        #* *** sozin Re-Rolls Attack Die 1 [Focus] and gets a [Hit] ***
-        entry = my_game_roll[12]
-        self.assertEqual( g.id, entry.game_id)
-        self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameRollType.ATTACK_DICE_REROLL, entry.roll_type)
-        self.assertEqual( 3, entry.attack_set_num)
-        self.assertEqual( 1, entry.dice_num)
-        self.assertEqual( DiceType.RED, entry.dice.dice_type)
-        self.assertEqual( DiceFace.HIT, entry.dice.dice_face)
-
-        #* *** sozin Re-Rolls Attack Die 2 [Focus] and gets a [Focus] ***
-        entry = my_game_roll[13]
-        self.assertEqual( g.id, entry.game_id)
-        self.assertEqual( p2.name, entry.player.name)
-        self.assertEqual( GameRollType.ATTACK_DICE_REROLL, entry.roll_type)
-        self.assertEqual( 3, entry.attack_set_num)
-        self.assertEqual( 2, entry.dice_num)
-        self.assertEqual( DiceType.RED, entry.dice.dice_type)
-        self.assertEqual( DiceFace.FOCUS, entry.dice.dice_face)
-
-    #@unittest.skip("because")
     def testGameWithPlayer(self):
         parser = LogFileParser()
         parser.read_input_from_file("../logfiles/fsm_test_input.txt")
         parser.run_finite_state_machine()
-        game_tape = parser.game_tape
-        p1 = Player(name=game_tape.player1)
-        p2 = Player(name=game_tape.player2)
-        g = Game(p1, p2, winner=p1)
+
+        g = Game(parser.get_players())
+
+        p1 = g.game_players[0]
+        p2 = g.game_players[1]
+        g.game_winner = p1
 
 
         session = self.session
@@ -264,6 +93,132 @@ class TestPersistence(unittest.TestCase):
 
         vader = self.persistence_manager.get_player(p1)
         self.assertEqual( my_player1.id, vader.id )
+
+
+
+    #@unittest.skip("because")
+    def testTape(self):
+        parser = LogFileParser()
+        parser.read_input_from_file("../logfiles/fsm_test_input.txt")
+        parser.run_finite_state_machine()
+        game_tape = parser.game_tape
+
+        g = Game(parser.get_players())
+
+        p1 = g.game_players[0]
+        p2 = g.game_players[1]
+
+        session = self.session
+
+        for throw_result in game_tape:
+            g.game_throws.append(throw_result)
+
+        session.add(g)
+        session.commit()
+
+
+        #now get 'em back
+        my_g = self.persistence_manager.get_game(g.id)
+        self.assertTrue( g is not None )
+
+        throws = my_g.game_throws
+        self.assertTrue( throws is not None)
+        self.assertEqual( len(throws) , 8 )
+
+        #* *** Ryan Krippendorf Rolls to Attack: [Focus], [Blank], [], [], [], [], [] ***
+        #* *** Ryan Krippendorf turns Attack Die 1 (Focus) into a [Hit] ***
+        throw = throws[0]
+        self.assertEqual( g.id, throw.game_id)
+        self.assertEqual( p1.name, throw.player.name)
+        self.assertEqual( DiceThrowType.ATTACK, throw.throw_type )
+        self.assertEqual( 1, throw.attack_set_num)
+
+        result = throw.results[0]
+        self.assertEqual( 1, result.dice_num)
+        self.assertEqual( DiceType.RED, result.dice.dice_type)
+        self.assertEqual( DiceFace.FOCUS, result.dice.dice_face)
+        self.assertEqual( 1, len (result.adjustments))
+
+        adjustment = result.adjustments[0]
+        self.assertEqual( adjustment.base_result_id, result.id)
+        self.assertEqual( DiceThrowAdjustmentType.CONVERT, adjustment.adjustment_type)
+        self.assertEqual( DiceFace.FOCUS, adjustment.from_dice.dice_face )
+        self.assertEqual( DiceFace.HIT, adjustment.to_dice.dice_face)
+
+        result = throw.results[1]
+        self.assertEqual( 2, result.dice_num)
+        self.assertEqual( DiceType.RED, result.dice.dice_type)
+        self.assertEqual( DiceFace.BLANK, result.dice.dice_face)
+        self.assertEqual( 0, len (result.adjustments))
+
+        #* *** sozin Rolls to Defend: [Evade], [Blank], [Evade], [], [], [], [] ***
+        throw = throws[1]
+        self.assertEqual( g.id, throw.game_id)
+        self.assertEqual( p2.name, throw.player.name)
+        self.assertEqual( DiceThrowType.DEFEND, throw.throw_type )
+        self.assertEqual( 1, throw.attack_set_num)
+
+        result = throw.results[0]
+        self.assertEqual( 1, result.dice_num)
+        self.assertEqual( DiceType.GREEN, result.dice.dice_type)
+        self.assertEqual( DiceFace.EVADE, result.dice.dice_face)
+        self.assertEqual( 0, len (result.adjustments))
+
+        result = throw.results[1]
+        self.assertEqual( 2, result.dice_num)
+        self.assertEqual( DiceType.GREEN, result.dice.dice_type)
+        self.assertEqual( DiceFace.BLANK, result.dice.dice_face)
+        self.assertEqual( 0, len (result.adjustments))
+
+        result = throw.results[2]
+        self.assertEqual( 3, result.dice_num)
+        self.assertEqual( DiceType.GREEN, result.dice.dice_type)
+        self.assertEqual( DiceFace.EVADE, result.dice.dice_face)
+        self.assertEqual( 0, len (result.adjustments))
+
+
+        #* *** Ryan Krippendorf Rolls to Attack: [Hit], [Crit], [], [], [], [], [] ***
+        throw = throws[2]
+        self.assertEqual( g.id, throw.game_id)
+        self.assertEqual( p1.name, throw.player.name)
+        self.assertEqual( DiceThrowType.ATTACK, throw.throw_type )
+        self.assertEqual( 2, throw.attack_set_num)
+        self.assertEqual( 2, len( throw.results ))
+
+
+        result = throw.results[0]
+        self.assertEqual( 1, result.dice_num)
+        self.assertEqual( DiceType.RED, result.dice.dice_type)
+        self.assertEqual( DiceFace.HIT, result.dice.dice_face)
+        self.assertEqual( 0, len (result.adjustments))
+
+        result = throw.results[1]
+        self.assertEqual( 2, result.dice_num)
+        self.assertEqual( DiceType.RED, result.dice.dice_type)
+        self.assertEqual( DiceFace.CRIT, result.dice.dice_face)
+        self.assertEqual( 0, len (result.adjustments))
+
+        #* *** sozin Rolls to Defend: [Focus], [], [], [], [], [], [] ***
+        #* *** sozin turns Defense Die 1 (Focus) into a [Evade] ***
+        throw = throws[3]
+        self.assertEqual( g.id, throw.game_id)
+        self.assertEqual( p2.name, throw.player.name)
+        self.assertEqual( DiceThrowType.DEFEND, throw.throw_type )
+        self.assertEqual( 2, throw.attack_set_num)
+        self.assertEqual( 1, len( throw.results))
+
+        result = throw.results[0]
+        self.assertEqual( 1, result.dice_num)
+        self.assertEqual( DiceType.GREEN, result.dice.dice_type)
+        self.assertEqual( DiceFace.FOCUS, result.dice.dice_face)
+        self.assertEqual( 1, len (result.adjustments))
+
+        adjustment = result.adjustments[0]
+        self.assertEqual( adjustment.base_result_id, result.id)
+        self.assertEqual( DiceThrowAdjustmentType.CONVERT, adjustment.adjustment_type)
+        self.assertEqual( DiceFace.FOCUS, adjustment.from_dice.dice_face )
+        self.assertEqual( DiceFace.EVADE, adjustment.to_dice.dice_face)
+
 
 
 if __name__ == "__main__":
