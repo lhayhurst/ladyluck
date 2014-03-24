@@ -138,6 +138,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceType.RED, result.dice.dice_type)
         self.assertEqual( DiceFace.FOCUS, result.dice.dice_face)
         self.assertEqual( 1, len (result.adjustments))
+        self.assertEqual( DiceFace.HIT, result.final_dice.dice_face)
 
         adjustment = result.adjustments[0]
         self.assertEqual( adjustment.base_result_id, result.id)
@@ -150,6 +151,8 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceType.RED, result.dice.dice_type)
         self.assertEqual( DiceFace.BLANK, result.dice.dice_face)
         self.assertEqual( 0, len (result.adjustments))
+        self.assertEqual( DiceFace.BLANK, result.final_dice.dice_face)
+
 
         #* *** sozin Rolls to Defend: [Evade], [Blank], [Evade], [], [], [], [] ***
         throw = throws[1]
@@ -163,18 +166,21 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( DiceType.GREEN, result.dice.dice_type)
         self.assertEqual( DiceFace.EVADE, result.dice.dice_face)
         self.assertEqual( 0, len (result.adjustments))
+        self.assertEqual( DiceFace.EVADE, result.final_dice.dice_face)
 
         result = throw.results[1]
         self.assertEqual( 2, result.dice_num)
         self.assertEqual( DiceType.GREEN, result.dice.dice_type)
         self.assertEqual( DiceFace.BLANK, result.dice.dice_face)
         self.assertEqual( 0, len (result.adjustments))
+        self.assertEqual( DiceFace.BLANK, result.final_dice.dice_face)
 
         result = throw.results[2]
         self.assertEqual( 3, result.dice_num)
         self.assertEqual( DiceType.GREEN, result.dice.dice_type)
         self.assertEqual( DiceFace.EVADE, result.dice.dice_face)
         self.assertEqual( 0, len (result.adjustments))
+        self.assertEqual( DiceFace.EVADE, result.final_dice.dice_face)
 
 
         #* *** Ryan Krippendorf Rolls to Attack: [Hit], [Crit], [], [], [], [], [] ***
@@ -190,12 +196,14 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( 1, result.dice_num)
         self.assertEqual( DiceType.RED, result.dice.dice_type)
         self.assertEqual( DiceFace.HIT, result.dice.dice_face)
+        self.assertEqual( DiceFace.HIT, result.final_dice.dice_face)
         self.assertEqual( 0, len (result.adjustments))
 
         result = throw.results[1]
         self.assertEqual( 2, result.dice_num)
         self.assertEqual( DiceType.RED, result.dice.dice_type)
         self.assertEqual( DiceFace.CRIT, result.dice.dice_face)
+        self.assertEqual( DiceFace.CRIT, result.final_dice.dice_face)
         self.assertEqual( 0, len (result.adjustments))
 
         #* *** sozin Rolls to Defend: [Focus], [], [], [], [], [], [] ***
@@ -211,6 +219,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( 1, result.dice_num)
         self.assertEqual( DiceType.GREEN, result.dice.dice_type)
         self.assertEqual( DiceFace.FOCUS, result.dice.dice_face)
+        self.assertEqual( DiceFace.EVADE, result.final_dice.dice_face)
         self.assertEqual( 1, len (result.adjustments))
 
         adjustment = result.adjustments[0]
@@ -236,6 +245,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( 1, result.dice_num)
         self.assertEqual( DiceType.RED, result.dice.dice_type)
         self.assertEqual( DiceFace.BLANK, result.dice.dice_face)
+        self.assertEqual( DiceFace.HIT, result.final_dice.dice_face)
         self.assertEqual( 2, len (result.adjustments))
 
         adjustment = result.adjustments[0]
@@ -254,6 +264,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( 2, result.dice_num)
         self.assertEqual( DiceType.RED, result.dice.dice_type)
         self.assertEqual( DiceFace.BLANK, result.dice.dice_face)
+        self.assertEqual( DiceFace.HIT, result.final_dice.dice_face)
         self.assertEqual( 2, len (result.adjustments))
 
         adjustment = result.adjustments[0]
@@ -285,6 +296,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( 1, result.dice_num)
         self.assertEqual( DiceType.GREEN, result.dice.dice_type)
         self.assertEqual( DiceFace.FOCUS, result.dice.dice_face)
+        self.assertEqual( DiceFace.EVADE, result.final_dice.dice_face)
         self.assertEqual( 1, len (result.adjustments))
 
         adjustment = result.adjustments[0]
@@ -297,6 +309,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( 2, result.dice_num)
         self.assertEqual( DiceType.GREEN, result.dice.dice_type)
         self.assertEqual( DiceFace.BLANK, result.dice.dice_face)
+        self.assertEqual( DiceFace.EVADE, result.final_dice.dice_face)
         self.assertEqual( 2, len (result.adjustments))
 
         adjustment = result.adjustments[0]
@@ -316,6 +329,7 @@ class TestPersistence(unittest.TestCase):
         self.assertEqual( 3, result.dice_num)
         self.assertEqual( DiceType.GREEN, result.dice.dice_type)
         self.assertEqual( DiceFace.FOCUS, result.dice.dice_face)
+        self.assertEqual( DiceFace.EVADE, result.final_dice.dice_face)
         self.assertEqual( 1, len (result.adjustments))
 
         adjustment = result.adjustments[0]

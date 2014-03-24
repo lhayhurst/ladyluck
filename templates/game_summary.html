@@ -15,20 +15,20 @@
 <table class="tg">
   <tr>
     <th class="tg-ii5f">Player</th>
-    <th class="tg-ii5f">Attack Set</th>
+    <th class="tg-ii5f">Attack Set Number</th>
     <th class="tg-ii5f">Dice Number</th>
     <th class="tg-ii5f">Roll Type&nbsp;</th>
     <th class="tg-ii5f">Dice Color</th>
     <th class="tg-ii5f">Dice Result</th>
   </tr>
-  {%    for roll in rolls %}
+  {%    for roll in tape %}
   <tr>
-    <td class="tg-031e">{{  roll.player.name }} </td>
-    <td class="tg-031e">{{ roll.attack_set_num }} </td>
-    <td class="tg-031e">{{ roll.dice_num }}</td>
-    <td class="tg-031e">{{ roll.roll_type.description }} </td>
-    <td class="tg-031e">{{ roll.dice.dice_type.description }}</td>
-    <td class="tg-031e">{{ roll.dice.dice_face.description }}</td>
+    <td class="tg-031e">{{  roll[1] }} </td>
+    <td class="tg-031e">{{  roll[3] }} </td>
+    <td class="tg-031e">{{ roll[4] }}</td>
+    <td class="tg-031e">{{ roll[5] }} </td>
+    <td class="tg-031e">{{ roll[6] }}</td>
+    <td class="tg-031e">{{ roll[7] }}</td>
   </tr>
 {%  endfor %}
 </table>

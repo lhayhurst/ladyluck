@@ -1,7 +1,8 @@
+from collections import OrderedDict
 import os
 from flask import Flask, render_template, request, url_for, redirect, Response
 from parser import LogFileParser
-from persistence import PersistenceManager, Player, GameRoll, Game
+from persistence import PersistenceManager, Player, Game
 
 
 UPLOAD_FOLDER = "static"
@@ -65,9 +66,10 @@ def add_game():
     parser.read_input_from_string(tape)
     parser.run_finite_state_machine()
 
-    game_tape = parser.game_tape.tape
-    p1 = Player(name=parser.game_tape.player1)
-    p2 = Player(name=parser.game_tape.player2)
+    game = Game( parser.get_players())
+
+    p1 = game.game_players[0]
+    p2 = game.game_players[1]
 
     winning_player = None
     if winner is not None:
@@ -75,40 +77,44 @@ def add_game():
             winning_player = p1
         elif winner == p2.name:
             winning_player = p2
-    game = Game(p1, p2, winning_player)
+    game.game_winner = winning_player
+
+    for throw_result in parser.game_tape:
+        game.game_throws.append(throw_result)
+
 
     db.session.add(game)
     db.session.commit()
 
-    for gt in game_tape:
-        player_id = None
-        if gt.player == p1.name:
-            player_id = p1.id
-        elif gt.player == p2.name:
-            player_id = p2.id
-
-        game_id = game.id
-        dice = db.get_dice(gt.dice_type, gt.dice_face)
-
-        db.session.add(GameRoll( player_id=player_id,
-                        game_id=game_id,
-                        roll_type=gt.entry_type,
-                        dice_id=dice.id,
-                        attack_set_num=gt.attack_set_number,
-                        dice_num=gt.dice_num ))
-    db.session.commit()
     return redirect( url_for('game', id=str(game.id)) )
+
+def get_game_tape_text(game, make_header=True):
+
+    rows = []
+    if make_header:
+        rows.append( ['game_id', 'player_name', 'throw_id', 'attack_set_num', 'dice_num', 'roll_type', 'dice_color', 'dice_result'] )
+
+    for throw in game.game_throws:
+        for result in throw.results:
+            row = [ str(game.id), throw.player.name, str(throw.id), str(throw.attack_set_num), str(result.dice_num), \
+                    throw.throw_type.description, result.dice.dice_type.description, result.dice.dice_face.description]
+            rows.append(row)
+
+            for a in result.adjustments:
+                arow = [ str(game.id), throw.player.name, str(throw.id), str(throw.attack_set_num), str(result.dice_num), \
+                        a.adjustment_type.description, a.to_dice.dice_type.description, a.to_dice.dice_face.description]
+                rows.append(arow)
+
+    return rows
 
 @app.route('/download-game')
 def download_game():
     game_id = str(request.args.get('id'))
     game = db.get_game(game_id)
     def generate():
-        yield ",".join([ 'game_id', 'player_name', 'attack_set_num', 'dice_num', 'roll_type', 'dice_color', 'dice_result']) + '\n'
-        for roll in game.game_roll:
-            row = [ str(game_id), roll.player.name, str(roll.attack_set_num), str(roll.dice_num),
-                    roll.roll_type.description, roll.dice.dice_type.description, roll.dice.dice_face.description]
-            yield ",".join(row) + '\n'
+        rows = get_game_tape_text(game)
+        for r in rows:
+           yield ",".join(r) + '\n'
     return Response(generate(), mimetype='text/csv')
 
 @app.route('/game')
@@ -120,6 +126,7 @@ def game():
 
     player1 = game.game_players[0]
     player2 = game.game_players[1]
+
     winning_player = "Unknown"
     if game.game_winner is not None:
         winning_player = game.game_winner.name
@@ -129,7 +136,7 @@ def game():
                             player1=player1.name,
                             player2=player2.name,
                             winner=winning_player,
-                            rolls=game.game_roll)
+                            tape=get_game_tape_text(game, make_header=False) )
 
 
 if __name__ == '__main__':

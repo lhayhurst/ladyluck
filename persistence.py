@@ -85,13 +85,15 @@ class DiceThrowAdjustment(Base):
     to_dice          = relationship(Dice.__name__, foreign_keys='DiceThrowAdjustment.to_dice_id')
 
 class DiceThrowResult(Base):
-    __tablename__     = dice_throw_result_table
-    id                = Column(Integer, primary_key=True)
-    dice_throw_id     = Column(Integer, ForeignKey('{0}.id'.format(dice_throw_table))) #parent
-    dice_num          = Column(Integer)
-    dice_result_id    = Column(Integer, ForeignKey('{0}.id'.format(dice_table)))
-    dice              = relationship( Dice.__name__)
-    adjustments       = relationship( DiceThrowAdjustment.__name__ )
+    __tablename__        = dice_throw_result_table
+    id                   = Column(Integer, primary_key=True)
+    dice_throw_id        = Column(Integer, ForeignKey('{0}.id'.format(dice_throw_table))) #parent
+    dice_num             = Column(Integer)
+    dice_result_id       = Column(Integer, ForeignKey('{0}.id'.format(dice_table)))
+    final_dice_result_id = Column(Integer, ForeignKey('{0}.id'.format(dice_table)))
+    dice                 = relationship( Dice.__name__, foreign_keys='DiceThrowResult.dice_result_id')
+    final_dice           = relationship( Dice.__name__, foreign_keys='DiceThrowResult.final_dice_result_id' )
+    adjustments          = relationship( DiceThrowAdjustment.__name__ )
 
 class DiceThrow(Base):
     __tablename__  = dice_throw_table
