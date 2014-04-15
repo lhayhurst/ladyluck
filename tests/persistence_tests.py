@@ -6,8 +6,7 @@ from persistence import Dice, DiceType, DiceFace, Player, Game, PersistenceManag
 import unittest
 
 
-
-class TestPersistence(unittest.TestCase):
+class DatabaseTestCase(unittest.TestCase):
 
     def setUp(self):
         self.persistence_manager = PersistenceManager(True)
@@ -26,6 +25,10 @@ class TestPersistence(unittest.TestCase):
 
         self.session.close_all()
         self.persistence_manager.drop_schema()
+
+
+class TestPersistence(DatabaseTestCase):
+
 
     def testSchemaConstruction(self):
         self.assertTrue(True)
@@ -94,6 +97,8 @@ class TestPersistence(unittest.TestCase):
         vader = self.persistence_manager.get_player(p1)
         self.assertEqual( my_player1.id, vader.id )
 
+    def test_structured_query(self):
+        return True
 
 
     #@unittest.skip("because")

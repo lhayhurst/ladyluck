@@ -1,6 +1,7 @@
 from collections import OrderedDict
 import os
 from flask import Flask, render_template, request, url_for, redirect, Response
+from model.game_summary_stats import GameTape
 from parser import LogFileParser
 from persistence import PersistenceManager, Player, Game
 
@@ -99,7 +100,7 @@ def get_game_tape_text(game, make_header=True):
             row = [ str(game.id), throw.player.name, str(throw.id), str(throw.attack_set_num), str(result.dice_num), \
                     throw.throw_type.description, result.dice.dice_type.description, result.dice.dice_face.description]
             rows.append(row)
-
+        for result in throw.results:
             for a in result.adjustments:
                 arow = [ str(game.id), throw.player.name, str(throw.id), str(throw.attack_set_num), str(result.dice_num), \
                         a.adjustment_type.description, a.to_dice.dice_type.description, a.to_dice.dice_face.description]
@@ -131,12 +132,14 @@ def game():
     if game.game_winner is not None:
         winning_player = game.game_winner.name
 
+    #summary_stats = GameSummaryStats(game)
+
     return render_template( 'game_summary.html',
                             game=game,
                             player1=player1.name,
                             player2=player2.name,
                             winner=winning_player,
-                            tape=get_game_tape_text(game, make_header=False) )
+                            game_tape=GameTape(game  ))
 
 
 if __name__ == '__main__':

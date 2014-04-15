@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<b> {{ player1 }} versus {{ player2 }}, won by {{ winner }} ( {{ game.game_played_time }} )</b>
+<b> {{ game.game_played_time }}: {{ player1 }} versus {{ player2 }}, won by {{ winner }} </b>
 
+<h3>Game Tape</h3>
 <p></p>
 <a href="/download-game?id={{ game.id }}">Download game as csv</a>
 
@@ -12,37 +13,51 @@
 .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
 .tg .tg-ii5f{background-color:#000000;color:#ffffff}
 .tg .tg-1bl1{background-color:#bdc3c7}
+.tg .tg-nkg8{background-color:#F0F6FA;color:#000000}
 .tg .tg-rh4c{background-color:#F0F6FA}
-
 </style>
-<table class="tg">
-  <tr>
-    <th class="tg-ii5f">Player</th>
-    <th class="tg-ii5f">Roll Type&nbsp;</th>
-    <th class="tg-ii5f">Attack Set Number</th>
-    <th class="tg-ii5f">Dice Number</th>
-    <th class="tg-ii5f">Dice Color</th>
-    <th class="tg-ii5f">Dice Result</th>
-  </tr>
-  {%    set curr_attack_set = tape[0][3] %}
-  {%    set row_class = "tg-rh4c" %}
-  {%    for roll in tape %}
-    {%  set attack_set = roll[3] %}
-    {%  if attack_set != curr_attack_set %}
-        {% set row_class = "tg-1bl1"  %}
-    {%  else %}
-        {% set row_class = "tg-rh4c" %}
-    {%  endif %}
-    {%   set curr_attack_set = roll[3] %}
 
-    <tr>
-      <td class="{{ row_class }}">{{  roll[1] }} </td>
-      <td class="{{ row_class }}">{{ roll[5] }} </td>
-      <td class="{{ row_class }}">{{  roll[3] }} </td>
-      <td class="{{ row_class }}">{{ roll[4] }}</td>
-      <td class="{{ row_class }}">{{ roll[6] }}</td>
-      <td class="{{ row_class }}">{{ roll[7] }}</td>
-    </tr>
+
+
+{% for attack_set in game_tape.attack_sets %}
+<br>
+
+    <b> {{  attack_set.number }}</b>
+
+    <table class="tg">
+        <tr>
+        <th class="tg-031e" colspan="5">Attacker: {{ attack_set.attacking_player }}</th>
+        <th class="tg-nkg8" rowspan="2"><br>Final<br>Result</th>
+        <th class="tg-031e" colspan="5">Defender: {{ attack_set.defending_player }}</th>
+      </tr>
+      <tr>
+        <td class="tg-nkg8">dice num</td>
+        <td class="tg-nkg8">roll</td>
+        <td class="tg-nkg8">reroll</td>
+        <td class="tg-nkg8">convert</td>
+        <td class="tg-nkg8">end</td>
+        <td class="tg-nkg8">end</td>
+        <td class="tg-nkg8">convert</td>
+        <td class="tg-nkg8">reroll</td>
+        <td class="tg-nkg8">roll</td>
+        <td class="tg-nkg8">dice_num</td>
+
+      </tr>
+    {% for rec in attack_set.records  %}
+        <td class="tg-031e">{{ rec.dice_num }}</td>
+        <td class="tg-031e"><img src={{ rec.attack_roll_as_img()  }}></td>
+        <td class="tg-031e"><img src={{ rec.attack_reroll_as_img() }}></td>
+        <td class="tg-031e"><img src={{ rec.attack_convert_as_img() }}></td>
+        <td class="tg-031e"><img src={{ rec.attack_end_as_img() }}></td>
+        <td class="tg-031e"><img src={{ rec.final_as_image() }}></td>
+        <td class="tg-031e"><img src={{ rec.defense_end_as_img() }}></td>
+        <td class="tg-031e"><img src={{ rec.defense_convert_as_img() }}></td>
+        <td class="tg-031e"><img src={{ rec.defense_reroll_as_img() }}></td>
+        <td class="tg-031e"><img src={{ rec.defense_roll_as_img() }}></td>
+        <td class="tg-031e">{{ rec.dice_num }}</td>
+      </tr>
+    {% endfor %}
+    </table>
   {%  endfor %}
-</table>
+
 {% endblock %}

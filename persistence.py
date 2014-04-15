@@ -67,11 +67,15 @@ class Player(Base):
     def __init__(self, name):
         self.name = name
 
+
 class Dice(Base):
     __tablename__ = dice_table
     id        = Column(Integer, primary_key=True)
     dice_type = Column(DiceType.db_type())
     dice_face = Column(DiceFace.db_type())
+
+    def as_image(self):
+        return DiceImage.get_image(self)
 
 
 class DiceThrowAdjustment(Base):
@@ -91,8 +95,8 @@ class DiceThrowResult(Base):
     dice_num             = Column(Integer)
     dice_result_id       = Column(Integer, ForeignKey('{0}.id'.format(dice_table)))
     final_dice_result_id = Column(Integer, ForeignKey('{0}.id'.format(dice_table)))
-    dice                 = relationship( Dice.__name__, foreign_keys='DiceThrowResult.dice_result_id')
-    final_dice           = relationship( Dice.__name__, foreign_keys='DiceThrowResult.final_dice_result_id' )
+    dice                 = relationship( Dice.__name__, foreign_keys='DiceThrowResult.dice_result_id', uselist=False)
+    final_dice           = relationship( Dice.__name__, foreign_keys='DiceThrowResult.final_dice_result_id', uselist=False )
     adjustments          = relationship( DiceThrowAdjustment.__name__ )
 
 class DiceThrow(Base):
