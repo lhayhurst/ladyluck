@@ -1,724 +1,722 @@
+     - Star Wars X-Wing Miniatures Game version 5.0.0
+     - Extension Crazy_Toms_Playmats_-5.0.0 v5.0.0 loaded
+     - Extension Yagyu's_Map_Pack_-5.0.0 v5.0.0 loaded
 
+      Welcome to the VASSAL server
 
- - Star Wars X-Wing Miniatures Game version 5.0.0
- - Extension Crazy_Toms_Playmats_-5.0.0 v5.0.0 loaded
- - Extension Yagyu's_Map_Pack_-5.0.0 v5.0.0 loaded
+    a
+     For help, see the VASSAL Forum at http://www.vassalengine.org/forum
 
-  Welcome to the VASSAL server
-
-a
- For help, see the VASSAL Forum at http://www.vassalengine.org/forum
-
- - Waiting for Game Info...
- - Synchronization complete
-<Paul Heaver> - Hi!
-<Jake Pichelmeyer> - Welcome Paul :)
-<Jake Pichelmeyer> - How are you?
-<Paul Heaver> - Good!  Congrats again on your win.
-<Jake Pichelmeyer> - Thank you
-<Jake Pichelmeyer> - When is your first tournament coming up?
-<Paul Heaver> - What is that craziness on the board? ")
-<Paul Heaver> - Thursday
-<Paul Heaver> - I have 8 events between 2/27 and 3/29
-<Paul Heaver> - I probably won't make all of them, or my wife will kill me
-<Jake Pichelmeyer> - :)
-<Jake Pichelmeyer> - Are they all the same region or are you region-crossing?
-<Paul Heaver> - We're on the border.  THe Va-MD line is the region border.
-<Paul Heaver> - I don't think it matters what region you win in though?
-<Jake Pichelmeyer> - Come to think of it, I suppose not
-<Jake Pichelmeyer> - I didn't see any region markings on the certificate
-<Paul Heaver> - Cool, good to know!
-<Jake Pichelmeyer> - I should know better than to assume :)
-<Jake Pichelmeyer> - So what are you up for tonight?
-<Jake Pichelmeyer> - Do you have a list in mind for THursday?
-<Paul Heaver> - I can either do a swarm or my rebel worlds build (-rookie, +hwk).  I'm more likely to play the rebels for Thursday
-<Paul Heaver> - Since I only own 3 TIE fighters. :)
-<Jake Pichelmeyer> - haha
-<Paul Heaver> - Once there's enough stuff for me to cross 100 bucks for free shipping, I'll pick up four more (and some netrunner and stuff)
-<Jake Pichelmeyer> - I second Netrunner
-<Jake Pichelmeyer> - I played in a few tournaments the past two weeks
-<Jake Pichelmeyer> - Fun stuff
-<Jake Pichelmeyer> - Much less stressful
-<Jake Pichelmeyer> - Due to a greater degree of control over the game state
-<Paul Heaver> - It's a ton of fun.  There's only three or four near me I think.
-<Paul Heaver> - I like the bluffing aspect of the game
-<Jake Pichelmeyer> - Same
-<Jake Pichelmeyer> - You have played a bit then?
-<Paul Heaver> - Yeah, back with the original set, and then I picked it up again on FFG's rerelease.  I went 6-6 at Worlds. :)
-<Jake Pichelmeyer> - Nice, same here.
-<Jake Pichelmeyer> - If you like bluffing I have to tell you this
-<Jake Pichelmeyer> - At the NR tournament yesterday
-<Jake Pichelmeyer> - I forfeited my first corp draw and drew my second hand
-<Jake Pichelmeyer> - I had 3/5 agendas
-<Jake Pichelmeyer> - first auto draw I drew an agenda
-<Paul Heaver> - of course
-<Jake Pichelmeyer> - I managed to score 5 agenda points before he scored a single point
-<Jake Pichelmeyer> - just by bluffing
-<Jake Pichelmeyer> - he had 40 money at one point I think
-<Paul Heaver> - geez
-<Jake Pichelmeyer> - I did the same in several other games, a heavily iced remote
-<Jake Pichelmeyer> - and I put out an agenda without ice
-<Jake Pichelmeyer> - It's like no one can believe you would be so crazy so they don't even bother
-<Jake Pichelmeyer> - Great fun
-<Paul Heaver> - Man, that should only work once. :)
-<Jake Pichelmeyer> - Indeed
-<Jake Pichelmeyer> - So anyway, you'll fly your modified worlds build?
-<Jake Pichelmeyer> - Any preference on what I fly? It's more practice for you at this point
-<Jake Pichelmeyer> - Since your tournament is closer
-<Paul Heaver> - because after that, your opponent is going to say, "can you believe what this guy did?" and you won't be able to do it for the rest of the day. :)  Sure.  I'll fly the mod-Worlds.
-<Paul Heaver> - I don't particularly care what you run.  I expect to see a mix of everything.
-<Paul Heaver> - no one in our meta tends to stick to any particular build.
-<Deadshane> - where is your tourney paul?  Hope you guys don't mind me jumping on your conversation....
-<Jake Pichelmeyer> - np here
-<Paul Heaver> - no, it's fine.  Ashburn, VA on Thursday
-<Paul Heaver> - Like 10min from my house
-<Jake Pichelmeyer> - I'll do that other Biggs build then
-<Paul Heaver> - ooh, the mirrorish match. :)
- - Loading IsThisADagger.vlog ...
- - Loaded IsThisADagger.vlog: 100
-<Deadshane> - that's not the charity event is it?
- - Bad Data in Module: Image not found Up-Cluster_Missiles.png
- - Bad Data in Module: Image not found Up-Assault_Missiles.png
- - Bad Data in Module: Image not found Up-Seismic_Charges.png
- - Bad Data in Module: Image not found Up-Squad_Leader.png
- - Bad Data in Module: Image not found Pilot-Backstabber.png
- - Bad Data in Module: Image not found Pilot_Captain_Jonus.png
- - Bad Data in Module: Image not found Pilot_Gamma_Squadron.png
- - Bad Data in Module: Image not found Move-wheel_Back.png
- - Bad Data in Module: Image not found Move-wheel.png
- - Bad Data in Module: Image not found Up-Advanced-Sensors.png
- - Bad Data in Module: Image not found Up-R2-D2.png
- - Bad Data in Module: Image not found Up-Shield_Upgrade.png
- - Bad Data in Module: Image not found Pilot-Rookie_Pilot.png
- - Bad Data in Module: Image not found Pilot-Biggs_Darklighter.png
- - Bad Data in Module: Image not found Pilot_Blue_Squadron.png
-<Paul Heaver> - I don't think so, it's a store champ
-<Paul Heaver> - also, you built that pre5.0, Jake?
-<Jake Pichelmeyer> - yes
-<Paul Heaver> - That explains the errors
-<Jake Pichelmeyer> - looks like the base stats can still be modded so I think we are okay
-<Jake Pichelmeyer> - just one second on the ID tagging
-<Paul Heaver> - I'm still wondering what's up with that ORS, 2xBlue, A-Wing build you are playing around with. :)
-<Jake Pichelmeyer> - Oh, "Sensor Jammin'  "
-<Jake Pichelmeyer> - Block with ORS-APL and Proto
-<Deadshane> - Variation on Rebel Convoy?
-<Jake Pichelmeyer> - Jam the shots
-<Paul Heaver> - With more punch and less ion
-<Jake Pichelmeyer> - I've denied 12+ damage with SJ in a few matches
-<Jake Pichelmeyer> - But AdvS and Kyle kills it
-<Jake Pichelmeyer> - I'm at 100 points, you?
-<Paul Heaver> - yeah, good thing Advanced Sensors is so rarely used mowadays </sarcasm>.  Yup, 100
-<Paul Heaver> - so dice for eyeballs?
-<Paul Heaver> - I love the setup box button they added in 5.0
-<Jake Pichelmeyer> - most eyeballs picks?
-<Paul Heaver> - sure
-<Jake Pichelmeyer> - k, 3 attack each I guess?
-<Paul Heaver> - ok
-* *** Jake Pichelmeyer Rolls to Attack: [Crit], [Blank], [Focus], [], [], [], [] ***
-<Jake Pichelmeyer> - 1
-<Paul Heaver> - ok
-<Paul Heaver> - so you
-<Jake Pichelmeyer> - Taking initiative, placing first asteroid
- - Bad Data in Module: Image not found move_2_B.png
- - Bad Data in Module: Image not found move_1_T.png
- - Bad Data in Module: Image not found move_1_S.png
- - Bad Data in Module: Image not found move_2_S.png
-<Paul Heaver> - ok.  I'm logging this btw.
-<Jake Pichelmeyer> - Same
-<Jake Pichelmeyer> - Do you have an edge preference?
-<Paul Heaver> - which sides you want?  Left/right?
-<Paul Heaver> - I prefer not right
-<Paul Heaver> - left, bottom, or top is fine
-<Jake Pichelmeyer> - Okay, you take bottom, I'll take the top edge
-<Paul Heaver> - ok
-<Jake Pichelmeyer> - placing first asteroid
-<Jake Pichelmeyer> - Set
-<Paul Heaver> - ok
-<Jake Pichelmeyer> - set
-<Jake Pichelmeyer> - Paul, what did you fly at Nationals last year?
-<Paul Heaver> - set
-<Jake Pichelmeyer> - You had at least one A-Wing if I remember right?
-<Paul Heaver> - Wedge, Garvin, Biggs, Proto
-<Paul Heaver> - Wedge had swarm
-<Paul Heaver> - I think that was 100
-<Paul Heaver> - You crushed me
-<Paul Heaver> - like a bug
-<Paul Heaver> - :)
-<Jake Pichelmeyer> - :P Only for you to be reborn from the ashes
-<Jake Pichelmeyer> - set
-<Paul Heaver> - ok
-<Paul Heaver> - your 2s, my 2 and 4s, your 5, my 5
-<Jake Pichelmeyer> - Placing 2s
-<Paul Heaver> - man, everyone's doing a pinwheel formation nowadays
-<Jake Pichelmeyer> - :P
-<Jake Pichelmeyer> - set with all, your go
-<Deadshane> - See...and this is why I'm watching you guys.  I'm like...."pinwheel formation"?  I need to play more.
-<Jake Pichelmeyer> - I'm not sure it's suited to a Biggs+3, but it's all about experimentation
-<Paul Heaver> - I'm going with the old standby
-<El Zorro> - i like a row of 4 with biggs at the edge (wall)
-<Paul Heaver> - ok all set
-<Jake Pichelmeyer> - set here, Good luck you Paul and have fun :) I'm excited for this match :)
-<Paul Heaver> - thanks, you too!
-<Paul Heaver> - all set
-<Jake Pichelmeyer> - set
-<Jake Pichelmeyer> - going with 2s
-* --- Blue (J3) performs move: 1 - Forward
-* --- Rookie 1 (J1) performs move: 1 - Forward
-* --- Rookie 2 (J2) performs move: 1 - Forward
- - Bad Data in Module: Image not found Action-target_Lock.png
-<Paul Heaver> - those focuses will definitely matter. :)
-<Paul Heaver> - my 2 and 4's
-* --- Rebel Op () performs move: 3 - Forward
-<Jake Pichelmeyer> - yeah, you know the drill :P your go
-* --- Dagger 1 () performs move: 2 - Forward
-* --- Dagger 2 () performs move: 2 - Forward
-<Paul Heaver> - I really need to premeasure the barrel roll on setup.  Ok
-* --- Biggs (J4) performs move: 1 - Forward
-<Jake Pichelmeyer> - your go
-* --- Biggs () performs move: 3 - Forward
-<Paul Heaver> - back to dials
-<Paul Heaver> - I'm set
-<Jake Pichelmeyer> - set, going with 2s
-* --- Blue (J3) performs move: 3 - Forward
-* --- Rookie 1 (J1) performs move: 3 - Forward
-* --- Rookie 2 (J2) performs move: 3 - Forward
-<Jake Pichelmeyer> - set
-* --- Rebel Op () performs move: 3 - Forward
-* --- Dagger 1 () performs move: 3 - Forward
-* --- Dagger 2 () performs move: 3 - Forward
-<Jake Pichelmeyer> - copy cat
-<Paul Heaver> - ugh, d2 is a little off from where I'd like to be
-<Paul Heaver> - oh well
-<Paul Heaver> - they focus I guess
-<Jake Pichelmeyer> - if you really want to move him in line you can
-<Paul Heaver> - stupid big rock
-<Paul Heaver> - no, I want him half a ship forward. :)
-<Jake Pichelmeyer> - oh, I see
-<Jake Pichelmeyer> - nm then
-<Jake Pichelmeyer> - the real Biggs is up
-* --- Biggs (J4) performs move: 3 - Forward
-<Jake Pichelmeyer> - now this is interesting
-* --- Biggs () performs move: 3 - Forward
-<Jake Pichelmeyer> - these are 4.6.0 bases so they don't have the movement hotkeys linked to them
-<Paul Heaver> - ok, interesting
-<Jake Pichelmeyer> - well now I know to switch that out
-<Jake Pichelmeyer> - no shots, clear actions, back to dials
-<Paul Heaver> - all set
-<Jake Pichelmeyer> - set, going with 2s
-* --- Blue (J3) performs move: 3 - Forward
-* --- Rookie 1 (J1) performs move: 3 - Forward
-* --- Rookie 2 (J2) performs move: 3 - Forward
-<Jake Pichelmeyer> - set
-<Paul Heaver> - I fear no asteroids, prefocusing
-* --- Rebel Op () performs move: 2 - Right Turn
-* --- Dagger 1 () performs move: 2 - Right Turn
-* --- Dagger 2 () performs move: 2 - Right Turn
-<Paul Heaver> - wow, did I miss the rock?
-<Jake Pichelmeyer> - sure did
-<Jake Pichelmeyer> - nice job
-<Paul Heaver> - nice, I expected to land on it since it didn't matter
-<Paul Heaver> - ok your biggs
-* --- Biggs (J4) performs move: 2 - Forward
-<Jake Pichelmeyer> - set
-* --- Biggs () performs move: 2 - Right Turn
-<Paul Heaver> - no shots. :)
-<Jake Pichelmeyer> - clear actions, back to dials, the fun is coming up
-<Paul Heaver> - ok all set
-<Jake Pichelmeyer> - I don't think this will go well, but let's try anyway :)
-<Jake Pichelmeyer> - Going with 2s
-* --- Rookie 1 (J1) performs move: 3 - Right Turn
-* --- Rookie 2 (J2) performs move: 3 - Right Turn
-<Jake Pichelmeyer> - scratch that, check for TLs
-<Paul Heaver> - ok
-<Jake Pichelmeyer> - focus it is
-* --- Blue (J3) performs move: 2 - Right Turn
-<Jake Pichelmeyer> - set
-* --- Rebel Op () performs move: 1 - Forward
-<Paul Heaver> - I'll check TL too!
-* --- Dagger 1 () performs move: 1 - Forward
-* --- Dagger 2 () performs move: 1 - Forward
-<Paul Heaver> - ok
-* --- Biggs (J4) performs move: 2 - Right Turn
-* --- Biggs () performs move: 1 - Forward
-<Jake Pichelmeyer> - focus for a boring turn
-<Jake Pichelmeyer> - back to it
-<Paul Heaver> - I was thinking the 3 forwards would just get my daggers shot up
-<Jake Pichelmeyer> - I don't see anything wrong with that :P
-<Paul Heaver> - ok
-<Jake Pichelmeyer> - Okay, let's go with this. Going with 2s
-* --- Blue (J3) performs move: 3 - Forward
-<Jake Pichelmeyer> - TL Biggs
-* --- Rookie 1 (J1) performs move: 2 - Forward
-* --- Rookie 2 (J2) performs move: 2 - Forward
-<Jake Pichelmeyer> - set
-* --- Rebel Op () performs move: 2 - Right Bank
-<Paul Heaver> - prefocus
-* --- Dagger 2 () performs move: 2 - Forward
-<Paul Heaver> - bumps
-* --- Dagger 1 () performs move: 2 - Forward
-<Paul Heaver> - ok
-* --- Biggs (J4) performs move: 1 - Forward
-* --- Biggs () performs move: 2 - Forward
-<Paul Heaver> - your biggs
-<Jake Pichelmeyer> - 3v3 Biggs to Biggs
-* *** Jake Pichelmeyer Rolls to Attack: [Blank], [Hit], [Blank], [], [], [], [] ***
-<Jake Pichelmeyer> - 1h
-* *** Paul Heaver Rolls to Defend: [Blank], [Focus], [Evade], [], [], [], [] ***
-<Paul Heaver> - dodged
-<Paul Heaver> - your biggs has everyone on a leash right?
-<Jake Pichelmeyer> - looks like it
-<Paul Heaver> - rookie 1 was almost out! :)
-<Paul Heaver> - ok, we shoot up biggs
-<Jake Pichelmeyer> - yeah, that was a gamble
-<Paul Heaver> - 3v3 from my biggs
-* *** Paul Heaver Rolls to Attack: [Blank], [Focus], [Hit], [], [], [], [] ***
-<Paul Heaver> - um
-<Paul Heaver> - I'll save it
-* *** Jake Pichelmeyer Rolls to Defend: [Focus], [Blank], [Evade], [], [], [], [] ***
-<Jake Pichelmeyer> - evaded
-<Paul Heaver> - 3v3 d1
-* *** Paul Heaver Rolls to Attack: [Hit], [Hit], [Crit], [], [], [], [] ***
-<Paul Heaver> - 2h1c
-<Jake Pichelmeyer> - can't argue with that
-* *** Jake Pichelmeyer Rolls to Defend: [Evade], [Focus], [Evade], [], [], [], [] ***
-<Jake Pichelmeyer> - thinking...
-<Jake Pichelmeyer> - keep focus, lose 1 shield
-<Paul Heaver> - ok
-<Paul Heaver> - 3v2
-* *** Paul Heaver Rolls to Attack: [Hit], [Focus], [Hit], [], [], [], [] ***
-<Paul Heaver> - focus 3h
-* *** Jake Pichelmeyer Rolls to Defend: [Blank], [Evade], [], [], [], [], [] ***
-<Jake Pichelmeyer> - lose 2 shields
-<Paul Heaver> - your 2's
-<Paul Heaver> - I was considering moving 1 and hanging that rebel op left
-<Jake Pichelmeyer> - that's the move I thought most probable
-<Jake Pichelmeyer> - but we'll see what you make of it
-<Jake Pichelmeyer> - 1 of the Rookies to Biggs 3v3
-* *** Jake Pichelmeyer Rolls to Attack: [Blank], [Focus], [Focus], [], [], [], [] ***
-<Jake Pichelmeyer> - focus 2h
-* *** Paul Heaver Rolls to Defend: [Blank], [Blank], [Blank], [], [], [], [] ***
-<Paul Heaver> - no biggs!
-<Paul Heaver> - it's worlds all over again. :)
-<Jake Pichelmeyer> - :P
-<Jake Pichelmeyer> - next rookie
-* *** Jake Pichelmeyer Rolls to Attack: [Blank], [Hit], [Focus], [], [], [], [] ***
-<Jake Pichelmeyer> - bleh, focus 2h
-<Paul Heaver> - I have 3 evade?
-<Jake Pichelmeyer> - yes
-* *** Paul Heaver Rolls to Defend: [Blank], [Blank], [Focus], [], [], [], [] ***
-<Paul Heaver> - ugh
-<Paul Heaver> - sure focus
-<Jake Pichelmeyer> - no ugh's from you Mr All Hits From Daggers :P
-<Jake Pichelmeyer> - 3v2 Blue Biggs
-<Paul Heaver> - hey you can roll dodges. :)
-* *** Jake Pichelmeyer Rolls to Attack: [Blank], [Focus], [Focus], [], [], [], [] ***
-<Paul Heaver> - so I need a dodge here
-<Jake Pichelmeyer> - TL for a "bigg" roll
-<Paul Heaver> - oh yeah
-<Paul Heaver> - you TLed
-* *** Jake Pichelmeyer Re-Rolls Attack Die 1 [Blank] and gets a [Hit] ***
-* *** Jake Pichelmeyer Re-Rolls Attack Die 2 [Focus] and gets a [Focus] ***
-* *** Jake Pichelmeyer Re-Rolls Attack Die 3 [Focus] and gets a [Crit] ***
-<Jake Pichelmeyer> - 1h1c
-<Paul Heaver> - still need a dodge here, pref 2
-* *** Paul Heaver Rolls to Defend: [Blank], [Evade], [], [], [], [], [] ***
-<Paul Heaver> - ok, crit happens, let's see what it is.
-<Paul Heaver> - I call dibbs on rebel deck
-<Jake Pichelmeyer> - come on DC....give me love
-<Jake Pichelmeyer> - all yours
-<Paul Heaver> - woo!
-<Jake Pichelmeyer> - :P
-<Jake Pichelmeyer> - ion time
-<Paul Heaver> - biggs it is
-<Paul Heaver> - 3v2
-* *** Paul Heaver Rolls to Attack: [Hit], [Focus], [Hit], [], [], [], [] ***
-<Paul Heaver> - focus to guarantee ion
-<Jake Pichelmeyer> - auto ion
-<Paul Heaver> - no green move for you!
-<Jake Pichelmeyer> - :P
-<Paul Heaver> - he's down to 2 hull now right?
-<Jake Pichelmeyer> - yes
-<Paul Heaver> - ok
-<Jake Pichelmeyer> - It's always painful going from a TIE Swarm to Xs/Bs as far as their manevuerability
-<Jake Pichelmeyer> - going with 2s
-<Paul Heaver> - haha, yeah but you have triple the health almost. :)
-* --- Rookie 1 (J1) performs move: 1 - Right Bank
-<Jake Pichelmeyer> - TL Biggs
-<Jake Pichelmeyer> - scratch
-<Jake Pichelmeyer> - focus
-<Jake Pichelmeyer> - AdvS focus
-<Jake Pichelmeyer> - set
-<Paul Heaver> - blah, I shouldn't have tried what I did with biggs
-<Paul Heaver> - oh well
-* --- Rebel Op () performs move: 2 - Left Turn
-<Paul Heaver> - prefocus
-* --- Dagger 1 () performs move: 1 - Right Bank
-<Paul Heaver> - I think I hit the blue first?
-<Jake Pichelmeyer> - I think so
-<Paul Heaver> - or should i turn more right?
-<Jake Pichelmeyer> - that's fine
-* --- Biggs () performs move: 3 - Left Turn
-<Paul Heaver> - whee!
-<Jake Pichelmeyer> - :)
-<Paul Heaver> - let's see how your naked roll is
-<Jake Pichelmeyer> - Indeed, 3v2
-* *** Jake Pichelmeyer Rolls to Attack: [Focus], [Hit], [Focus], [], [], [], [] ***
-<Jake Pichelmeyer> - bleh
-* *** Paul Heaver Rolls to Defend: [Blank], [Focus], [], [], [], [], [] ***
-<Paul Heaver> - foicus to live
-<Paul Heaver> - my biggs has no shot. :)
-<Jake Pichelmeyer> - Dagger Time
-<Jake Pichelmeyer> - Like Hammer Time but more painful
-<Paul Heaver> - man is that r2?
-<Jake Pichelmeyer> - Zoom says yes
-<Paul Heaver> - looks like 2 to me
-<Paul Heaver> - oh well 3v2
-* *** Paul Heaver Rolls to Attack: [Hit], [Crit], [Hit], [], [], [], [] ***
-<Paul Heaver> - die!
-<Jake Pichelmeyer> - 9/64 to have a chance here...
-* *** Jake Pichelmeyer Rolls to Defend: [Evade], [Blank], [], [], [], [], [] ***
-<Jake Pichelmeyer> - nope
-<Paul Heaver> - I'm liking the rebel op
-<Paul Heaver> - he's doing good work
-<Paul Heaver> - d2 will fire at...
-<Jake Pichelmeyer> - definitely a nice little mini counter to R2D2 Biggs
-<Paul Heaver> - well, it's good against B-Wings in general too. :)
-<Paul Heaver> - let's see if we can help biggs
-<Paul Heaver> - rookie 2
-<Paul Heaver> - 4v2
-* *** Paul Heaver Rolls to Attack: [Hit], [Blank], [Blank], [Hit], [], [], [] ***
-<Paul Heaver> - 2h
-* *** Jake Pichelmeyer Rolls to Defend: [Evade], [Focus], [], [], [], [], [] ***
-<Jake Pichelmeyer> - lose 1 shield
-<Jake Pichelmeyer> - okay, Rookie 1 on Biggs, 3v3 through the asteroid, let's see if we get lucky
-<Paul Heaver> - ok
-* *** Jake Pichelmeyer Rolls to Attack: [Focus], [Hit], [Focus], [], [], [], [] ***
-<Jake Pichelmeyer> - focus 3h
-<Paul Heaver> - ok 3 natural evades coming up
-* *** Paul Heaver Rolls to Defend: [Evade], [Evade], [Focus], [], [], [], [] ***
-* *** Jake Pichelmeyer turns Attack Die 1 [Focus] into a [Hit] ***
-* *** Jake Pichelmeyer turns Attack Die 3 [Focus] into a [Hit] ***
-<Paul Heaver> - almost!
-<Jake Pichelmeyer> - Sweet Justice!
-<Jake Pichelmeyer> - Blue on Dagger 2 4v1
-* *** Jake Pichelmeyer Rolls to Attack: [Hit], [Blank], [Hit], [Hit], [], [], [] ***
-<Jake Pichelmeyer> - 3h
-* *** Paul Heaver Rolls to Defend: [Evade], [], [], [], [], [], [] ***
-<Jake Pichelmeyer> - same from Rookie 2
-* *** Jake Pichelmeyer Rolls to Attack: [Hit], [Hit], [Hit], [Hit], [], [], [] ***
-<Paul Heaver> - ouch!
-<Jake Pichelmeyer> - nice job, little guy
-* *** Paul Heaver Rolls to Defend: [Focus], [], [], [], [], [], [] ***
-<Paul Heaver> - focus to lose my shields
-<Paul Heaver> - ok ion time
-<Paul Heaver> - blue
-<Jake Pichelmeyer> - okay, the mini-Blinded Pilot cannon
-* *** Paul Heaver Rolls to Attack: [Blank], [Crit], [Blank], [], [], [], [] ***
-<Paul Heaver> - wow
-<Paul Heaver> -
-<Jake Pichelmeyer> - okay, 5/8, baby
-* *** Jake Pichelmeyer Rolls to Defend: [Blank], [], [], [], [], [], [] ***
-<Paul Heaver> - yay!
-<Jake Pichelmeyer> - bleh :P
-<Jake Pichelmeyer> - that would have been pretty significant I think
-<Paul Heaver> - oh yes
-<Paul Heaver> - he did lose a shield too. :)
-<Jake Pichelmeyer> - oh yeah, thank you :)
-<Jake Pichelmeyer> - here comes the "always focused, firing before Rookie" AdvS Rookie stomp :)
-<Paul Heaver> - it's fairly even on health right now, but the PS bonus will definitely help me
-<Jake Pichelmeyer> - set
-<Paul Heaver> - .,me too
-<Jake Pichelmeyer> - going with 2s, big round
-<Jake Pichelmeyer> - J2 stalls on Blue
-* --- Rookie 1 (J1) performs move: 4 - Forward
-* --- Rookie 1 (J1) performs move: 4 - Koiogran
-<Jake Pichelmeyer> - AdvS for focus on Blue, then bump to stall
-<Jake Pichelmeyer> - set
-* --- Rebel Op () performs move: 2 - Right Turn
-<Paul Heaver> - pre barrel roll time
-* --- Dagger 1 () performs move: 2 - Forward
-* --- Dagger 1 () performs move: 2 - Koiogran
-* --- Dagger 2 () performs move: 1 - Left Turn
-<Paul Heaver> - ok?
-<Jake Pichelmeyer> - looks good
-<Jake Pichelmeyer> - Biggs, the B-Wing delivery system
-<Jake Pichelmeyer> - Dagger shots
-<Paul Heaver> - D2 first
-<Paul Heaver> - r1 on blue 4v1
-* *** Paul Heaver Rolls to Attack: [Blank], [Focus], [Blank], [Blank], [], [], [] ***
-<Paul Heaver> - miss
-<Paul Heaver> - d1 on blue
-<Paul Heaver> - 4v1
-* *** Paul Heaver Rolls to Attack: [Hit], [Focus], [Focus], [Hit], [], [], [] ***
-<Paul Heaver> - 2h
-* *** Jake Pichelmeyer Rolls to Defend: [Focus], [], [], [], [], [], [] ***
-<Jake Pichelmeyer> - focus for 1 shield
-<Jake Pichelmeyer> - that could have been much worse
-<Paul Heaver> - yup!
-<Jake Pichelmeyer> - that Rookie actually did do some action denial then
-<Paul Heaver> - I should have done the 2 turn with d2
-<Paul Heaver> - oh well
-<Jake Pichelmeyer> - now's the time the learn, as you know
-<Jake Pichelmeyer> - 3v1 Rookie on Dagger, hail mary
-<Paul Heaver> - I was wondering if you were going to stall or K both
-* *** Jake Pichelmeyer Rolls to Attack: [Blank], [Blank], [Hit], [], [], [], [] ***
-<Jake Pichelmeyer> - 1h
-* *** Paul Heaver Rolls to Defend: [Blank], [], [], [], [], [], [] ***
-<Paul Heaver> - good enough
-<Jake Pichelmeyer> - I can't complain about that, Ion time
-<Paul Heaver> - on the blue again
-<Paul Heaver> -
-<Paul Heaver> - 3v1
-* *** Paul Heaver Rolls to Attack: [Hit], [Blank], [Focus], [], [], [], [] ***
-<Paul Heaver> - focus to guarantee
-<Jake Pichelmeyer> - ioned again
-<Jake Pichelmeyer> - lost 1 shield
-<Jake Pichelmeyer> - back to dials
-<Paul Heaver> - Rebel Op / Ion is the 21 point B-Wing Dream Crusher
-<Jake Pichelmeyer> - yeah, I was skeptical about the switch, but I think it's for the better
-<Jake Pichelmeyer> - the Rookie is just a thug, but the RO is a professional
-<Jake Pichelmeyer> - might struggle against YTs and TIEs, though
-<Jake Pichelmeyer> - YTs at range 3, that is
-<Paul Heaver> - true
-<Jake Pichelmeyer> - I think dual falcons on the run might give this some trouble?
-<Paul Heaver> - You know, I haven't played against dual falcons in forever
-<Jake Pichelmeyer> - If you want the practice, I'll play it against you. I'm trying to learn how the list ticks
-<Jake Pichelmeyer> - next time if we get to it
-<Paul Heaver> - that'd be fun
-<Jake Pichelmeyer> - set
-<Paul Heaver> - me too
-<Jake Pichelmeyer> - going with 2s
-* --- Rookie 2 (J2) performs move: 4 - Forward
-* UNDO: * --- Rookie 2 (J2) performs move: 4 - Forward
-* --- Rookie 2 (J2) performs move: 4 - Forward
-* --- Rookie 2 (J2) performs move: 4 - Koiogran
-* --- Rookie 1 (J1) performs move: 2 - Forward
-<Jake Pichelmeyer> - AdvS focus and bump
-<Jake Pichelmeyer> - dry
-* --- Rebel Op () performs move: 2 - Right Turn
-* --- Dagger 2 () performs move: 1 - Left Bank
-<Paul Heaver> - nooooo
-<Paul Heaver> - that was going to be awesome with the barrel roll right
-<Jake Pichelmeyer> - it will live on in our imaginations
-<Paul Heaver> - so how does this work?  I don't hit you until I turn in more?  or do I move back and clip the corner?
-<Jake Pichelmeyer> - I thnk the turn is what causes the overlap, so how you originally had it
-<Paul Heaver> - like that?  Sideswipe?
-<Jake Pichelmeyer> - looks good to me
-<Paul Heaver> - he's so dead
-<Paul Heaver> - definitely should've 2 turned last turn :)
-* --- Dagger 1 () performs move: 1 - Left Bank
-<Paul Heaver> - ok
-<Jake Pichelmeyer> - I think it is my primary goal to get to do a K-turn with that B-Wing before he dies an ion-y death
-<Paul Heaver> - d2 no shot
-<Paul Heaver> - d1 on...
-<Paul Heaver> - hmm split dmg some more?  sound terrible
-<Paul Heaver> - rookie 2 has a rock too
-<Paul Heaver> - ugh!
-<Paul Heaver> - screw it, rookie 1 gets shot
-<Jake Pichelmeyer> - k, 4v2
-* *** Paul Heaver Rolls to Attack: [Blank], [Focus], [Hit], [Crit], [], [], [] ***
-<Paul Heaver> - 1h1c
-* *** Jake Pichelmeyer Rolls to Defend: [Evade], [Evade], [], [], [], [], [] ***
-<Paul Heaver> - haha it wouldn't have mattered much
-<Jake Pichelmeyer> - I swear I was just thinking, "if that is 2 evade, I will sort of feel bad" :P
-<Paul Heaver> - nah, it's all good
-<Jake Pichelmeyer> - 2s firing
-<Jake Pichelmeyer> - Rookie 1 on Dagger 2, 4v1
-* *** Jake Pichelmeyer Rolls to Attack: [Focus], [Crit], [Focus], [Blank], [], [], [] ***
-<Jake Pichelmeyer> - focus, 2h1c
-<Paul Heaver> - he dies
-<Jake Pichelmeyer> - Rookie 2 to Dagger, 3v2 through Asteroidd
-* *** Jake Pichelmeyer Rolls to Attack: [Focus], [Crit], [Focus], [], [], [], [] ***
-<Jake Pichelmeyer> - 1c
-* *** Paul Heaver Rolls to Defend: [Blank], [Blank], [], [], [], [], [] ***
-<Paul Heaver> - blargh
-<Paul Heaver> - ion that guy again
-* *** Paul Heaver Rolls to Attack: [Focus], [Blank], [Blank], [], [], [], [] ***
-<Paul Heaver> - focus for 1
-<Paul Heaver> - wow
-* *** Jake Pichelmeyer Rolls to Defend: [Evade], [], [], [], [], [], [] ***
-<Paul Heaver> - nooooo
-<Jake Pichelmeyer> - he's broken free!
-<Paul Heaver> - this was a bad round for me
-<Jake Pichelmeyer> - definitely
-<Jake Pichelmeyer> - but you know as good as anyone that anything can still happen
-<Jake Pichelmeyer> - dial time
-<Paul Heaver> - ok
-<Jake Pichelmeyer> - set, going with all
-* --- Rookie 1 (J1) performs move: 4 - Forward
-* --- Rookie 1 (J1) performs move: 4 - Koiogran
-<Jake Pichelmeyer> - AdvS focus
-* --- Blue (J3) performs move: 2 - Forward
-* --- Rookie 2 (J2) performs move: 1 - Right Bank
-<Jake Pichelmeyer> - TL on RO with Rookie 2
-<Jake Pichelmeyer> - set
-* --- Rebel Op () performs move: 3 - Forward
-<Paul Heaver> - prefocus
-* --- Dagger 1 () performs move: 1 - Forward
-<Paul Heaver> - hmm
-<Jake Pichelmeyer> - your shot
-<Paul Heaver> - 4 dice vs someone
-<Paul Heaver> - rookie
-<Paul Heaver> - I want to get lucky and blow him up
-* *** Paul Heaver Rolls to Attack: [Blank], [Focus], [Hit], [Focus], [], [], [] ***
-<Paul Heaver> - focus 3h
-* *** Jake Pichelmeyer Rolls to Defend: [Evade], [Blank], [], [], [], [], [] ***
-<Jake Pichelmeyer> - lose 1 shield and 1 hull
-<Paul Heaver> - man I can't even ion kill him
-<Jake Pichelmeyer> - 3v1 on Dagger with Rookie
-* *** Jake Pichelmeyer Rolls to Attack: [Blank], [Blank], [Hit], [], [], [], [] ***
-<Jake Pichelmeyer> - 1h
-* *** Paul Heaver Rolls to Defend: [Evade], [], [], [], [], [], [] ***
-<Paul Heaver> - whoosh
-<Jake Pichelmeyer> - 4v1 Blue to Dagger
-* *** Jake Pichelmeyer Rolls to Attack: [Hit], [Hit], [Hit], [Blank], [], [], [] ***
-<Jake Pichelmeyer> - 3h
-* *** Paul Heaver Rolls to Defend: [Blank], [], [], [], [], [], [] ***
-<Paul Heaver> - no whoosh
-<Jake Pichelmeyer> - 3v2 Rookie to Rebel Op
-* *** Jake Pichelmeyer Rolls to Attack: [Hit], [Hit], [Hit], [], [], [], [] ***
-<Jake Pichelmeyer> - 3h
-* *** Paul Heaver Rolls to Defend: [Evade], [Evade], [], [], [], [], [] ***
-<Paul Heaver> - loses his shield
-<Jake Pichelmeyer> - his shot
-<Paul Heaver> - he will ion
-<Paul Heaver> - ...
-<Paul Heaver> - if blue is in range, blue
-<Jake Pichelmeyer> - I call nope
-<Paul Heaver> - you are correct
-<Paul Heaver> - rookie 1 then
-* *** Paul Heaver Rolls to Attack: [Focus], [Focus], [Hit], [], [], [], [] ***
-<Paul Heaver> - focus to auto
-<Jake Pichelmeyer> - lose 1 shield, keep stress next turn
-<Paul Heaver> - I love spreading dmg! :)
-<Jake Pichelmeyer> - it's the best way to win
-<Jake Pichelmeyer> - er... :P
-<Jake Pichelmeyer> - dial time
-<Paul Heaver> - I'm good
-<Paul Heaver> - I'm thinking next time, I TL the B-Wing and keep that in my pocket for when I screw up an ion roll
-<Jake Pichelmeyer> - set, going with all
-* --- Rookie 2 (J2) performs move: 1 - Right Bank
-* --- Blue (J3) performs move: 1 - Right Bank
-* --- Rookie 1 (J1) performs move: 1 - Forward
-<Jake Pichelmeyer> - set
-<Paul Heaver> - arg, I didn't K turn because you could have stopped it
-<Paul Heaver> - so you didn't stop it. :)
-* --- Rebel Op () performs move: 2 - Right Bank
-<Jake Pichelmeyer> - ; )
-<Paul Heaver> - I guess I tl with my action
-<Paul Heaver> - um
-<Paul Heaver> - r2
-* --- Dagger 1 () performs move: 2 - Left Turn
-<Paul Heaver> - what, i fit?
-<Paul Heaver> - uh ok
-<Paul Heaver> - That wasn't supposed to happen
-<Paul Heaver> - ok then
-<Jake Pichelmeyer> - you TL'd the Blue?
-<Paul Heaver> - shoot r2 and hope for lucky dice
-<Paul Heaver> - yeah
-<Jake Pichelmeyer> - k
-<Paul Heaver> - cause I thought I would bump
-<Paul Heaver> - and not have a shot at all this turn
-<Paul Heaver> - well 4v2
-* *** Paul Heaver Rolls to Attack: [Focus], [Hit], [Crit], [Blank], [], [], [] ***
-<Paul Heaver> - 1h1v
-* *** Jake Pichelmeyer Rolls to Defend: [Evade], [Evade], [], [], [], [], [] ***
-<Paul Heaver> - haha
-<Jake Pichelmeyer> - all you can do is laugh at that :P
-<Paul Heaver> - those evade dice.
-<Paul Heaver> - they hate me
-<Paul Heaver> - and you clip there too
-<Jake Pichelmeyer> - Blue on RO 3v2
-* *** Jake Pichelmeyer Rolls to Attack: [Blank], [Blank], [Focus], [], [], [], [] ***
-<Jake Pichelmeyer> - man, but these attack dice hate me
-<Jake Pichelmeyer> - focus 1h
-* *** Paul Heaver Rolls to Defend: [Blank], [Blank], [], [], [], [], [] ***
-<Paul Heaver> - ouch
-<Jake Pichelmeyer> - I guess they hate everyone
-<Jake Pichelmeyer> - 4v1 on B-Wing with J1
-* *** Jake Pichelmeyer Rolls to Attack: [Blank], [Crit], [Hit], [Blank], [], [], [] ***
-<Jake Pichelmeyer> - 1h1c
-* *** Paul Heaver Rolls to Defend: [Evade], [], [], [], [], [], [] ***
-<Paul Heaver> - 1shield
-<Jake Pichelmeyer> - 4v2 Rookie 2 to RO with focus/TL
-* *** Jake Pichelmeyer Rolls to Attack: [Hit], [Blank], [Blank], [Hit], [], [], [] ***
-<Paul Heaver> - this is going to suck
-* *** Jake Pichelmeyer Re-Rolls Attack Die 2 [Blank] and gets a [Crit] ***
-* *** Jake Pichelmeyer Re-Rolls Attack Die 3 [Blank] and gets a [Focus] ***
-* *** Jake Pichelmeyer turns Attack Die 3 [Focus] into a [Hit] ***
-* *** Paul Heaver Rolls to Defend: [Focus], [Evade], [], [], [], [], [] ***
-<Paul Heaver> - focus to maybe live
-* *** Paul Heaver Rolls to Attack: [Hit], [], [], [], [], [], [] ***
-<Paul Heaver> - nope
-<Paul Heaver> - he ions back
-<Jake Pichelmeyer> - rookie 2?
-<Paul Heaver> - nah
-<Paul Heaver> - blue
-<Paul Heaver> - no focus :(
-* *** Paul Heaver Rolls to Attack: [Crit], [Hit], [Blank], [], [], [], [] ***
-<Paul Heaver> - no matter
-* *** Jake Pichelmeyer Rolls to Defend: [Evade], [], [], [], [], [], [] ***
-<Jake Pichelmeyer> - lose 1 shield and ioned
-<Jake Pichelmeyer> - dial time
-<Paul Heaver> - DId you subtract the shield?
-<Jake Pichelmeyer> - you are very much alive in this I think
-<Jake Pichelmeyer> - sorry, forgot :(
-<Paul Heaver> - I have to do 10 before taking 3, which is rough
-<Paul Heaver> - but I think I get free beats next round
-<Jake Pichelmeyer> - that PS is huge now
-<Jake Pichelmeyer> - you can clobber each one in turn before they shoot
-<Jake Pichelmeyer> - if I can finagle some decent positioning
-<Paul Heaver> - that's the plan!
-<Jake Pichelmeyer> - *can't
-<Jake Pichelmeyer> - set
-<Paul Heaver> - me too
-<Jake Pichelmeyer> - actually, changing quick then going
-<Jake Pichelmeyer> - B-Wing TLs Dagger
-<Jake Pichelmeyer> - stays in place
-<Paul Heaver> - yup
-* --- Rookie 2 (J2) performs move: 1 - Forward
-<Jake Pichelmeyer> - thinking...
-<Jake Pichelmeyer> - focus
-<Jake Pichelmeyer> - set
-<Paul Heaver> - man, I keep choosing the wrong move
-<Paul Heaver> - hmm
-<Jake Pichelmeyer> - the last one didn't work out so badly
-<Paul Heaver> - I roll
-* --- Dagger 1 () performs move: 1 - Right Bank
-<Paul Heaver> - I didn't pick 1 fwd and should have
-<Paul Heaver> - oh well
-<Jake Pichelmeyer> - yeah, it was safe no matter what I did
-<Jake Pichelmeyer> - back to dials
-<Jake Pichelmeyer> - set
-<Paul Heaver> - uh oh you get to choose all your moves again!
-<Paul Heaver> - I'm all set too
-<Jake Pichelmeyer> - going with all
-* --- Rookie 2 (J2) performs move: 4 - Forward
-* --- Rookie 2 (J2) performs move: 4 - Koiogran
-* --- Blue (J3) performs move: 1 - Right Turn
-* --- Rookie 1 (J1) performs move: 2 - Left Turn
-<Jake Pichelmeyer> - TL on Dagger
-<Jake Pichelmeyer> - set
-* --- Dagger 1 () performs move: 2 - Forward
-* --- Dagger 1 () performs move: 2 - Koiogran
-<Paul Heaver> - shoot blue!
-<Paul Heaver> - 3v1
-* *** Paul Heaver Rolls to Attack: [Blank], [Hit], [Blank], [], [], [], [] ***
-<Paul Heaver> - tl the blanks
-* *** Paul Heaver Re-Rolls Attack Die 1 [Blank] and gets a [Focus] ***
-* *** Paul Heaver Re-Rolls Attack Die 3 [Blank] and gets a [Focus] ***
-<Paul Heaver> - focus for 3h
-* *** Jake Pichelmeyer Rolls to Defend: [Blank], [], [], [], [], [], [] ***
-<Jake Pichelmeyer> - down to 1
-<Paul Heaver> - If I get all your guys to 1-2 health, that's like winning
-<Jake Pichelmeyer> - :P
-<Paul Heaver> - this is where dagger dies
-<Jake Pichelmeyer> - I can hope
-<Jake Pichelmeyer> - 3v2 Rookie to Dagger
-* *** Jake Pichelmeyer Rolls to Attack: [Focus], [Hit], [Hit], [], [], [], [] ***
-* *** Jake Pichelmeyer Re-Rolls Attack Die 1 [Focus] and gets a [Hit] ***
-<Jake Pichelmeyer> - 3h with TL
-<Paul Heaver> - that's r3?
-* *** Paul Heaver Rolls to Defend: [Blank], [Focus], [], [], [], [], [] ***
-<Jake Pichelmeyer> - yep
-<Paul Heaver> - i die anyway
+     - Waiting for Game Info...
+     - Synchronization complete
+    <Paul Heaver> - Hi!
+    <Jake Pichelmeyer> - Welcome Paul :)
+    <Jake Pichelmeyer> - How are you?
+    <Paul Heaver> - Good!  Conågrats again on your win.
+    <Jake Pichelmeyer> - Thank you
+    <Jake Pichelmeyer> - When is your first tournament coming up?
+    <Paul Heaver> - What is that craziness on the board? ")
+    <Paul Heaver> - Thursday
+    <Paul Heaver> - I have 8 events between 2/27 and 3/29
+    <Paul Heaver> - I probably won't make all of them, or my wife will kill me
+    <Jake Pichelmeyer> - :)
+    <Jake Pichelmeyer> - Are they all the same region or are you region-crossing?
+    <Paul Heaver> - We're on the border.  THe Va-MD line is the region border.
+    <Paul Heaver> - I don't think it matters what region you win in though?
+    <Jake Pichelmeyer> - Come to think of it, I suppose not
+    <Jake Pichelmeyer> - I didn't see any region markings on the certificate
+    <Paul Heaver> - Cool, good to know!
+    <Jake Pichelmeyer> - I should know better than to assume :)
+    <Jake Pichelmeyer> - So what are you up for tonight?
+    <Jake Pichelmeyer> - Do you have a list in mind for THursday?
+    <Paul Heaver> - I can either do a swarm or my rebel worlds build (-rookie, +hwk).  I'm more likely to play the rebels for Thursday
+    <Paul Heaver> - Since I only own 3 TIE fighters. :)
+    <Jake Pichelmeyer> - haha
+    <Paul Heaver> - Once there's enough stuff for me to cross 100 bucks for free shipping, I'll pick up four more (and some netrunner and stuff)
+    <Jake Pichelmeyer> - I second Netrunner
+    <Jake Pichelmeyer> - I played in a few tournaments the past two weeks
+    <Jake Pichelmeyer> - Fun stuff
+    <Jake Pichelmeyer> - Much less stressful
+    <Jake Pichelmeyer> - Due to a greater degree of control over the game state
+    <Paul Heaver> - It's a ton of fun.  There's only three or four near me I think.
+    <Paul Heaver> - I like the bluffing aspect of the game
+    <Jake Pichelmeyer> - Same
+    <Jake Pichelmeyer> - You have played a bit then?
+    <Paul Heaver> - Yeah, back with the original set, and then I picked it up again on FFG's rerelease.  I went 6-6 at Worlds. :)
+    <Jake Pichelmeyer> - Nice, same here.
+    <Jake Pichelmeyer> - If you like bluffing I have to tell you this
+    <Jake Pichelmeyer> - At the NR tournament yesterday
+    <Jake Pichelmeyer> - I forfeited my first corp draw and drew my second hand
+    <Jake Pichelmeyer> - I had 3/5 agendas
+    <Jake Pichelmeyer> - first auto draw I drew an agenda
+    <Paul Heaver> - of course
+    <Jake Pichelmeyer> - I managed to score 5 agenda points before he scored a single point
+    <Jake Pichelmeyer> - just by bluffing
+    <Jake Pichelmeyer> - he had 40 money at one point I think
+    <Paul Heaver> - geez
+    <Jake Pichelmeyer> - I did the same in several other games, a heavily iced remote
+    <Jake Pichelmeyer> - and I put out an agenda without ice
+    <Jake Pichelmeyer> - It's like no one can believe you would be so crazy so they don't even bother
+    <Jake Pichelmeyer> - Great fun
+    <Paul Heaver> - Man, that should only work once. :)
+    <Jake Pichelmeyer> - Indeed
+    <Jake Pichelmeyer> - So anyway, you'll fly your modified worlds build?
+    <Jake Pichelmeyer> - Any preference on what I fly? It's more practice for you at this point
+    <Jake Pichelmeyer> - Since your tournament is closer
+    <Paul Heaver> - because after that, your opponent is going to say, "can you believe what this guy did?" and you won't be able to do it for the rest of the day. :)  Sure.  I'll fly the mod-Worlds.
+    <Paul Heaver> - I don't particularly care what you run.  I expect to see a mix of everything.
+    <Paul Heaver> - no one in our meta tends to stick to any particular build.
+    <Deadshane> - where is your tourney paul?  Hope you guys don't mind me jumping on your conversation....
+    <Jake Pichelmeyer> - np here
+    <Paul Heaver> - no, it's fine.  Ashburn, VA on Thursday
+    <Paul Heaver> - Like 10min from my house
+    <Jake Pichelmeyer> - I'll do that other Biggs build then
+    <Paul Heaver> - ooh, the mirrorish match. :)
+     - Loading IsThisADagger.vlog ...
+     - Loaded IsThisADagger.vlog: 100
+    <Deadshane> - that's not the charity event is it?
+     - Bad Data in Module: Image not found Up-Cluster_Missiles.png
+     - Bad Data in Module: Image not found Up-Assault_Missiles.png
+     - Bad Data in Module: Image not found Up-Seismic_Charges.png
+     - Bad Data in Module: Image not found Up-Squad_Leader.png
+     - Bad Data in Module: Image not found Pilot-Backstabber.png
+     - Bad Data in Module: Image not found Pilot_Captain_Jonus.png
+     - Bad Data in Module: Image not found Pilot_Gamma_Squadron.png
+     - Bad Data in Module: Image not found Move-wheel_Back.png
+     - Bad Data in Module: Image not found Move-wheel.png
+     - Bad Data in Module: Image not found Up-Advanced-Sensors.png
+     - Bad Data in Module: Image not found Up-R2-D2.png
+     - Bad Data in Module: Image not found Up-Shield_Upgrade.png
+     - Bad Data in Module: Image not found Pilot-Rookie_Pilot.png
+     - Bad Data in Module: Image not found Pilot-Biggs_Darklighter.png
+     - Bad Data in Module: Image not found Pilot_Blue_Squadron.png
+    <Paul Heaver> - I don't think so, it's a store champ
+    <Paul Heaver> - also, you built that pre5.0, Jake?
+    <Jake Pichelmeyer> - yes
+    <Paul Heaver> - That explains the errors
+    <Jake Pichelmeyer> - looks like the base stats can still be modded so I think we are okay
+    <Jake Pichelmeyer> - just one second on the ID tagging
+    <Paul Heaver> - I'm still wondering what's up with that ORS, 2xBlue, A-Wing build you are playing around with. :)
+    <Jake Pichelmeyer> - Oh, "Sensor Jammin'  "
+    <Jake Pichelmeyer> - Block with ORS-APL and Proto
+    <Deadshane> - Variation on Rebel Convoy?
+    <Jake Pichelmeyer> - Jam the shots
+    <Paul Heaver> - With more punch and less ion
+    <Jake Pichelmeyer> - I've denied 12+ damage with SJ in a few matches
+    <Jake Pichelmeyer> - But AdvS and Kyle kills it
+    <Jake Pichelmeyer> - I'm at 100 points, you?
+    <Paul Heaver> - yeah, good thing Advanced Sensors is so rarely used mowadays </sarcasm>.  Yup, 100
+    <Paul Heaver> - so dice for eyeballs?
+    <Paul Heaver> - I love the setup box button they added in 5.0
+    <Jake Pichelmeyer> - most eyeballs picks?
+    <Paul Heaver> - sure
+    <Jake Pichelmeyer> - k, 3 attack each I guess?
+    <Paul Heaver> - ok
+    * *** Jake Pichelmeyer Rolls to Attack: [Crit], [Blank], [Focus], [], [], [], [] ***
+    <Jake Pichelmeyer> - 1
+    <Paul Heaver> - ok
+    <Paul Heaver> - so you
+    <Jake Pichelmeyer> - Taking initiative, placing first asteroid
+     - Bad Data in Module: Image not found move_2_B.png
+     - Bad Data in Module: Image not found move_1_T.png
+     - Bad Data in Module: Image not found move_1_S.png
+     - Bad Data in Module: Image not found move_2_S.png
+    <Paul Heaver> - ok.  I'm logging this btw.
+    <Jake Pichelmeyer> - Same
+    <Jake Pichelmeyer> - Do you have an edge preference?
+    <Paul Heaver> - which sides you want?  Left/right?
+    <Paul Heaver> - I prefer not right
+    <Paul Heaver> - left, bottom, or top is fine
+    <Jake Pichelmeyer> - Okay, you take bottom, I'll take the top edge
+    <Paul Heaver> - ok
+    <Jake Pichelmeyer> - placing first asteroid
+    <Jake Pichelmeyer> - Set
+    <Paul Heaver> - ok
+    <Jake Pichelmeyer> - set
+    <Jake Pichelmeyer> - Paul, what did you fly at Nationals last year?
+    <Paul Heaver> - set
+    <Jake Pichelmeyer> - You had at least one A-Wing if I remember right?
+    <Paul Heaver> - Wedge, Garvin, Biggs, Proto
+    <Paul Heaver> - Wedge had swarm
+    <Paul Heaver> - I think that was 100
+    <Paul Heaver> - You crushed me
+    <Paul Heaver> - like a bug
+    <Paul Heaver> - :)
+    <Jake Pichelmeyer> - :P Only for you to be reborn from the ashes
+    <Jake Pichelmeyer> - set
+    <Paul Heaver> - ok
+    <Paul Heaver> - your 2s, my 2 and 4s, your 5, my 5
+    <Jake Pichelmeyer> - Placing 2s
+    <Paul Heaver> - man, everyone's doing a pinwheel formation nowadays
+    <Jake Pichelmeyer> - :P
+    <Jake Pichelmeyer> - set with all, your go
+    <Deadshane> - See...and this is why I'm watching you guys.  I'm like...."pinwheel formation"?  I need to play more.
+    <Jake Pichelmeyer> - I'm not sure it's suited to a Biggs+3, but it's all about experimentation
+    <Paul Heaver> - I'm going with the old standby
+    <El Zorro> - i like a row of 4 with biggs at the edge (wall)
+    <Paul Heaver> - ok all set
+    <Jake Pichelmeyer> - set here, Good luck you Paul and have fun :) I'm excited for this match :)
+    <Paul Heaver> - thanks, you too!
+    <Paul Heaver> - all set
+    <Jake Pichelmeyer> - set
+    <Jake Pichelmeyer> - going with 2s
+    * --- Blue (J3) performs move: 1 - Forward
+    * --- Rookie 1 (J1) performs move: 1 - Forward
+    * --- Rookie 2 (J2) performs move: 1 - Forward
+     - Bad Data in Module: Image not found Action-target_Lock.png
+    <Paul Heaver> - those focuses will definitely matter. :)
+    <Paul Heaver> - my 2 and 4's
+    * --- Rebel Op () performs move: 3 - Forward
+    <Jake Pichelmeyer> - yeah, you know the drill :P your go
+    * --- Dagger 1 () performs move: 2 - Forward
+    * --- Dagger 2 () performs move: 2 - Forward
+    <Paul Heaver> - I really need to premeasure the barrel roll on setup.  Ok
+    * --- Biggs (J4) performs move: 1 - Forward
+    <Jake Pichelmeyer> - your go
+    * --- Biggs () performs move: 3 - Forward
+    <Paul Heaver> - back to dials
+    <Paul Heaver> - I'm set
+    <Jake Pichelmeyer> - set, going with 2s
+    * --- Blue (J3) performs move: 3 - Forward
+    * --- Rookie 1 (J1) performs move: 3 - Forward
+    * --- Rookie 2 (J2) performs move: 3 - Forward
+    <Jake Pichelmeyer> - set
+    * --- Rebel Op () performs move: 3 - Forward
+    * --- Dagger 1 () performs move: 3 - Forward
+    * --- Dagger 2 () performs move: 3 - Forward
+    <Jake Pichelmeyer> - copy cat
+    <Paul Heaver> - ugh, d2 is a little off from where I'd like to be
+    <Paul Heaver> - oh well
+    <Paul Heaver> - they focus I guess
+    <Jake Pichelmeyer> - if you really want to move him in line you can
+    <Paul Heaver> - stupid big rock
+    <Paul Heaver> - no, I want him half a ship forward. :)
+    <Jake Pichelmeyer> - oh, I see
+    <Jake Pichelmeyer> - nm then
+    <Jake Pichelmeyer> - the real Biggs is up
+    * --- Biggs (J4) performs move: 3 - Forward
+    <Jake Pichelmeyer> - now this is interesting
+    * --- Biggs () performs move: 3 - Forward
+    <Jake Pichelmeyer> - these are 4.6.0 bases so they don't have the movement hotkeys linked to them
+    <Paul Heaver> - ok, interesting
+    <Jake Pichelmeyer> - well now I know to switch that out
+    <Jake Pichelmeyer> - no shots, clear actions, back to dials
+    <Paul Heaver> - all set
+    <Jake Pichelmeyer> - set, going with 2s
+    * --- Blue (J3) performs move: 3 - Forward
+    * --- Rookie 1 (J1) performs move: 3 - Forward
+    * --- Rookie 2 (J2) performs move: 3 - Forward
+    <Jake Pichelmeyer> - set
+    <Paul Heaver> - I fear no asteroids, prefocusing
+    * --- Rebel Op () performs move: 2 - Right Turn
+    * --- Dagger 1 () performs move: 2 - Right Turn
+    * --- Dagger 2 () performs move: 2 - Right Turn
+    <Paul Heaver> - wow, did I miss the rock?
+    <Jake Pichelmeyer> - sure did
+    <Jake Pichelmeyer> - nice job
+    <Paul Heaver> - nice, I expected to land on it since it didn't matter
+    <Paul Heaver> - ok your biggs
+    * --- Biggs (J4) performs move: 2 - Forward
+    <Jake Pichelmeyer> - set
+    * --- Biggs () performs move: 2 - Right Turn
+    <Paul Heaver> - no shots. :)
+    <Jake Pichelmeyer> - clear actions, back to dials, the fun is coming up
+    <Paul Heaver> - ok all set
+    <Jake Pichelmeyer> - I don't think this will go well, but let's try anyway :)
+    <Jake Pichelmeyer> - Going with 2s
+    * --- Rookie 1 (J1) performs move: 3 - Right Turn
+    * --- Rookie 2 (J2) performs move: 3 - Right Turn
+    <Jake Pichelmeyer> - scratch that, check for TLs
+    <Paul Heaver> - ok
+    <Jake Pichelmeyer> - focus it is
+    * --- Blue (J3) performs move: 2 - Right Turn
+    <Jake Pichelmeyer> - set
+    * --- Rebel Op () performs move: 1 - Forward
+    <Paul Heaver> - I'll check TL too!
+    * --- Dagger 1 () performs move: 1 - Forward
+    * --- Dagger 2 () performs move: 1 - Forward
+    <Paul Heaver> - ok
+    * --- Biggs (J4) performs move: 2 - Right Turn
+    * --- Biggs () performs move: 1 - Forward
+    <Jake Pichelmeyer> - focus for a boring turn
+    <Jake Pichelmeyer> - back to it
+    <Paul Heaver> - I was thinking the 3 forwards would just get my daggers shot up
+    <Jake Pichelmeyer> - I don't see anything wrong with that :P
+    <Paul Heaver> - ok
+    <Jake Pichelmeyer> - Okay, let's go with this. Going with 2s
+    * --- Blue (J3) performs move: 3 - Forward
+    <Jake Pichelmeyer> - TL Biggs
+    * --- Rookie 1 (J1) performs move: 2 - Forward
+    * --- Rookie 2 (J2) performs move: 2 - Forward
+    <Jake Pichelmeyer> - set
+    * --- Rebel Op () performs move: 2 - Right Bank
+    <Paul Heaver> - prefocus
+    * --- Dagger 2 () performs move: 2 - Forward
+    <Paul Heaver> - bumps
+    * --- Dagger 1 () performs move: 2 - Forward
+    <Paul Heaver> - ok
+    * --- Biggs (J4) performs move: 1 - Forward
+    * --- Biggs () performs move: 2 - Forward
+    <Paul Heaver> - your biggs
+    <Jake Pichelmeyer> - 3v3 Biggs to Biggs
+    * *** Jake Pichelmeyer Rolls to Attack: [Blank], [Hit], [Blank], [], [], [], [] ***
+    <Jake Pichelmeyer> - 1h
+    * *** Paul Heaver Rolls to Defend: [Blank], [Focus], [Evade], [], [], [], [] ***
+    <Paul Heaver> - dodged
+    <Paul Heaver> - your biggs has everyone on a leash right?
+    <Jake Pichelmeyer> - looks like it
+    <Paul Heaver> - rookie 1 was almost out! :)
+    <Paul Heaver> - ok, we shoot up biggs
+    <Jake Pichelmeyer> - yeah, that was a gamble
+    <Paul Heaver> - 3v3 from my biggs
+    * *** Paul Heaver Rolls to Attack: [Blank], [Focus], [Hit], [], [], [], [] ***
+    <Paul Heaver> - um
+    <Paul Heaver> - I'll save it
+    * *** Jake Pichelmeyer Rolls to Defend: [Focus], [Blank], [Evade], [], [], [], [] ***
+    <Jake Pichelmeyer> - evaded
+    <Paul Heaver> - 3v3 d1
+    * *** Paul Heaver Rolls to Attack: [Hit], [Hit], [Crit], [], [], [], [] ***
+    <Paul Heaver> - 2h1c
+    <Jake Pichelmeyer> - can't argue with that
+    * *** Jake Pichelmeyer Rolls to Defend: [Evade], [Focus], [Evade], [], [], [], [] ***
+    <Jake Pichelmeyer> - thinking...
+    <Jake Pichelmeyer> - keep focus, lose 1 shield
+    <Paul Heaver> - ok
+    <Paul Heaver> - 3v2
+    * *** Paul Heaver Rolls to Attack: [Hit], [Focus], [Hit], [], [], [], [] ***
+    <Paul Heaver> - focus 3h
+    * *** Jake Pichelmeyer Rolls to Defend: [Blank], [Evade], [], [], [], [], [] ***
+    <Jake Pichelmeyer> - lose 2 shields
+    <Paul Heaver> - your 2's
+    <Paul Heaver> - I was considering moving 1 and hanging that rebel op left
+    <Jake Pichelmeyer> - that's the move I thought most probable
+    <Jake Pichelmeyer> - but we'll see what you make of it
+    <Jake Pichelmeyer> - 1 of the Rookies to Biggs 3v3
+    * *** Jake Pichelmeyer Rolls to Attack: [Blank], [Focus], [Focus], [], [], [], [] ***
+    <Jake Pichelmeyer> - focus 2h
+    * *** Paul Heaver Rolls to Defend: [Blank], [Blank], [Blank], [], [], [], [] ***
+    <Paul Heaver> - no biggs!
+    <Paul Heaver> - it's worlds all over again. :)
+    <Jake Pichelmeyer> - :P
+    <Jake Pichelmeyer> - next rookie
+    * *** Jake Pichelmeyer Rolls to Attack: [Blank], [Hit], [Focus], [], [], [], [] ***
+    <Jake Pichelmeyer> - bleh, focus 2h
+    <Paul Heaver> - I have 3 evade?
+    <Jake Pichelmeyer> - yes
+    * *** Paul Heaver Rolls to Defend: [Blank], [Blank], [Focus], [], [], [], [] ***
+    <Paul Heaver> - ugh
+    <Paul Heaver> - sure focus
+    <Jake Pichelmeyer> - no ugh's from you Mr All Hits From Daggers :P
+    <Jake Pichelmeyer> - 3v2 Blue Biggs
+    <Paul Heaver> - hey you can roll dodges. :)
+    * *** Jake Pichelmeyer Rolls to Attack: [Blank], [Focus], [Focus], [], [], [], [] ***
+    <Paul Heaver> - so I need a dodge here
+    <Jake Pichelmeyer> - TL for a "bigg" roll
+    <Paul Heaver> - oh yeah
+    <Paul Heaver> - you TLed
+    * *** Jake Pichelmeyer Re-Rolls Attack Die 1 [Blank] and gets a [Hit] ***
+    * *** Jake Pichelmeyer Re-Rolls Attack Die 2 [Focus] and gets a [Focus] ***
+    * *** Jake Pichelmeyer Re-Rolls Attack Die 3 [Focus] and gets a [Crit] ***
+    <Jake Pichelmeyer> - 1h1c
+    <Paul Heaver> - still need a dodge here, pref 2
+    * *** Paul Heaver Rolls to Defend: [Blank], [Evade], [], [], [], [], [] ***
+    <Paul Heaver> - ok, crit happens, let's see what it is.
+    <Paul Heaver> - I call dibbs on rebel deck
+    <Jake Pichelmeyer> - come on DC....give me love
+    <Jake Pichelmeyer> - all yours
+    <Paul Heaver> - woo!
+    <Jake Pichelmeyer> - :P
+    <Jake Pichelmeyer> - ion time
+    <Paul Heaver> - biggs it is
+    <Paul Heaver> - 3v2
+    * *** Paul Heaver Rolls to Attack: [Hit], [Focus], [Hit], [], [], [], [] ***
+    <Paul Heaver> - focus to guarantee ion
+    <Jake Pichelmeyer> - auto ion
+    <Paul Heaver> - no green move for you!
+    <Jake Pichelmeyer> - :P
+    <Paul Heaver> - he's down to 2 hull now right?
+    <Jake Pichelmeyer> - yes
+    <Paul Heaver> - ok
+    <Jake Pichelmeyer> - It's always painful going from a TIE Swarm to Xs/Bs as far as their manevuerability
+    <Jake Pichelmeyer> - going with 2s
+    <Paul Heaver> - haha, yeah but you have triple the health almost. :)
+    * --- Rookie 1 (J1) performs move: 1 - Right Bank
+    <Jake Pichelmeyer> - TL Biggs
+    <Jake Pichelmeyer> - scratch
+    <Jake Pichelmeyer> - focus
+    <Jake Pichelmeyer> - AdvS focus
+    <Jake Pichelmeyer> - set
+    <Paul Heaver> - blah, I shouldn't have tried what I did with biggs
+    <Paul Heaver> - oh well
+    * --- Rebel Op () performs move: 2 - Left Turn
+    <Paul Heaver> - prefocus
+    * --- Dagger 1 () performs move: 1 - Right Bank
+    <Paul Heaver> - I think I hit the blue first?
+    <Jake Pichelmeyer> - I think so
+    <Paul Heaver> - or should i turn more right?
+    <Jake Pichelmeyer> - that's fine
+    * --- Biggs () performs move: 3 - Left Turn
+    <Paul Heaver> - whee!
+    <Jake Pichelmeyer> - :)
+    <Paul Heaver> - let's see how your naked roll is
+    <Jake Pichelmeyer> - Indeed, 3v2
+    * *** Jake Pichelmeyer Rolls to Attack: [Focus], [Hit], [Focus], [], [], [], [] ***
+    <Jake Pichelmeyer> - bleh
+    * *** Paul Heaver Rolls to Defend: [Blank], [Focus], [], [], [], [], [] ***
+    <Paul Heaver> - foicus to live
+    <Paul Heaver> - my biggs has no shot. :)
+    <Jake Pichelmeyer> - Dagger Time
+    <Jake Pichelmeyer> - Like Hammer Time but more painful
+    <Paul Heaver> - man is that r2?
+    <Jake Pichelmeyer> - Zoom says yes
+    <Paul Heaver> - looks like 2 to me
+    <Paul Heaver> - oh well 3v2
+    * *** Paul Heaver Rolls to Attack: [Hit], [Crit], [Hit], [], [], [], [] ***
+    <Paul Heaver> - die!
+    <Jake Pichelmeyer> - 9/64 to have a chance here...
+    * *** Jake Pichelmeyer Rolls to Defend: [Evade], [Blank], [], [], [], [], [] ***
+    <Jake Pichelmeyer> - nope
+    <Paul Heaver> - I'm liking the rebel op
+    <Paul Heaver> - he's doing good work
+    <Paul Heaver> - d2 will fire at...
+    <Jake Pichelmeyer> - definitely a nice little mini counter to R2D2 Biggs
+    <Paul Heaver> - well, it's good against B-Wings in general too. :)
+    <Paul Heaver> - let's see if we can help biggs
+    <Paul Heaver> - rookie 2
+    <Paul Heaver> - 4v2
+    * *** Paul Heaver Rolls to Attack: [Hit], [Blank], [Blank], [Hit], [], [], [] ***
+    <Paul Heaver> - 2h
+    * *** Jake Pichelmeyer Rolls to Defend: [Evade], [Focus], [], [], [], [], [] ***
+    <Jake Pichelmeyer> - lose 1 shield
+    <Jake Pichelmeyer> - okay, Rookie 1 on Biggs, 3v3 through the asteroid, let's see if we get lucky
+    <Paul Heaver> - ok
+    * *** Jake Pichelmeyer Rolls to Attack: [Focus], [Hit], [Focus], [], [], [], [] ***
+    <Jake Pichelmeyer> - focus 3h
+    <Paul Heaver> - ok 3 natural evades coming up
+    * *** Paul Heaver Rolls to Defend: [Evade], [Evade], [Focus], [], [], [], [] ***
+    * *** Jake Pichelmeyer turns Attack Die 1 [Focus] into a [Hit] ***
+    * *** Jake Pichelmeyer turns Attack Die 3 [Focus] into a [Hit] ***
+    <Paul Heaver> - almost!
+    <Jake Pichelmeyer> - Sweet Justice!
+    <Jake Pichelmeyer> - Blue on Dagger 2 4v1
+    * *** Jake Pichelmeyer Rolls to Attack: [Hit], [Blank], [Hit], [Hit], [], [], [] ***
+    <Jake Pichelmeyer> - 3h
+    * *** Paul Heaver Rolls to Defend: [Evade], [], [], [], [], [], [] ***
+    <Jake Pichelmeyer> - same from Rookie 2
+    * *** Jake Pichelmeyer Rolls to Attack: [Hit], [Hit], [Hit], [Hit], [], [], [] ***
+    <Paul Heaver> - ouch!
+    <Jake Pichelmeyer> - nice job, little guy
+    * *** Paul Heaver Rolls to Defend: [Focus], [], [], [], [], [], [] ***
+    <Paul Heaver> - focus to lose my shields
+    <Paul Heaver> - ok ion time
+    <Paul Heaver> - blue
+    <Jake Pichelmeyer> - okay, the mini-Blinded Pilot cannon
+    * *** Paul Heaver Rolls to Attack: [Blank], [Crit], [Blank], [], [], [], [] ***
+    <Paul Heaver> - wow
+    <Paul Heaver> -
+    <Jake Pichelmeyer> - okay, 5/8, baby
+    * *** Jake Pichelmeyer Rolls to Defend: [Blank], [], [], [], [], [], [] ***
+    <Paul Heaver> - yay!
+    <Jake Pichelmeyer> - bleh :P
+    <Jake Pichelmeyer> - that would have been pretty significant I think
+    <Paul Heaver> - oh yes
+    <Paul Heaver> - he did lose a shield too. :)
+    <Jake Pichelmeyer> - oh yeah, thank you :)
+    <Jake Pichelmeyer> - here comes the "always focused, firing before Rookie" AdvS Rookie stomp :)
+    <Paul Heaver> - it's fairly even on health right now, but the PS bonus will definitely help me
+    <Jake Pichelmeyer> - set
+    <Paul Heaver> - .,me too
+    <Jake Pichelmeyer> - going with 2s, big round
+    <Jake Pichelmeyer> - J2 stalls on Blue
+    * --- Rookie 1 (J1) performs move: 4 - Forward
+    * --- Rookie 1 (J1) performs move: 4 - Koiogran
+    <Jake Pichelmeyer> - AdvS for focus on Blue, then bump to stall
+    <Jake Pichelmeyer> - set
+    * --- Rebel Op () performs move: 2 - Right Turn
+    <Paul Heaver> - pre barrel roll time
+    * --- Dagger 1 () performs move: 2 - Forward
+    * --- Dagger 1 () performs move: 2 - Koiogran
+    * --- Dagger 2 () performs move: 1 - Left Turn
+    <Paul Heaver> - ok?
+    <Jake Pichelmeyer> - looks good
+    <Jake Pichelmeyer> - Biggs, the B-Wing delivery system
+    <Jake Pichelmeyer> - Dagger shots
+    <Paul Heaver> - D2 first
+    <Paul Heaver> - r1 on blue 4v1
+    * *** Paul Heaver Rolls to Attack: [Blank], [Focus], [Blank], [Blank], [], [], [] ***
+    <Paul Heaver> - miss
+    <Paul Heaver> - d1 on blue
+    <Paul Heaver> - 4v1
+    * *** Paul Heaver Rolls to Attack: [Hit], [Focus], [Focus], [Hit], [], [], [] ***
+    <Paul Heaver> - 2h
+    * *** Jake Pichelmeyer Rolls to Defend: [Focus], [], [], [], [], [], [] ***
+    <Jake Pichelmeyer> - focus for 1 shield
+    <Jake Pichelmeyer> - that could have been much worse
+    <Paul Heaver> - yup!
+    <Jake Pichelmeyer> - that Rookie actually did do some action denial then
+    <Paul Heaver> - I should have done the 2 turn with d2
+    <Paul Heaver> - oh well
+    <Jake Pichelmeyer> - now's the time the learn, as you know
+    <Jake Pichelmeyer> - 3v1 Rookie on Dagger, hail mary
+    <Paul Heaver> - I was wondering if you were going to stall or K both
+    * *** Jake Pichelmeyer Rolls to Attack: [Blank], [Blank], [Hit], [], [], [], [] ***
+    <Jake Pichelmeyer> - 1h
+    * *** Paul Heaver Rolls to Defend: [Blank], [], [], [], [], [], [] ***
+    <Paul Heaver> - good enough
+    <Jake Pichelmeyer> - I can't complain about that, Ion time
+    <Paul Heaver> - on the blue again
+    <Paul Heaver> -
+    <Paul Heaver> - 3v1
+    * *** Paul Heaver Rolls to Attack: [Hit], [Blank], [Focus], [], [], [], [] ***
+    <Paul Heaver> - focus to guarantee
+    <Jake Pichelmeyer> - ioned again
+    <Jake Pichelmeyer> - lost 1 shield
+    <Jake Pichelmeyer> - back to dials
+    <Paul Heaver> - Rebel Op / Ion is the 21 point B-Wing Dream Crusher
+    <Jake Pichelmeyer> - yeah, I was skeptical about the switch, but I think it's for the better
+    <Jake Pichelmeyer> - the Rookie is just a thug, but the RO is a professional
+    <Jake Pichelmeyer> - might struggle against YTs and TIEs, though
+    <Jake Pichelmeyer> - YTs at range 3, that is
+    <Paul Heaver> - true
+    <Jake Pichelmeyer> - I think dual falcons on the run might give this some trouble?
+    <Paul Heaver> - You know, I haven't played against dual falcons in forever
+    <Jake Pichelmeyer> - If you want the practice, I'll play it against you. I'm trying to learn how the list ticks
+    <Jake Pichelmeyer> - next time if we get to it
+    <Paul Heaver> - that'd be fun
+    <Jake Pichelmeyer> - set
+    <Paul Heaver> - me too
+    <Jake Pichelmeyer> - going with 2s
+    * --- Rookie 2 (J2) performs move: 4 - Forward
+    * UNDO: * --- Rookie 2 (J2) performs move: 4 - Forward
+    * --- Rookie 2 (J2) performs move: 4 - Forward
+    * --- Rookie 2 (J2) performs move: 4 - Koiogran
+    * --- Rookie 1 (J1) performs move: 2 - Forward
+    <Jake Pichelmeyer> - AdvS focus and bump
+    <Jake Pichelmeyer> - dry
+    * --- Rebel Op () performs move: 2 - Right Turn
+    * --- Dagger 2 () performs move: 1 - Left Bank
+    <Paul Heaver> - nooooo
+    <Paul Heaver> - that was going to be awesome with the barrel roll right
+    <Jake Pichelmeyer> - it will live on in our imaginations
+    <Paul Heaver> - so how does this work?  I don't hit you until I turn in more?  or do I move back and clip the corner?
+    <Jake Pichelmeyer> - I thnk the turn is what causes the overlap, so how you originally had it
+    <Paul Heaver> - like that?  Sideswipe?
+    <Jake Pichelmeyer> - looks good to me
+    <Paul Heaver> - he's so dead
+    <Paul Heaver> - definitely should've 2 turned last turn :)
+    * --- Dagger 1 () performs move: 1 - Left Bank
+    <Paul Heaver> - ok
+    <Jake Pichelmeyer> - I think it is my primary goal to get to do a K-turn with that B-Wing before he dies an ion-y death
+    <Paul Heaver> - d2 no shot
+    <Paul Heaver> - d1 on...
+    <Paul Heaver> - hmm split dmg some more?  sound terrible
+    <Paul Heaver> - rookie 2 has a rock too
+    <Paul Heaver> - ugh!
+    <Paul Heaver> - screw it, rookie 1 gets shot
+    <Jake Pichelmeyer> - k, 4v2
+    * *** Paul Heaver Rolls to Attack: [Blank], [Focus], [Hit], [Crit], [], [], [] ***
+    <Paul Heaver> - 1h1c
+    * *** Jake Pichelmeyer Rolls to Defend: [Evade], [Evade], [], [], [], [], [] ***
+    <Paul Heaver> - haha it wouldn't have mattered much
+    <Jake Pichelmeyer> - I swear I was just thinking, "if that is 2 evade, I will sort of feel bad" :P
+    <Paul Heaver> - nah, it's all good
+    <Jake Pichelmeyer> - 2s firing
+    <Jake Pichelmeyer> - Rookie 1 on Dagger 2, 4v1
+    * *** Jake Pichelmeyer Rolls to Attack: [Focus], [Crit], [Focus], [Blank], [], [], [] ***
+    <Jake Pichelmeyer> - focus, 2h1c
+    <Paul Heaver> - he dies
+    <Jake Pichelmeyer> - Rookie 2 to Dagger, 3v2 through Asteroidd
+    * *** Jake Pichelmeyer Rolls to Attack: [Focus], [Crit], [Focus], [], [], [], [] ***
+    <Jake Pichelmeyer> - 1c
+    * *** Paul Heaver Rolls to Defend: [Blank], [Blank], [], [], [], [], [] ***
+    <Paul Heaver> - blargh
+    <Paul Heaver> - ion that guy again
+    * *** Paul Heaver Rolls to Attack: [Focus], [Blank], [Blank], [], [], [], [] ***
+    <Paul Heaver> - focus for 1
+    <Paul Heaver> - wow
+    * *** Jake Pichelmeyer Rolls to Defend: [Evade], [], [], [], [], [], [] ***
+    <Paul Heaver> - nooooo
+    <Jake Pichelmeyer> - he's broken free!
+    <Paul Heaver> - this was a bad round for me
+    <Jake Pichelmeyer> - definitely
+    <Jake Pichelmeyer> - but you know as good as anyone that anything can still happen
+    <Jake Pichelmeyer> - dial time
+    <Paul Heaver> - ok
+    <Jake Pichelmeyer> - set, going with all
+    * --- Rookie 1 (J1) performs move: 4 - Forward
+    * --- Rookie 1 (J1) performs move: 4 - Koiogran
+    <Jake Pichelmeyer> - AdvS focus
+    * --- Blue (J3) performs move: 2 - Forward
+    * --- Rookie 2 (J2) performs move: 1 - Right Bank
+    <Jake Pichelmeyer> - TL on RO with Rookie 2
+    <Jake Pichelmeyer> - set
+    * --- Rebel Op () performs move: 3 - Forward
+    <Paul Heaver> - prefocus
+    * --- Dagger 1 () performs move: 1 - Forward
+    <Paul Heaver> - hmm
+    <Jake Pichelmeyer> - your shot
+    <Paul Heaver> - 4 dice vs someone
+    <Paul Heaver> - rookie
+    <Paul Heaver> - I want to get lucky and blow him up
+    * *** Paul Heaver Rolls to Attack: [Blank], [Focus], [Hit], [Focus], [], [], [] ***
+    <Paul Heaver> - focus 3h
+    * *** Jake Pichelmeyer Rolls to Defend: [Evade], [Blank], [], [], [], [], [] ***
+    <Jake Pichelmeyer> - lose 1 shield and 1 hull
+    <Paul Heaver> - man I can't even ion kill him
+    <Jake Pichelmeyer> - 3v1 on Dagger with Rookie
+    * *** Jake Pichelmeyer Rolls to Attack: [Blank], [Blank], [Hit], [], [], [], [] ***
+    <Jake Pichelmeyer> - 1h
+    * *** Paul Heaver Rolls to Defend: [Evade], [], [], [], [], [], [] ***
+    <Paul Heaver> - whoosh
+    <Jake Pichelmeyer> - 4v1 Blue to Dagger
+    * *** Jake Pichelmeyer Rolls to Attack: [Hit], [Hit], [Hit], [Blank], [], [], [] ***
+    <Jake Pichelmeyer> - 3h
+    * *** Paul Heaver Rolls to Defend: [Blank], [], [], [], [], [], [] ***
+    <Paul Heaver> - no whoosh
+    <Jake Pichelmeyer> - 3v2 Rookie to Rebel Op
+    * *** Jake Pichelmeyer Rolls to Attack: [Hit], [Hit], [Hit], [], [], [], [] ***
+    <Jake Pichelmeyer> - 3h
+    * *** Paul Heaver Rolls to Defend: [Evade], [Evade], [], [], [], [], [] ***
+    <Paul Heaver> - loses his shield
+    <Jake Pichelmeyer> - his shot
+    <Paul Heaver> - he will ion
+    <Paul Heaver> - ...
+    <Paul Heaver> - if blue is in range, blue
+    <Jake Pichelmeyer> - I call nope
+    <Paul Heaver> - you are correct
+    <Paul Heaver> - rookie 1 then
+    * *** Paul Heaver Rolls to Attack: [Focus], [Focus], [Hit], [], [], [], [] ***
+    <Paul Heaver> - focus to auto
+    <Jake Pichelmeyer> - lose 1 shield, keep stress next turn
+    <Paul Heaver> - I love spreading dmg! :)
+    <Jake Pichelmeyer> - it's the best way to win
+    <Jake Pichelmeyer> - er... :P
+    <Jake Pichelmeyer> - dial time
+    <Paul Heaver> - I'm good
+    <Paul Heaver> - I'm thinking next time, I TL the B-Wing and keep that in my pocket for when I screw up an ion roll
+    <Jake Pichelmeyer> - set, going with all
+    * --- Rookie 2 (J2) performs move: 1 - Right Bank
+    * --- Blue (J3) performs move: 1 - Right Bank
+    * --- Rookie 1 (J1) performs move: 1 - Forward
+    <Jake Pichelmeyer> - set
+    <Paul Heaver> - arg, I didn't K turn because you could have stopped it
+    <Paul Heaver> - so you didn't stop it. :)
+    * --- Rebel Op () performs move: 2 - Right Bank
+    <Jake Pichelmeyer> - ; )
+    <Paul Heaver> - I guess I tl with my action
+    <Paul Heaver> - um
+    <Paul Heaver> - r2
+    * --- Dagger 1 () performs move: 2 - Left Turn
+    <Paul Heaver> - what, i fit?
+    <Paul Heaver> - uh ok
+    <Paul Heaver> - That wasn't supposed to happen
+    <Paul Heaver> - ok then
+    <Jake Pichelmeyer> - you TL'd the Blue?
+    <Paul Heaver> - shoot r2 and hope for lucky dice
+    <Paul Heaver> - yeah
+    <Jake Pichelmeyer> - k
+    <Paul Heaver> - cause I thought I would bump
+    <Paul Heaver> - and not have a shot at all this turn
+    <Paul Heaver> - well 4v2
+    * *** Paul Heaver Rolls to Attack: [Focus], [Hit], [Crit], [Blank], [], [], [] ***
+    <Paul Heaver> - 1h1v
+    * *** Jake Pichelmeyer Rolls to Defend: [Evade], [Evade], [], [], [], [], [] ***
+    <Paul Heaver> - haha
+    <Jake Pichelmeyer> - all you can do is laugh at that :P
+    <Paul Heaver> - those evade dice.
+    <Paul Heaver> - they hate me
+    <Paul Heaver> - and you clip there too
+    <Jake Pichelmeyer> - Blue on RO 3v2
+    * *** Jake Pichelmeyer Rolls to Attack: [Blank], [Blank], [Focus], [], [], [], [] ***
+    <Jake Pichelmeyer> - man, but these attack dice hate me
+    <Jake Pichelmeyer> - focus 1h
+    * *** Paul Heaver Rolls to Defend: [Blank], [Blank], [], [], [], [], [] ***
+    <Paul Heaver> - ouch
+    <Jake Pichelmeyer> - I guess they hate everyone
+    <Jake Pichelmeyer> - 4v1 on B-Wing with J1
+    * *** Jake Pichelmeyer Rolls to Attack: [Blank], [Crit], [Hit], [Blank], [], [], [] ***
+    <Jake Pichelmeyer> - 1h1c
+    * *** Paul Heaver Rolls to Defend: [Evade], [], [], [], [], [], [] ***
+    <Paul Heaver> - 1shield
+    <Jake Pichelmeyer> - 4v2 Rookie 2 to RO with focus/TL
+    * *** Jake Pichelmeyer Rolls to Attack: [Hit], [Blank], [Blank], [Hit], [], [], [] ***
+    <Paul Heaver> - this is going to suck
+    * *** Jake Pichelmeyer Re-Rolls Attack Die 2 [Blank] and gets a [Crit] ***
+    * *** Jake Pichelmeyer Re-Rolls Attack Die 3 [Blank] and gets a [Focus] ***
+    * *** Jake Pichelmeyer turns Attack Die 3 [Focus] into a [Hit] ***
+    * *** Paul Heaver Rolls to Defend: [Focus], [Evade], [], [], [], [], [] ***
+    <Paul Heaver> - focus to maybe live
+    * *** Paul Heaver Rolls to Attack: [Hit], [], [], [], [], [], [] ***
+    <Paul Heaver> - nope
+    <Paul Heaver> - he ions back
+    <Jake Pichelmeyer> - rookie 2?
+    <Paul Heaver> - nah
+    <Paul Heaver> - blue
+    <Paul Heaver> - no focus :(
+    * *** Paul Heaver Rolls to Attack: [Crit], [Hit], [Blank], [], [], [], [] ***
+    <Paul Heaver> - no matter
+    * *** Jake Pichelmeyer Rolls to Defend: [Evade], [], [], [], [], [], [] ***
+    <Jake Pichelmeyer> - lose 1 shield and ioned
+    <Jake Pichelmeyer> - dial time
+    <Paul Heaver> - DId you subtract the shield?
+    <Jake Pichelmeyer> - you are very much alive in this I think
+    <Jake Pichelmeyer> - sorry, forgot :(
+    <Paul Heaver> - I have to do 10 before taking 3, which is rough
+    <Paul Heaver> - but I think I get free beats next round
+    <Jake Pichelmeyer> - that PS is huge now
+    <Jake Pichelmeyer> - you can clobber each one in turn before they shoot
+    <Jake Pichelmeyer> - if I can finagle some decent positioning
+    <Paul Heaver> - that's the plan!
+    <Jake Pichelmeyer> - *can't
+    <Jake Pichelmeyer> - set
+    <Paul Heaver> - me too
+    <Jake Pichelmeyer> - actually, changing quick then going
+    <Jake Pichelmeyer> - B-Wing TLs Dagger
+    <Jake Pichelmeyer> - stays in place
+    <Paul Heaver> - yup
+    * --- Rookie 2 (J2) performs move: 1 - Forward
+    <Jake Pichelmeyer> - thinking...
+    <Jake Pichelmeyer> - focus
+    <Jake Pichelmeyer> - set
+    <Paul Heaver> - man, I keep choosing the wrong move
+    <Paul Heaver> - hmm
+    <Jake Pichelmeyer> - the last one didn't work out so badly
+    <Paul Heaver> - I roll
+    * --- Dagger 1 () performs move: 1 - Right Bank
+    <Paul Heaver> - I didn't pick 1 fwd and should have
+    <Paul Heaver> - oh well
+    <Jake Pichelmeyer> - yeah, it was safe no matter what I did
+    <Jake Pichelmeyer> - back to dials
+    <Jake Pichelmeyer> - set
+    <Paul Heaver> - uh oh you get to choose all your moves again!
+    <Paul Heaver> - I'm all set too
+    <Jake Pichelmeyer> - going with all
+    * --- Rookie 2 (J2) performs move: 4 - Forward
+    * --- Rookie 2 (J2) performs move: 4 - Koiogran
+    * --- Blue (J3) performs move: 1 - Right Turn
+    * --- Rookie 1 (J1) performs move: 2 - Left Turn
+    <Jake Pichelmeyer> - TL on Dagger
+    <Jake Pichelmeyer> - set
+    * --- Dagger 1 () performs move: 2 - Forward
+    * --- Dagger 1 () performs move: 2 - Koiogran
+    <Paul Heaver> - shoot blue!
+    <Paul Heaver> - 3v1
+    * *** Paul Heaver Rolls to Attack: [Blank], [Hit], [Blank], [], [], [], [] ***
+    <Paul Heaver> - tl the blanks
+    * *** Paul Heaver Re-Rolls Attack Die 1 [Blank] and gets a [Focus] ***
+    * *** Paul Heaver Re-Rolls Attack Die 3 [Blank] and gets a [Focus] ***
+    <Paul Heaver> - focus for 3h
+    * *** Jake Pichelmeyer Rolls to Defend: [Blank], [], [], [], [], [], [] ***
+    <Jake Pichelmeyer> - down to 1
+    <Paul Heaver> - If I get all your guys to 1-2 health, that's like winning
+    <Jake Pichelmeyer> - :P
+    <Paul Heaver> - this is where dagger dies
+    <Jake Pichelmeyer> - I can hope
+    <Jake Pichelmeyer> - 3v2 Rookie to Dagger
+    * *** Jake Pichelmeyer Rolls to Attack: [Focus], [Hit], [Hit], [], [], [], [] ***
+    * *** Jake Pichelmeyer Re-Rolls Attack Die 1 [Focus] and gets a [Hit] ***
+    <Jake Pichelmeyer> - 3h with TL
+    <Paul Heaver> - that's r3?
+    * *** Paul Heaver Rolls to Defend: [Blank], [Focus], [], [], [], [], [] ***
+    <Jake Pichelmeyer> - yep
+    <Paul Heaver> - i die anyway

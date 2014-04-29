@@ -3,6 +3,7 @@
 
 <b> {{ game.game_played_time }}: {{ player1 }} versus {{ player2 }}, won by {{ winner }} </b>
 
+
 <h3>Game Tape</h3>
 <p></p>
 <a href="/download-game?id={{ game.id }}">Download game as csv</a>
@@ -15,6 +16,14 @@
 .tg .tg-1bl1{background-color:#bdc3c7}
 .tg .tg-nkg8{background-color:#F0F6FA;color:#000000}
 .tg .tg-rh4c{background-color:#F0F6FA}
+.tg .tg-o1{background-color:#F8F8F8}
+.tg .tg-o2{background-color:#D0D0D0}
+.tg .tg-o3{background-color:#A8A8A8}
+.tg .tg-o4{background-color:#808080}
+.tg .tg-o5{background-color:#585858}
+.tg .tg-o6{background-color:#303030}
+
+
 </style>
 
 
@@ -44,19 +53,32 @@
 
       </tr>
     {% for rec in attack_set.records  %}
-        <td class="tg-031e">{{ rec.dice_num }}</td>
-        <td class="tg-031e"><img src={{ rec.attack_roll_as_img()  }}></td>
-        <td class="tg-031e"><img src={{ rec.attack_reroll_as_img() }}></td>
-        <td class="tg-031e"><img src={{ rec.attack_convert_as_img() }}></td>
-        <td class="tg-031e"><img src={{ rec.attack_end_as_img() }}></td>
-        <td class="tg-031e"><img src={{ rec.final_as_image() }}></td>
-        <td class="tg-031e"><img src={{ rec.defense_end_as_img() }}></td>
-        <td class="tg-031e"><img src={{ rec.defense_convert_as_img() }}></td>
-        <td class="tg-031e"><img src={{ rec.defense_reroll_as_img() }}></td>
-        <td class="tg-031e"><img src={{ rec.defense_roll_as_img() }}></td>
-        <td class="tg-031e">{{ rec.dice_num }}</td>
+        <td class="tg-o1">{{ rec.dice_num }}</td>
+        <td class="tg-o2"><img src={{ rec.attack_roll_as_img()  }}></td>
+        <td class="tg-o3"><img src={{ rec.attack_reroll_as_img() }}></td>
+        <td class="tg-o4"><img src={{ rec.attack_convert_as_img() }}></td>
+        <td class="tg-o5"><img src={{ rec.attack_end_as_img() }}></td>
+        <td class="tg-o6"><img src={{ rec.final_as_image() }}></td>
+        <td class="tg-o5"><img src={{ rec.defense_end_as_img() }}></td>
+        <td class="tg-o4"><img src={{ rec.defense_convert_as_img() }}></td>
+        <td class="tg-o3"><img src={{ rec.defense_reroll_as_img() }}></td>
+        <td class="tg-o2"><img src={{ rec.defense_roll_as_img() }}></td>
+        <td class="tg-o1">{{ rec.dice_num }}</td>
       </tr>
     {% endfor %}
+    <tr>
+        <td class="tg-01" style="border:0">score</td>
+        <td class="tg-01" style="border:0">{{ attack_set.total_attack_roll_luck() }}</td>
+        <td class="tg-01" style="border:0">{{ attack_set.total_attack_reroll_luck() }}</td>
+        <td class="tg-01" style="border:0">{{ attack_set.total_attack_convert_luck() }}</td>
+        <td class="tg-01" style="border:0">{{ attack_set.total_attack_end_luck() }}</td>
+        <td class="tg-01" style="border:0">{{ 1 }}</td>
+        <td class="tg-01" style="border:0">{{ 1 }}</td>
+        <td class="tg-01" style="border:0">{{ 1 }}</td>
+        <td class="tg-01" style="border:0">{{ 1 }}</td>
+        <td class="tg-01" style="border:0">{{ 1 }}</td>
+
+    </tr>
     </table>
   {%  endfor %}
 

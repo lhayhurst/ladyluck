@@ -17,7 +17,7 @@ class TestStats(unittest.TestCase):
         stats = LuckStats("P1")
         stats.add_dice_set(1, t)
         stats.add_defense_luck_record()
-        stats.add_attack_set_luck()
+        stats.add_throw()
         self.assertEqual( stats.last_attack_set_green_luck(), 3.375)
 
         t = AttackSet("P1", "P2")
@@ -30,7 +30,7 @@ class TestStats(unittest.TestCase):
 
         stats.add_dice_set(2, t)
         stats.add_defense_luck_record()
-        stats.add_attack_set_luck()
+        stats.add_throw()
         self.assertEqual( stats.last_attack_set_green_luck(), 2.25)
 
         t = AttackSet("P1", "P2")
@@ -43,7 +43,7 @@ class TestStats(unittest.TestCase):
 
         stats.add_dice_set(3, t)
         stats.add_defense_luck_record()
-        stats.add_attack_set_luck()
+        stats.add_throw()
         self.assertEqual( stats.last_attack_set_green_luck(), -0.375)
 
         t = AttackSet("P1", "P2")
@@ -56,7 +56,7 @@ class TestStats(unittest.TestCase):
 
         stats.add_dice_set(4, t)
         stats.add_defense_luck_record()
-        stats.add_attack_set_luck()
+        stats.add_throw()
         self.assertEqual( stats.last_attack_set_green_luck(), -0.5)
 
 
@@ -74,7 +74,7 @@ class TestStats(unittest.TestCase):
         stats = LuckStats("P1")
         stats.add_dice_set(1, t)
         stats.add_attack_luck_record()
-        stats.add_attack_set_luck()
+        stats.add_throw()
         self.assertEqual( stats.last_attack_set_red_luck(), 0)
 
         t = AttackSet("P1", "P2")
@@ -89,7 +89,7 @@ class TestStats(unittest.TestCase):
 
         stats.add_dice_set(2, t)
         stats.add_attack_luck_record()
-        stats.add_attack_set_luck()
+        stats.add_throw()
         self.assertEqual( stats.last_attack_set_red_luck(), 2.75)
 
         t = AttackSet("P1", "P2")
@@ -104,7 +104,7 @@ class TestStats(unittest.TestCase):
 
         stats.add_dice_set(3, t)
         stats.add_attack_luck_record()
-        stats.add_attack_set_luck()
+        stats.add_throw()
         self.assertEqual( stats.last_attack_set_red_luck(), 7.5)
 
         t = AttackSet("P1", "P2")
@@ -119,7 +119,7 @@ class TestStats(unittest.TestCase):
 
         stats.add_dice_set(4, t)
         stats.add_attack_luck_record()
-        stats.add_attack_set_luck()
+        stats.add_throw()
         self.assertEqual( stats.last_attack_set_red_luck(), 6.25)
 
         t = AttackSet("P1", "P2")
@@ -134,7 +134,7 @@ class TestStats(unittest.TestCase):
 
         stats.add_dice_set(5, t)
         stats.add_attack_luck_record()
-        stats.add_attack_set_luck()
+        stats.add_throw()
         self.assertEqual( stats.last_attack_set_red_luck(), 1)
 
 if __name__ == "__main__":

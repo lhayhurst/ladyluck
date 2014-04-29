@@ -104,3 +104,6 @@ margin:0.6em 0.5em 0.2em 1.5em;
 p {
 margin:1px 0.5em 0.5em 1.5em;
 }
+
+#sidebar {float: right; width: 200px; background: #eee;}
+#content {overflow: hidden; background: #dad;}

@@ -74,8 +74,27 @@ class Dice(Base):
     dice_type = Column(DiceType.db_type())
     dice_face = Column(DiceFace.db_type())
 
-    def as_image(self):
-        return DiceImage.get_image(self)
+    def is_hit(self):
+        return self.dice_face == DiceFace.HIT
+
+    def is_crit(self):
+        return self.dice_face == DiceFace.CRIT
+
+    def is_focus(self):
+        return self.dice_face == DiceFace.FOCUS
+
+    def is_blank(self):
+        return self.dice_face == DiceFace.BLANK
+
+    def is_evade(self):
+        return self.dice_face == DiceFace.EVADE
+
+    def is_attack(self):
+        return self.dice_type == DiceType.RED
+
+    def is_defense(self):
+        return self.dice_type == DiceType.GREEN
+
 
 
 class DiceThrowAdjustment(Base):
