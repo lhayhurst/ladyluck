@@ -3,6 +3,7 @@ import os
 from flask import url_for
 from parser import LogFileParser
 from persistence import Game, DiceThrowResult, DiceThrow, DiceThrowType, DiceThrowAdjustmentType, DiceFace, DiceType
+from tape_graph import TapeGraph
 from tests.persistence_tests import DatabaseTestCase
 
 __author__ = 'lhayhurst'
@@ -109,6 +110,19 @@ class Score:
     def __init__(self):
         self.red_luck   = []
         self.green_luck = []
+
+    def get_last_red_luck(self):
+        if len(self.red_luck) > 0:
+            return self.red_luck[-1]
+        else:
+            return None
+
+    def get_last_green_luck(self):
+        if len(self.green_luck) > 0:
+            return self.green_luck[-1]
+        else:
+            return None
+
 
     def eval(self, dice_type, counter):
         if dice_type == DiceType.RED:
@@ -282,6 +296,7 @@ class AttackSet:
         self.records = []
         self.attacking_player = None
         self.defending_player = None
+        self.cumulative_score = None
 
     def add_defending_throw(self, throw):
         self.defending_throw = throw
@@ -291,6 +306,13 @@ class AttackSet:
             if rec.dice_num == dice_num:
                 return rec
         return None
+
+
+    def cumulative_attack_luck(self):
+        return self.cumulative_attack_score
+
+    def cumulative_defense_luck(self):
+        return self.cumulative_defense_score
 
     def total_attack_roll_luck(self):
         return self.total_by_luck_attr("attack_roll_luck")
@@ -379,17 +401,16 @@ class AttackSet:
                 break
 
 
-    def score(self):
+    def score(self, cumulative_counter, cumulative_score):
 
-        self.roll_counter = Counter()
-        self.reroll_counter          = Counter()
-        self.convert_counter         = Counter()
-        self.end_counter             = Counter()
-        self.roll_score              = Score()
-        self.reroll_score            = Score()
-        self.convert_score           = Score()
-        self.end_score               = Score()
-
+        self.roll_counter              = Counter()
+        self.reroll_counter            = Counter()
+        self.convert_counter           = Counter()
+        self.end_counter               = Counter()
+        self.roll_score                = Score()
+        self.reroll_score              = Score()
+        self.convert_score             = Score()
+        self.end_score                 = Score()
 
         for rec in self.records:
             if rec.attack_roll is not None:
@@ -413,10 +434,15 @@ class AttackSet:
             if rec.attack_end is not None:
                 luck = self.end_score.eval( rec.attack_end.dice_type, self.end_counter.count(rec.attack_end))
                 rec.attack_end_luck = luck
+                cumulative_score.eval( rec.attack_end.dice_type, cumulative_counter.count(rec.attack_end))
+
             if rec.defense_end is not None:
                 luck = self.end_score.eval( rec.defense_end.dice_type, self.end_counter.count(rec.defense_end))
                 rec.defense_end_luck = luck
+                cumulative_score.eval( rec.defense_end.dice_type, cumulative_counter.count(rec.defense_end))
 
+        self.cumulative_attack_score = cumulative_score.get_last_red_luck()
+        self.cumulative_defense_score = cumulative_score.get_last_green_luck()
 
 class GameTape(object):
 
@@ -476,8 +502,10 @@ class GameTape(object):
             ats.net_results()
 
     def score(self):
+        cumulative_luck   = Counter()
+        cumulative_score  = Score()
         for ats in self.attack_sets:
-            ats.score()
+            ats.score(cumulative_luck, cumulative_score)
 
 
 
@@ -498,6 +526,8 @@ class GameTapeTester(unittest.TestCase):
         tape = GameTape( g )
         tape.score()
 
+        tape_graph = TapeGraph( g, tape )
+
         self.assertEqual( 4, len(tape.attack_sets) )
 
         aset = tape.attack_sets[0]
@@ -505,22 +535,28 @@ class GameTapeTester(unittest.TestCase):
         self.assertEqual( None, aset.total_attack_reroll_luck())
         self.assertEqual( .34375, aset.total_attack_convert_luck() )
         self.assertEqual( -.3125, aset.total_attack_end_luck() )
+        self.assertEqual( -.3125, aset.cumulative_attack_luck() )
 
         self.assertEqual( .3125, aset.total_defense_roll_luck() )
         self.assertEqual( None, aset.total_defense_reroll_luck())
         self.assertEqual( None, aset.total_defense_convert_luck() )
         self.assertEqual( .3125, aset.total_defense_end_luck() )
+        self.assertEqual( 0.3125, aset.cumulative_defense_luck() )
+
 
         aset = tape.attack_sets[1]
         self.assertEqual( .9375, aset.total_attack_roll_luck() )
         self.assertEqual( None, aset.total_attack_reroll_luck())
         self.assertEqual( None, aset.total_attack_convert_luck() )
         self.assertEqual( .9375, aset.total_attack_end_luck() )
+        self.assertEqual( 0.625, aset.cumulative_attack_luck() )
+
 
         self.assertEqual( 0.1875, aset.total_defense_roll_luck() )
         self.assertEqual( None, aset.total_defense_reroll_luck())
         self.assertEqual( 0.4375, aset.total_defense_convert_luck() )
         self.assertEqual( 0.4375, aset.total_defense_end_luck() )
+        self.assertEqual( 0.75, aset.cumulative_defense_luck() )
 
 
         aset = tape.attack_sets[2]
@@ -528,11 +564,14 @@ class GameTapeTester(unittest.TestCase):
         self.assertEqual( -0.3125, aset.total_attack_reroll_luck())
         self.assertEqual( 0.6875, aset.total_attack_convert_luck() )
         self.assertEqual( 0.6875, aset.total_attack_end_luck() )
+        self.assertEqual( 1.3125, aset.cumulative_attack_luck() )
+
 
         self.assertEqual( -0.1875, aset.total_defense_roll_luck() )
         self.assertEqual( 0.1875, aset.total_defense_reroll_luck())
         self.assertEqual( 1.3125, aset.total_defense_convert_luck() )
         self.assertEqual( 1.3125, aset.total_defense_end_luck() )
+        self.assertEqual( 2.0625, aset.cumulative_defense_luck() )
 
 
         aset = tape.attack_sets[3]
@@ -540,11 +579,14 @@ class GameTapeTester(unittest.TestCase):
         self.assertEqual( None, aset.total_attack_reroll_luck())
         self.assertEqual( None, aset.total_attack_convert_luck() )
         self.assertEqual( 0.59375, aset.total_attack_end_luck() )
+        self.assertEqual( 1.90625, aset.cumulative_attack_luck() )
+
 
         self.assertEqual( -0.9375, aset.total_defense_roll_luck() )
         self.assertEqual( None, aset.total_defense_reroll_luck())
         self.assertEqual(0.4375, aset.total_defense_convert_luck() )
         self.assertEqual( -0.6875, aset.total_defense_end_luck() )
+        self.assertEqual( 1.375, aset.cumulative_defense_luck() )
 
 
 if __name__ == "__main__":

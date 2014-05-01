@@ -26,12 +26,51 @@
 
 </style>
 
+{#
+<table class="tg" style="position: fixed; margin-left: -140px; background-color: #fff; top: 97px">
+
+
+    {%  for attack_set in game_tape.attack_sets %}
+    <tr>
+       <td>
+            <a href="#attack_set{{loop.index}}"><canvas id="circlecanvas{{loop.index }}_1" width="40" height="40"></canvas></a>
+                <script>
+                      var canvas = document.getElementById("circlecanvas{{loop.index }}_1");
+                      var context = canvas.getContext("2d");
+                      context.strokeStyle="red"
+                      context.fillStyle="red"
+                      context.arc(20, 20, Math.abs({{attack_set.total_attack_end_luck() }}) * (40/3.5), 0, Math.PI * 2, false);
+                      {%  if attack_set.total_attack_end_luck() < 0  %}
+                          context.stroke()
+                      {% else %}
+                          context.fill()
+                      {%  endif %}
+                </script>
+            <span style="position: relative; top: -14px">3</span>
+            <a href="#attack_set{{loop.index}}"><canvas id="circlecanvas{{loop.index }}_2" width="40" height="40"></canvas></a>
+                <script>
+                      var canvas = document.getElementById("circlecanvas{{loop.index }}_2");
+                      var context = canvas.getContext("2d");
+                      context.strokeStyle="green"
+                      context.fillStyle="green"
+                      context.arc(20, 20, Math.abs({{attack_set.total_defense_end_luck() }}) * (40/3.5), 0, Math.PI * 2, false);
+                      {%  if attack_set.total_defense_end_luck() < 0  %}
+                          context.stroke()
+                      {% else %}
+                          context.fill()
+                      {%  endif %}
+                </script>
+       </td>
+   </tr>
+   {%  endfor %}
+</table>
+#}
 
 
 {% for attack_set in game_tape.attack_sets %}
 <br>
 
-    <b> {{  attack_set.number }}</b>
+    <a name="attack_set{{ loop.index }}"><b> {{  attack_set.number }}</b></a>
 
     <table class="tg">
         <tr>
@@ -67,16 +106,16 @@
       </tr>
     {% endfor %}
     <tr>
-        <td class="tg-01" style="border:0">score</td>
-        <td class="tg-01" style="border:0">{{ attack_set.total_attack_roll_luck() }}</td>
-        <td class="tg-01" style="border:0">{{ attack_set.total_attack_reroll_luck() }}</td>
-        <td class="tg-01" style="border:0">{{ attack_set.total_attack_convert_luck() }}</td>
-        <td class="tg-01" style="border:0">{{ attack_set.total_attack_end_luck() }}</td>
-        <td class="tg-01" style="border:0">{{ 1 }}</td>
-        <td class="tg-01" style="border:0">{{ 1 }}</td>
-        <td class="tg-01" style="border:0">{{ 1 }}</td>
-        <td class="tg-01" style="border:0">{{ 1 }}</td>
-        <td class="tg-01" style="border:0">{{ 1 }}</td>
+        <td class="tg-nkg8" border="0" >score</td>
+        <td class="tg-nkg8" border="0" ></td>
+        <td class="tg-nkg8" border="0" ></td>
+        <td class="tg-nkg8" border="0" ></td>
+        <td class="tg-nkg8" border="0" >{{ attack_set.total_attack_end_luck() }}</td>
+        <td class="tg-nkg8" border="0" ></td>
+        <td class="tg-nkg8" border="0" >{{ attack_set.total_defense_end_luck() }}</td>
+        <td class="tg-nkg8" border="0" ></td>
+        <td class="tg-nkg8" border="0" ></td>
+        <td class="tg-nkg8" border="0" ></td>
 
     </tr>
     </table>
