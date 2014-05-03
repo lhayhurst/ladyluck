@@ -146,6 +146,103 @@ class Game(Base):
         if winner is not None:
             self.game_winner = winner
 
+    #these methods are utility methods to help out the game_summary web page.
+    def total_reds(self, player):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.total_reds( player )
+
+    def total_greens(self, player):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.total_greens( player )
+
+    def unmodified_hits(self, player ):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.unmodified_hits( player )
+
+    def expected_unmodified_evades(self, player ):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.expected_unmodified_evades( player )
+
+    def unmodified_evades(self, player ):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.unmodified_evades( player )
+
+    def expected_unmodified_hits(self, player ):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.expected_unmodified_hits( player )
+
+    def unmodified_crits(self, player ):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.unmodified_crits( player )
+
+    def expected_unmodified_crits(self, player ):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.expected_unmodified_crits( player )
+
+    def unmodified_focuses(self, player ):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.unmodified_focuses( player )
+
+    def expected_unmodified_focuses(self, player ):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.expected_unmodified_focuses( player )
+
+    def unmodified_green_focuses(self, player ):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.unmodified_green_focuses( player )
+
+    def expected_unmodified_green_focuses(self, player ):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.expected_unmodified_green_focuses( player )
+
+    def unmodified_blanks(self, player ):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.unmodified_blanks( player )
+
+    def expected_unmodified_blanks(self, player ):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.expected_unmodified_blanks( player )
+
+    def unmodified_green_blanks(self, player ):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.unmodified_green_blanks( player )
+
+    def expected_unmodified_green_blanks(self, player ):
+        if self.game_tape == None:
+            return 0
+        else:
+            return self.game_tape.expected_unmodified_green_blanks( player )
+
 class PersistenceManager:
     def __init__(self, echo=False):
         url = os.getenv('DB_TEST_URL')

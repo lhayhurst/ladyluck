@@ -136,10 +136,11 @@ def game():
     game_tape = GameTape(game)
     game_tape.score()
 
+
     return render_template( 'game_summary.html',
                             game=game,
-                            player1=player1.name,
-                            player2=player2.name,
+                            player1=player1,
+                            player2=player2,
                             winner=winning_player,
                             game_tape=game_tape )
 

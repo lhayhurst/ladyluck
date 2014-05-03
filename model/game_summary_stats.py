@@ -71,7 +71,7 @@ class Counter:
         t = self.total_reds
         return t * (3.0 / 8.0)
 
-    def expected_red_misses(self):
+    def expected_red_blanks(self):
         t = self.total_reds
         return t * (2.0 / 8.0)
 
@@ -144,7 +144,7 @@ class Score:
         focus_dev          = counter.red_eyes - exp_focus
         weighted_focus_dev = focus_dev * Score.RED_FOCUS_WEIGHT
 
-        exp_blank          = counter.expected_red_misses()
+        exp_blank          = counter.expected_red_blanks()
         blank_dev          = counter.red_blanks - exp_blank
         weighted_blank_dev = blank_dev * Score.RED_BLANK_WEIGHT
 
@@ -178,7 +178,9 @@ class Score:
 class GameTapeRecord:
 
 
-    def __init__(self):
+    def __init__(self, attacking_player, defending_player):
+        self.attacking_player = attacking_player
+        self.defending_player = defending_player
         self.dice_num   = None
         self.throw_num  = None
         self.attack_roll = None
@@ -197,7 +199,6 @@ class GameTapeRecord:
         self.defense_convert_luck = None
         self.defense_end = None
         self.defense_end_luck = None
-
         self.was_cancelled = False
 
     def cancel(self):
@@ -300,6 +301,7 @@ class AttackSet:
 
     def add_defending_throw(self, throw):
         self.defending_throw = throw
+        self.defending_player = throw.player
 
     def get_record_for_dice_num(self, dice_num):
         for rec in self.records:
@@ -401,7 +403,7 @@ class AttackSet:
                 break
 
 
-    def score(self, cumulative_counter, cumulative_score):
+    def score(self, cumulative_counter, cumulative_score, tape_stats):
 
         self.roll_counter              = Counter()
         self.reroll_counter            = Counter()
@@ -416,9 +418,18 @@ class AttackSet:
             if rec.attack_roll is not None:
                 luck = self.roll_score.eval( rec.attack_roll.dice_type, self.roll_counter.count(rec.attack_roll))
                 rec.attack_roll_luck = luck
+                tape_stats[rec.attacking_player.name]["score"].eval(
+                    rec.attack_roll.dice_type,
+                    tape_stats[rec.attacking_player.name]["counter"].count( rec.attack_roll )
+                )
             if rec.defense_roll is not None:
                 luck = self.roll_score.eval( rec.defense_roll.dice_type, self.roll_counter.count( rec.defense_roll))
                 rec.defense_roll_luck = luck
+                if rec.defending_player is not None:
+                    tape_stats[rec.defending_player.name]["score"].eval(
+                        rec.defense_roll.dice_type,
+                        tape_stats[rec.defending_player.name]["counter"].count( rec.defense_roll )
+                    )
             if rec.attack_reroll is not None:
                 luck = self.reroll_score.eval( rec.attack_reroll.dice_type, self.reroll_counter.count(rec.attack_reroll))
                 rec.attack_reroll_luck = luck
@@ -452,9 +463,110 @@ class GameTape(object):
                 return aset
         return None
 
+    def total_reds(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].total_reds
+
+    def total_greens(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].total_greens
+
+    def unmodified_hits(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].red_hits
+
+
+    def expected_unmodified_hits(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].expected_red_hits()
+
+    def unmodified_evades(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].green_evades
+
+
+    def expected_unmodified_evades(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].expected_green_evades()
+
+    def unmodified_crits(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].red_crits
+
+
+    def expected_unmodified_focuses(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].expected_red_eyes()
+
+    def unmodified_focuses(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].red_eyes
+
+    def expected_unmodified_green_focuses(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].expected_green_eyes()
+
+    def unmodified_green_focuses(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].green_eyes
+
+
+    def expected_unmodified_blanks(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].expected_red_blanks()
+
+    def unmodified_blanks(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].red_blanks
+
+    def expected_unmodified_green_blanks(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].expected_green_blanks()
+
+    def unmodified_green_blanks(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].green_blanks
+
+    def expected_unmodified_crits(self, player):
+        if self.stats == None:
+            return 0
+        else:
+            return self.stats[player.name]["counter"].expected_red_crits()
+
     def __init__(self, game):
 
         self.game = game
+        game.game_tape = self
         throws = self.game.game_throws
 
         attack_sets = []
@@ -465,10 +577,10 @@ class GameTape(object):
             if throw.throw_type == DiceThrowType.ATTACK:
                 attack_set = AttackSet( throw.attack_set_num, throw )
                 attack_sets.append( attack_set )
-                attack_set.attacking_player = throw.player.name
+                attack_set.attacking_player = throw.player
 
                 for result in throw.results:
-                    record = GameTapeRecord()
+                    record = GameTapeRecord( attacking_player=attack_set.attacking_player, defending_player=attack_set.defending_player)
                     attack_set.records.append(record)
                     record.dice_num = result.dice_num
                     record.attack_roll = result.dice
@@ -480,16 +592,16 @@ class GameTape(object):
                 attack_set = self.get_attack_set(throw.attack_set_num)
                 attack_set.add_defending_throw(throw)
                 for result in throw.results:
-                    attack_set.defending_player = throw.player.name
                     record = attack_set.get_record_for_dice_num( result.dice_num )
                     if record is not None:
                         record = attack_set.get_record_for_dice_num( result.dice_num )
+                        record.defending_player = throw.player
                         record.defense_roll = result.dice
                         record.defense_end = result.final_dice
                         for adjustment in result.adjustments:
                             record.visit(adjustment, "defense")
                     else:
-                        record = GameTapeRecord()
+                        record = GameTapeRecord(attacking_player=attack_set.attacking_player, defending_player=throw.player)
                         attack_set.records.append(record)
                         record.dice_num = result.dice_num
                         record.defense_roll = result.dice
@@ -502,35 +614,59 @@ class GameTape(object):
             ats.net_results()
 
     def score(self):
-        cumulative_luck   = Counter()
-        cumulative_score  = Score()
+        raw_luck_p1          = Counter()
+        raw_score_p1         = Score()
+        raw_luck_p2          = Counter()
+        raw_score_p2         = Score()
+
+        self.stats = {}
+        self.stats[ self.game.game_players[0].name] = { "counter" : raw_luck_p1, "score" : raw_score_p1 }
+        self.stats[ self.game.game_players[1].name] = { "counter" : raw_luck_p2, "score" : raw_score_p2 }
+
+
+        cumulative_luck      = Counter()
+        cumulative_score     = Score()
+
         for ats in self.attack_sets:
-            ats.score(cumulative_luck, cumulative_score)
+            ats.score(cumulative_luck, cumulative_score, self.stats)
+
+        self.cumulative_luck  = cumulative_luck
+        self.cumulative_score = cumulative_score
 
 
 
 class GameTapeTester(unittest.TestCase):
 
-    def testSummaryStats(self):
-        parser = LogFileParser()
-        parser.read_input_from_file("../logfiles/fsm_test_input.txt")
-        parser.run_finite_state_machine()
-        game_tape = parser.game_tape
+    def setUp(self):
 
-        g = Game(parser.get_players())
+        self.parser = LogFileParser()
+        self.parser.read_input_from_file("../logfiles/fsm_test_input.txt")
+        self.parser.run_finite_state_machine()
+        self.game_tape = self.parser.game_tape
+
+        self.g = Game(self.parser.get_players())
 
 
-        for throw_result in game_tape:
-            g.game_throws.append(throw_result)
+        for throw_result in self.game_tape:
+            self.g.game_throws.append(throw_result)
 
-        tape = GameTape( g )
-        tape.score()
+        self.tape = GameTape( self.g )
+        self.tape.score()
 
-        tape_graph = TapeGraph( g, tape )
 
-        self.assertEqual( 4, len(tape.attack_sets) )
+    def testRawSummaryStats(self):
 
-        aset = tape.attack_sets[0]
+        self.assertEqual( 4, self.g.total_reds( self.g.game_players[0] ) )
+        self.assertEqual( 1, self.g.unmodified_hits( self.g.game_players[0] ) )
+        self.assertEqual( (3.0/8.0) * 4 , self.g.expected_unmodified_hits( self.g.game_players[0] ) )
+
+        self.assertEqual( 4, self.g.total_greens(self.g.game_players[1]))
+
+    def testAttackSetStats(self):
+
+        self.assertEqual( 4, len(self.tape.attack_sets) )
+
+        aset = self.tape.attack_sets[0]
         self.assertEqual( -.8125, aset.total_attack_roll_luck() )
         self.assertEqual( None, aset.total_attack_reroll_luck())
         self.assertEqual( .34375, aset.total_attack_convert_luck() )
@@ -544,7 +680,7 @@ class GameTapeTester(unittest.TestCase):
         self.assertEqual( 0.3125, aset.cumulative_defense_luck() )
 
 
-        aset = tape.attack_sets[1]
+        aset = self.tape.attack_sets[1]
         self.assertEqual( .9375, aset.total_attack_roll_luck() )
         self.assertEqual( None, aset.total_attack_reroll_luck())
         self.assertEqual( None, aset.total_attack_convert_luck() )
@@ -559,7 +695,7 @@ class GameTapeTester(unittest.TestCase):
         self.assertEqual( 0.75, aset.cumulative_defense_luck() )
 
 
-        aset = tape.attack_sets[2]
+        aset = self.tape.attack_sets[2]
         self.assertEqual( -1.3125, aset.total_attack_roll_luck() )
         self.assertEqual( -0.3125, aset.total_attack_reroll_luck())
         self.assertEqual( 0.6875, aset.total_attack_convert_luck() )
@@ -574,7 +710,7 @@ class GameTapeTester(unittest.TestCase):
         self.assertEqual( 2.0625, aset.cumulative_defense_luck() )
 
 
-        aset = tape.attack_sets[3]
+        aset = self.tape.attack_sets[3]
         self.assertEqual( 0.59375, aset.total_attack_roll_luck() )
         self.assertEqual( None, aset.total_attack_reroll_luck())
         self.assertEqual( None, aset.total_attack_convert_luck() )
