@@ -1,4 +1,5 @@
 import os
+from flask import url_for
 import sqlalchemy
 
 __author__ = 'lhayhurst'
@@ -145,6 +146,12 @@ class Game(Base):
         self.game_name = "{0} v {1} ({2}".format(self.game_players[0].name, self.game_players[1].name, self.game_played_time )
         if winner is not None:
             self.game_winner = winner
+
+    def id_str(self):
+        return str(self.id)
+
+    def sparkline(self, player):
+        return url_for("sparkline", game_id=self.id_str(), player=player )
 
     #these methods are utility methods to help out the game_summary web page.
     def total_reds(self, player):

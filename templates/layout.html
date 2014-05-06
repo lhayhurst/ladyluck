@@ -7,6 +7,20 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15" />
 		<link rel="stylesheet" href="static/style.css" />
 	</head>
+    <script type="text/javascript">
+
+      function activateTab(pageId) {
+          var tabCtrl = document.getElementById('tabCtrl');
+          var pageToActivate = document.getElementById(pageId);
+          for (var i = 0; i < tabCtrl.childNodes.length; i++) {
+              var node = tabCtrl.childNodes[i];
+              if (node.nodeType == 1) { /* Element */
+                  node.style.display = (node == pageToActivate) ? 'block' : 'none';
+              }
+          }
+      }
+
+</script>
 	<body>
 	<div id="conteneur" style="overflow:hidden; width:85%;">
 		  <div id="header">Lady luck</div>

@@ -95,8 +95,6 @@ class Counter:
         t = self.total_greens
         return t * (2.0 / 8.0)
 
-
-
 class Score:
 
     HIT_WEIGHT         = 1
@@ -172,8 +170,6 @@ class Score:
         self.green_luck.append(luck)
 
         return luck
-
-
 
 class GameTapeRecord:
 
@@ -288,7 +284,6 @@ class GameTapeRecord:
         if self.defense_end == None:
             return False
         return self.defense_end.is_evade()
-
 
 class AttackSet:
     def __init__(self, attack_set, throw):
@@ -463,6 +458,9 @@ class GameTape(object):
                 return aset
         return None
 
+    def unmodified_attack_data(self, player):
+        return self.stats[player]["score"].red_luck
+
     def total_reds(self, player):
         if self.stats == None:
             return 0
@@ -632,7 +630,6 @@ class GameTape(object):
 
         self.cumulative_luck  = cumulative_luck
         self.cumulative_score = cumulative_score
-
 
 
 class GameTapeTester(unittest.TestCase):

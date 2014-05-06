@@ -1,121 +1,182 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<b> {{ game.game_played_time }}: {{ player1.name }} versus {{ player2.name }}, won by {{ winner }} </b>
+<ul>
+      <li>
+        <a href="javascript:activateTab('page1')">Dice Stats</a>
+      </li>
+      <li>
+        <a href="javascript:activateTab('page2')">Game Tape</a>
+      </li>
 
-<br>
-<br>
-<b>Unmodified Dice Results</b>
-<style type="text/css">
-.tg1  {border-collapse:collapse;border-spacing:0;}
-.tg1 td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-.tg1 th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-.tg1 .tg-ii5f{background-color:#ecf4ff;color:#ffffff}
-.tg1 .tg-fdty{background-color:#efefef;color:#000000}
-.tg1 .tg-cxkv{background-color:#ffffff}
-.tg1 .tg-tr94{background-color:#efefef;color:#000000;text-align:center}
-.tg1 .tg-6997{background-color:#ffffff;color:#000000;text-align:center}
-.tg1 .tg-zlxb{background-color:#ffffff;text-align:center}
-.tg1 .tg-bsv2{background-color:#efefef}
-.tg1 .tg-ek65{background-color:#ffffff;color:#000000}
-</style>
-<table class="tg1">
+</ul>
+
+<div id="tabCtrl">
+        <div id="page1" style="display: block;">
+            <b> {{ game.game_played_time }}: {{ player1.name }} versus {{ player2.name }}, won by {{ winner }} </b>
+
+            <b>Unmodified Dice Results</b>
+            <style type="text/css">
+            .tg1  {border-collapse:collapse;border-spacing:0;}
+            .tg1 td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+            .tg1 th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+            .tg1 .tg-ii5f{background-color:#ecf4ff;color:#ffffff}
+            .tg1 .tg-fdty{background-color:#efefef;color:#000000}
+            .tg1 .tg-cxkv{background-color:#ffffff}
+            .tg1 .tg-tr94{background-color:#efefef;color:#000000;text-align:center}
+            .tg1 .tg-6997{background-color:#ffffff;color:#000000;text-align:center}
+            .tg1 .tg-zlxb{background-color:#ffffff;text-align:center}
+            .tg1 .tg-bsv2{background-color:#efefef}
+            .tg1 .tg-ek65{background-color:#ffffff;color:#000000}
+            </style>
+            {#    <td class="tg-ek65"><img src= {{ game.sparkline(player1.name)}}></td> #}
+
+
+            <table class="tg1">
   <tr>
     <th class="tg-tr94">{{ player1.name }}</th>
-    <th class="tg-6997" colspan="2">total red dice: {{ game.total_reds(player1) }}</th>
+    <th class="tg-6997" colspan="4">total red dice: {{ game.total_reds(player1) }}</th>
     <th class="tg-ii5f" rowspan="6"></th>
     <th class="tg-tr94">{{ player2.name }}</th>
-    <th class="tg-zlxb" colspan="2">total red dice: {{ game.total_reds(player2) }}</th>
+    <th class="tg-zlxb" colspan="4">total red dice: {{ game.total_reds(player2) }}</th>
+
   </tr>
   <tr>
     <td class="tg-tr94">face</td>
-    <td class="tg-tr94">actual</td>
     <td class="tg-tr94">expected</td>
+    <td class="tg-tr94">actual</td>
+    <td class="tg-tr94">after rerolls</td>
+    <td class="tg-tr94">after converts</td>
     <td class="tg-tr94">face</td>
-    <td class="tg-tr94">actual</td>
     <td class="tg-tr94">expected</td>
+    <td class="tg-tr94">actual</td>
+    <td class="tg-tr94">after rerolls</td>
+    <td class="tg-tr94">after converts</td>
+
   </tr>
   <tr>
     <td class="tg-bsv2">hits</td>
-    <td class="tg-ek65">{{ game.unmodified_hits(player1) }}</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_hits(player1) }} </td>
+    <td class="tg-ek65">{{ game.expected_unmodified_hits(player1) }}</td>
+    <td class="tg-ek65">{{ game.unmodified_hits(player1) }} </td>
+    <td class="tg-ek65">15</td>
+    <td class="tg-ek65">17</td>
     <td class="tg-bsv2">hits</td>
-    <td class="tg-ek65">{{ game.unmodified_hits(player2) }}</td>
     <td class="tg-ek65">{{ game.expected_unmodified_hits(player2) }}</td>
+    <td class="tg-ek65">{{ game.unmodified_hits(player2) }}</td>
+    <td class="tg-ek65"></td>
+    <td class="tg-ek65"></td>
+
   </tr>
   <tr>
     <td class="tg-bsv2">crits</td>
-    <td class="tg-ek65">{{ game.unmodified_crits(player1) }}</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_crits(player1) }} </td>
+    <td class="tg-ek65">{{ game.expected_unmodified_crits(player1) }}</td>
+    <td class="tg-ek65">{{ game.unmodified_crits(player1) }} </td>
+    <td class="tg-ek65"></td>
+    <td class="tg-ek65"></td>
     <td class="tg-bsv2">crits</td>
-    <td class="tg-ek65">{{ game.unmodified_crits(player2) }}</td>
     <td class="tg-ek65">{{ game.expected_unmodified_crits(player2) }}</td>
+    <td class="tg-ek65">{{ game.unmodified_crits(player2) }}</td>
+    <td class="tg-ek65"></td>
+    <td class="tg-ek65"></td>
+
+
   </tr>
   <tr>
     <td class="tg-bsv2">focuses</td>
-    <td class="tg-ek65">{{ game.unmodified_focuses(player1) }}</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_focuses(player1) }} </td>
+    <td class="tg-ek65">{{ game.expected_unmodified_focuses(player1) }}</td>
+    <td class="tg-ek65">{{ game.unmodified_focuses(player1) }} </td>
+    <td class="tg-ek65"></td>
+    <td class="tg-ek65"></td>
     <td class="tg-bsv2">focuses</td>
-    <td class="tg-ek65">{{ game.unmodified_focuses(player2) }}</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_focuses(player2) }} </td>  </tr>
+    <td class="tg-ek65">{{ game.expected_unmodified_focuses(player2) }}</td>
+    <td class="tg-ek65">{{ game.unmodified_focuses(player2) }} </td>
+    <td class="tg-ek65"></td>
+    <td class="tg-ek65"></td>
+  </tr>
+
   <tr>
     <td class="tg-bsv2">blanks</td>
-    <td class="tg-ek65">{{ game.unmodified_blanks(player1) }}</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_blanks(player1) }} </td>
+    <td class="tg-ek65">{{ game.expected_unmodified_blanks(player1) }}</td>
+    <td class="tg-ek65">{{ game.unmodified_blanks(player1) }} </td>
+    <td class="tg-ek65"></td>
+    <td class="tg-ek65"></td>
     <td class="tg-bsv2">blanks</td>
-    <td class="tg-ek65">{{ game.unmodified_blanks(player2) }}</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_blanks(player2) }} </td>
+    <td class="tg-ek65">{{ game.expected_unmodified_blanks(player2) }}</td>
+    <td class="tg-ek65">{{ game.unmodified_blanks(player2) }} </td>
+    <td class="tg-ek65"></td>
+    <td class="tg-ek65"></td>
+
   </tr>
   <tr>
     <td class="tg-ii5f" colspan="7"></td>
   </tr>
   <tr>
     <td class="tg-tr94">{{ player1.name }}</td>
-    <td class="tg-zlxb" colspan="2">total green dice: {{  game.total_greens(player1) }}</td>
+    <td class="tg-zlxb" colspan="4">total green dice: {{  game.total_greens(player1) }}</td>
     <td class="tg-ii5f" rowspan="5"></td>
     <td class="tg-tr94">{{ player2.name }}</td>
-    <td class="tg-cxkv" colspan="2">total green dice: {{  game.total_greens(player2) }}</td>
+    <td class="tg-cxkv" colspan="4">total green dice: {{  game.total_greens(player2) }}</td>
   </tr>
   <tr>
     <td class="tg-tr94">face</td>
-    <td class="tg-tr94">actual</td>
     <td class="tg-tr94">expected</td>
+    <td class="tg-tr94">actual</td>
+    <td class="tg-tr94">after rerolls</td>
+    <td class="tg-tr94">after converts</td>
     <td class="tg-tr94">face</td>
-    <td class="tg-tr94">actual</td>
     <td class="tg-tr94">expected</td>
+    <td class="tg-tr94">actual</td>
+    <td class="tg-tr94">after rerolls</td>
+    <td class="tg-tr94">after converts</td>
+
   </tr>
   <tr>
     <td class="tg-fdty">evades</td>
-    <td class="tg-ek65">{{ game.unmodified_evades(player1) }}</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_evades(player1) }} </td>
+    <td class="tg-ek65">{{ game.expected_unmodified_evades(player1) }}</td>
+    <td class="tg-ek65">{{ game.unmodified_evades(player1) }} </td>
+    <td class="tg-ek65"></td>
+    <td class="tg-ek65"></td>
     <td class="tg-bsv2">evades</td>
-    <td class="tg-ek65">{{ game.unmodified_evades(player2) }}</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_evades(player2) }} </td>
+    <td class="tg-ek65">{{ game.expected_unmodified_evades(player2) }}</td>
+    <td class="tg-ek65">{{ game.unmodified_evades(player2) }} </td>
+    <td class="tg-ek65"></td>
+    <td class="tg-ek65"></td>
   </tr>
   <tr>
     <td class="tg-fdty">focuses</td>
-    <td class="tg-ek65">{{ game.unmodified_green_focuses(player1) }}</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_green_focuses(player1) }} </td>
+    <td class="tg-ek65">{{ game.expected_unmodified_green_focuses(player1) }}</td>
+    <td class="tg-ek65">{{ game.unmodified_green_focuses(player1) }} </td>
+    <td class="tg-ek65"></td>
+    <td class="tg-ek65"></td>
     <td class="tg-bsv2">focuses</td>
-    <td class="tg-ek65">{{ game.unmodified_green_focuses(player2) }}</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_green_focuses(player2) }} </td>
+    <td class="tg-ek65">{{ game.expected_unmodified_green_focuses(player2) }}</td>
+    <td class="tg-ek65">{{ game.unmodified_green_focuses(player2) }} </td>
+    <td class="tg-ek65"></td>
+    <td class="tg-ek65"></td>
   </tr>
   <tr>
     <td class="tg-fdty">blanks</td>
-    <td class="tg-ek65">{{ game.unmodified_green_blanks(player1) }}</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_green_blanks(player1) }} </td>
+    <td class="tg-ek65">{{ game.expected_unmodified_green_blanks(player1) }}</td>
+    <td class="tg-ek65">{{ game.unmodified_green_blanks(player1) }} </td>
+    <td class="tg-ek65"></td>
+    <td class="tg-ek65"></td>
     <td class="tg-bsv2">blanks</td>
-    <td class="tg-ek65">{{ game.unmodified_green_blanks(player2) }}</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_green_blanks(player2) }} </td>
+    <td class="tg-ek65">{{ game.expected_unmodified_green_blanks(player2) }}</td>
+    <td class="tg-ek65">{{ game.unmodified_green_blanks(player2) }} </td>
+    <td class="tg-ek65"></td>
+    <td class="tg-ek65"></td>
   </tr>
 </table>
 
+        </div>
 
-<h3>Game Tape</h3>
-<p></p>
-<a href="/download-game?id={{ game.id }}">Download game as csv</a>
+        <div id="page2" style="display: block;">
 
-<style type="text/css">
+            <h3>Game Tape</h3>
+            <p></p>
+            <a href="/download-game?id={{ game.id }}">Download game as csv</a>
+
+            <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}
 .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
 .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
@@ -133,53 +194,12 @@
 
 </style>
 
-{#
-<table class="tg" style="position: fixed; margin-left: -140px; background-color: #fff; top: 97px">
+            {% for attack_set in game_tape.attack_sets %}
+                <br>
 
+                <a name="attack_set{{ loop.index }}"><b> {{  attack_set.number }}</b></a>
 
-    {%  for attack_set in game_tape.attack_sets %}
-    <tr>
-       <td>
-            <a href="#attack_set{{loop.index}}"><canvas id="circlecanvas{{loop.index }}_1" width="40" height="40"></canvas></a>
-                <script>
-                      var canvas = document.getElementById("circlecanvas{{loop.index }}_1");
-                      var context = canvas.getContext("2d");
-                      context.strokeStyle="red"
-                      context.fillStyle="red"
-                      context.arc(20, 20, Math.abs({{attack_set.total_attack_end_luck() }}) * (40/3.5), 0, Math.PI * 2, false);
-                      {%  if attack_set.total_attack_end_luck() < 0  %}
-                          context.stroke()
-                      {% else %}
-                          context.fill()
-                      {%  endif %}
-                </script>
-            <span style="position: relative; top: -14px">3</span>
-            <a href="#attack_set{{loop.index}}"><canvas id="circlecanvas{{loop.index }}_2" width="40" height="40"></canvas></a>
-                <script>
-                      var canvas = document.getElementById("circlecanvas{{loop.index }}_2");
-                      var context = canvas.getContext("2d");
-                      context.strokeStyle="green"
-                      context.fillStyle="green"
-                      context.arc(20, 20, Math.abs({{attack_set.total_defense_end_luck() }}) * (40/3.5), 0, Math.PI * 2, false);
-                      {%  if attack_set.total_defense_end_luck() < 0  %}
-                          context.stroke()
-                      {% else %}
-                          context.fill()
-                      {%  endif %}
-                </script>
-       </td>
-   </tr>
-   {%  endfor %}
-</table>
-#}
-
-
-{% for attack_set in game_tape.attack_sets %}
-<br>
-
-    <a name="attack_set{{ loop.index }}"><b> {{  attack_set.number }}</b></a>
-
-    <table class="tg">
+                <table class="tg">
         <tr>
         <th class="tg-031e" colspan="5">Attacker: {{ attack_set.attacking_player.name }}</th>
         <th class="tg-nkg8" rowspan="2"><br>Final<br>Result</th>
@@ -226,6 +246,9 @@
 
     </tr>
     </table>
-  {%  endfor %}
+            {%  endfor %}
 
+        </div>
+</div>
 {% endblock %}
+

@@ -1,9 +1,10 @@
 from collections import OrderedDict
 import os
-from flask import Flask, render_template, request, url_for, redirect, Response
+from flask import Flask, render_template, request, url_for, redirect, Response, make_response
 from model.game_summary_stats import GameTape
 from parser import LogFileParser
 from persistence import PersistenceManager, Player, Game
+from sparkplot import Sparkplot
 
 
 UPLOAD_FOLDER = "static"
@@ -136,7 +137,6 @@ def game():
     game_tape = GameTape(game)
     game_tape.score()
 
-
     return render_template( 'game_summary.html',
                             game=game,
                             player1=player1,
@@ -144,6 +144,19 @@ def game():
                             winner=winning_player,
                             game_tape=game_tape )
 
+@app.route('/sparkline')
+def sparkline():
+    id = str(request.args.get('game_id'))
+    game = db.get_game(id)
+    if game == None:
+        return redirect(url_for('add_game'))
+    player = str(request.args.get('player'))
+
+    sparkline = Sparkplot(data=game.game_tape.unmodified_attack_data( player ), label_min=True, label_max=True, label_last_value=True )
+    output = sparkline.plot_sparkline()
+    response = make_response(output.getvalue())
+    response.mimetype = 'image/png'
+    return response
 
 if __name__ == '__main__':
     app.debug = True
