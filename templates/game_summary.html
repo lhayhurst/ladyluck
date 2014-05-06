@@ -1,182 +1,182 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<ul>
-      <li>
-        <a href="javascript:activateTab('page1')">Dice Stats</a>
-      </li>
-      <li>
-        <a href="javascript:activateTab('page2')">Game Tape</a>
-      </li>
-
-</ul>
-
-<div id="tabCtrl">
-        <div id="page1" style="display: block;">
-            <b> {{ game.game_played_time }}: {{ player1.name }} versus {{ player2.name }}, won by {{ winner }} </b>
-
-            <b>Unmodified Dice Results</b>
-            <style type="text/css">
-            .tg1  {border-collapse:collapse;border-spacing:0;}
-            .tg1 td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-            .tg1 th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-            .tg1 .tg-ii5f{background-color:#ecf4ff;color:#ffffff}
-            .tg1 .tg-fdty{background-color:#efefef;color:#000000}
-            .tg1 .tg-cxkv{background-color:#ffffff}
-            .tg1 .tg-tr94{background-color:#efefef;color:#000000;text-align:center}
-            .tg1 .tg-6997{background-color:#ffffff;color:#000000;text-align:center}
-            .tg1 .tg-zlxb{background-color:#ffffff;text-align:center}
-            .tg1 .tg-bsv2{background-color:#efefef}
-            .tg1 .tg-ek65{background-color:#ffffff;color:#000000}
-            </style>
+<b> {{ game.game_played_time }}: {{ player1.name }} versus {{ player2.name }}, won by {{ winner }} </b>
+<hr>
+<div id="tabs" class="ui-tabs ui-widget ui-widget-content ui-corner-all ui-tabs-vertical ui-helper-clearfix">
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">
+        <li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab" tabindex="-1" aria-controls="a" aria-labelledby="ui-id-1" aria-selected="true">
+            <a href="#a" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">Dice Stats</a>
+        </li>
+        <li class="ui-state-default ui-corner-top"  role="tab" tabindex="0" aria-controls="b" aria-labelledby="ui-id-2" aria-selected="false">
+            <a href="#b" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">Graphs</a>
+        </li>
+        <li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="c" aria-labelledby="ui-id-3" aria-selected="false">
+            <a href="#c" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3">Game Tape</a>
+        </li>
+    </ul>
+    <div id="a" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
+        <style type="text/css">
+        .tg1  {border-collapse:collapse;border-spacing:0;}
+        .tg1 td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+        .tg1 th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+        .tg1 .tg-ii5f{background-color:#ecf4ff;color:#ffffff}
+        .tg1 .tg-fdty{background-color:#efefef;color:#000000}
+        .tg1 .tg-cxkv{background-color:#ffffff}
+        .tg1 .tg-tr94{background-color:#efefef;color:#000000;text-align:center}
+        .tg1 .tg-6997{background-color:#ffffff;color:#000000;text-align:center}
+        .tg1 .tg-zlxb{background-color:#ffffff;text-align:center}
+        .tg1 .tg-bsv2{background-color:#efefef}
+        .tg1 .tg-ek65{background-color:#ffffff;color:#000000}
+        </style>
             {#    <td class="tg-ek65"><img src= {{ game.sparkline(player1.name)}}></td> #}
 
 
-            <table class="tg1">
-  <tr>
-    <th class="tg-tr94">{{ player1.name }}</th>
-    <th class="tg-6997" colspan="4">total red dice: {{ game.total_reds(player1) }}</th>
-    <th class="tg-ii5f" rowspan="6"></th>
-    <th class="tg-tr94">{{ player2.name }}</th>
-    <th class="tg-zlxb" colspan="4">total red dice: {{ game.total_reds(player2) }}</th>
+        <table class="tg1">
+          <tr>
+            <th class="tg-tr94">{{ player1.name }}</th>
+            <th class="tg-6997" colspan="4">total red dice: {{ game.total_reds(player1) }}</th>
+            <th class="tg-ii5f" rowspan="6"></th>
+            <th class="tg-tr94">{{ player2.name }}</th>
+            <th class="tg-zlxb" colspan="4">total red dice: {{ game.total_reds(player2) }}</th>
 
-  </tr>
-  <tr>
-    <td class="tg-tr94">face</td>
-    <td class="tg-tr94">expected</td>
-    <td class="tg-tr94">actual</td>
-    <td class="tg-tr94">after rerolls</td>
-    <td class="tg-tr94">after converts</td>
-    <td class="tg-tr94">face</td>
-    <td class="tg-tr94">expected</td>
-    <td class="tg-tr94">actual</td>
-    <td class="tg-tr94">after rerolls</td>
-    <td class="tg-tr94">after converts</td>
+          </tr>
+          <tr>
+            <td class="tg-tr94">face</td>
+            <td class="tg-tr94">expected</td>
+            <td class="tg-tr94">actual</td>
+            <td class="tg-tr94">after rerolls</td>
+            <td class="tg-tr94">after converts</td>
+            <td class="tg-tr94">face</td>
+            <td class="tg-tr94">expected</td>
+            <td class="tg-tr94">actual</td>
+            <td class="tg-tr94">after rerolls</td>
+            <td class="tg-tr94">after converts</td>
 
-  </tr>
-  <tr>
-    <td class="tg-bsv2">hits</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_hits(player1) }}</td>
-    <td class="tg-ek65">{{ game.unmodified_hits(player1) }} </td>
-    <td class="tg-ek65">15</td>
-    <td class="tg-ek65">17</td>
-    <td class="tg-bsv2">hits</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_hits(player2) }}</td>
-    <td class="tg-ek65">{{ game.unmodified_hits(player2) }}</td>
-    <td class="tg-ek65"></td>
-    <td class="tg-ek65"></td>
+          </tr>
+          <tr>
+            <td class="tg-bsv2">hits</td>
+            <td class="tg-ek65">{{ game.expected_unmodified_hits(player1) }}</td>
+            <td class="tg-ek65">{{ game.unmodified_hits(player1) }} </td>
+            <td class="tg-ek65">15</td>
+            <td class="tg-ek65">17</td>
+            <td class="tg-bsv2">hits</td>
+            <td class="tg-ek65">{{ game.expected_unmodified_hits(player2) }}</td>
+            <td class="tg-ek65">{{ game.unmodified_hits(player2) }}</td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
 
-  </tr>
-  <tr>
-    <td class="tg-bsv2">crits</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_crits(player1) }}</td>
-    <td class="tg-ek65">{{ game.unmodified_crits(player1) }} </td>
-    <td class="tg-ek65"></td>
-    <td class="tg-ek65"></td>
-    <td class="tg-bsv2">crits</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_crits(player2) }}</td>
-    <td class="tg-ek65">{{ game.unmodified_crits(player2) }}</td>
-    <td class="tg-ek65"></td>
-    <td class="tg-ek65"></td>
+          </tr>
+          <tr>
+            <td class="tg-bsv2">crits</td>
+            <td class="tg-ek65">{{ game.expected_unmodified_crits(player1) }}</td>
+            <td class="tg-ek65">{{ game.unmodified_crits(player1) }} </td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
+            <td class="tg-bsv2">crits</td>
+            <td class="tg-ek65">{{ game.expected_unmodified_crits(player2) }}</td>
+            <td class="tg-ek65">{{ game.unmodified_crits(player2) }}</td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
 
 
-  </tr>
-  <tr>
-    <td class="tg-bsv2">focuses</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_focuses(player1) }}</td>
-    <td class="tg-ek65">{{ game.unmodified_focuses(player1) }} </td>
-    <td class="tg-ek65"></td>
-    <td class="tg-ek65"></td>
-    <td class="tg-bsv2">focuses</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_focuses(player2) }}</td>
-    <td class="tg-ek65">{{ game.unmodified_focuses(player2) }} </td>
-    <td class="tg-ek65"></td>
-    <td class="tg-ek65"></td>
-  </tr>
+          </tr>
+          <tr>
+            <td class="tg-bsv2">focuses</td>
+            <td class="tg-ek65">{{ game.expected_unmodified_focuses(player1) }}</td>
+            <td class="tg-ek65">{{ game.unmodified_focuses(player1) }} </td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
+            <td class="tg-bsv2">focuses</td>
+            <td class="tg-ek65">{{ game.expected_unmodified_focuses(player2) }}</td>
+            <td class="tg-ek65">{{ game.unmodified_focuses(player2) }} </td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
+          </tr>
+          <tr>
+            <td class="tg-bsv2">blanks</td>
+            <td class="tg-ek65">{{ game.expected_unmodified_blanks(player1) }}</td>
+            <td class="tg-ek65">{{ game.unmodified_blanks(player1) }} </td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
+            <td class="tg-bsv2">blanks</td>
+            <td class="tg-ek65">{{ game.expected_unmodified_blanks(player2) }}</td>
+            <td class="tg-ek65">{{ game.unmodified_blanks(player2) }} </td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
 
-  <tr>
-    <td class="tg-bsv2">blanks</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_blanks(player1) }}</td>
-    <td class="tg-ek65">{{ game.unmodified_blanks(player1) }} </td>
-    <td class="tg-ek65"></td>
-    <td class="tg-ek65"></td>
-    <td class="tg-bsv2">blanks</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_blanks(player2) }}</td>
-    <td class="tg-ek65">{{ game.unmodified_blanks(player2) }} </td>
-    <td class="tg-ek65"></td>
-    <td class="tg-ek65"></td>
+          </tr>
+          <tr>
+            <td class="tg-ii5f" colspan="7"></td>
+          </tr>
+          <tr>
+            <td class="tg-tr94">{{ player1.name }}</td>
+            <td class="tg-zlxb" colspan="4">total green dice: {{  game.total_greens(player1) }}</td>
+            <td class="tg-ii5f" rowspan="5"></td>
+            <td class="tg-tr94">{{ player2.name }}</td>
+            <td class="tg-cxkv" colspan="4">total green dice: {{  game.total_greens(player2) }}</td>
+          </tr>
+          <tr>
+            <td class="tg-tr94">face</td>
+            <td class="tg-tr94">expected</td>
+            <td class="tg-tr94">actual</td>
+            <td class="tg-tr94">after rerolls</td>
+            <td class="tg-tr94">after converts</td>
+            <td class="tg-tr94">face</td>
+            <td class="tg-tr94">expected</td>
+            <td class="tg-tr94">actual</td>
+            <td class="tg-tr94">after rerolls</td>
+            <td class="tg-tr94">after converts</td>
 
-  </tr>
-  <tr>
-    <td class="tg-ii5f" colspan="7"></td>
-  </tr>
-  <tr>
-    <td class="tg-tr94">{{ player1.name }}</td>
-    <td class="tg-zlxb" colspan="4">total green dice: {{  game.total_greens(player1) }}</td>
-    <td class="tg-ii5f" rowspan="5"></td>
-    <td class="tg-tr94">{{ player2.name }}</td>
-    <td class="tg-cxkv" colspan="4">total green dice: {{  game.total_greens(player2) }}</td>
-  </tr>
-  <tr>
-    <td class="tg-tr94">face</td>
-    <td class="tg-tr94">expected</td>
-    <td class="tg-tr94">actual</td>
-    <td class="tg-tr94">after rerolls</td>
-    <td class="tg-tr94">after converts</td>
-    <td class="tg-tr94">face</td>
-    <td class="tg-tr94">expected</td>
-    <td class="tg-tr94">actual</td>
-    <td class="tg-tr94">after rerolls</td>
-    <td class="tg-tr94">after converts</td>
+          </tr>
+          <tr>
+            <td class="tg-fdty">evades</td>
+            <td class="tg-ek65">{{ game.expected_unmodified_evades(player1) }}</td>
+            <td class="tg-ek65">{{ game.unmodified_evades(player1) }} </td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
+            <td class="tg-bsv2">evades</td>
+            <td class="tg-ek65">{{ game.expected_unmodified_evades(player2) }}</td>
+            <td class="tg-ek65">{{ game.unmodified_evades(player2) }} </td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
+          </tr>
+          <tr>
+            <td class="tg-fdty">focuses</td>
+            <td class="tg-ek65">{{ game.expected_unmodified_green_focuses(player1) }}</td>
+            <td class="tg-ek65">{{ game.unmodified_green_focuses(player1) }} </td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
+            <td class="tg-bsv2">focuses</td>
+            <td class="tg-ek65">{{ game.expected_unmodified_green_focuses(player2) }}</td>
+            <td class="tg-ek65">{{ game.unmodified_green_focuses(player2) }} </td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
+          </tr>
+          <tr>
+            <td class="tg-fdty">blanks</td>
+            <td class="tg-ek65">{{ game.expected_unmodified_green_blanks(player1) }}</td>
+            <td class="tg-ek65">{{ game.unmodified_green_blanks(player1) }} </td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
+            <td class="tg-bsv2">blanks</td>
+            <td class="tg-ek65">{{ game.expected_unmodified_green_blanks(player2) }}</td>
+            <td class="tg-ek65">{{ game.unmodified_green_blanks(player2) }} </td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
+          </tr>
+        </table>
 
-  </tr>
-  <tr>
-    <td class="tg-fdty">evades</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_evades(player1) }}</td>
-    <td class="tg-ek65">{{ game.unmodified_evades(player1) }} </td>
-    <td class="tg-ek65"></td>
-    <td class="tg-ek65"></td>
-    <td class="tg-bsv2">evades</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_evades(player2) }}</td>
-    <td class="tg-ek65">{{ game.unmodified_evades(player2) }} </td>
-    <td class="tg-ek65"></td>
-    <td class="tg-ek65"></td>
-  </tr>
-  <tr>
-    <td class="tg-fdty">focuses</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_green_focuses(player1) }}</td>
-    <td class="tg-ek65">{{ game.unmodified_green_focuses(player1) }} </td>
-    <td class="tg-ek65"></td>
-    <td class="tg-ek65"></td>
-    <td class="tg-bsv2">focuses</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_green_focuses(player2) }}</td>
-    <td class="tg-ek65">{{ game.unmodified_green_focuses(player2) }} </td>
-    <td class="tg-ek65"></td>
-    <td class="tg-ek65"></td>
-  </tr>
-  <tr>
-    <td class="tg-fdty">blanks</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_green_blanks(player1) }}</td>
-    <td class="tg-ek65">{{ game.unmodified_green_blanks(player1) }} </td>
-    <td class="tg-ek65"></td>
-    <td class="tg-ek65"></td>
-    <td class="tg-bsv2">blanks</td>
-    <td class="tg-ek65">{{ game.expected_unmodified_green_blanks(player2) }}</td>
-    <td class="tg-ek65">{{ game.unmodified_green_blanks(player2) }} </td>
-    <td class="tg-ek65"></td>
-    <td class="tg-ek65"></td>
-  </tr>
-</table>
+    </div>
+    <div id="b" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true" aria-hidden="false" style="display: block;">
+        Content of B
+    </div>
+    <div id="c" aria-labelledby="ui-id-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
+        <h3>Game Tape</h3>
+        <p></p>
+        <a href="/download-game?id={{ game.id }}">Download game as csv</a>
 
-        </div>
-
-        <div id="page2" style="display: block;">
-
-            <h3>Game Tape</h3>
-            <p></p>
-            <a href="/download-game?id={{ game.id }}">Download game as csv</a>
-
-            <style type="text/css">
+        <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}
 .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
 .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
@@ -194,61 +194,65 @@
 
 </style>
 
-            {% for attack_set in game_tape.attack_sets %}
-                <br>
+        {% for attack_set in game_tape.attack_sets %}
+            <br>
 
-                <a name="attack_set{{ loop.index }}"><b> {{  attack_set.number }}</b></a>
+            <a name="attack_set{{ loop.index }}"><b> {{  attack_set.number }}</b></a>
 
-                <table class="tg">
-        <tr>
-        <th class="tg-031e" colspan="5">Attacker: {{ attack_set.attacking_player.name }}</th>
-        <th class="tg-nkg8" rowspan="2"><br>Final<br>Result</th>
-        <th class="tg-031e" colspan="5">Defender: {{ attack_set.defending_player.name }}</th>
-      </tr>
-      <tr>
-        <td class="tg-nkg8">dice num</td>
-        <td class="tg-nkg8">roll</td>
-        <td class="tg-nkg8">reroll</td>
-        <td class="tg-nkg8">convert</td>
-        <td class="tg-nkg8">end</td>
-        <td class="tg-nkg8">end</td>
-        <td class="tg-nkg8">convert</td>
-        <td class="tg-nkg8">reroll</td>
-        <td class="tg-nkg8">roll</td>
-        <td class="tg-nkg8">dice_num</td>
-
-      </tr>
-    {% for rec in attack_set.records  %}
-        <td class="tg-o1">{{ rec.dice_num }}</td>
-        <td class="tg-o2"><img src={{ rec.attack_roll_as_img()  }}></td>
-        <td class="tg-o3"><img src={{ rec.attack_reroll_as_img() }}></td>
-        <td class="tg-o4"><img src={{ rec.attack_convert_as_img() }}></td>
-        <td class="tg-o5"><img src={{ rec.attack_end_as_img() }}></td>
-        <td class="tg-o6"><img src={{ rec.final_as_image() }}></td>
-        <td class="tg-o5"><img src={{ rec.defense_end_as_img() }}></td>
-        <td class="tg-o4"><img src={{ rec.defense_convert_as_img() }}></td>
-        <td class="tg-o3"><img src={{ rec.defense_reroll_as_img() }}></td>
-        <td class="tg-o2"><img src={{ rec.defense_roll_as_img() }}></td>
-        <td class="tg-o1">{{ rec.dice_num }}</td>
-      </tr>
-    {% endfor %}
+            <table class="tg">
     <tr>
-        <td class="tg-nkg8" border="0" >score</td>
-        <td class="tg-nkg8" border="0" ></td>
-        <td class="tg-nkg8" border="0" ></td>
-        <td class="tg-nkg8" border="0" ></td>
-        <td class="tg-nkg8" border="0" >{{ attack_set.total_attack_end_luck() }}</td>
-        <td class="tg-nkg8" border="0" ></td>
-        <td class="tg-nkg8" border="0" >{{ attack_set.total_defense_end_luck() }}</td>
-        <td class="tg-nkg8" border="0" ></td>
-        <td class="tg-nkg8" border="0" ></td>
-        <td class="tg-nkg8" border="0" ></td>
+    <th class="tg-031e" colspan="5">Attacker: {{ attack_set.attacking_player.name }}</th>
+    <th class="tg-nkg8" rowspan="2"><br>Final<br>Result</th>
+    <th class="tg-031e" colspan="5">Defender: {{ attack_set.defending_player.name }}</th>
+  </tr>
+  <tr>
+    <td class="tg-nkg8">dice num</td>
+    <td class="tg-nkg8">roll</td>
+    <td class="tg-nkg8">reroll</td>
+    <td class="tg-nkg8">convert</td>
+    <td class="tg-nkg8">end</td>
+    <td class="tg-nkg8">end</td>
+    <td class="tg-nkg8">convert</td>
+    <td class="tg-nkg8">reroll</td>
+    <td class="tg-nkg8">roll</td>
+    <td class="tg-nkg8">dice_num</td>
 
-    </tr>
-    </table>
-            {%  endfor %}
+  </tr>
+{% for rec in attack_set.records  %}
+    <td class="tg-o1">{{ rec.dice_num }}</td>
+    <td class="tg-o2"><img src={{ rec.attack_roll_as_img()  }}></td>
+    <td class="tg-o3"><img src={{ rec.attack_reroll_as_img() }}></td>
+    <td class="tg-o4"><img src={{ rec.attack_convert_as_img() }}></td>
+    <td class="tg-o5"><img src={{ rec.attack_end_as_img() }}></td>
+    <td class="tg-o6"><img src={{ rec.final_as_image() }}></td>
+    <td class="tg-o5"><img src={{ rec.defense_end_as_img() }}></td>
+    <td class="tg-o4"><img src={{ rec.defense_convert_as_img() }}></td>
+    <td class="tg-o3"><img src={{ rec.defense_reroll_as_img() }}></td>
+    <td class="tg-o2"><img src={{ rec.defense_roll_as_img() }}></td>
+    <td class="tg-o1">{{ rec.dice_num }}</td>
+  </tr>
+{% endfor %}
+<tr>
+    <td class="tg-nkg8" border="0" >score</td>
+    <td class="tg-nkg8" border="0" ></td>
+    <td class="tg-nkg8" border="0" ></td>
+    <td class="tg-nkg8" border="0" ></td>
+    <td class="tg-nkg8" border="0" >{{ attack_set.total_attack_end_luck() }}</td>
+    <td class="tg-nkg8" border="0" ></td>
+    <td class="tg-nkg8" border="0" >{{ attack_set.total_defense_end_luck() }}</td>
+    <td class="tg-nkg8" border="0" ></td>
+    <td class="tg-nkg8" border="0" ></td>
+    <td class="tg-nkg8" border="0" ></td>
 
-        </div>
+</tr>
+</table>
+        {%  endfor %}
+
+
+    </div>
 </div>
+
+
+
 {% endblock %}
 
