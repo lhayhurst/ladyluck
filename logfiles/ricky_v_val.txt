@@ -551,10 +551,9 @@
 * --- TIE Int (Soontir Fel) performs move: 2 - Forward
 <Val> - Rang 2, 3v1
 * *** Val Rolls to Attack: [Crit], [Focus], [Focus], [], [], [], [] ***
+* *** Val turns Attack Die 2 [Focus] into a [Hit] ***
 <Val> - Focus
 * *** KelvanTiberius Rolls to Defend: [Blank], [], [], [], [], [], [] ***
-* *** Val turns Attack Die 2 [Focus] into a [Hit] ***
-* *** Val turns Attack Die 3 [Focus] into a [Hit] ***
 <KelvanTiberius> - bs range 2
 * *** KelvanTiberius Rolls to Attack: [Hit], [Crit], [Blank], [], [], [], [] ***
 * *** Val Rolls to Defend: [Focus], [Focus], [Evade], [Evade], [], [], [] ***

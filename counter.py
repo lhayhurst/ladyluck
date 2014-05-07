@@ -79,6 +79,15 @@ class Counter:
         #this one is interesting, as the total number of focuses could go down due to the converts
         return self.total_red_focuses_after_rerolls() - self.convert_counter.red_hits - self.convert_counter.red_crits
 
+    def total_red_blanks_after_rerolls(self):
+        return self.red_blanks + self.reroll_counter.red_blanks
+
+
+    def total_red_blanks_after_converts(self):
+        return self.total_red_blanks_after_rerolls() + self.convert_counter.red_blanks
+
+
+
     def expected_red_hits(self):
         t = self.total_reds
         return t * Counter.NUM_REDS_HITS
@@ -108,6 +117,13 @@ class Counter:
     def expected_red_blanks(self):
         t = self.total_reds
         return t * Counter.NUM_RED_BLANKS
+
+    def expected_blanks_after_rerolls(self):
+        t1 = self.total_reds
+        t2 = self.reroll_counter.total_reds
+        t3 = t1 + t2
+        return t3 * Counter.NUM_RED_BLANKS
+
 
     def expected_red_eyes(self):
         t = self.total_reds

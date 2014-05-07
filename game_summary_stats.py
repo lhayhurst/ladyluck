@@ -239,9 +239,14 @@ class GameTape(object):
     def total_red_focuses_after_rerolls(self, player):
         return self.stats[player.name][COUNTER].total_red_focuses_after_rerolls()
 
+    def total_red_blanks_after_rerolls(self, player):
+        return self.stats[player.name][COUNTER].total_red_blanks_after_rerolls()
+
     def total_red_focuses_after_converts(self, player):
         return self.stats[player.name][COUNTER].total_red_focuses_after_converts()
 
+    def total_red_blanks_after_converts(self, player):
+        return self.stats[player.name][COUNTER].total_red_blanks_after_converts()
 
 
     def expected_hits_after_rerolls(self, player):
@@ -260,6 +265,14 @@ class GameTape(object):
 
     def expected_focuses_after_rerolls(self, player):
         return self.stats[player.name][COUNTER].expected_focuses_after_rerolls()
+
+    def expected_blanks_after_rerolls(self, player):
+        return self.stats[player.name][COUNTER].expected_blanks_after_rerolls()
+
+    def expected_blanks_after_converts(self, player):
+        return self.expected_blanks_after_rerolls(player) #count doesn't change
+
+
 
     def expected_focuses_after_converts(self, player):
         return self.expected_focuses_after_rerolls(player) #thecount doesn't go up, so can piggy back
@@ -422,6 +435,32 @@ class GameTapeTester(unittest.TestCase):
         self.assertEqual( (2.0/8.0) * 5, self.g.expected_focuses_after_converts ( p2 ))
 
         #RED BLANK
+        #p1, initial blank rolls
+        self.assertEqual( 1, self.g.unmodified_blanks( p1 ) )
+        self.assertEqual( (2.0/8.0) * 4 , self.g.expected_unmodified_blanks( p1 ) )
+
+        #p2, initial blank rolls
+        self.assertEqual( 2, self.g.unmodified_blanks( p2 ) )
+        self.assertEqual( (2.0/8.0) * 3 , self.g.expected_unmodified_focuses( p2 ) )
+
+
+        #p1, blanks after rerolls
+        self.assertEqual( 1, self.g.total_red_blanks_after_rerolls( p1 ) )
+        self.assertEqual( 4 * (2.0/8.0), self.g.expected_blanks_after_rerolls( p1 ))
+
+        #p2, after rerolls
+        self.assertEqual( 2, self.g.total_red_blanks_after_rerolls( p2 ) )
+        self.assertEqual(  (2.0/8.0) * 5, self.g.expected_blanks_after_rerolls( p2 ))
+
+        #p1, after converts
+        self.assertEqual( 1, self.g.total_red_blanks_after_converts( p1 ) )
+        self.assertEqual( (2.0/8.0) * 4, self.g.expected_blanks_after_converts ( p1 ))
+
+        #p2, after converts
+        self.assertEqual( 2, self.g.total_red_blanks_after_converts( p2 ) )
+        self.assertEqual( (2.0/8.0) * 5, self.g.expected_blanks_after_converts ( p2 ))
+
+
 
         #EVADES
 
