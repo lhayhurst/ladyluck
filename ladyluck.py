@@ -1,9 +1,10 @@
-from collections import OrderedDict
 import os
+
 from flask import Flask, render_template, request, url_for, redirect, Response, make_response
-from model.game_summary_stats import GameTape
+
+from game_summary_stats import GameTape
 from parser import LogFileParser
-from persistence import PersistenceManager, Player, Game
+from persistence import PersistenceManager, Game
 from sparkplot import Sparkplot
 
 

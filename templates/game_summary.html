@@ -35,49 +35,61 @@
         <table class="tg1">
           <tr>
             <th class="tg-tr94">{{ player1.name }}</th>
-            <th class="tg-6997" colspan="4">total red dice: {{ game.total_reds(player1) }}</th>
+            <th class="tg-6997" colspan="6">red dice: {{ game.total_reds(player1) }}<br>with rerolls: {{ game.total_reds_after_rerolls(player1) }}</th>
             <th class="tg-ii5f" rowspan="6"></th>
             <th class="tg-tr94">{{ player2.name }}</th>
-            <th class="tg-zlxb" colspan="4">total red dice: {{ game.total_reds(player2) }}</th>
+            <th class="tg-6997" colspan="6">red dice: {{ game.total_reds(player2) }}<br>with rerolls: {{ game.total_reds_after_rerolls(player2) }}</th>
 
           </tr>
           <tr>
             <td class="tg-tr94">face</td>
             <td class="tg-tr94">expected</td>
             <td class="tg-tr94">actual</td>
-            <td class="tg-tr94">after rerolls</td>
-            <td class="tg-tr94">after converts</td>
+            <td class="tg-tr94">expected after rerolls</td>
+            <td class="tg-tr94">actual after rerolls</td>
+            <td class="tg-tr94">expected after converts</td>
+            <td class="tg-tr94">actual after converts</td>
             <td class="tg-tr94">face</td>
             <td class="tg-tr94">expected</td>
             <td class="tg-tr94">actual</td>
-            <td class="tg-tr94">after rerolls</td>
-            <td class="tg-tr94">after converts</td>
+            <td class="tg-tr94">expected after rerolls</td>
+            <td class="tg-tr94">actual after rerolls</td>
+            <td class="tg-tr94">expected after converts</td>
+            <td class="tg-tr94">actual after converts</td>
 
           </tr>
           <tr>
             <td class="tg-bsv2">hits</td>
             <td class="tg-ek65">{{ game.expected_unmodified_hits(player1) }}</td>
             <td class="tg-ek65">{{ game.unmodified_hits(player1) }} </td>
-            <td class="tg-ek65">15</td>
-            <td class="tg-ek65">17</td>
+            <td class="tg-ek65">{{ game.expected_hits_after_rerolls(player1) }}</td>
+            <td class="tg-ek65">{{ game.total_red_hits_after_rerolls(player1) }}</td>
+            <td class="tg-ek65">{{ game.expected_hits_after_converts(player1) }}</td>
+            <td class="tg-ek65">{{ game.total_red_hits_after_converts(player1) }}</td>
             <td class="tg-bsv2">hits</td>
             <td class="tg-ek65">{{ game.expected_unmodified_hits(player2) }}</td>
             <td class="tg-ek65">{{ game.unmodified_hits(player2) }}</td>
-            <td class="tg-ek65"></td>
-            <td class="tg-ek65"></td>
+            <td class="tg-ek65">{{ game.expected_hits_after_rerolls(player2) }}</td>
+            <td class="tg-ek65">{{ game.total_red_hits_after_rerolls(player2) }}</td>
+            <td class="tg-ek65">{{ game.expected_hits_after_converts(player2) }}</td>
+            <td class="tg-ek65">{{ game.total_red_hits_after_converts(player2) }}</td>
 
           </tr>
           <tr>
             <td class="tg-bsv2">crits</td>
             <td class="tg-ek65">{{ game.expected_unmodified_crits(player1) }}</td>
             <td class="tg-ek65">{{ game.unmodified_crits(player1) }} </td>
-            <td class="tg-ek65"></td>
-            <td class="tg-ek65"></td>
+            <td class="tg-ek65">{{ game.expected_crits_after_rerolls(player1) }}</td>
+            <td class="tg-ek65">{{ game.total_red_crits_after_rerolls(player1) }}</td>
+            <td class="tg-ek65">{{ game.expected_crits_after_converts(player1) }}</td>
+            <td class="tg-ek65">{{ game.total_red_crits_after_converts(player1) }}</td>
             <td class="tg-bsv2">crits</td>
             <td class="tg-ek65">{{ game.expected_unmodified_crits(player2) }}</td>
             <td class="tg-ek65">{{ game.unmodified_crits(player2) }}</td>
-            <td class="tg-ek65"></td>
-            <td class="tg-ek65"></td>
+            <td class="tg-ek65">{{ game.expected_crits_after_rerolls(player2) }}</td>
+            <td class="tg-ek65">{{ game.total_red_crits_after_rerolls(player2) }}</td>
+            <td class="tg-ek65">{{ game.expected_crits_after_converts(player2) }}</td>
+            <td class="tg-ek65">{{ game.total_red_crits_after_converts(player2) }}</td>
 
 
           </tr>
@@ -87,9 +99,13 @@
             <td class="tg-ek65">{{ game.unmodified_focuses(player1) }} </td>
             <td class="tg-ek65"></td>
             <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
             <td class="tg-bsv2">focuses</td>
             <td class="tg-ek65">{{ game.expected_unmodified_focuses(player2) }}</td>
             <td class="tg-ek65">{{ game.unmodified_focuses(player2) }} </td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
             <td class="tg-ek65"></td>
             <td class="tg-ek65"></td>
           </tr>
@@ -99,9 +115,13 @@
             <td class="tg-ek65">{{ game.unmodified_blanks(player1) }} </td>
             <td class="tg-ek65"></td>
             <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
             <td class="tg-bsv2">blanks</td>
             <td class="tg-ek65">{{ game.expected_unmodified_blanks(player2) }}</td>
             <td class="tg-ek65">{{ game.unmodified_blanks(player2) }} </td>
+            <td class="tg-ek65"></td>
+            <td class="tg-ek65"></td>
             <td class="tg-ek65"></td>
             <td class="tg-ek65"></td>
 
