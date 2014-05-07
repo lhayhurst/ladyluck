@@ -52,8 +52,10 @@ class Counter:
                 self.green_blanks += 1
         return self
 
-    NUM_REDS_HITS = 3.0 / 8.0
-    NUM_RED_CRITS = 1.0 / 8.0
+    NUM_REDS_HITS  = 3.0 / 8.0
+    NUM_RED_CRITS  = 1.0 / 8.0
+    NUM_RED_EYES   = 2.0 / 8.0
+    NUM_RED_BLANKS = 2.0 / 8.0
 
     def total_reds_after_rerolls(self):
         return self.total_reds + self.reroll_counter.total_reds
@@ -70,6 +72,12 @@ class Counter:
     def total_red_hits_after_converts(self):
         return self.total_red_hits_after_rerolls() + self.convert_counter.red_hits
 
+    def total_red_focuses_after_rerolls(self):
+        return self.red_eyes + self.reroll_counter.red_eyes
+
+    def total_red_focuses_after_converts(self):
+        #this one is interesting, as the total number of focuses could go down due to the converts
+        return self.total_red_focuses_after_rerolls() - self.convert_counter.red_hits - self.convert_counter.red_crits
 
     def expected_red_hits(self):
         t = self.total_reds
@@ -91,13 +99,19 @@ class Counter:
         t3 = t1 + t2
         return t3 * Counter.NUM_RED_CRITS
 
+    def expected_focuses_after_rerolls(self):
+        t1 = self.total_reds
+        t2 = self.reroll_counter.total_reds
+        t3 = t1 + t2
+        return t3 * Counter.NUM_RED_EYES
+
     def expected_red_blanks(self):
         t = self.total_reds
-        return t * (2.0 / 8.0)
+        return t * Counter.NUM_RED_BLANKS
 
     def expected_red_eyes(self):
         t = self.total_reds
-        return t * (2.0 / 8.0)
+        return t * Counter.NUM_RED_EYES
 
     def expected_green_evades(self):
         t = self.total_greens

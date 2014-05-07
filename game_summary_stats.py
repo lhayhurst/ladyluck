@@ -236,6 +236,14 @@ class GameTape(object):
     def total_red_crits_after_converts(self, player):
         return self.stats[player.name][COUNTER].total_red_crits_after_converts()
 
+    def total_red_focuses_after_rerolls(self, player):
+        return self.stats[player.name][COUNTER].total_red_focuses_after_rerolls()
+
+    def total_red_focuses_after_converts(self, player):
+        return self.stats[player.name][COUNTER].total_red_focuses_after_converts()
+
+
+
     def expected_hits_after_rerolls(self, player):
         return self.stats[player.name][COUNTER].expected_hits_after_rerolls()
 
@@ -250,7 +258,11 @@ class GameTape(object):
         #its the same name as the re-rolls, since no new dice have been thrown
         return self.expected_hits_after_rerolls(player)
 
+    def expected_focuses_after_rerolls(self, player):
+        return self.stats[player.name][COUNTER].expected_focuses_after_rerolls()
 
+    def expected_focuses_after_converts(self, player):
+        return self.expected_focuses_after_rerolls(player) #thecount doesn't go up, so can piggy back
 
     def total_greens(self, player):
         return self.stats[player.name][COUNTER].total_greens
@@ -323,20 +335,101 @@ class GameTapeTester(unittest.TestCase):
 
         p1 = self.g.game_players[0]
         p2 = self.g.game_players[1]
+
+        #HITS
+
+        #totals first
         self.assertEqual( 4, self.g.total_reds( p1) )
+        self.assertEqual( 3, self.g.total_reds( p2) )
+
+
+        #p1, initial rolls
         self.assertEqual( 1, self.g.unmodified_hits( p1 ) )
         self.assertEqual( (3.0/8.0) * 4 , self.g.expected_unmodified_hits( p1 ) )
 
+        #p2, initial roles
+        self.assertEqual( 0, self.g.unmodified_hits( p2 ) )
+        self.assertEqual( (3.0/8.0) * 3 , self.g.expected_unmodified_hits( p2 ) )
+
+
+        #p1, after rerolls
+        self.assertEqual( 1, self.g.total_red_hits_after_rerolls( p1 ) )
         self.assertEqual( 1.5, self.g.expected_hits_after_rerolls( p1 ))
+
+        #p2, after rerolls
+        self.assertEqual( 1, self.g.total_red_hits_after_rerolls( p2 ) )
+        self.assertEqual(  (3.0/8.0) * 5, self.g.expected_hits_after_rerolls( p2 ))
+
+        #p1, after converts
+        self.assertEqual( 2, self.g.total_red_hits_after_converts( p1 ) )
         self.assertEqual( 1.5, self.g.expected_hits_after_converts ( p1 ))
 
-        self.assertEqual( 2, self.g.total_red_hits_after_converts( p1 ) )
+        #p2, after converts
+        self.assertEqual( 1, self.g.total_red_hits_after_converts( p2 ) )
+        self.assertEqual( (3.0/8.0) * 5, self.g.expected_hits_after_converts ( p2 ))
 
 
+        #CRITS
+        #p1, initial rolls
+        self.assertEqual( 1, self.g.unmodified_crits( p1 ) )
+        self.assertEqual( (1.0/8.0) * 4 , self.g.expected_unmodified_crits( p1 ) )
+
+        #p2, initial roles
+        self.assertEqual( 1, self.g.unmodified_crits( p2 ) )
+        self.assertEqual( (1.0/8.0) * 3 , self.g.expected_unmodified_crits( p2 ) )
+
+
+        #p1, after rerolls
+        self.assertEqual( 1, self.g.total_red_crits_after_rerolls( p1 ) )
+        self.assertEqual( .5, self.g.expected_crits_after_rerolls( p1 ))
+
+        #p2, after rerolls
+        self.assertEqual( 1, self.g.total_red_crits_after_rerolls( p2 ) )
+        self.assertEqual(  (1.0/8.0) * 5, self.g.expected_crits_after_rerolls( p2 ))
+
+        #p1, after converts
+        self.assertEqual( 1, self.g.total_red_crits_after_converts( p1 ) )
+        self.assertEqual( .5, self.g.expected_crits_after_converts ( p1 ))
+
+        #p2, after converts
+        self.assertEqual( 2, self.g.total_red_crits_after_converts( p2 ) )
+        self.assertEqual( (1.0/8.0) * 5, self.g.expected_crits_after_converts ( p2 ))
+
+        #RED FOCUS
+        #p1, initial rolls
+        self.assertEqual( 1, self.g.unmodified_focuses( p1 ) )
+        self.assertEqual( (2.0/8.0) * 4 , self.g.expected_unmodified_focuses( p1 ) )
+
+        #p2, initial roles
+        self.assertEqual( 0, self.g.unmodified_focuses( p2 ) )
+        self.assertEqual( (2.0/8.0) * 3 , self.g.expected_unmodified_focuses( p2 ) )
+
+
+        #p1, after rerolls
+        self.assertEqual( 1, self.g.total_red_focuses_after_rerolls( p1 ) )
+        self.assertEqual( 4 * (2.0/8.0), self.g.expected_focuses_after_rerolls( p1 ))
+
+        #p2, after rerolls
+        self.assertEqual( 1, self.g.total_red_focuses_after_rerolls( p2 ) )
+        self.assertEqual(  (2.0/8.0) * 5, self.g.expected_focuses_after_rerolls( p2 ))
+
+        #p1, after converts
+        self.assertEqual( 0, self.g.total_red_focuses_after_converts( p1 ) )
+        self.assertEqual( (2.0/8.0) * 4, self.g.expected_focuses_after_converts ( p1 ))
+
+        #p2, after converts
+        self.assertEqual( 0, self.g.total_red_focuses_after_converts( p2 ) )
+        self.assertEqual( (2.0/8.0) * 5, self.g.expected_focuses_after_converts ( p2 ))
+
+        #RED BLANK
+
+        #EVADES
+
+        #GREEN FOCUSES
+
+        #GREEN BLANKS
         self.assertEqual( 4, self.g.total_greens(self.g.game_players[1]))
 
-        self.assertEqual( 1, self.g.total_red_hits_after_rerolls(p2))
-        self.assertEqual( 5, self.g.total_reds_after_rerolls(p2))
 
 
     def testAttackSetStats(self):
