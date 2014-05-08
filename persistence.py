@@ -147,8 +147,15 @@ class Game(Base):
         if winner is not None:
             self.game_winner = winner
 
+
     def id_str(self):
         return str(self.id)
+
+    def get_player_by_name(self, name):
+        for p in self.game_players:
+            if p.name == name:
+                return p
+        return None
 
 
     def sparkline(self, player):

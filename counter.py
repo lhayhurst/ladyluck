@@ -52,13 +52,21 @@ class Counter:
                 self.green_blanks += 1
         return self
 
-    NUM_REDS_HITS  = 3.0 / 8.0
-    NUM_RED_CRITS  = 1.0 / 8.0
-    NUM_RED_EYES   = 2.0 / 8.0
-    NUM_RED_BLANKS = 2.0 / 8.0
+    NUM_REDS_HITS    = 3.0 / 8.0
+    NUM_RED_CRITS    = 1.0 / 8.0
+    NUM_RED_EYES     = 2.0 / 8.0
+    NUM_RED_BLANKS   = 2.0 / 8.0
+
+    NUM_GREEN_EYES   = 2.0 / 8.0
+    NUM_GREEN_EVADES = 3.0 / 8.0
+    NUM_GREEN_BLANKS = 3.0 / 8.0
 
     def total_reds_after_rerolls(self):
         return self.total_reds + self.reroll_counter.total_reds
+
+    def total_greens_after_rerolls(self):
+        return self.total_greens + self.reroll_counter.total_greens
+
 
     def total_red_hits_after_rerolls(self):
         return self.red_hits + self.reroll_counter.red_hits
@@ -72,6 +80,10 @@ class Counter:
     def total_red_hits_after_converts(self):
         return self.total_red_hits_after_rerolls() + self.convert_counter.red_hits
 
+    def total_green_evades_after_converts(self):
+        return self.total_green_evades_after_rerolls() + self.convert_counter.green_evades
+
+
     def total_red_focuses_after_rerolls(self):
         return self.red_eyes + self.reroll_counter.red_eyes
 
@@ -79,14 +91,32 @@ class Counter:
         #this one is interesting, as the total number of focuses could go down due to the converts
         return self.total_red_focuses_after_rerolls() - self.convert_counter.red_hits - self.convert_counter.red_crits
 
+
+    def total_green_evades_after_rerolls(self):
+        return self.green_evades + self.reroll_counter.green_evades
+
+
+
+    def total_green_focuses_after_converts(self):
+        #same logic as above
+        return self.total_green_focuses_after_rerolls() - self.convert_counter.green_evades
+
     def total_red_blanks_after_rerolls(self):
         return self.red_blanks + self.reroll_counter.red_blanks
+
+    def total_green_blanks_after_rerolls(self):
+        return self.green_blanks + self.reroll_counter.green_blanks
 
 
     def total_red_blanks_after_converts(self):
         return self.total_red_blanks_after_rerolls() + self.convert_counter.red_blanks
 
+    def total_green_blanks_after_converts(self):
+        return self.total_green_blanks_after_rerolls() + self.convert_counter.green_blanks
 
+
+    def total_green_focuses_after_rerolls(self):
+        return self.green_eyes + self.reroll_counter.green_eyes
 
     def expected_red_hits(self):
         t = self.total_reds
@@ -97,6 +127,13 @@ class Counter:
         t2 = self.reroll_counter.total_reds
         t3 = t1 + t2
         return t3 * Counter.NUM_REDS_HITS
+
+    def expected_green_evades_after_rerolls(self):
+        t1 = self.total_greens
+        t2 = self.reroll_counter.total_greens
+        t3 = t1 + t2
+        return t3 * Counter.NUM_GREEN_EVADES
+
 
     def expected_red_crits(self ):
         t = self.total_reds
@@ -114,6 +151,12 @@ class Counter:
         t3 = t1 + t2
         return t3 * Counter.NUM_RED_EYES
 
+    def expected_green_focuses_after_rerolls(self):
+        t1 = self.total_greens
+        t2 = self.reroll_counter.total_greens
+        t3 = t1 + t2
+        return t3 * Counter.NUM_GREEN_EYES
+
     def expected_red_blanks(self):
         t = self.total_reds
         return t * Counter.NUM_RED_BLANKS
@@ -124,6 +167,11 @@ class Counter:
         t3 = t1 + t2
         return t3 * Counter.NUM_RED_BLANKS
 
+    def expected_green_blanks_after_rerolls(self):
+        t1 = self.total_greens
+        t2 = self.reroll_counter.total_greens
+        t3 = t1 + t2
+        return t3 * Counter.NUM_GREEN_BLANKS
 
     def expected_red_eyes(self):
         t = self.total_reds
@@ -131,12 +179,12 @@ class Counter:
 
     def expected_green_evades(self):
         t = self.total_greens
-        return t * (3.0 / 8.0)
+        return t * Counter.NUM_GREEN_EVADES
 
     def expected_green_blanks(self):
         t = self.total_greens
-        return t * (3.0 / 8.0)
+        return t * Counter.NUM_GREEN_BLANKS
 
     def expected_green_eyes(self ):
         t = self.total_greens
-        return t * (2.0 / 8.0)
+        return t * Counter.NUM_GREEN_EYES

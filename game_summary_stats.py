@@ -180,6 +180,29 @@ class GameTape(object):
         for ats in self.attack_sets:
             ats.net_results()
 
+    def attack_set_subsets(self, modvalue=15):
+        ret = []
+        i = 0
+        subset = []
+        for ats in self.attack_sets:
+            i = i + 1
+            if i % modvalue == 0:
+                ret.append(list(subset))
+                subset = []
+            else:
+                subset.append( ats )
+        if len(subset) > 0:
+            ret.append(subset)
+        return ret
+
+
+    def total_attack_sets(self, player):
+        cnt = 0
+        for ats in self.attack_sets:
+            if ats.attacking_player.name == player.name:
+                cnt = cnt + 1
+        return cnt
+
     def score(self):
         raw_luck_p1          = Counter( True )
         raw_score_p1         = Score( )
@@ -223,12 +246,17 @@ class GameTape(object):
     def total_reds_after_rerolls(self, player):
         return self.stats[player.name][COUNTER].total_reds_after_rerolls()
 
+    def total_greens_after_rerolls(self, player):
+        return self.stats[player.name][COUNTER].total_greens_after_rerolls()
 
     def total_red_hits_after_rerolls(self, player):
         return self.stats[player.name][COUNTER].total_red_hits_after_rerolls()
 
     def total_red_hits_after_converts(self, player):
         return self.stats[player.name][COUNTER].total_red_hits_after_converts()
+
+    def total_green_evades_after_converts(self, player):
+        return self.stats[player.name][COUNTER].total_green_evades_after_converts()
 
     def total_red_crits_after_rerolls(self, player):
         return self.stats[player.name][COUNTER].total_red_crits_after_rerolls()
@@ -239,8 +267,15 @@ class GameTape(object):
     def total_red_focuses_after_rerolls(self, player):
         return self.stats[player.name][COUNTER].total_red_focuses_after_rerolls()
 
+    def expected_green_focuses_after_rerolls(self, player):
+        return self.stats[player.name][COUNTER].expected_green_focuses_after_rerolls()
+
     def total_red_blanks_after_rerolls(self, player):
         return self.stats[player.name][COUNTER].total_red_blanks_after_rerolls()
+
+    def total_green_evades_after_rerolls(self, player):
+        return self.stats[player.name][COUNTER].total_green_evades_after_rerolls()
+
 
     def total_red_focuses_after_converts(self, player):
         return self.stats[player.name][COUNTER].total_red_focuses_after_converts()
@@ -273,13 +308,33 @@ class GameTape(object):
         return self.expected_blanks_after_rerolls(player) #count doesn't change
 
 
-
     def expected_focuses_after_converts(self, player):
         return self.expected_focuses_after_rerolls(player) #thecount doesn't go up, so can piggy back
+
+    def expected_green_focuses_after_converts(self, player):
+        return self.expected_green_focuses_after_rerolls(player) #thecount doesn't go up, so can piggy back
+
+    def expected_green_blanks_after_converts(self, player):
+        return self.expected_green_blanks_after_rerolls(player)
+
+    def expected_green_evades_after_converts(self, player):
+        return self.expected_green_evades_after_rerolls(player)
 
     def total_greens(self, player):
         return self.stats[player.name][COUNTER].total_greens
 
+    def total_green_focuses_after_rerolls(self, player):
+        return self.stats[player.name][COUNTER].total_green_focuses_after_rerolls()
+
+    def total_green_focuses_after_converts(self, player):
+        return self.stats[player.name][COUNTER].total_green_focuses_after_converts()
+
+
+    def total_green_blanks_after_rerolls(self, player):
+        return self.stats[player.name][COUNTER].total_green_blanks_after_rerolls()
+
+    def total_green_blanks_after_converts(self, player):
+        return self.stats[player.name][COUNTER].total_green_blanks_after_converts()
 
 
     def expected_unmodified_hits(self, player):
@@ -291,6 +346,9 @@ class GameTape(object):
 
     def expected_unmodified_evades(self, player):
         return self.stats[player.name][COUNTER].expected_green_evades()
+
+    def expected_green_evades_after_rerolls(self, player):
+        return self.stats[player.name][COUNTER].expected_green_evades_after_rerolls()
 
     def unmodified_crits(self, player):
         return self.stats[player.name][COUNTER].red_crits
@@ -316,6 +374,9 @@ class GameTape(object):
 
     def expected_unmodified_green_blanks(self, player):
         return self.stats[player.name][COUNTER].expected_green_blanks()
+
+    def expected_green_blanks_after_rerolls(self, player):
+        return self.stats[player.name][COUNTER].expected_green_blanks_after_rerolls()
 
     def unmodified_green_blanks(self, player):
         return self.stats[player.name][COUNTER].green_blanks
@@ -462,12 +523,86 @@ class GameTapeTester(unittest.TestCase):
 
 
 
+        #green dice
+        self.assertEqual( 6, self.g.total_greens(p1))
+        self.assertEqual( 4, self.g.total_greens(p2))
+
         #EVADES
+        self.assertEqual( 0, self.g.unmodified_evades(p1))
+        self.assertEqual( (3.0/8.0) * 6,  self.g.expected_unmodified_evades(p1))
+
+        self.assertEqual( 2, self.g.unmodified_evades(p2))
+        self.assertEqual( (3.0/8.0) * 4,  self.g.expected_unmodified_evades(p2))
+
+
+        #p1, after rerolls
+        self.assertEqual( 0, self.g.total_green_evades_after_rerolls( p1 ) )
+        self.assertEqual( (3.0/8.0) * 7, self.g.expected_green_evades_after_rerolls( p1 ))
+
+        #p2, after rerolls
+        self.assertEqual( 2, self.g.total_green_evades_after_rerolls( p2 ) )
+        self.assertEqual(  (3.0/8.0) * 4, self.g.expected_green_evades_after_rerolls( p2 ))
+
+        #p1, after converts
+        self.assertEqual( 4, self.g.total_green_evades_after_converts( p1 ) )
+        self.assertEqual( (3.0/8.0) * 7 , self.g.expected_green_evades_after_converts ( p1 ))
+
+        #p2, after converts
+        self.assertEqual( 3, self.g.total_green_evades_after_converts( p2 ) )
+        self.assertEqual( (3.0/8.0) * 4, self.g.expected_green_evades_after_converts ( p2 ))
+
 
         #GREEN FOCUSES
+        self.assertEqual( 3, self.g.unmodified_green_focuses( p1 ) )
+        self.assertEqual( (2.0/8.0) * 6 , self.g.expected_unmodified_green_focuses( p1 ) )
+
+        #p2, initial roles
+        self.assertEqual( 1, self.g.unmodified_green_focuses( p2 ) )
+        self.assertEqual( (2.0/8.0) * 4 , self.g.expected_unmodified_green_focuses( p2 ) )
+
+
+        #p1, after rerolls
+        self.assertEqual( 4, self.g.total_green_focuses_after_rerolls( p1 ) )
+        self.assertEqual( 7 * (2.0/8.0), self.g.expected_green_focuses_after_rerolls( p1 ))
+
+        #p2, after rerolls
+        self.assertEqual( 1, self.g.total_green_focuses_after_rerolls( p2 ) )
+        self.assertEqual( (2.0/8.0) * 4, self.g.expected_green_focuses_after_rerolls( p2 ))
+
+        #p1, after converts
+        self.assertEqual( 0, self.g.total_green_focuses_after_converts( p1 ) )
+        self.assertEqual( (2.0/8.0) * 7, self.g.expected_green_focuses_after_converts ( p1 ))
+
+        #p2, after converts
+        self.assertEqual( 0, self.g.total_green_focuses_after_converts( p2 ) )
+        self.assertEqual( (2.0/8.0) * 4, self.g.expected_green_focuses_after_converts ( p2 ))
 
         #GREEN BLANKS
-        self.assertEqual( 4, self.g.total_greens(self.g.game_players[1]))
+
+        self.assertEqual( 3, self.g.unmodified_green_blanks( p1 ) )
+        self.assertEqual( (3.0/8.0) * 6 , self.g.expected_unmodified_green_blanks( p1 ) )
+
+        #p2, initial roles
+        self.assertEqual( 1, self.g.unmodified_green_blanks( p2 ) )
+        self.assertEqual( (3.0/8.0) * 4 , self.g.expected_unmodified_green_blanks( p2 ) )
+
+
+        #p1, after rerolls
+        self.assertEqual( 3, self.g.total_green_blanks_after_rerolls( p1 ) )
+        self.assertEqual( 7 * (3.0/8.0), self.g.expected_green_blanks_after_rerolls( p1 ))
+
+        #p2, after rerolls
+        self.assertEqual( 1, self.g.total_green_blanks_after_rerolls( p2 ) )
+        self.assertEqual( (3.0/8.0) * 4, self.g.expected_green_blanks_after_rerolls( p2 ))
+
+        #p1, after converts
+        self.assertEqual( 3, self.g.total_green_blanks_after_converts( p1 ) )
+        self.assertEqual( (3.0/8.0) * 7, self.g.expected_green_blanks_after_converts ( p1 ))
+
+        #p2, after converts
+        self.assertEqual( 1, self.g.total_green_blanks_after_converts( p2 ) )
+        self.assertEqual( (3.0/8.0) * 4, self.g.expected_green_blanks_after_converts ( p2 ))
+
 
 
 

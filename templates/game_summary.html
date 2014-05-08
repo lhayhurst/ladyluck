@@ -16,6 +16,7 @@
         </li>
     </ul>
     <div id="a" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
+
         <style type="text/css">
         .tg1  {border-collapse:collapse;border-spacing:0;}
         .tg1 td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
@@ -29,16 +30,17 @@
         .tg1 .tg-bsv2{background-color:#efefef}
         .tg1 .tg-ek65{background-color:#ffffff;color:#000000}
         </style>
-            {#    <td class="tg-ek65"><img src= {{ game.sparkline(player1.name)}}></td> #}
+
+
 
 
         <table class="tg1">
           <tr>
             <th class="tg-tr94">{{ player1.name }}</th>
-            <th class="tg-6997" colspan="5">red dice: {{ game.total_reds(player1) }}<br>with rerolls: {{ game.total_reds_after_rerolls(player1) }}</th>
+            <th class="tg-6997" colspan="5">{{ game.total_attack_sets(player1)}} attack sets rolled<br>red dice rolled: {{ game.total_reds(player1) }}<br>after rerolls: {{ game.total_reds_after_rerolls(player1) }}</th>
             <th class="tg-ii5f" rowspan="6"></th>
             <th class="tg-tr94">{{ player2.name }}</th>
-            <th class="tg-6997" colspan="5">red dice: {{ game.total_reds(player2) }}<br>with rerolls: {{ game.total_reds_after_rerolls(player2) }}</th>
+            <th class="tg-6997" colspan="5">{{ game.total_attack_sets(player2)}} attack sets rolled<br>red dice rolled: {{ game.total_reds(player2) }}<br>after rerolls: {{ game.total_reds_after_rerolls(player2) }}</th>
 
           </tr>
           <tr>
@@ -117,14 +119,14 @@
 
           </tr>
           <tr>
-            <td class="tg-ii5f" colspan="7"></td>
+            <td class="tg-ii5f" colspan="14"></td>
           </tr>
           <tr>
             <td class="tg-tr94">{{ player1.name }}</td>
-            <td class="tg-zlxb" colspan="5">total green dice: {{  game.total_greens(player1) }}</td>
+            <td class="tg-zlxb" colspan="5">green dice rolled: {{  game.total_greens(player1) }}<br>after rerolls: {{ game.total_greens_after_rerolls(player1) }}</td>
             <td class="tg-ii5f" rowspan="5"></td>
             <td class="tg-tr94">{{ player2.name }}</td>
-            <td class="tg-zlxb" colspan="5">total green dice: {{  game.total_greens(player2) }}</td>
+            <td class="tg-zlxb" colspan="5">green dice rolled: {{  game.total_greens(player2) }}<br>after rerolls: {{ game.total_greens_after_rerolls(player2) }}</td>
           </tr>
           <tr>
             <td class="tg-tr94">face</td>
@@ -145,72 +147,161 @@
             <td class="tg-fdty">evades</td>
             <td class="tg-ek65">{{ game.expected_unmodified_evades(player1) }}</td>
             <td class="tg-ek65">{{ game.unmodified_evades(player1) }} </td>
-            <td class="tg-ek65"></td>
-            <td class="tg-ek65"></td>
-            <td class="tg-ek65"></td>
+            <td class="tg-ek65">{{ game.expected_green_evades_after_rerolls(player1) }}</td>
+            <td class="tg-ek65">{{ game.total_green_evades_after_rerolls(player1) }}</td>
+            <td class="tg-ek65">{{ game.total_green_evades_after_converts(player1) }}</td>
+
             <td class="tg-bsv2">evades</td>
             <td class="tg-ek65">{{ game.expected_unmodified_evades(player2) }}</td>
             <td class="tg-ek65">{{ game.unmodified_evades(player2) }} </td>
-            <td class="tg-ek65"></td>
-            <td class="tg-ek65"></td>
-            <td class="tg-ek65"></td>
+            <td class="tg-ek65">{{ game.expected_green_evades_after_rerolls(player2) }}</td>
+            <td class="tg-ek65">{{ game.total_green_evades_after_rerolls(player2) }}</td>
+            <td class="tg-ek65">{{ game.total_green_evades_after_converts(player2) }}</td>
           </tr>
           <tr>
             <td class="tg-fdty">focuses</td>
             <td class="tg-ek65">{{ game.expected_unmodified_green_focuses(player1) }}</td>
             <td class="tg-ek65">{{ game.unmodified_green_focuses(player1) }} </td>
-            <td class="tg-ek65"></td>
-            <td class="tg-ek65"></td>
-            <td class="tg-ek65"></td>
+            <td class="tg-ek65">{{ game.expected_green_focuses_after_rerolls(player1) }}</td>
+            <td class="tg-ek65">{{ game.total_green_focuses_after_rerolls(player1) }}</td>
+            <td class="tg-ek65">{{ game.total_green_focuses_after_converts(player1) }}</td>
             <td class="tg-bsv2">focuses</td>
             <td class="tg-ek65">{{ game.expected_unmodified_green_focuses(player2) }}</td>
             <td class="tg-ek65">{{ game.unmodified_green_focuses(player2) }} </td>
-            <td class="tg-ek65"></td>
-            <td class="tg-ek65"></td>
-            <td class="tg-ek65"></td>
+            <td class="tg-ek65">{{ game.expected_green_focuses_after_rerolls(player2) }}</td>
+            <td class="tg-ek65">{{ game.total_green_focuses_after_rerolls(player2) }}</td>
+            <td class="tg-ek65">{{ game.total_green_focuses_after_converts(player2) }}</td>
+
           </tr>
           <tr>
             <td class="tg-fdty">blanks</td>
             <td class="tg-ek65">{{ game.expected_unmodified_green_blanks(player1) }}</td>
             <td class="tg-ek65">{{ game.unmodified_green_blanks(player1) }} </td>
-            <td class="tg-ek65"></td>
-            <td class="tg-ek65"></td>
-            <td class="tg-ek65"></td>
+            <td class="tg-ek65">{{ game.expected_green_blanks_after_rerolls(player1) }}</td>
+            <td class="tg-ek65">{{ game.total_green_blanks_after_rerolls(player1) }}</td>
+            <td class="tg-ek65">{{ game.total_green_blanks_after_converts(player1) }}</td>
             <td class="tg-bsv2">blanks</td>
             <td class="tg-ek65">{{ game.expected_unmodified_green_blanks(player2) }}</td>
             <td class="tg-ek65">{{ game.unmodified_green_blanks(player2) }} </td>
-            <td class="tg-ek65"></td>
-            <td class="tg-ek65"></td>
-            <td class="tg-ek65"></td>
-          </tr>
+            <td class="tg-ek65">{{ game.expected_green_blanks_after_rerolls(player2) }}</td>
+            <td class="tg-ek65">{{ game.total_green_blanks_after_rerolls(player2) }}</td>
+            <td class="tg-ek65">{{ game.total_green_blanks_after_converts(player2) }}</td>
+       </tr>
         </table>
 
     </div>
     <div id="b" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true" aria-hidden="false" style="display: block;">
-        Content of B
     </div>
     <div id="c" aria-labelledby="ui-id-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
-        <h3>Game Tape</h3>
-        <p></p>
         <a href="/download-game?id={{ game.id }}">Download game as csv</a>
 
         <style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-.tg .tg-ii5f{background-color:#000000;color:#ffffff}
-.tg .tg-1bl1{background-color:#bdc3c7}
-.tg .tg-nkg8{background-color:#F0F6FA;color:#000000}
-.tg .tg-rh4c{background-color:#F0F6FA}
-.tg .tg-o1{background-color:#F8F8F8}
-.tg .tg-o2{background-color:#D0D0D0}
-.tg .tg-o3{background-color:#A8A8A8}
-.tg .tg-o4{background-color:#808080}
-.tg .tg-o5{background-color:#585858}
-.tg .tg-o6{background-color:#303030}
+            .tg  {border-collapse:collapse;border-spacing:0;}
+            .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+            .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+            .tg .tg-ii5f{background-color:#000000;color:#ffffff}
+            .tg .tg-1bl1{background-color:#bdc3c7}
+            .tg .tg-nkg8{background-color:#F0F6FA;color:#000000}
+            .tg .tg-rh4c{background-color:#F0F6FA}
+            .tg .tg-o1{background-color:#F8F8F8}
+            .tg .tg-o2{background-color:#D0D0D0}
+            .tg .tg-o3{background-color:#A8A8A8}
+            .tg .tg-o4{background-color:#808080}
+            .tg .tg-o5{background-color:#585858}
+            .tg .tg-o6{background-color:#303030}
 
 
-</style>
+        </style>
+
+
+        <br>
+        <br>
+        <b>Top bar:</b> {{ player1.name }}
+        <br>
+        <b>Bottom bar:</b> {{ player2.name }}
+        {% for attack_set_subset in game_tape.attack_set_subsets(modvalue=15) %}
+            <br>
+            <table class="tg">
+                <tr>
+                    {%  for attack_set in attack_set_subset %}
+                        <td class="tg-o2">
+                        <center>{{ attack_set.number }}</center>
+                            <table class="tg">
+                                {%  if attack_set.attacking_player.name == player1.name %}
+                                    <tr>
+                                        <td class="tg-o1">
+                                            <a href="#attack_set{{attack_set.number}}"><canvas id="circlecanvas{{attack_set.number}}_1" width="40" height="40"></canvas></a>
+                                            <script>
+                                              var canvas = document.getElementById("circlecanvas{{attack_set.number}}_1");
+                                              var context = canvas.getContext("2d");
+                                              context.strokeStyle="red"
+                                              context.fillStyle="red"
+                                              context.arc(20, 20, Math.abs({{attack_set.total_attack_end_luck() }}) * (40/3.5), 0, Math.PI * 2, false);
+                                              {%  if attack_set.total_attack_end_luck() < 0  %}
+                                                  context.stroke()
+                                              {% else %}
+                                                  context.fill()
+                                              {%  endif %}
+                                            </script> <a href="#attack_set{{attack_set.number}}"><canvas id="circlecanvas{{attack_set.number}}_2" width="40" height="40"></canvas></a>
+                                            <script>
+                                              var canvas = document.getElementById("circlecanvas{{attack_set.number}}_2");
+                                              var context = canvas.getContext("2d");
+                                              context.strokeStyle="green"
+                                              context.fillStyle="green"
+                                              context.arc(20, 20, Math.abs({{attack_set.total_defense_end_luck() }}) * (40/3.5), 0, Math.PI * 2, false);
+                                              {%  if attack_set.total_defense_end_luck() < 0  %}
+                                                  context.stroke()
+                                              {% else %}
+                                                  context.fill()
+                                              {%  endif %}
+                                            </script>
+                                            {{ attack_set.hits_comma_crits_string() }}
+
+                                        </td>
+                                    </tr>
+                                    <tr><td class="tg-o1"></td></tr>
+                                {%  else %}
+                                    <tr><td class="tg-o1"></td></tr>
+                                    <tr>
+                                        <td class="tg-o1">
+                                            <a href="#attack_set{{attack_set.number}}"><canvas id="circlecanvas{{attack_set.number}}_2" width="40" height="40"></canvas></a>
+                                            <script>
+                                              var canvas = document.getElementById("circlecanvas{{attack_set.number}}_2");
+                                              var context = canvas.getContext("2d");
+                                              context.strokeStyle="green"
+                                              context.fillStyle="green"
+                                              context.arc(20, 20, Math.abs({{attack_set.total_defense_end_luck() }}) * (40/3.5), 0, Math.PI * 2, false);
+                                              {%  if attack_set.total_defense_end_luck() < 0  %}
+                                                  context.stroke()
+                                              {% else %}
+                                                  context.fill()
+                                              {%  endif %}
+                                            </script>
+                                            <a href="#attack_set{{attack_set.number}}"><canvas id="circlecanvas{{attack_set.number}}_1" width="40" height="40"></canvas></a>
+                                            <script>
+                                              var canvas = document.getElementById("circlecanvas{{attack_set.number}}_1");
+                                              var context = canvas.getContext("2d");
+                                              context.strokeStyle="red"
+                                              context.fillStyle="red"
+                                              context.arc(20, 20, Math.abs({{attack_set.total_attack_end_luck() }}) * (40/3.5), 0, Math.PI * 2, false);
+                                              {%  if attack_set.total_attack_end_luck() < 0  %}
+                                                  context.stroke()
+                                              {% else %}
+                                                  context.fill()
+                                              {%  endif %}
+                                            </script>
+                                            {{ attack_set.hits_comma_crits_string() }}
+
+                                        </td>
+                                    </tr>
+                                {%  endif %}
+                            </table>
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table>
+        {%  endfor %}
+
 
         {% for attack_set in game_tape.attack_sets %}
             <br>

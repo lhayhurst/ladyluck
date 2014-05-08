@@ -149,11 +149,9 @@ def game():
 def sparkline():
     id = str(request.args.get('game_id'))
     game = db.get_game(id)
-    if game == None:
-        return redirect(url_for('add_game'))
-    player = str(request.args.get('player'))
+    player_name = str(request.args.get('player'))
 
-    sparkline = Sparkplot(data=game.game_tape.unmodified_attack_data( player ), label_min=True, label_max=True, label_last_value=True )
+    sparkline = Sparkplot(data=game.game_tape.unmodified_attack_data( player_name ), label_min=True, label_max=True )
     output = sparkline.plot_sparkline()
     response = make_response(output.getvalue())
     response.mimetype = 'image/png'

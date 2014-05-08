@@ -54,8 +54,6 @@ class AttackSet:
     def total_defense_end_luck(self):
         return self.total_by_luck_attr("defense_end_luck")
 
-
-
     def total_by_luck_attr(self, attr):
         score = None
         for rec in self.records:
@@ -87,12 +85,32 @@ class AttackSet:
                 ret.append(rec)
         return ret
 
+    def num_net_hits(self):
+        return self.net_hits
+
+    def num_net_crits(self):
+        return self.net_crits
+
+    def hits_comma_crits_string(self):
+
+        nnh = self.num_net_hits()
+        nnc = self.net_crits
+        if nnh == 0 and nnc == 0:
+            return ""
+        if nnh >0 and nnc == 0:
+            return str(nnh) + "h"
+        if nnh == 0 and nnc > 0:
+            return str(nnc) + "c"
+        return str(nnh) +"h, " + str(nnc) + "c"
 
     def net_results(self):
         #first extract all the hits
+
         hits = self.get_hits()
+        self.net_hits = len(hits)
         #then crits
         crits = self.get_crits()
+        self.net_crits = len(crits)
 
         if len(hits) == 0 and len(crits) == 0:
             return
@@ -105,6 +123,7 @@ class AttackSet:
             if num_evades > 0:
                 num_evades = num_evades - 1
                 hit.cancel()
+                self.net_hits = self.net_hits - 1
             elif num_evades == 0:
                 break
 
@@ -113,6 +132,8 @@ class AttackSet:
             if num_evades > 0:
                 num_evades = num_evades - 1
                 crit.cancel()
+                self.net_crits = self.net_crits - 1
+
             elif num_evades == 0:
                 break
 
@@ -129,6 +150,7 @@ class AttackSet:
         self.end_score                 = Score()
 
         for rec in self.records:
+
             if rec.attack_roll is not None:
                 luck = self.roll_score.eval( rec.attack_roll.dice_type, self.roll_counter.count(rec.attack_roll))
                 rec.attack_roll_luck = luck
@@ -136,6 +158,7 @@ class AttackSet:
                     rec.attack_roll.dice_type,
                     tape_stats[rec.attacking_player.name][COUNTER].count( rec.attack_roll )
                 )
+
             if rec.defense_roll is not None:
                 luck = self.roll_score.eval( rec.defense_roll.dice_type, self.roll_counter.count( rec.defense_roll))
                 rec.defense_roll_luck = luck
@@ -144,20 +167,27 @@ class AttackSet:
                         rec.defense_roll.dice_type,
                         tape_stats[rec.defending_player.name][COUNTER].count( rec.defense_roll )
                     )
+
             if rec.attack_reroll is not None:
                 luck = self.reroll_score.eval( rec.attack_reroll.dice_type, self.reroll_counter.count(rec.attack_reroll))
                 rec.attack_reroll_luck = luck
                 tape_stats[rec.attacking_player.name][COUNTER].count_reroll( rec.attack_reroll )
+
             if rec.defense_reroll is not None:
                 luck = self.reroll_score.eval( rec.defense_reroll.dice_type, self.reroll_counter.count(rec.defense_reroll))
                 rec.defense_reroll_luck = luck
+                tape_stats[rec.defending_player.name][COUNTER].count_reroll( rec.defense_reroll )
+
             if rec.attack_convert is not None:
                 luck = self.convert_score.eval( rec.attack_convert.dice_type, self.convert_counter.count(rec.attack_convert))
                 rec.attack_convert_luck = luck
                 tape_stats[rec.attacking_player.name][COUNTER].count_convert( rec.attack_convert )
+
             if rec.defense_convert is not None:
                 luck = self.convert_score.eval( rec.defense_convert.dice_type, self.convert_counter.count(rec.defense_convert))
                 rec.defense_convert_luck = luck
+                tape_stats[rec.defending_player.name][COUNTER].count_convert( rec.defense_convert )
+
             if rec.attack_end is not None:
                 luck = self.end_score.eval( rec.attack_end.dice_type, self.end_counter.count(rec.attack_end))
                 rec.attack_end_luck = luck
