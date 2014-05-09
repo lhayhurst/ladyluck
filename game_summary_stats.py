@@ -216,6 +216,20 @@ class GameTape(object):
             ats.score(self.stats)
 
 
+    def red_scores(self, player):
+        ret = []
+        for aset in self.attack_sets:
+            if aset.attacking_player.name == player.name:
+                ret.append(aset.cumulative_attack_end_luck)
+        return ret
+
+    def green_scores(self, player):
+        ret = []
+        for aset in self.attack_sets:
+            if aset.defending_player is not None and aset.defending_player.name == player.name:
+                ret.append(aset.cumulative_defense_end_luck)
+        return ret
+
     def get_attack_set(self, attack_set_num):
         for aset in self.attack_sets:
             if aset.number == attack_set_num:
@@ -401,6 +415,42 @@ class GameTapeTester(unittest.TestCase):
 
         self.tape = GameTape( self.g )
         self.tape.score()
+
+    def testCumulativeStats(self):
+
+        p1 = self.g.game_players[0]
+        p2 = self.g.game_players[1]
+
+        self.assertEqual( 4, self.g.total_reds( p1) )
+        self.assertEqual( 3, self.g.total_reds( p2) )
+
+        p1_reds = self.g.game_tape.red_scores( p1 )
+
+        self.assertEqual( 2, len(p1_reds))
+        self.assertEqual( -0.3125, p1_reds[0])
+        self.assertEqual(  0.625, p1_reds[1])
+
+        p2_reds = self.g.game_tape.red_scores( p2 )
+
+        self.assertEqual( 2, len(p2_reds))
+        self.assertEqual( 0.9375, p2_reds[0])
+        self.assertEqual( 1.53125, p2_reds[1])
+
+
+        p1_greens = self.g.game_tape.green_scores( p1 )
+
+        self.assertEqual( 2, len(p1_greens))
+
+        self.assertEqual(1.3125, p1_greens[0])
+        self.assertEqual(0.625, p1_greens[1])
+
+        p2_greens = self.g.game_tape.green_scores( p2 )
+
+        self.assertEqual( 2, len(p2_greens))
+        self.assertEqual( 0.3125, p2_greens[0])
+        self.assertEqual( 0.75, p2_greens[1])
+
+
 
 
     def testRawSummaryStats(self):

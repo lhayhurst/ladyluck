@@ -123,6 +123,7 @@ class AttackSet:
         self.end_score                 = Score()
 
 
+
         for rec in self.records:
 
             initial_attack_score   = tape_stats[rec.attacking_player.name][INITIAL][SCORE]
@@ -165,7 +166,8 @@ class AttackSet:
 
                 end_attack_score       = tape_stats[rec.attacking_player.name][END][SCORE]
                 end_attack_counter     = tape_stats[rec.attacking_player.name][END][COUNTER]
-                end_attack_score.eval( rec.attack_end.dice_type, end_attack_counter.count( rec.attack_end ))
+                self.cumulative_attack_end_luck = end_attack_score.eval( rec.attack_end.dice_type, end_attack_counter.count( rec.attack_end ))
+
 
 
             if rec.defense_end is not None:
@@ -174,4 +176,4 @@ class AttackSet:
                 if rec.defending_player is not None:
                     end_defense_score   = tape_stats[rec.defending_player.name][END][SCORE]
                     end_defense_counter = tape_stats[rec.defending_player.name][END][COUNTER]
-                    end_defense_score.eval( rec.defense_end.dice_type,end_defense_counter.count( rec.defense_end ) )
+                    self.cumulative_defense_end_luck = end_defense_score.eval( rec.defense_end.dice_type,end_defense_counter.count( rec.defense_end ) )
