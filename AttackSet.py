@@ -3,6 +3,10 @@ from score import Score
 
 __author__ = 'lhayhurst'
 
+END = "end"
+SCORE = "score"
+INITIAL = "initial"
+
 
 class AttackSet:
     def __init__(self, attack_set, throw):
@@ -121,36 +125,36 @@ class AttackSet:
         for rec in self.records:
 
             if rec.attack_roll is not None:
-                tape_stats[rec.attacking_player.name]["raw"]["score"].eval(
+                tape_stats[rec.attacking_player.name][INITIAL][SCORE].eval(
                     rec.attack_roll.dice_type,
-                    tape_stats[rec.attacking_player.name]["raw"][COUNTER].count( rec.attack_roll )
+                    tape_stats[rec.attacking_player.name][INITIAL][COUNTER].count( rec.attack_roll )
                 )
 
             if rec.defense_roll is not None:
                 if rec.defending_player is not None:
-                    tape_stats[rec.defending_player.name]["raw"]["score"].eval(
+                    tape_stats[rec.defending_player.name][INITIAL][SCORE].eval(
                         rec.defense_roll.dice_type,
-                        tape_stats[rec.defending_player.name]["raw"][COUNTER].count( rec.defense_roll )
+                        tape_stats[rec.defending_player.name][INITIAL][COUNTER].count( rec.defense_roll )
                     )
 
             if rec.attack_reroll is not None:
-                tape_stats[rec.attacking_player.name]["raw"][COUNTER].count_reroll( rec.attack_reroll )
+                tape_stats[rec.attacking_player.name][INITIAL][COUNTER].count_reroll( rec.attack_reroll )
 
             if rec.defense_reroll is not None:
-                tape_stats[rec.defending_player.name]["raw"][COUNTER].count_reroll( rec.defense_reroll )
+                tape_stats[rec.defending_player.name][INITIAL][COUNTER].count_reroll( rec.defense_reroll )
 
             if rec.attack_convert is not None:
-                tape_stats[rec.attacking_player.name]["raw"][COUNTER].count_convert( rec.attack_convert )
+                tape_stats[rec.attacking_player.name][INITIAL][COUNTER].count_convert( rec.attack_convert )
 
             if rec.defense_convert is not None:
-                tape_stats[rec.defending_player.name]["raw"][COUNTER].count_convert( rec.defense_convert )
+                tape_stats[rec.defending_player.name][INITIAL][COUNTER].count_convert( rec.defense_convert )
 
             if rec.attack_end is not None:
                 luck = self.end_score.eval( rec.attack_end.dice_type, self.end_counter.count(rec.attack_end))
                 rec.attack_end_luck = luck
-                tape_stats[rec.attacking_player.name]["end"]["score"].eval(
+                tape_stats[rec.attacking_player.name][END][SCORE].eval(
                     rec.attack_end.dice_type,
-                    tape_stats[rec.attacking_player.name]["end"][COUNTER].count( rec.attack_end )
+                    tape_stats[rec.attacking_player.name][END][COUNTER].count( rec.attack_end )
                 )
 
 
@@ -158,7 +162,7 @@ class AttackSet:
                 luck = self.end_score.eval( rec.defense_end.dice_type, self.end_counter.count(rec.defense_end))
                 rec.defense_end_luck = luck
                 if rec.defending_player is not None:
-                    tape_stats[rec.defending_player.name]["end"]["score"].eval(
+                    tape_stats[rec.defending_player.name][END][SCORE].eval(
                         rec.defense_end.dice_type,
-                        tape_stats[rec.defending_player.name]["end"][COUNTER].count( rec.defense_end )
+                        tape_stats[rec.defending_player.name][END][COUNTER].count( rec.defense_end )
                     )

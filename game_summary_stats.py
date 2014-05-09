@@ -1,12 +1,11 @@
 import collections
 from flask import url_for
 
-from AttackSet import AttackSet
+from AttackSet import AttackSet, INITIAL, SCORE, END
 from counter import Counter, COUNTER
 from parser import LogFileParser
 from persistence import Game, DiceThrowType, DiceThrowAdjustmentType, DiceFace, DiceType
 from score import Score
-
 
 STATIC = 'static'
 
@@ -206,17 +205,12 @@ class GameTape(object):
         return cnt
 
     def score(self):
-        raw_luck_p1          = Counter( True )
-        raw_score_p1         = Score( )
-        raw_luck_p2          = Counter( True )
-        raw_score_p2         = Score()
 
         self.stats = collections.defaultdict( lambda: collections.defaultdict(dict))
-        self.stats[ self.game.game_players[0].name]["raw"] = { COUNTER : raw_luck_p1, "score" : raw_score_p1 }
-        self.stats[ self.game.game_players[1].name]["raw"] = { COUNTER : raw_luck_p2, "score" : raw_score_p2 }
-
-        self.stats[ self.game.game_players[0].name]["end"] = { COUNTER : Counter(True), "score" : Score() }
-        self.stats[ self.game.game_players[1].name]["end"] = { COUNTER : Counter(True), "score" : Score() }
+        self.stats[ self.game.game_players[0].name][INITIAL] = { COUNTER : Counter(True), SCORE: Score() }
+        self.stats[ self.game.game_players[1].name][INITIAL] = { COUNTER : Counter(True), SCORE: Score() }
+        self.stats[ self.game.game_players[0].name][END] = { COUNTER : Counter(True), SCORE: Score() }
+        self.stats[ self.game.game_players[1].name][END] = { COUNTER : Counter(True), SCORE: Score() }
 
         for ats in self.attack_sets:
             ats.score(self.stats)
@@ -229,67 +223,73 @@ class GameTape(object):
         return None
 
 
+    def initial_player_score(self, player):
+        return self.stats[player][INITIAL][SCORE]
+
+    def initial_player_counter(self, player):
+        return self.stats[player.name][INITIAL][COUNTER]
+
     def unmodified_attack_data(self, player):
-        return self.stats[player]["raw"]["score"].red_luck
+        return self.initial_player_score(player).red_luck
 
 
     def total_reds(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_reds
+        return self.initial_player_counter(player).total_reds
 
 
     #total helper methods methods
 
     def unmodified_hits(self, player):
-        return self.stats[player.name]["raw"][COUNTER].red_hits
+        return self.initial_player_counter(player).red_hits
 
     def total_reds_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_reds_after_rerolls()
+        return self.initial_player_counter(player).total_reds_after_rerolls()
 
     def total_greens_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_greens_after_rerolls()
+        return self.initial_player_counter(player).total_greens_after_rerolls()
 
     def total_red_hits_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_red_hits_after_rerolls()
+        return self.initial_player_counter(player).total_red_hits_after_rerolls()
 
     def total_red_hits_after_converts(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_red_hits_after_converts()
+        return self.initial_player_counter(player).total_red_hits_after_converts()
 
     def total_green_evades_after_converts(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_green_evades_after_converts()
+        return self.initial_player_counter(player).total_green_evades_after_converts()
 
     def total_red_crits_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_red_crits_after_rerolls()
+        return self.initial_player_counter(player).total_red_crits_after_rerolls()
 
     def total_red_crits_after_converts(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_red_crits_after_converts()
+        return self.initial_player_counter(player).total_red_crits_after_converts()
 
     def total_red_focuses_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_red_focuses_after_rerolls()
+        return self.initial_player_counter(player).total_red_focuses_after_rerolls()
 
     def expected_green_focuses_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].expected_green_focuses_after_rerolls()
+        return self.initial_player_counter(player).expected_green_focuses_after_rerolls()
 
     def total_red_blanks_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_red_blanks_after_rerolls()
+        return self.initial_player_counter(player).total_red_blanks_after_rerolls()
 
     def total_green_evades_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_green_evades_after_rerolls()
+        return self.initial_player_counter(player).total_green_evades_after_rerolls()
 
 
     def total_red_focuses_after_converts(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_red_focuses_after_converts()
+        return self.initial_player_counter(player).total_red_focuses_after_converts()
 
     def total_red_blanks_after_converts(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_red_blanks_after_converts()
+        return self.initial_player_counter(player).total_red_blanks_after_converts()
 
     def expected_hits_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].expected_hits_after_rerolls()
+        return self.initial_player_counter(player).expected_hits_after_rerolls()
 
     def expected_crits_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].expected_crits_after_rerolls()
+        return self.initial_player_counter(player).expected_crits_after_rerolls()
 
     def expected_crits_after_converts(self, player):
-        return self.stats[player.name]["raw"][COUNTER].expected_crits_after_rerolls() #converts implies no rerolls
+        return self.initial_player_counter(player).expected_crits_after_rerolls() #converts implies no rerolls
 
 
     def expected_hits_after_converts(self, player):
@@ -297,10 +297,10 @@ class GameTape(object):
         return self.expected_hits_after_rerolls(player)
 
     def expected_focuses_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].expected_focuses_after_rerolls()
+        return self.initial_player_counter(player).expected_focuses_after_rerolls()
 
     def expected_blanks_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].expected_blanks_after_rerolls()
+        return self.initial_player_counter(player).expected_blanks_after_rerolls()
 
     def expected_blanks_after_converts(self, player):
         return self.expected_blanks_after_rerolls(player) #count doesn't change
@@ -319,68 +319,68 @@ class GameTape(object):
         return self.expected_green_evades_after_rerolls(player)
 
     def total_greens(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_greens
+        return self.initial_player_counter(player).total_greens
 
     def total_green_focuses_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_green_focuses_after_rerolls()
+        return self.initial_player_counter(player).total_green_focuses_after_rerolls()
 
     def total_green_focuses_after_converts(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_green_focuses_after_converts()
+        return self.initial_player_counter(player).total_green_focuses_after_converts()
 
 
     def total_green_blanks_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_green_blanks_after_rerolls()
+        return self.initial_player_counter(player).total_green_blanks_after_rerolls()
 
     def total_green_blanks_after_converts(self, player):
-        return self.stats[player.name]["raw"][COUNTER].total_green_blanks_after_converts()
+        return self.initial_player_counter(player).total_green_blanks_after_converts()
 
 
     def expected_unmodified_hits(self, player):
-        return self.stats[player.name]["raw"][COUNTER].expected_red_hits()
+        return self.initial_player_counter(player).expected_red_hits()
 
     def unmodified_evades(self, player):
-        return self.stats[player.name]["raw"][COUNTER].green_evades
+        return self.initial_player_counter(player).green_evades
 
 
     def expected_unmodified_evades(self, player):
-        return self.stats[player.name]["raw"][COUNTER].expected_green_evades()
+        return self.initial_player_counter(player).expected_green_evades()
 
     def expected_green_evades_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].expected_green_evades_after_rerolls()
+        return self.initial_player_counter(player).expected_green_evades_after_rerolls()
 
     def unmodified_crits(self, player):
-        return self.stats[player.name]["raw"][COUNTER].red_crits
+        return self.initial_player_counter(player).red_crits
 
     def expected_unmodified_focuses(self, player):
-        return self.stats[player.name]["raw"][COUNTER].expected_red_eyes()
+        return self.initial_player_counter(player).expected_red_eyes()
 
     def unmodified_focuses(self, player):
-        return self.stats[player.name]["raw"][COUNTER].red_eyes
+        return self.initial_player_counter(player).red_eyes
 
     def expected_unmodified_green_focuses(self, player):
-        return self.stats[player.name]["raw"][COUNTER].expected_green_eyes()
+        return self.initial_player_counter(player).expected_green_eyes()
 
     def unmodified_green_focuses(self, player):
-        return self.stats[player.name]["raw"][COUNTER].green_eyes
+        return self.initial_player_counter(player).green_eyes
 
 
     def expected_unmodified_blanks(self, player):
-        return self.stats[player.name]["raw"][COUNTER].expected_red_blanks()
+        return self.initial_player_counter(player).expected_red_blanks()
 
     def unmodified_blanks(self, player):
-        return self.stats[player.name]["raw"][COUNTER].red_blanks
+        return self.initial_player_counter(player).red_blanks
 
     def expected_unmodified_green_blanks(self, player):
-        return self.stats[player.name]["raw"][COUNTER].expected_green_blanks()
+        return self.initial_player_counter(player).expected_green_blanks()
 
     def expected_green_blanks_after_rerolls(self, player):
-        return self.stats[player.name]["raw"][COUNTER].expected_green_blanks_after_rerolls()
+        return self.initial_player_counter(player).expected_green_blanks_after_rerolls()
 
     def unmodified_green_blanks(self, player):
-        return self.stats[player.name]["raw"][COUNTER].green_blanks
+        return self.initial_player_counter(player).green_blanks
 
     def expected_unmodified_crits(self, player):
-        return self.stats[player.name]["raw"][COUNTER].expected_red_crits()
+        return self.initial_player_counter(player).expected_red_crits()
 
 
 
