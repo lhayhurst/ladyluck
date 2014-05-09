@@ -157,9 +157,8 @@ class Game(Base):
                 return p
         return None
 
-
-    def sparkline(self, player):
-        return url_for("sparkline", game_id=self.id_str(), player=player )
+    def versus_graph(self ):
+        return url_for("versus", game_id=self.id_str() )
 
     #these methods are utility methods to help out the game_summary web page.
     #todo: autoforward these along to the tape class

@@ -191,6 +191,9 @@
 
     </div>
     <div id="b" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true" aria-hidden="false" style="display: block;">
+
+        <img src="{{ game.versus_graph() }}">
+
     </div>
     <div id="c" aria-labelledby="ui-id-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
         <a href="/download-game?id={{ game.id }}">Download game as csv</a>
@@ -201,7 +204,7 @@
             .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
             .tg .tg-ii5f{background-color:#000000;color:#ffffff}
             .tg .tg-1bl1{background-color:#bdc3c7}
-            .tg .tg-nkg8{background-color:#F0F6FA;color:#000000}
+            .tg .tg-nkg8{background-color:#F0F6FA;color:#000000; text-align: center}
             .tg .tg-rh4c{background-color:#F0F6FA}
             .tg .tg-o1{background-color:#F8F8F8}
             .tg .tg-o2{background-color:#D0D0D0}
@@ -216,9 +219,9 @@
 
         <br>
         <br>
-        <b>Top bar:</b> {{ player1.name }}
+        <b>Player1 :</b> {{ player1.name }}
         <br>
-        <b>Bottom bar:</b> {{ player2.name }}
+        <b>Player 2:</b> {{ player2.name }}
         {% for attack_set_subset in game_tape.attack_set_subsets(modvalue=15) %}
             <br>
             <table class="tg">
@@ -255,13 +258,13 @@
                                                   context.fill()
                                               {%  endif %}
                                             </script>
-                                            {{ attack_set.hits_comma_crits_string() }}
+                                            <center>{{ attack_set.hits_comma_crits_string() }}</center>
 
                                         </td>
                                     </tr>
-                                    <tr><td class="tg-o1"></td></tr>
+                                    <tr><td class="tg-o1">Player1</td></tr>
                                 {%  else %}
-                                    <tr><td class="tg-o1"></td></tr>
+                                    <tr><td class="tg-o1">Player2</td></tr>
                                     <tr>
                                         <td class="tg-o1">
                                             <a href="#attack_set{{attack_set.number}}"><canvas id="circlecanvas{{attack_set.number}}_2" width="40" height="40"></canvas></a>
@@ -290,7 +293,7 @@
                                                   context.fill()
                                               {%  endif %}
                                             </script>
-                                            {{ attack_set.hits_comma_crits_string() }}
+                                            <center>{{ attack_set.hits_comma_crits_string() }}</center>
 
                                         </td>
                                     </tr>
@@ -302,59 +305,59 @@
             </table>
         {%  endfor %}
 
-
         {% for attack_set in game_tape.attack_sets %}
             <br>
 
             <a name="attack_set{{ loop.index }}"><b> {{  attack_set.number }}</b></a>
 
             <table class="tg">
-    <tr>
-    <th class="tg-031e" colspan="5">Attacker: {{ attack_set.attacking_player.name }}</th>
-    <th class="tg-nkg8" rowspan="2"><br>Final<br>Result</th>
-    <th class="tg-031e" colspan="5">Defender: {{ attack_set.defending_player.name }}</th>
-  </tr>
-  <tr>
-    <td class="tg-nkg8">dice num</td>
-    <td class="tg-nkg8">roll</td>
-    <td class="tg-nkg8">reroll</td>
-    <td class="tg-nkg8">convert</td>
-    <td class="tg-nkg8">end</td>
-    <td class="tg-nkg8">end</td>
-    <td class="tg-nkg8">convert</td>
-    <td class="tg-nkg8">reroll</td>
-    <td class="tg-nkg8">roll</td>
-    <td class="tg-nkg8">dice_num</td>
+              <tr>
+                <th class="tg-031e" colspan="5">Attacker: {{ attack_set.attacking_player.name }}</th>
+                <th class="tg-nkg8" rowspan="2"><br>Final<br>Result</th>
+                <th class="tg-031e" colspan="5">Defender: {{ attack_set.defending_player.name }}</th>
+              </tr>
+              <tr>
+                <td class="tg-nkg8">dice num</td>
+                <td class="tg-nkg8">roll</td>
+                <td class="tg-nkg8">reroll</td>
+                <td class="tg-nkg8">convert</td>
+                <td class="tg-nkg8">end</td>
+                <td class="tg-nkg8">end</td>
+                <td class="tg-nkg8">convert</td>
+                <td class="tg-nkg8">reroll</td>
+                <td class="tg-nkg8">roll</td>
+                <td class="tg-nkg8">dice_num</td>
 
   </tr>
-{% for rec in attack_set.records  %}
-    <td class="tg-o1">{{ rec.dice_num }}</td>
-    <td class="tg-o2"><img src={{ rec.attack_roll_as_img()  }}></td>
-    <td class="tg-o3"><img src={{ rec.attack_reroll_as_img() }}></td>
-    <td class="tg-o4"><img src={{ rec.attack_convert_as_img() }}></td>
-    <td class="tg-o5"><img src={{ rec.attack_end_as_img() }}></td>
-    <td class="tg-o6"><img src={{ rec.final_as_image() }}></td>
-    <td class="tg-o5"><img src={{ rec.defense_end_as_img() }}></td>
-    <td class="tg-o4"><img src={{ rec.defense_convert_as_img() }}></td>
-    <td class="tg-o3"><img src={{ rec.defense_reroll_as_img() }}></td>
-    <td class="tg-o2"><img src={{ rec.defense_roll_as_img() }}></td>
-    <td class="tg-o1">{{ rec.dice_num }}</td>
-  </tr>
-{% endfor %}
-<tr>
-    <td class="tg-nkg8" border="0" >score</td>
-    <td class="tg-nkg8" border="0" ></td>
-    <td class="tg-nkg8" border="0" ></td>
-    <td class="tg-nkg8" border="0" ></td>
-    <td class="tg-nkg8" border="0" >{{ attack_set.total_attack_end_luck() }}</td>
-    <td class="tg-nkg8" border="0" ></td>
-    <td class="tg-nkg8" border="0" >{{ attack_set.total_defense_end_luck() }}</td>
-    <td class="tg-nkg8" border="0" ></td>
-    <td class="tg-nkg8" border="0" ></td>
-    <td class="tg-nkg8" border="0" ></td>
+                {% for rec in attack_set.records  %}
+                    <td class="tg-o1">{{ rec.dice_num }}</td>
+                    <td class="tg-o2"><img src={{ rec.attack_roll_as_img()  }}></td>
+                    <td class="tg-o3"><img src={{ rec.attack_reroll_as_img() }}></td>
+                    <td class="tg-o4"><img src={{ rec.attack_convert_as_img() }}></td>
+                    <td class="tg-o5"><img src={{ rec.attack_end_as_img() }}></td>
+                    <td class="tg-o6"><img src={{ rec.final_as_image() }}></td>
+                    <td class="tg-o5"><img src={{ rec.defense_end_as_img() }}></td>
+                    <td class="tg-o4"><img src={{ rec.defense_convert_as_img() }}></td>
+                    <td class="tg-o3"><img src={{ rec.defense_reroll_as_img() }}></td>
+                    <td class="tg-o2"><img src={{ rec.defense_roll_as_img() }}></td>
+                    <td class="tg-o1">{{ rec.dice_num }}</td>
+                  </tr>
+                {% endfor %}
+                <tr>
+                    <td class="tg-nkg8" border="0" >score</td>
+                    <td class="tg-nkg8" border="0" ></td>
+                    <td class="tg-nkg8" border="0" ></td>
+                    <td class="tg-nkg8" border="0" ></td>
+                    <td class="tg-nkg8" border="0" >{{ attack_set.total_attack_end_luck() }}</td>
+                    <td class="tg-nkg8" border="0" >{{  attack_set.hits_comma_crits_string() }}</td>
+                    <td class="tg-nkg8" border="0" >{{ attack_set.total_defense_end_luck() }}</td>
+                    <td class="tg-nkg8" border="0" ></td>
+                    <td class="tg-nkg8" border="0" ></td>
+                    <td class="tg-nkg8" border="0" ></td>
+                    <td class="tg-nkg8" border="0" ></td>
 
-</tr>
-</table>
+                </tr>
+            </table>
         {%  endfor %}
 
 

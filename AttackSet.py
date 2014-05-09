@@ -154,49 +154,60 @@ class AttackSet:
             if rec.attack_roll is not None:
                 luck = self.roll_score.eval( rec.attack_roll.dice_type, self.roll_counter.count(rec.attack_roll))
                 rec.attack_roll_luck = luck
-                tape_stats[rec.attacking_player.name]["score"].eval(
+                tape_stats[rec.attacking_player.name]["raw"]["score"].eval(
                     rec.attack_roll.dice_type,
-                    tape_stats[rec.attacking_player.name][COUNTER].count( rec.attack_roll )
+                    tape_stats[rec.attacking_player.name]["raw"][COUNTER].count( rec.attack_roll )
                 )
 
             if rec.defense_roll is not None:
                 luck = self.roll_score.eval( rec.defense_roll.dice_type, self.roll_counter.count( rec.defense_roll))
                 rec.defense_roll_luck = luck
                 if rec.defending_player is not None:
-                    tape_stats[rec.defending_player.name]["score"].eval(
+                    tape_stats[rec.defending_player.name]["raw"]["score"].eval(
                         rec.defense_roll.dice_type,
-                        tape_stats[rec.defending_player.name][COUNTER].count( rec.defense_roll )
+                        tape_stats[rec.defending_player.name]["raw"][COUNTER].count( rec.defense_roll )
                     )
 
             if rec.attack_reroll is not None:
                 luck = self.reroll_score.eval( rec.attack_reroll.dice_type, self.reroll_counter.count(rec.attack_reroll))
                 rec.attack_reroll_luck = luck
-                tape_stats[rec.attacking_player.name][COUNTER].count_reroll( rec.attack_reroll )
+                tape_stats[rec.attacking_player.name]["raw"][COUNTER].count_reroll( rec.attack_reroll )
 
             if rec.defense_reroll is not None:
                 luck = self.reroll_score.eval( rec.defense_reroll.dice_type, self.reroll_counter.count(rec.defense_reroll))
                 rec.defense_reroll_luck = luck
-                tape_stats[rec.defending_player.name][COUNTER].count_reroll( rec.defense_reroll )
+                tape_stats[rec.defending_player.name]["raw"][COUNTER].count_reroll( rec.defense_reroll )
 
             if rec.attack_convert is not None:
                 luck = self.convert_score.eval( rec.attack_convert.dice_type, self.convert_counter.count(rec.attack_convert))
                 rec.attack_convert_luck = luck
-                tape_stats[rec.attacking_player.name][COUNTER].count_convert( rec.attack_convert )
+                tape_stats[rec.attacking_player.name]["raw"][COUNTER].count_convert( rec.attack_convert )
 
             if rec.defense_convert is not None:
                 luck = self.convert_score.eval( rec.defense_convert.dice_type, self.convert_counter.count(rec.defense_convert))
                 rec.defense_convert_luck = luck
-                tape_stats[rec.defending_player.name][COUNTER].count_convert( rec.defense_convert )
+                tape_stats[rec.defending_player.name]["raw"][COUNTER].count_convert( rec.defense_convert )
 
             if rec.attack_end is not None:
                 luck = self.end_score.eval( rec.attack_end.dice_type, self.end_counter.count(rec.attack_end))
                 rec.attack_end_luck = luck
                 cumulative_score.eval( rec.attack_end.dice_type, cumulative_counter.count(rec.attack_end))
+                tape_stats[rec.attacking_player.name]["end"]["score"].eval(
+                    rec.attack_end.dice_type,
+                    tape_stats[rec.attacking_player.name]["end"][COUNTER].count( rec.attack_end )
+                )
+
 
             if rec.defense_end is not None:
                 luck = self.end_score.eval( rec.defense_end.dice_type, self.end_counter.count(rec.defense_end))
                 rec.defense_end_luck = luck
                 cumulative_score.eval( rec.defense_end.dice_type, cumulative_counter.count(rec.defense_end))
+                if rec.defending_player is not None:
+                    tape_stats[rec.defending_player.name]["end"]["score"].eval(
+                        rec.defense_end.dice_type,
+                        tape_stats[rec.defending_player.name]["end"][COUNTER].count( rec.defense_end )
+                    )
+
 
         self.cumulative_attack_score = cumulative_score.get_last_red_luck()
         self.cumulative_defense_score = cumulative_score.get_last_green_luck()

@@ -6,6 +6,7 @@ from game_summary_stats import GameTape
 from parser import LogFileParser
 from persistence import PersistenceManager, Game
 from sparkplot import Sparkplot
+from versus_graph import VersusGraph
 
 
 UPLOAD_FOLDER = "static"
@@ -145,14 +146,12 @@ def game():
                             winner=winning_player,
                             game_tape=game_tape )
 
-@app.route('/sparkline')
-def sparkline():
+@app.route('/versus')
+def versus():
     id = str(request.args.get('game_id'))
     game = db.get_game(id)
-    player_name = str(request.args.get('player'))
-
-    sparkline = Sparkplot(data=game.game_tape.unmodified_attack_data( player_name ), label_min=True, label_max=True )
-    output = sparkline.plot_sparkline()
+    versus_graph = VersusGraph( game=game)
+    output = versus_graph.plot()
     response = make_response(output.getvalue())
     response.mimetype = 'image/png'
     return response
