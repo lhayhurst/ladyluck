@@ -218,15 +218,9 @@ class GameTape(object):
         self.stats[ self.game.game_players[0].name]["end"] = { COUNTER : Counter(True), "score" : Score() }
         self.stats[ self.game.game_players[1].name]["end"] = { COUNTER : Counter(True), "score" : Score() }
 
-
-        cumulative_luck      = Counter()
-        cumulative_score     = Score()
-
         for ats in self.attack_sets:
-            ats.score(cumulative_luck, cumulative_score, self.stats)
+            ats.score(self.stats)
 
-        self.cumulative_luck  = cumulative_luck
-        self.cumulative_score = cumulative_score
 
     def get_attack_set(self, attack_set_num):
         for aset in self.attack_sets:
@@ -615,62 +609,22 @@ class GameTapeTester(unittest.TestCase):
         self.assertEqual( 4, len(self.tape.attack_sets) )
 
         aset = self.tape.attack_sets[0]
-        self.assertEqual( -.8125, aset.total_attack_roll_luck() )
-        self.assertEqual( None, aset.total_attack_reroll_luck())
-        self.assertEqual( .34375, aset.total_attack_convert_luck() )
         self.assertEqual( -.3125, aset.total_attack_end_luck() )
-        self.assertEqual( -.3125, aset.cumulative_attack_luck() )
-
-        self.assertEqual( .3125, aset.total_defense_roll_luck() )
-        self.assertEqual( None, aset.total_defense_reroll_luck())
-        self.assertEqual( None, aset.total_defense_convert_luck() )
         self.assertEqual( .3125, aset.total_defense_end_luck() )
-        self.assertEqual( 0.3125, aset.cumulative_defense_luck() )
 
 
         aset = self.tape.attack_sets[1]
-        self.assertEqual( .9375, aset.total_attack_roll_luck() )
-        self.assertEqual( None, aset.total_attack_reroll_luck())
-        self.assertEqual( None, aset.total_attack_convert_luck() )
         self.assertEqual( .9375, aset.total_attack_end_luck() )
-        self.assertEqual( 0.625, aset.cumulative_attack_luck() )
-
-
-        self.assertEqual( 0.1875, aset.total_defense_roll_luck() )
-        self.assertEqual( None, aset.total_defense_reroll_luck())
-        self.assertEqual( 0.4375, aset.total_defense_convert_luck() )
         self.assertEqual( 0.4375, aset.total_defense_end_luck() )
-        self.assertEqual( 0.75, aset.cumulative_defense_luck() )
-
 
         aset = self.tape.attack_sets[2]
-        self.assertEqual( -1.3125, aset.total_attack_roll_luck() )
-        self.assertEqual( 0.1875, aset.total_attack_reroll_luck())
-        self.assertEqual( 0.59375, aset.total_attack_convert_luck() )
         self.assertEqual( 0.9375, aset.total_attack_end_luck() )
-        self.assertEqual( 1.5625, aset.cumulative_attack_luck() )
-
-
-        self.assertEqual( -0.1875, aset.total_defense_roll_luck() )
-        self.assertEqual( 0.1875, aset.total_defense_reroll_luck())
-        self.assertEqual( 1.3125, aset.total_defense_convert_luck() )
         self.assertEqual( 1.3125, aset.total_defense_end_luck() )
-        self.assertEqual( 2.0625, aset.cumulative_defense_luck() )
 
 
         aset = self.tape.attack_sets[3]
-        self.assertEqual( 0.59375, aset.total_attack_roll_luck() )
-        self.assertEqual( None, aset.total_attack_reroll_luck())
-        self.assertEqual( None, aset.total_attack_convert_luck() )
         self.assertEqual( 0.59375, aset.total_attack_end_luck() )
-        self.assertEqual( 2.15625, aset.cumulative_attack_luck() )
-
-
-        self.assertEqual( -0.9375, aset.total_defense_roll_luck() )
-        self.assertEqual( None, aset.total_defense_reroll_luck())
-        self.assertEqual(0.4375, aset.total_defense_convert_luck() )
         self.assertEqual( -0.6875, aset.total_defense_end_luck() )
-        self.assertEqual( 1.375, aset.cumulative_defense_luck() )
 
 
 if __name__ == "__main__":
