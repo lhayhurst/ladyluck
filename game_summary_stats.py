@@ -97,14 +97,14 @@ class GameTapeRecord:
 
     def visit(self, adjustment, atype):
         if adjustment.adjustment_type == DiceThrowAdjustmentType.REROLL:
-            if atype == "attack":
+            if atype == DiceThrowType.ATTACK:
                 self.attack_reroll = adjustment.to_dice
-            elif atype == "defense":
+            elif atype == DiceThrowType.DEFEND:
                 self.defense_reroll = adjustment.to_dice
         elif adjustment.adjustment_type == DiceThrowAdjustmentType.CONVERT:
-            if atype == "attack":
+            if atype == DiceThrowType.ATTACK:
                 self.attack_convert = adjustment.to_dice
-            elif atype == "defense":
+            elif atype == DiceThrowType.DEFEND:
                 self.defense_convert = adjustment.to_dice
 
     def was_not_a_hit_or_crit(self):
@@ -153,7 +153,7 @@ class GameTape(object):
                     record.attack_roll = result.dice
                     record.attack_end = result.final_dice
                     for adjustment in result.adjustments:
-                        record.visit(adjustment, "attack")
+                        record.visit(adjustment, DiceThrowType.ATTACK)
 
             elif throw.throw_type == DiceThrowType.DEFEND:
                 attack_set = self.get_attack_set(throw.attack_set_num)
@@ -166,7 +166,7 @@ class GameTape(object):
                         record.defense_roll = result.dice
                         record.defense_end = result.final_dice
                         for adjustment in result.adjustments:
-                            record.visit(adjustment, "defense")
+                            record.visit(adjustment, DiceThrowType.DEFEND)
                     else:
                         record = GameTapeRecord(attacking_player=attack_set.attacking_player, defending_player=throw.player)
                         attack_set.records.append(record)
@@ -174,7 +174,7 @@ class GameTape(object):
                         record.defense_roll = result.dice
                         record.defense_end = result.final_dice
                         for adjustment in result.adjustments:
-                            record.visit(adjustment, "defense")
+                            record.visit(adjustment, DiceThrowType.DEFEND)
 
         #now circle through all the records and net out the records
         for ats in self.attack_sets:
