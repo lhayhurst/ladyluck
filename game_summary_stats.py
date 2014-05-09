@@ -206,29 +206,47 @@ class GameTape(object):
 
     def score(self):
 
+        self.scores = collections.defaultdict( lambda: collections.defaultdict(list))
         self.stats = collections.defaultdict( lambda: collections.defaultdict(dict))
-        self.stats[ self.game.game_players[0].name][INITIAL] = { COUNTER : Counter(True), SCORE: Score() }
-        self.stats[ self.game.game_players[1].name][INITIAL] = { COUNTER : Counter(True), SCORE: Score() }
-        self.stats[ self.game.game_players[0].name][END] = { COUNTER : Counter(True), SCORE: Score() }
-        self.stats[ self.game.game_players[1].name][END] = { COUNTER : Counter(True), SCORE: Score() }
+
+        p1 = self.game.game_players[0].name
+        p2 = self.game.game_players[1].name
+        self.scores[ p1][ DiceType.RED ].append( 0 )
+        self.scores[ p2 ][ DiceType.RED ].append( 0 )
+        self.scores[ p1 ][ DiceType.GREEN ].append( 0 )
+        self.scores[ p2 ][ DiceType.GREEN ].append( 0 )
+
+        self.stats[ p1 ][INITIAL] = { COUNTER : Counter(True), SCORE: Score() }
+        self.stats[ p2 ][INITIAL] = { COUNTER : Counter(True), SCORE: Score() }
+        self.stats[ p1 ][END] = { COUNTER : Counter(True), SCORE: Score() }
+        self.stats[ p2 ][END] = { COUNTER : Counter(True), SCORE: Score() }
+
+        p1_red_score   = self.scores[ p1 ][ DiceType.RED ]
+        p2_red_score   = self.scores[ p2 ][ DiceType.RED ]
+        p1_green_score = self.scores[ p1 ][ DiceType.GREEN ]
+        p2_green_score = self.scores[ p2 ][ DiceType.GREEN ]
+
 
         for ats in self.attack_sets:
-            ats.score(self.stats)
+            ats.score(self.stats )
+            if ats.attacking_player.name == p1:
+                p1_red_score.append( ats.cumulative_attack_end_luck )
+                p1_green_score.append( p1_green_score[-1])
+                p2_red_score.append( p2_red_score[-1])
+                p2_green_score.append( ats.cumulative_defense_end_luck )
+            else: #p2 is the attacking player
+                p2_red_score.append( ats.cumulative_attack_end_luck )
+                p2_green_score.append( p2_green_score[-1])
+                p1_red_score.append( p1_red_score[-1])
+                p1_green_score.append( ats.cumulative_defense_end_luck )
+
 
 
     def red_scores(self, player):
-        ret = []
-        for aset in self.attack_sets:
-            if aset.attacking_player.name == player.name:
-                ret.append(aset.cumulative_attack_end_luck)
-        return ret
+        return self.scores[ player.name][DiceType.RED]
 
     def green_scores(self, player):
-        ret = []
-        for aset in self.attack_sets:
-            if aset.defending_player is not None and aset.defending_player.name == player.name:
-                ret.append(aset.cumulative_defense_end_luck)
-        return ret
+        return self.scores[ player.name][DiceType.GREEN]
 
     def get_attack_set(self, attack_set_num):
         for aset in self.attack_sets:
@@ -426,29 +444,44 @@ class GameTapeTester(unittest.TestCase):
 
         p1_reds = self.g.game_tape.red_scores( p1 )
 
-        self.assertEqual( 2, len(p1_reds))
-        self.assertEqual( -0.3125, p1_reds[0])
-        self.assertEqual(  0.625, p1_reds[1])
+        self.assertEqual( 5, len(p1_reds))
+        self.assertEqual( 0, p1_reds[0])
+        self.assertEqual( -0.3125, p1_reds[1])
+        self.assertEqual(  0.625, p1_reds[2])
+        self.assertEqual(  0.625, p1_reds[3])
+        self.assertEqual(  0.625, p1_reds[4])
+
 
         p2_reds = self.g.game_tape.red_scores( p2 )
 
-        self.assertEqual( 2, len(p2_reds))
-        self.assertEqual( 0.9375, p2_reds[0])
-        self.assertEqual( 1.53125, p2_reds[1])
+        self.assertEqual( 5, len(p2_reds))
+        self.assertEqual( 0, p2_reds[0])
+        self.assertEqual( 0, p2_reds[1])
+        self.assertEqual( 0, p2_reds[2])
+        self.assertEqual( 0.9375, p2_reds[3])
+        self.assertEqual( 1.53125, p2_reds[4])
 
 
         p1_greens = self.g.game_tape.green_scores( p1 )
 
-        self.assertEqual( 2, len(p1_greens))
+        self.assertEqual( 5, len(p1_greens))
 
-        self.assertEqual(1.3125, p1_greens[0])
-        self.assertEqual(0.625, p1_greens[1])
+        self.assertEqual(0, p1_greens[0])
+        self.assertEqual(0, p1_greens[1])
+        self.assertEqual(0, p1_greens[2])
+        self.assertEqual(1.3125, p1_greens[3])
+        self.assertEqual(0.625, p1_greens[4])
 
         p2_greens = self.g.game_tape.green_scores( p2 )
 
-        self.assertEqual( 2, len(p2_greens))
-        self.assertEqual( 0.3125, p2_greens[0])
-        self.assertEqual( 0.75, p2_greens[1])
+        print p2_greens
+        self.assertEqual( 5, len(p2_greens))
+        self.assertEqual( 0, p2_greens[0])
+        self.assertEqual( 0.3125, p2_greens[1])
+        self.assertEqual( 0.75, p2_greens[2])
+        self.assertEqual( 0.75, p2_greens[3])
+        self.assertEqual( 0.75, p2_greens[4])
+
 
 
 

@@ -1,4 +1,5 @@
 from counter import Counter, COUNTER
+from persistence import DiceType
 from score import Score
 
 __author__ = 'lhayhurst'
@@ -117,7 +118,7 @@ class AttackSet:
                 break
 
 
-    def score(self, tape_stats):
+    def score(self, tape_stats ):
 
         self.end_counter               = Counter(True)
         self.end_score                 = Score()
@@ -169,11 +170,10 @@ class AttackSet:
                 self.cumulative_attack_end_luck = end_attack_score.eval( rec.attack_end.dice_type, end_attack_counter.count( rec.attack_end ))
 
 
-
             if rec.defense_end is not None:
                 luck = self.end_score.eval( rec.defense_end.dice_type, self.end_counter.count(rec.defense_end))
                 rec.defense_end_luck = luck
-                if rec.defending_player is not None:
-                    end_defense_score   = tape_stats[rec.defending_player.name][END][SCORE]
-                    end_defense_counter = tape_stats[rec.defending_player.name][END][COUNTER]
-                    self.cumulative_defense_end_luck = end_defense_score.eval( rec.defense_end.dice_type,end_defense_counter.count( rec.defense_end ) )
+                end_defense_score   = tape_stats[rec.defending_player.name][END][SCORE]
+                end_defense_counter = tape_stats[rec.defending_player.name][END][COUNTER]
+                self.cumulative_defense_end_luck = end_defense_score.eval( rec.defense_end.dice_type,end_defense_counter.count( rec.defense_end ) )
+
