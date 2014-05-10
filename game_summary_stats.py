@@ -206,47 +206,99 @@ class GameTape(object):
 
     def score(self):
 
-        self.scores = collections.defaultdict( lambda: collections.defaultdict(list))
+        self.final_scores   = collections.defaultdict( lambda: collections.defaultdict(list))
+        self.initial_scores = collections.defaultdict( lambda: collections.defaultdict(list))
         self.stats = collections.defaultdict( lambda: collections.defaultdict(dict))
 
         p1 = self.game.game_players[0].name
         p2 = self.game.game_players[1].name
-        self.scores[ p1][ DiceType.RED ].append( 0 )
-        self.scores[ p2 ][ DiceType.RED ].append( 0 )
-        self.scores[ p1 ][ DiceType.GREEN ].append( 0 )
-        self.scores[ p2 ][ DiceType.GREEN ].append( 0 )
+
+        self.final_scores[ p1][ DiceType.RED ].append( 0 )
+        self.final_scores[ p2 ][ DiceType.RED ].append( 0 )
+        self.final_scores[ p1 ][ DiceType.GREEN ].append( 0 )
+        self.final_scores[ p2 ][ DiceType.GREEN ].append( 0 )
+
+        self.initial_scores[ p1][ DiceType.RED ].append( 0 )
+        self.initial_scores[ p2 ][ DiceType.RED ].append( 0 )
+        self.initial_scores[ p1 ][ DiceType.GREEN ].append( 0 )
+        self.initial_scores[ p2 ][ DiceType.GREEN ].append( 0 )
+
 
         self.stats[ p1 ][INITIAL] = { COUNTER : Counter(True), SCORE: Score() }
         self.stats[ p2 ][INITIAL] = { COUNTER : Counter(True), SCORE: Score() }
         self.stats[ p1 ][END] = { COUNTER : Counter(True), SCORE: Score() }
         self.stats[ p2 ][END] = { COUNTER : Counter(True), SCORE: Score() }
 
-        p1_red_score   = self.scores[ p1 ][ DiceType.RED ]
-        p2_red_score   = self.scores[ p2 ][ DiceType.RED ]
-        p1_green_score = self.scores[ p1 ][ DiceType.GREEN ]
-        p2_green_score = self.scores[ p2 ][ DiceType.GREEN ]
+        p1_red_score   = self.final_scores[ p1 ][ DiceType.RED ]
+        p2_red_score   = self.final_scores[ p2 ][ DiceType.RED ]
+        p1_green_score = self.final_scores[ p1 ][ DiceType.GREEN ]
+        p2_green_score = self.final_scores[ p2 ][ DiceType.GREEN ]
+
+        p1_begin_red_score   = self.initial_scores[ p1 ][ DiceType.RED ]
+        p2_begin_red_score   = self.initial_scores[ p2 ][ DiceType.RED ]
+        p1_begin_green_score = self.initial_scores[ p1 ][ DiceType.GREEN ]
+        p2_begin_green_score = self.initial_scores[ p2 ][ DiceType.GREEN ]
 
 
         for ats in self.attack_sets:
+
             ats.score(self.stats )
+
             if ats.attacking_player.name == p1:
                 p1_red_score.append( ats.cumulative_attack_end_luck )
+                p1_begin_red_score.append( ats.cumulative_attack_begin_luck )
+
                 p1_green_score.append( p1_green_score[-1])
+                p1_begin_green_score.append( p1_begin_green_score[-1])
+
+
                 p2_red_score.append( p2_red_score[-1])
-                p2_green_score.append( ats.cumulative_defense_end_luck )
+                p2_begin_red_score.append( p2_begin_red_score[-1])
+
+                if ats.cumulative_defense_end_luck is not None:
+                    p2_green_score.append( ats.cumulative_defense_end_luck )
+                else:
+                    p2_green_score.append( p2_green_score[-1])
+
+                if ats.cumulative_defense_begin_luck is not None:
+                    p2_begin_green_score.append( ats.cumulative_defense_begin_luck )
+                else:
+                    p2_begin_green_score.append( p2_begin_green_score[-1])
+
+
             else: #p2 is the attacking player
                 p2_red_score.append( ats.cumulative_attack_end_luck )
+                p2_begin_red_score.append( ats.cumulative_attack_begin_luck )
+
                 p2_green_score.append( p2_green_score[-1])
+                p2_begin_green_score.append( p2_begin_green_score[-1])
+
                 p1_red_score.append( p1_red_score[-1])
-                p1_green_score.append( ats.cumulative_defense_end_luck )
+                p1_begin_red_score.append( p1_begin_red_score[-1])
+
+                if ats.cumulative_defense_end_luck is not None:
+                    p1_green_score.append( ats.cumulative_defense_end_luck )
+                else:
+                    p2_green_score.append( p2_green_score[-1])
+
+                if ats.cumulative_defense_begin_luck is not None:
+                    p1_begin_green_score.append( ats.cumulative_defense_begin_luck )
+                else:
+                    p2_begin_green_score.append( p2_begin_green_score[-1])
+
+    def final_red_scores(self, player):
+        return self.final_scores[ player.name][DiceType.RED]
+
+    def final_green_scores(self, player):
+        return self.final_scores[ player.name][DiceType.GREEN]
+
+    def initial_red_scores(self, player):
+        return self.initial_scores[ player.name][DiceType.RED]
 
 
+    def initial_green_scores(self, player):
+        return self.initial_scores[ player.name][DiceType.GREEN]
 
-    def red_scores(self, player):
-        return self.scores[ player.name][DiceType.RED]
-
-    def green_scores(self, player):
-        return self.scores[ player.name][DiceType.GREEN]
 
     def get_attack_set(self, attack_set_num):
         for aset in self.attack_sets:
@@ -439,10 +491,21 @@ class GameTapeTester(unittest.TestCase):
         p1 = self.g.game_players[0]
         p2 = self.g.game_players[1]
 
+
         self.assertEqual( 4, self.g.total_reds( p1) )
         self.assertEqual( 3, self.g.total_reds( p2) )
 
-        p1_reds = self.g.game_tape.red_scores( p1 )
+
+        p1_init_reds = self.g.game_tape.initial_red_scores(p1)
+        self.assertEqual( 5, len(p1_init_reds))
+        self.assertEqual( 0, p1_init_reds[0])
+        self.assertEqual( -0.8125, p1_init_reds[1])
+        self.assertEqual(  0.125, p1_init_reds[2])
+        self.assertEqual(  0.125, p1_init_reds[3])
+        self.assertEqual(  0.125, p1_init_reds[4])
+
+
+        p1_reds = self.g.game_tape.final_red_scores( p1 )
 
         self.assertEqual( 5, len(p1_reds))
         self.assertEqual( 0, p1_reds[0])
@@ -452,7 +515,7 @@ class GameTapeTester(unittest.TestCase):
         self.assertEqual(  0.625, p1_reds[4])
 
 
-        p2_reds = self.g.game_tape.red_scores( p2 )
+        p2_reds = self.g.game_tape.final_red_scores( p2 )
 
         self.assertEqual( 5, len(p2_reds))
         self.assertEqual( 0, p2_reds[0])
@@ -462,7 +525,7 @@ class GameTapeTester(unittest.TestCase):
         self.assertEqual( 1.53125, p2_reds[4])
 
 
-        p1_greens = self.g.game_tape.green_scores( p1 )
+        p1_greens = self.g.game_tape.final_green_scores( p1 )
 
         self.assertEqual( 5, len(p1_greens))
 
@@ -472,7 +535,7 @@ class GameTapeTester(unittest.TestCase):
         self.assertEqual(1.3125, p1_greens[3])
         self.assertEqual(0.625, p1_greens[4])
 
-        p2_greens = self.g.game_tape.green_scores( p2 )
+        p2_greens = self.g.game_tape.final_green_scores( p2 )
 
         print p2_greens
         self.assertEqual( 5, len(p2_greens))

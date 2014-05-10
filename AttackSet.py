@@ -16,6 +16,11 @@ class AttackSet:
         self.records = []
         self.attacking_player = None
         self.defending_player = None
+        self.cumulative_defense_end_luck = None
+        self.cumulative_attack_end_luck  = None
+        self.cumulative_defense_begin_luck = None
+        self.cumulative_attack_begin_luck = None
+
 
     def add_defending_throw(self, throw):
         self.defending_throw = throw
@@ -137,14 +142,14 @@ class AttackSet:
                 initial_defend_counter = tape_stats[rec.defending_player.name][INITIAL][COUNTER]
 
             if rec.attack_roll is not None:
-                initial_attack_score.eval(
+                self.cumulative_attack_begin_luck = initial_attack_score.eval(
                     rec.attack_roll.dice_type,
                     initial_attack_counter.count( rec.attack_roll )
                 )
 
             if rec.defense_roll is not None:
                 if rec.defending_player is not None:
-                    initial_defend_score.eval(
+                    self.cumulative_defense_begin_luck = initial_defend_score.eval(
                         rec.defense_roll.dice_type,
                         initial_defend_counter.count( rec.defense_roll )
                     )
