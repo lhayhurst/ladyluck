@@ -17,7 +17,6 @@ def _unique(session, cls, hashfunc, queryfunc, constructor, arg, kw):
                 obj = constructor(*arg, **kw)
                 session.add(obj)
         cache[key] = obj
-        print obj
         return obj
 
 class UniqueMixin(object):
