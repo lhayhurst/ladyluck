@@ -23,13 +23,14 @@ class DatabaseTestCase(unittest.TestCase):
 
     def tearDown(self):
 
+#        self.session.flush()
         self.session.close_all()
         self.persistence_manager.drop_schema()
 
 
 class TestPersistence(DatabaseTestCase):
 
-
+    #@unittest.skip("because")
     def testSchemaConstruction(self):
         self.assertTrue(True)
 
@@ -53,13 +54,56 @@ class TestPersistence(DatabaseTestCase):
         for dice in green_dice:
             self.assertEqual( dice.dice_type, DiceType.GREEN)
 
-    #@unittest.skip("because")
-    def testGameWithPlayer(self):
-        parser = LogFileParser()
+
+#    @unittest.skip("because")
+    def testDoubleGameLoadPlayersRemainTheSame(self):
+
+        parser = LogFileParser(self.session)
         parser.read_input_from_file("../logfiles/fsm_test_input.txt")
         parser.run_finite_state_machine()
 
-        g = Game(parser.get_players())
+        g = Game(self.session, parser.get_players())
+
+        p1 = g.game_players[0]
+        p2 = g.game_players[1]
+        g.game_winner = p1
+
+
+        session = self.session
+        session.add(g)
+        session.commit()
+
+        parser = LogFileParser(self.session)
+        parser.read_input_from_file("../logfiles/fsm_test_input.txt")
+        parser.run_finite_state_machine()
+
+        g = Game(self.session, parser.get_players())
+
+        session.add(g)
+        session.commit()
+
+        p1a = g.game_players[0]
+        p2a = g.game_players[1]
+
+        g.game_winner = p1a
+
+        session = self.session
+        session.add (g)
+        session.commit()
+
+        self.assertTrue( p1.id == p1a.id)
+        self.assertTrue( p2.id == p2a.id )
+
+        session.flush(p1)
+        session.flush(p2)
+
+    #@unittest.skip("because")
+    def testGameWithPlayer(self):
+        parser = LogFileParser(self.session)
+        parser.read_input_from_file("../logfiles/fsm_test_input.txt")
+        parser.run_finite_state_machine()
+
+        g = Game(self.session, parser.get_players())
 
         p1 = g.game_players[0]
         p2 = g.game_players[1]
@@ -75,14 +119,14 @@ class TestPersistence(DatabaseTestCase):
         self.assertTrue( my_g is not None)
         self.assertEqual( g.game_name, my_g.game_name)
         self.assertTrue( len(g.game_players) == 2 )
-        self.assertTrue( g.game_players[0].name == "Ryan Krippendorf")
+        self.assertEqual( g.game_players[0].name , "Ryan")
         self.assertTrue( g.game_players[1].name == "sozin")
         self.assertTrue( g.game_winner is not None)
-        self.assertTrue( g.game_winner.name == "Ryan Krippendorf")
+        self.assertTrue( g.game_winner.name == "Ryan")
 
 
         my_player1 = self.persistence_manager.get_player(p1)
-        self.assertEqual("Ryan Krippendorf", my_player1.name)
+        self.assertEqual("Ryan", my_player1.name)
         self.assertTrue( my_player1.id == g.game_players[0].id)
 
         my_player2 = self.persistence_manager.get_player(p2)
@@ -97,23 +141,21 @@ class TestPersistence(DatabaseTestCase):
         vader = self.persistence_manager.get_player(p1)
         self.assertEqual( my_player1.id, vader.id )
 
-    def test_structured_query(self):
-        return True
-
-
     #@unittest.skip("because")
     def testTape(self):
-        parser = LogFileParser()
+
+        session = self.session
+
+        parser = LogFileParser(self.session)
         parser.read_input_from_file("../logfiles/fsm_test_input.txt")
         parser.run_finite_state_machine()
         game_tape = parser.game_tape
 
-        g = Game(parser.get_players())
+        g = Game(self.session, parser.get_players())
 
         p1 = g.game_players[0]
         p2 = g.game_players[1]
 
-        session = self.session
 
         for throw_result in game_tape:
             g.game_throws.append(throw_result)
@@ -130,8 +172,8 @@ class TestPersistence(DatabaseTestCase):
         self.assertTrue( throws is not None)
         self.assertEqual( len(throws) , 8 )
 
-        #* *** Ryan Krippendorf Rolls to Attack: [Focus], [Blank], [], [], [], [], [] ***
-        #* *** Ryan Krippendorf turns Attack Die 1 (Focus) into a [Hit] ***
+        #* *** Ryan Rolls to Attack: [Focus], [Blank], [], [], [], [], [] ***
+        #* *** Ryan turns Attack Die 1 (Focus) into a [Hit] ***
         throw = throws[0]
         self.assertEqual( g.id, throw.game_id)
         self.assertEqual( p1.name, throw.player.name)
@@ -188,7 +230,7 @@ class TestPersistence(DatabaseTestCase):
         self.assertEqual( DiceFace.EVADE, result.final_dice.dice_face)
 
 
-        #* *** Ryan Krippendorf Rolls to Attack: [Hit], [Crit], [], [], [], [], [] ***
+        #* *** Ryan Rolls to Attack: [Hit], [Crit], [], [], [], [], [] ***
         throw = throws[2]
         self.assertEqual( g.id, throw.game_id)
         self.assertEqual( p1.name, throw.player.name)
@@ -251,25 +293,20 @@ class TestPersistence(DatabaseTestCase):
         self.assertEqual( DiceType.RED, result.dice.dice_type)
         self.assertEqual( DiceFace.BLANK, result.dice.dice_face)
         self.assertEqual( DiceFace.HIT, result.final_dice.dice_face)
-        self.assertEqual( 2, len (result.adjustments))
+        self.assertEqual( 1, len (result.adjustments))
 
         adjustment = result.adjustments[0]
         self.assertEqual( adjustment.base_result_id, result.id)
         self.assertEqual( DiceThrowAdjustmentType.REROLL, adjustment.adjustment_type)
         self.assertEqual( DiceFace.BLANK, adjustment.from_dice.dice_face )
-        self.assertEqual( DiceFace.FOCUS, adjustment.to_dice.dice_face)
-
-        adjustment = result.adjustments[1]
-        self.assertEqual( adjustment.base_result_id, result.id)
-        self.assertEqual( DiceThrowAdjustmentType.CONVERT, adjustment.adjustment_type)
-        self.assertEqual( DiceFace.FOCUS, adjustment.from_dice.dice_face )
         self.assertEqual( DiceFace.HIT, adjustment.to_dice.dice_face)
+
 
         result = throw.results[1]
         self.assertEqual( 2, result.dice_num)
         self.assertEqual( DiceType.RED, result.dice.dice_type)
         self.assertEqual( DiceFace.BLANK, result.dice.dice_face)
-        self.assertEqual( DiceFace.HIT, result.final_dice.dice_face)
+        self.assertEqual( DiceFace.CRIT, result.final_dice.dice_face)
         self.assertEqual( 2, len (result.adjustments))
 
         adjustment = result.adjustments[0]
@@ -282,13 +319,13 @@ class TestPersistence(DatabaseTestCase):
         self.assertEqual( adjustment.base_result_id, result.id)
         self.assertEqual( DiceThrowAdjustmentType.CONVERT, adjustment.adjustment_type)
         self.assertEqual( DiceFace.FOCUS, adjustment.from_dice.dice_face )
-        self.assertEqual( DiceFace.HIT, adjustment.to_dice.dice_face)
+        self.assertEqual( DiceFace.CRIT, adjustment.to_dice.dice_face)
 
-        #* *** Ryan Krippendorf Rolls to Defend: [Focus], [Blank], [Focus], [], [], [], [] ***
-        #* *** Ryan Krippendorf Re-Rolls Defense Die 2 (Blank) and gets a [Focus] ***
-        #* *** Ryan Krippendorf turns Defense Die 1 (Focus) into a [Evade] ***
-        #* *** Ryan Krippendorf turns Defense Die 2 (Focus) into a [Evade] ***
-        #* *** Ryan Krippendorf turns Defense Die 3 (Focus) into a [Evade] ***
+        #* *** Ryan Rolls to Defend: [Focus], [Blank], [Focus], [], [], [], [] ***
+        #* *** Ryan Re-Rolls Defense Die 2 (Blank) and gets a [Focus] ***
+        #* *** Ryan turns Defense Die 1 (Focus) into a [Evade] ***
+        #* *** Ryan turns Defense Die 2 (Focus) into a [Evade] ***
+        #* *** Ryan turns Defense Die 3 (Focus) into a [Evade] ***
 
         throw = throws[5]
         self.assertEqual( g.id, throw.game_id)

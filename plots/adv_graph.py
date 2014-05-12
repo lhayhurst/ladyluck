@@ -8,7 +8,8 @@ import matplotlib
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import matplotlib.pyplot as plt
 
-class VersusGraph:
+class AdvantagePlot:
+
     def __init__(self,game):
         self.game      = game
         self.p1        = game.game_players[0]
@@ -22,7 +23,7 @@ class VersusGraph:
         player2_red_score = self.game_tape.final_red_scores( self.p2 )
         player2_green_score = self.game_tape.final_green_scores( self.p2 )
 
-        fig = plt.figure(1, figsize=(15, 8))
+        fig = plt.figure(1, figsize=(13, 8))
         fig.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.1)
 
         ax1 = fig.add_subplot(2, 2, 1)

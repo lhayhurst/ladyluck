@@ -5,8 +5,8 @@ from flask import Flask, render_template, request, url_for, redirect, Response, 
 from game_summary_stats import GameTape
 from parser import LogFileParser
 from persistence import PersistenceManager, Game
-from sparkplot import Sparkplot
-from versus_graph import VersusGraph
+from plots.adv_graph import AdvantagePlot
+from plots.player_plots import LuckPlot
 
 
 UPLOAD_FOLDER = "static"
@@ -66,11 +66,11 @@ def add_game():
     if len(tape) == 0:
         return redirect(url_for('new'))
 
-    parser = LogFileParser()
+    parser = LogFileParser(db.session)
     parser.read_input_from_string(tape)
     parser.run_finite_state_machine()
 
-    game = Game( parser.get_players())
+    game = Game( db.session, parser.get_players())
 
     p1 = game.game_players[0]
     p2 = game.game_players[1]
@@ -150,11 +150,25 @@ def game():
 def versus():
     id = str(request.args.get('game_id'))
     game = db.get_game(id)
-    versus_graph = VersusGraph( game=game)
+    versus_graph = LuckPlot( game, game.game_players[0])
     output = versus_graph.plot()
     response = make_response(output.getvalue())
     response.mimetype = 'image/png'
     return response
+
+@app.route('/luck_graph')
+def luck_graph():
+    id = str(request.args.get('game_id'))
+    game = db.get_game(id)
+    player_id = long(request.args.get('player'))
+    dice_type = request.args.get('dice_type')
+
+    lp = LuckPlot( game, player_id, dice_type)
+    output =  lp.plot()
+    response = make_response(output.getvalue())
+    response.mimetype = 'image/png'
+    return response
+
 
 if __name__ == '__main__':
     app.debug = True

@@ -4,12 +4,13 @@ from collections import OrderedDict
 import re
 from fsm import fsm
 from persistence import DiceType, DiceFace, DiceThrowType, DiceThrowAdjustmentType, DiceThrow, Player, Dice, \
-    DiceThrowResult, DiceThrowAdjustment
+    DiceThrowResult, DiceThrowAdjustment, Session
 
 
 class LogFileParser:
 
-    def __init__(self):
+    def __init__(self, session):
+        self.session = session
         self.lines = []
         self.game_tape = []
         self.players = OrderedDict()
@@ -163,8 +164,15 @@ class LogFileParser:
 
         fs.start(LogFileParser.START)
 
-        for line in self.get_lines():
-            fs.event(line)
+        i = 0
+        lines = self.get_lines()
+        for line in lines:
+            try:
+                fs.event(line)
+            except ValueError:
+                print("Unable to transition from state {0} ({1}) using input {2}, ignoring and continuing on ...".format(fs.currentState, lines[i-1], lines[i]))
+
+            i = i + 1 #just for debugging purposes
 
         fs.event("")
 
@@ -202,7 +210,10 @@ class LogFileParser:
 
 
     def get_dice_rolled(self, line):
-        dice_rolled = re.findall(r'\[(.*?)\]', line)
+        #some players have the annoying habit of putting []'s in their names, for example 'sepyx [FR]
+        #these have to be stripped out before providing them to the below
+        pre, post = line.split(':')
+        dice_rolled = re.findall(r'\[(.*?)\]', post)
         dice_rolled[:] = (LogFileParser.face_translate[value] for value in dice_rolled if len(value) > 0)
         return dice_rolled
 
@@ -210,7 +221,7 @@ class LogFileParser:
         return re.search(r'^\* \*\*\*\s+.*?\s+[Rolls|Re-rolls|turns].*?\*\*\*',line)
 
     def player_rolling_dice(self, line):
-        match = re.match(r'^\* \*\*\*\s+(.*?)\s+[Rolls|Re-rolls|turns].*?\*\*\*',line)
+        match = re.match(r'^\* \*\*\*\s+(.*?)\s+.*?[Rolls|Re-rolls|turns].*?\*\*\*',line)
         if match:
             player = match.group(1)
             self.players[player] = 1
@@ -223,6 +234,15 @@ class LogFileParser:
 
     def is_defense_roll(self,line):
         return re.search(r'^\* \*\*\*\s+.*?\s+Rolls\s+to\s+Defend.*?\*\*\*',line)
+
+    #* *** Veldrin used Focus on Attack Dice ***
+    def player_using_focus_token_on_attack(self, line):
+        return re.search(r'^\* \*\*\*\s+.*?\s+used\s+Focus\s+on\s+Attack\s+Dice.*?\*\*\*',line)
+
+    #* *** Veldrin used Focus on Defense Dice ***
+    def player_using_focus_token_on_defense(self, line):
+        return re.search(r'^\* \*\*\*\s+.*?\s+used\s+Focus\s+on\s+Defense\s+Dice.*?\*\*\*',line)
+
 
     def player_is_defending(self, line):
         if self.player_is_rolling_dice(line):
@@ -241,7 +261,9 @@ class LogFileParser:
         dice_rolled = self.get_dice_rolled( value )
 
         dice_number = 1
-        dice_throw = DiceThrow( throw_type=DiceThrowType.ATTACK, attack_set_num=self.current_attack_set, player=Player(name=attacking_player))
+        dice_throw = DiceThrow( throw_type=DiceThrowType.ATTACK,
+                                attack_set_num=self.current_attack_set,
+                                player=Player.as_unique( self.session, name=attacking_player))
         for dice_value in dice_rolled:
 
             dice = Dice(dice_type=DiceType.RED, dice_face=dice_value)
@@ -267,7 +289,9 @@ class LogFileParser:
         dice_number = 1
 
 
-        dice_throw = DiceThrow( throw_type=DiceThrowType.DEFEND, attack_set_num=self.current_attack_set, player=Player(name=defending_player))
+        dice_throw = DiceThrow( throw_type=DiceThrowType.DEFEND,
+                                attack_set_num=self.current_attack_set,
+                                player=Player.as_unique(self.session, name=defending_player))
         for dice_value in dice_rolled:
             dice = Dice( dice_type=DiceType.GREEN,dice_face=dice_value)
             throw_result = DiceThrowResult(dice_num=dice_number,
@@ -293,13 +317,16 @@ class LogFileParser:
 
     def player_is_modifying_defense_dice(self, value):
         return self.player_rerolled_defense_dice(value) or\
-               self.player_turned_defense_dice(value)
+               self.player_turned_defense_dice(value) or \
+               self.player_using_focus_token_on_defense(value)
 
     def player_is_modifying_attack_dice(self, value):
         return self.player_rerolled_attack_dice(value) or\
                self.player_turned_attack_dice(value)
 
-
+    def player_turned_attack_dice(self, line):
+        return re.search(r'^\* \*\*\*\s+.*?\s+turns\s+Attack\s+Die.*?\*\*\*',line) or \
+               self.player_using_focus_token_on_attack(line )
 
     #* *** sozin Re-Rolls Attack Die 1 [Focus] and gets a [Hit] ***
     def get_attack_dice_rerolled(self, line):
@@ -313,6 +340,9 @@ class LogFileParser:
 
 
     def add_attack_modification(self,game_state,value):
+        if self.player_using_focus_token_on_attack(value):
+            return
+
         dice = []
         adjustment_type = None
         if self.player_rerolled_attack_dice(value):
@@ -325,7 +355,13 @@ class LogFileParser:
         dice_number = int(dice[0][0])
         dice_value = LogFileParser.face_translate[dice[0][1]]
 
-        modified_result = self.current_throw.results[ dice_number - 1 ]
+        modified_result = None
+
+        try:
+            modified_result = self.current_throw.results[ dice_number - 1 ]
+        except:
+            print("foo")
+
 
         #if there were no adjustments, then the from is just from the base result
         #otherwise its from the last adjustment
@@ -352,7 +388,8 @@ class LogFileParser:
         return dice_rolled
 
     def add_defense_modification(self,game_state,value):
-
+        if self.player_using_focus_token_on_defense(value):
+            return
         dice = []
         adjustment_type = None
 

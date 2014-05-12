@@ -2,10 +2,12 @@ import os
 import re
 import uuid
 import shutil
-from werkzeug.utils import secure_filename
-from lgraph import LuckGraphs
-from enum import Enum
 import time
+
+from werkzeug.utils import secure_filename
+
+from plots.lgraph import LuckGraphs
+
 
 class DiceRoll:
     def __init__(self, result, num, player ):

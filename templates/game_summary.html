@@ -192,7 +192,24 @@
     </div>
     <div id="b" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true" aria-hidden="false" style="display: block;">
 
-        <img src="{{ game.versus_graph() }}">
+        <table>
+            <tr>
+                <td>{{ player1.name }} attack luck
+                    <img src="{{ game.luck_graph( player1, "R") }}"> </td>
+                <td>{{ player2.name }} attack luck
+                    <img src="{{ game.luck_graph( player2, "R") }}"> </td>
+
+            </tr>
+            <tr>
+                <td>{{ player1.name }} defense luck
+                    <img src="{{ game.luck_graph( player1, "G") }}"> </td>
+                <td>{{ player2.name }} defense luck
+                    <img src="{{ game.luck_graph( player2, "G") }}"> </td>
+
+            </tr>
+
+        </table>
+
 
     </div>
     <div id="c" aria-labelledby="ui-id-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
@@ -258,7 +275,7 @@
                                                   context.fill()
                                               {%  endif %}
                                             </script>
-                                            <center>{{ attack_set.hits_comma_crits_string() }}</center>
+                                            <center>{{ attack_set.hits_comma_crits_string() or '&nbsp;' }}</center>
 
                                         </td>
                                     </tr>
@@ -293,7 +310,7 @@
                                                   context.fill()
                                               {%  endif %}
                                             </script>
-                                            <center>{{ attack_set.hits_comma_crits_string() }}</center>
+                                            <center>{{ attack_set.hits_comma_crits_string() or '&nbsp;' }}</center>
 
                                         </td>
                                     </tr>
