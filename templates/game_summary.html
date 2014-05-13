@@ -220,14 +220,18 @@
     <div id="d" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true" aria-hidden="false" style="display: block;">
 
         <b>Versus</b>
+
         <table>
-
-
             <tr>
-                <td>Damage over time, red = {{ player1.name }}, green = {{ player2.name }}<img src="{{ game.damage_graph() }}"></td>
-                <td>Advantage over time, <img src="{{ game.advantage_graph() }}"></td>
             </tr>
+        </table>
 
+
+        <table>
+            <tr>
+                <td>Converted advantage over time, red = {{ player1.name }}, green = {{ player2.name }} <img src="{{ game.advantage_graph(1) }}"></td>
+                <td>Damage over time, red = {{ player1.name }}, green = {{ player2.name }}<img src="{{ game.damage_graph() }}"></td>
+            </tr>
             <tr>
                 <td>{{ player1.name }} attack luck versus {{ player2.name }} defense luck
                     <img src="{{ game.versus_graph( attacker=player1, defender=player2) }}">
@@ -235,10 +239,10 @@
                 <td>{{ player2.name }} attack luck versus {{ player1.name }} defense luck
                     <img src="{{ game.versus_graph( attacker=player2, defender=player1 ) }}">
                 </td>
+
             </tr>
-
-
         </table>
+
 
 
     </div>
@@ -279,6 +283,10 @@
                         <center>{{ attack_set.number }}</center>
                             <table class="tg">
                                 {%  if attack_set.attacking_player.name == player1.name %}
+                                    <tr><td class="tg-o1">Player1</td></tr>
+                                {%  else %}
+                                    <tr><td class="tg-o1">Player2</td></tr>
+                                {%  endif %}
                                     <tr>
                                         <td class="tg-o1">
                                             <a href="#attack_set{{attack_set.number}}"><canvas id="circlecanvas{{attack_set.number}}_1" width="40" height="40"></canvas></a>
@@ -310,42 +318,6 @@
 
                                         </td>
                                     </tr>
-                                    <tr><td class="tg-o1">Player1</td></tr>
-                                {%  else %}
-                                    <tr><td class="tg-o1">Player2</td></tr>
-                                    <tr>
-                                        <td class="tg-o1">
-                                            <a href="#attack_set{{attack_set.number}}"><canvas id="circlecanvas{{attack_set.number}}_2" width="40" height="40"></canvas></a>
-                                            <script>
-                                              var canvas = document.getElementById("circlecanvas{{attack_set.number}}_2");
-                                              var context = canvas.getContext("2d");
-                                              context.strokeStyle="green"
-                                              context.fillStyle="green"
-                                              context.arc(20, 20, Math.abs({{attack_set.total_defense_end_luck() }}) * (40/3.5), 0, Math.PI * 2, false);
-                                              {%  if attack_set.total_defense_end_luck() < 0  %}
-                                                  context.stroke()
-                                              {% else %}
-                                                  context.fill()
-                                              {%  endif %}
-                                            </script>
-                                            <a href="#attack_set{{attack_set.number}}"><canvas id="circlecanvas{{attack_set.number}}_1" width="40" height="40"></canvas></a>
-                                            <script>
-                                              var canvas = document.getElementById("circlecanvas{{attack_set.number}}_1");
-                                              var context = canvas.getContext("2d");
-                                              context.strokeStyle="red"
-                                              context.fillStyle="red"
-                                              context.arc(20, 20, Math.abs({{attack_set.total_attack_end_luck() }}) * (40/3.5), 0, Math.PI * 2, false);
-                                              {%  if attack_set.total_attack_end_luck() < 0  %}
-                                                  context.stroke()
-                                              {% else %}
-                                                  context.fill()
-                                              {%  endif %}
-                                            </script>
-                                            <center>{{ attack_set.hits_comma_crits_string() or '&nbsp;' }}</center>
-
-                                        </td>
-                                    </tr>
-                                {%  endif %}
                             </table>
                         </td>
                     {% endfor %}

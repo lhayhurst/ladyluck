@@ -9,6 +9,8 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import matplotlib.pyplot as plt
 from persistence import DiceType
 
+FIGSIZE = (6, 2.5)
+
 
 class LuckPlot:
 
@@ -33,7 +35,7 @@ class LuckPlot:
             adjusted_pl_data = self.game_tape.final_green_scores( self.p1 )
             line_color = 'g'
 
-        fig = plt.figure(figsize=(6,2.5))
+        fig = plt.figure(figsize=FIGSIZE)
         ax = fig.add_subplot(111)
         ax.plot( adjusted_pl_data, linewidth=3.0, color=line_color)
         ax.plot( init_pl_data, linewidth=3.0, linestyle='--', color='b'  )
@@ -62,7 +64,7 @@ class DamagePlot:
         p1_damage = self.game_tape.damage(p1)
         p2_damage = self.game_tape.damage(p2)
 
-        fig = plt.figure(figsize=(6,2.5))
+        fig = plt.figure(figsize=FIGSIZE)
         ax = fig.add_subplot(111)
         ax.plot( p1_damage, linewidth=3.0, color='r')
         ax.plot( p2_damage, linewidth=3.0, color='g'  )
@@ -96,7 +98,7 @@ class VersusPlot:
         initial_attack  = [x - y for x, y in zip(p1_initial_attack, p2_initial_defense)]
         adjusted_attack = [x - y for x, y in zip(p1_adjusted_attack, p2_adjusted_defense)]
 
-        fig = plt.figure(figsize=(6,2.5))
+        fig = plt.figure(figsize=FIGSIZE)
         ax = fig.add_subplot(111)
         ax.plot( adjusted_attack, linewidth=3.0, color='r')
         ax.plot( initial_attack, linewidth=3.0, linestyle='--', color='b'  )
@@ -112,20 +114,35 @@ class VersusPlot:
 
 class AdvantagePlot:
 
-    def __init__(self,game):
-        self.game      = game
-        self.p1        = game.game_players[0]
-        self.p2        = game.game_players[1]
-        self.game_tape = game.game_tape
+    def __init__(self,game, use_initial):
+        self.game        = game
+        self.use_initial = use_initial
+        self.p1          = game.game_players[0]
+        self.p2          = game.game_players[1]
+        self.game_tape   = game.game_tape
+
 
     def plot(self):
 
-        player1_red_score   = self.game_tape.final_red_scores( self.p1 )
-        player1_green_score = self.game_tape.final_green_scores( self.p1 )
-        player2_red_score = self.game_tape.final_red_scores( self.p2 )
-        player2_green_score = self.game_tape.final_green_scores( self.p2 )
+        player1_red_score = []
+        player1_green_score = []
+        player2_red_score = []
+        player2_green_score = []
 
-        fig = plt.figure(figsize=(6, 2.5))
+
+
+        if self.use_initial == 0:
+            player1_red_score   = self.game_tape.initial_red_scores( self.p1 )
+            player1_green_score = self.game_tape.initial_green_scores( self.p1 )
+            player2_red_score = self.game_tape.initial_red_scores( self.p2 )
+            player2_green_score = self.game_tape.initial_green_scores( self.p2 )
+        else:
+            player1_red_score   = self.game_tape.final_red_scores( self.p1 )
+            player1_green_score = self.game_tape.final_green_scores( self.p1 )
+            player2_red_score = self.game_tape.final_red_scores( self.p2 )
+            player2_green_score = self.game_tape.final_green_scores( self.p2 )
+
+        fig = plt.figure(figsize=FIGSIZE)
         ax1 = fig.add_subplot(111)
 
         player1_luck = [x + y for x, y in zip( player1_red_score, player1_green_score)]

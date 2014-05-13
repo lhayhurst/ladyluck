@@ -158,8 +158,10 @@ def damage():
 @app.route('/advantage')
 def advantage():
     id = str(request.args.get('game_id'))
+    use_initial = int(request.args.get('initial'))
+    print "initial {0}".format(use_initial)
     game = db.get_game(id)
-    ap = AdvantagePlot( game )
+    ap = AdvantagePlot( game, use_initial )
     output = ap.plot()
     response = make_response(output.getvalue())
     response.mimetype = 'image/png'

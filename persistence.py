@@ -190,9 +190,9 @@ class Game(Base):
         gid = self.id_str()
         return url_for("luck_graph", game_id=gid, player=pl.id, dice_type=dt)
 
-    def advantage_graph(self):
+    def advantage_graph(self, use_initial):
         gid = self.id_str()
-        return url_for("advantage", game_id=gid)
+        return url_for("advantage", game_id=gid, initial=use_initial)
 
     def damage_graph(self):
         gid = self.id_str()
