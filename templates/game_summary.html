@@ -263,9 +263,7 @@
 
 
         </style>
-
-
-        <br>
+        <i>Click on the circles to jump to the attack set</i>
         <br>
         <b>Player1 :</b> {{ player1.name }}
         <br>
@@ -310,7 +308,7 @@
                                                   context.fill()
                                               {%  endif %}
                                             </script>
-                                            <center>{{ attack_set.hits_comma_crits_string() or '&nbsp;' }}</center>
+                                            <center>{{ attack_set.hits_comma_crits_string() }}</center>
 
                                         </td>
                                     </tr>

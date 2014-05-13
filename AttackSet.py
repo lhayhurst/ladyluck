@@ -81,7 +81,7 @@ class AttackSet:
         nnh = self.num_net_hits()
         nnc = self.net_crits
         if nnh == 0 and nnc == 0:
-            return ""
+            return "0h,0c"
         if nnh >0 and nnc == 0:
             return str(nnh) + "h"
         if nnh == 0 and nnc > 0:
