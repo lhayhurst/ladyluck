@@ -210,7 +210,7 @@ class Game(Base):
 
 class PersistenceManager:
     def __init__(self, echo=False):
-        url = os.getenv('DB_TEST_URL')
+        url = os.getenv('LOCAL_DB_URL')
         self.engine = sqlalchemy.create_engine(url, echo=echo)
         self.connection = self.engine.connect()
 
