@@ -128,8 +128,6 @@ class AttackSet:
         self.end_counter               = Counter(True)
         self.end_score                 = Score()
 
-
-
         for rec in self.records:
 
             initial_attack_score   = tape_stats[rec.attacking_player.name][INITIAL][SCORE]

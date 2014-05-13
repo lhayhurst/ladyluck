@@ -182,13 +182,21 @@ class Game(Base):
         return None
 
 
-    def versus_graph(self):
-        return url_for("versus", game_id=self.id_str())
+    def versus_graph(self, attacker, defender):
+        return url_for("versus", game_id=self.id_str(),attacker=attacker.id, defender=defender.id)
 
 
     def luck_graph(self, pl, dt):
         gid = self.id_str()
         return url_for("luck_graph", game_id=gid, player=pl.id, dice_type=dt)
+
+    def advantage_graph(self):
+        gid = self.id_str()
+        return url_for("advantage", game_id=gid)
+
+    def damage_graph(self):
+        gid = self.id_str()
+        return url_for("damage", game_id=gid)
 
     #these methods are utility methods to help out the game_summary web page.
     #todo: autoforward these along to the tape class

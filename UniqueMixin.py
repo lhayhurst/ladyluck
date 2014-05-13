@@ -1,6 +1,10 @@
 #see https://bitbucket.org/zzzeek/sqlalchemy/wiki/UsageRecipes/UniqueObject
 
 def _unique(session, cls, hashfunc, queryfunc, constructor, arg, kw):
+    if session is None:
+        obj = constructor(*arg, **kw)
+        return obj
+
     cache = getattr(session, '_unique_cache', None)
     if cache is None:
         session._unique_cache = cache = {}

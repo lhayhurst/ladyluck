@@ -4,7 +4,7 @@ from flask import url_for
 from AttackSet import AttackSet, INITIAL, SCORE, END
 from counter import Counter, COUNTER
 from parser import LogFileParser
-from persistence import Game, DiceThrowType, DiceThrowAdjustmentType, DiceFace, DiceType
+from persistence import Game, DiceThrowType, DiceThrowAdjustmentType, DiceFace, DiceType, Session
 from score import Score
 
 STATIC = 'static'
@@ -204,6 +204,9 @@ class GameTape(object):
                 cnt = cnt + 1
         return cnt
 
+    def damage(self, player):
+        return self.damage_hash[ player.name ]
+
     def score(self):
 
         self.final_scores   = collections.defaultdict( lambda: collections.defaultdict(list))
@@ -240,11 +243,20 @@ class GameTape(object):
         p2_begin_green_score = self.initial_scores[ p2 ][ DiceType.GREEN ]
 
 
+        self.p1_damage = [0]
+        self.p2_damage = [0]
+
+        self.damage_hash = { p1: self.p1_damage, p2 : self.p2_damage }
+
         for ats in self.attack_sets:
 
             ats.score(self.stats )
 
             if ats.attacking_player.name == p1:
+
+                self.p1_damage.append( ats.num_net_hits() +ats.net_crits + self.p1_damage[-1])
+                self.p2_damage.append( self.p2_damage[-1] )
+
                 p1_red_score.append( ats.cumulative_attack_end_luck )
                 p1_begin_red_score.append( ats.cumulative_attack_begin_luck )
 
@@ -267,6 +279,10 @@ class GameTape(object):
 
 
             else: #p2 is the attacking player
+
+                self.p2_damage.append( ats.num_net_hits() +ats.net_crits + self.p2_damage[-1])
+                self.p1_damage.append( self.p1_damage[-1] )
+
                 p2_red_score.append( ats.cumulative_attack_end_luck )
                 p2_begin_red_score.append( ats.cumulative_attack_begin_luck )
 
@@ -472,12 +488,12 @@ class GameTapeTester(unittest.TestCase):
 
     def setUp(self):
 
-        self.parser = LogFileParser()
+        self.parser = LogFileParser(None)
         self.parser.read_input_from_file("../logfiles/fsm_test_input.txt")
         self.parser.run_finite_state_machine()
         self.game_tape = self.parser.game_tape
 
-        self.g = Game(self.parser.get_players())
+        self.g = Game(None,self.parser.get_players())
 
 
         for throw_result in self.game_tape:
@@ -485,6 +501,29 @@ class GameTapeTester(unittest.TestCase):
 
         self.tape = GameTape( self.g )
         self.tape.score()
+
+
+    def testDamage(self):
+
+        p1 = self.g.game_players[0]
+        p2 = self.g.game_players[1]
+
+        p1_damage = self.g.game_tape.damage( p1 )
+        p2_damage = self.g.game_tape.damage( p2 )
+
+        self.assertEqual( 0, p1_damage[0])
+        self.assertEqual( 0, p1_damage[1])
+        self.assertEqual( 1, p1_damage[2])
+        self.assertEqual( 1, p1_damage[3])
+        self.assertEqual( 1, p1_damage[4])
+
+        self.assertEqual( 0, p2_damage[0])
+        self.assertEqual( 0, p2_damage[1])
+        self.assertEqual( 0, p2_damage[2])
+        self.assertEqual( 0, p2_damage[3])
+        self.assertEqual( 0, p2_damage[4])
+
+
 
     def testCumulativeStats(self):
 

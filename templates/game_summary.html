@@ -9,8 +9,12 @@
             <a href="#a" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-1">Dice Stats</a>
         </li>
         <li class="ui-state-default ui-corner-top"  role="tab" tabindex="0" aria-controls="b" aria-labelledby="ui-id-2" aria-selected="false">
-            <a href="#b" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">Graphs</a>
+            <a href="#b" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">Player graphs</a>
         </li>
+        <li class="ui-state-default ui-corner-top"  role="tab" tabindex="0" aria-controls="b" aria-labelledby="ui-id-2" aria-selected="false">
+            <a href="#d" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-2">Versus graphs</a>
+        </li>
+
         <li class="ui-state-default ui-corner-top" role="tab" tabindex="-1" aria-controls="c" aria-labelledby="ui-id-3" aria-selected="false">
             <a href="#c" class="ui-tabs-anchor" role="presentation" tabindex="-1" id="ui-id-3">Game Tape</a>
         </li>
@@ -192,18 +196,19 @@
     </div>
     <div id="b" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true" aria-hidden="false" style="display: block;">
 
+        <b>Initial and adjusted luck graphs</b>
         <table>
             <tr>
-                <td>{{ player1.name }} attack luck
+                <td>{{ player1.name }} attack luck; solid line = after rerolls/focuses
                     <img src="{{ game.luck_graph( player1, "R") }}"> </td>
-                <td>{{ player2.name }} attack luck
+                <td>{{ player2.name }} attack luck;  solid line = after rerolls/focuses
                     <img src="{{ game.luck_graph( player2, "R") }}"> </td>
 
             </tr>
             <tr>
-                <td>{{ player1.name }} defense luck
+                <td>{{ player1.name }} defense luck;  solid line = after rerolls/focuses
                     <img src="{{ game.luck_graph( player1, "G") }}"> </td>
-                <td>{{ player2.name }} defense luck
+                <td>{{ player2.name }} defense luck;  solid line = after rerolls/focuses
                     <img src="{{ game.luck_graph( player2, "G") }}"> </td>
 
             </tr>
@@ -212,6 +217,32 @@
 
 
     </div>
+    <div id="d" aria-labelledby="ui-id-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="true" aria-hidden="false" style="display: block;">
+
+        <b>Versus</b>
+        <table>
+
+
+            <tr>
+                <td>Damage over time, red = {{ player1.name }}, green = {{ player2.name }}<img src="{{ game.damage_graph() }}"></td>
+                <td>Advantage over time, <img src="{{ game.advantage_graph() }}"></td>
+            </tr>
+
+            <tr>
+                <td>{{ player1.name }} attack luck versus {{ player2.name }} defense luck
+                    <img src="{{ game.versus_graph( attacker=player1, defender=player2) }}">
+                </td>
+                <td>{{ player2.name }} attack luck versus {{ player1.name }} defense luck
+                    <img src="{{ game.versus_graph( attacker=player2, defender=player1 ) }}">
+                </td>
+            </tr>
+
+
+        </table>
+
+
+    </div>
+
     <div id="c" aria-labelledby="ui-id-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-expanded="false" aria-hidden="true" style="display: none;">
         <a href="/download-game?id={{ game.id }}">Download game as csv</a>
 

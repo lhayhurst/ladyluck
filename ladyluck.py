@@ -5,8 +5,7 @@ from flask import Flask, render_template, request, url_for, redirect, Response, 
 from game_summary_stats import GameTape
 from parser import LogFileParser
 from persistence import PersistenceManager, Game
-from plots.adv_graph import AdvantagePlot
-from plots.player_plots import LuckPlot
+from plots.player_plots import LuckPlot, VersusPlot, AdvantagePlot, DamagePlot
 
 
 UPLOAD_FOLDER = "static"
@@ -146,12 +145,35 @@ def game():
                             winner=winning_player,
                             game_tape=game_tape )
 
+@app.route('/damage')
+def damage():
+    id = str(request.args.get('game_id'))
+    game = db.get_game(id)
+    dp = DamagePlot( game )
+    output = dp.plot()
+    response = make_response(output.getvalue())
+    response.mimetype = 'image/png'
+    return response
+
+@app.route('/advantage')
+def advantage():
+    id = str(request.args.get('game_id'))
+    game = db.get_game(id)
+    ap = AdvantagePlot( game )
+    output = ap.plot()
+    response = make_response(output.getvalue())
+    response.mimetype = 'image/png'
+    return response
+
 @app.route('/versus')
 def versus():
     id = str(request.args.get('game_id'))
     game = db.get_game(id)
-    versus_graph = LuckPlot( game, game.game_players[0])
-    output = versus_graph.plot()
+    attacker_id = long(request.args.get('attacker'))
+    defender_id = long(request.args.get('defender'))
+
+    vp = VersusPlot( game, attacker_id, defender_id)
+    output = vp.plot()
     response = make_response(output.getvalue())
     response.mimetype = 'image/png'
     return response
