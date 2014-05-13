@@ -27,25 +27,13 @@ if not app.debug:
     app.logger.addHandler(mail_handler)
 
 
-def get_all_games():
-    ret = []
-    games = db.get_games()
-
-    for game in games:
-        p1 = game.game_players[0]
-        p2 = game.game_players[1]
-        url_text = "{0} vs {1} ({2})".format(p1.name, p2.name, game.game_played_time)
-        ret.append( { 'text' : url_text, 'guid' : 'game?id=' + str(game.id)})
-    return ret
-
-
 @app.route("/about")
 def about():
     return render_template('about.html')
 
 @app.route("/games" )
 def games():
-    games = get_all_games()
+    games = db.get_games()
     return( render_template('games.html', games=games) )
 
 
@@ -118,7 +106,9 @@ def download_game():
         rows = get_game_tape_text(game)
         for r in rows:
            yield ",".join(r) + '\n'
-    return Response(generate(), mimetype='text/csv')
+
+    disposition = "attachment; filename=game{0}_{1}_vs_{2}.csv".format(game.id_str(), game.game_players[0].name, game.game_players[1].name )
+    return Response(generate(), mimetype='text/csv', headers={'Content-Disposition': disposition} )
 
 @app.route('/game')
 def game():

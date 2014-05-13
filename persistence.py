@@ -182,6 +182,9 @@ class Game(Base):
         return None
 
 
+    def display_text(self):
+        return "{0} v {1} at {2}".format(self.game_players[0].name, self.game_players[1].name, self.game_played_time)
+
     def versus_graph(self, attacker, defender):
         return url_for("versus", game_id=self.id_str(),attacker=attacker.id, defender=defender.id)
 
