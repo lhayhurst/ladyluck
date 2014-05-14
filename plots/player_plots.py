@@ -6,6 +6,7 @@ import matplotlib
 # Agg stands for "antigrain rendering" and produces PNG files
 #matplotlib.use('Agg')
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+matplotlib.use('AGG')
 import matplotlib.pyplot as plt
 from persistence import DiceType
 
