@@ -120,6 +120,9 @@ def game():
     game_tape = GameTape(game)
     game_tape.score()
 
+    db.session.merge(game)
+    db.session.commit()
+
     return render_template( 'game_summary.html',
                             game=game,
                             player1=player1,
@@ -148,10 +151,6 @@ def advantage():
     use_initial = int(request.args.get('initial'))
     game = db.get_game(id)
 
-    if game.game_tape is None:
-        game_tape = GameTape(game)
-        game_tape.score()
-
     ap = AdvantagePlot( game, use_initial )
     output = ap.plot()
     response = make_response(output.getvalue())
@@ -162,10 +161,6 @@ def advantage():
 def versus():
     id = str(request.args.get('game_id'))
     game = db.get_game(id)
-
-    if game.game_tape is None:
-        game_tape = GameTape(game)
-        game_tape.score()
 
     attacker_id = long(request.args.get('attacker'))
     defender_id = long(request.args.get('defender'))
@@ -180,10 +175,6 @@ def versus():
 def luck_graph():
     id = str(request.args.get('game_id'))
     game = db.get_game(id)
-
-    if game.game_tape is None:
-        game_tape = GameTape(game)
-        game_tape.score()
 
     player_id = long(request.args.get('player'))
     dice_type = request.args.get('dice_type')
