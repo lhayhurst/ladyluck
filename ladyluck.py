@@ -180,10 +180,10 @@ def luck_graph():
     dice_type = request.args.get('dice_type')
 
     lp = LuckPlot( game, player_id, dice_type)
-    output =  lp.plot()
-    response = make_response(output.getvalue())
-    response.mimetype = 'image/png'
-    return response
+    return lp.plot()
+    #response = make_response(output.getvalue())
+    #response.mimetype = 'image/png'
+    #return response
 
 
 if __name__ == '__main__':

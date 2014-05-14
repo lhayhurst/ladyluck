@@ -1,4 +1,5 @@
 import StringIO
+from flask import send_file
 import matplotlib
 matplotlib.use('AGG')
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
@@ -43,7 +44,8 @@ class LuckPlot:
         output = StringIO.StringIO()
         canvas = FigureCanvas( fig  )
         canvas.print_png( output )
-        return output
+        output.seek(0)
+        return send_file( output, mimetype='image/png')
 
 class DamagePlot:
 
