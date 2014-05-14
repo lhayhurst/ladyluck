@@ -391,11 +391,11 @@
 <Jake Pichelmeyer> - okay, Rookie 1 on Biggs, 3v3 through the asteroid, let's see if we get lucky
 <Paul Heaver> - ok
 * *** Jake Pichelmeyer Rolls to Attack: [Focus], [Hit], [Focus], [], [], [], [] ***
+* *** Jake Pichelmeyer turns Attack Die 1 [Focus] into a [Hit] ***
+* *** Jake Pichelmeyer turns Attack Die 3 [Focus] into a [Hit] ***
 <Jake Pichelmeyer> - focus 3h
 <Paul Heaver> - ok 3 natural evades coming up
 * *** Paul Heaver Rolls to Defend: [Evade], [Evade], [Focus], [], [], [], [] ***
-* *** Jake Pichelmeyer turns Attack Die 1 [Focus] into a [Hit] ***
-* *** Jake Pichelmeyer turns Attack Die 3 [Focus] into a [Hit] ***
 <Paul Heaver> - almost!
 <Jake Pichelmeyer> - Sweet Justice!
 <Jake Pichelmeyer> - Blue on Dagger 2 4v1

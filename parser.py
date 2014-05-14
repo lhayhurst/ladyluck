@@ -108,11 +108,6 @@ class LogFileParser:
             ),
             (
                 LogFileParser.PLAYER_DEFENDING,
-                LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
-                lambda x: self.player_is_modifying_attack_dice(x)
-            ),
-            (
-                LogFileParser.PLAYER_DEFENDING,
                 LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE,
                 lambda x: self.player_is_modifying_defense_dice(x),
                 self.add_defense_modification
