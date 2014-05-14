@@ -18,14 +18,6 @@ static_dir = os.path.join( here, app.config['UPLOAD_FOLDER'] )
 db = PersistenceManager()
 
 ADMINS = ['sozinsky@gmail.com']
-if not app.debug:
-    import logging
-    from logging.handlers import SMTPHandler
-    mail_handler = SMTPHandler('127.0.0.1', 'server-error@pythonanywhere.com',
-    ADMINS, 'Ladyluck Failed')
-    mail_handler.setLevel(logging.ERROR)
-    app.logger.addHandler(mail_handler)
-
 
 @app.route("/about")
 def about():
