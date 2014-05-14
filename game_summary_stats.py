@@ -181,6 +181,22 @@ class GameTape(object):
             ats.net_results()
 
 
+    def versus_graph(self, attacker, defender):
+        return url_for("versus", game_id=self.game.id_str(),attacker=attacker.id, defender=defender.id)
+
+
+    def luck_graph(self, pl, dt):
+        gid = self.game.id_str()
+        return url_for("luck_graph", game_id=gid, player=pl.id, dice_type=dt)
+
+    def advantage_graph(self, use_initial):
+        gid = self.game.id_str()
+        return url_for("advantage", game_id=gid, initial=use_initial)
+
+    def damage_graph(self):
+        gid = self.game.id_str()
+        return url_for("damage", game_id=gid)
+
     def attack_set_subsets(self, modvalue=15):
         ret = []
         i = 0

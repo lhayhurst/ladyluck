@@ -185,22 +185,6 @@ class Game(Base):
     def display_text(self):
         return "{0} v {1} at {2}".format(self.game_players[0].name, self.game_players[1].name, self.game_played_time)
 
-    def versus_graph(self, attacker, defender):
-        return url_for("versus", game_id=self.id_str(),attacker=attacker.id, defender=defender.id)
-
-
-    def luck_graph(self, pl, dt):
-        gid = self.id_str()
-        return url_for("luck_graph", game_id=gid, player=pl.id, dice_type=dt)
-
-    def advantage_graph(self, use_initial):
-        gid = self.id_str()
-        return url_for("advantage", game_id=gid, initial=use_initial)
-
-    def damage_graph(self):
-        gid = self.id_str()
-        return url_for("damage", game_id=gid)
-
     #these methods are utility methods to help out the game_summary web page.
     #todo: autoforward these along to the tape class
 
