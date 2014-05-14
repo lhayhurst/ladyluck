@@ -1,21 +1,20 @@
 import StringIO
-from flask import send_file
 import matplotlib
 matplotlib.use('AGG')
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import matplotlib.pyplot as plt
 from persistence import DiceType
 
-FIGSIZE = (6, 2.5)
+FIGSIZE = (5,2)
 
 
 class LuckPlot:
 
     def __init__(self,game, p1, dice_type):
         self.game      = game
-        self.p1        = game.get_player_by_id(p1)
+        self.p1        = p1
         self.game_tape = game.game_tape
-        self.dice_type = DiceType.from_string(dice_type)
+        self.dice_type = dice_type
 
     def plot(self):
 
@@ -38,14 +37,11 @@ class LuckPlot:
         ax.plot( init_pl_data, linewidth=3.0, linestyle='--', color='b'  )
 
         ax.grid(True)
-        ax.set_xlabel("Attack sets")
-        ax.set_ylabel("Score")
 
         output = StringIO.StringIO()
-        canvas = FigureCanvas( fig  )
-        canvas.print_png( output )
-        output.seek(0)
-        return send_file( output, mimetype='image/png')
+        fig.savefig(output, format='png')
+        data = output.getvalue().encode('base64')
+        return data
 
 class DamagePlot:
 
@@ -68,21 +64,19 @@ class DamagePlot:
         ax.plot( p2_damage, linewidth=3.0, color='g'  )
 
         ax.grid(True)
-        ax.set_xlabel("Attack sets")
-        ax.set_ylabel("Damage")
 
         output = StringIO.StringIO()
-        canvas = FigureCanvas( fig  )
-        canvas.print_png( output )
-        return output
+        fig.savefig(output, format='png')
+        data = output.getvalue().encode('base64')
+        return data
 
 
 class VersusPlot:
 
     def __init__(self,game, attacker, defender ):
         self.game            = game
-        self.attacker        = game.get_player_by_id(attacker)
-        self.defender        = game.get_player_by_id(defender)
+        self.attacker        = attacker
+        self.defender        = defender
         self.game_tape = game.game_tape
 
     def plot(self):
@@ -102,13 +96,11 @@ class VersusPlot:
         ax.plot( initial_attack, linewidth=3.0, linestyle='--', color='b'  )
 
         ax.grid(True)
-        ax.set_xlabel("Attack sets")
-        ax.set_ylabel("Score")
 
         output = StringIO.StringIO()
-        canvas = FigureCanvas( fig  )
-        canvas.print_png( output )
-        return output
+        fig.savefig(output, format='png')
+        data = output.getvalue().encode('base64')
+        return data
 
 class AdvantagePlot:
 
@@ -168,11 +160,10 @@ class AdvantagePlot:
         ax1.bar(x_axis_values, player1_adv, color='r')
         ax1.bar(x_axis_values, player2_adv, color='g')
 
-        ax1.set_xlabel("Attack sets")
-        ax1.set_ylabel("Net advantage score")
         ax1.grid(True)
 
         output = StringIO.StringIO()
-        canvas = FigureCanvas( fig  )
-        canvas.print_png( output )
-        return output
+        fig.savefig(output, format='png')
+        data = output.getvalue().encode('base64')
+        return data
+

@@ -5,6 +5,7 @@ from AttackSet import AttackSet, INITIAL, SCORE, END
 from counter import Counter, COUNTER
 from parser import LogFileParser
 from persistence import Game, DiceThrowType, DiceThrowAdjustmentType, DiceFace, DiceType, Session
+from plots.player_plots import LuckPlot, AdvantagePlot, DamagePlot, VersusPlot
 from score import Score
 
 STATIC = 'static'
@@ -182,20 +183,20 @@ class GameTape(object):
 
 
     def versus_graph(self, attacker, defender):
-        return url_for("versus", game_id=self.game.id_str(),attacker=attacker.id, defender=defender.id)
+        vp = VersusPlot( self.game, attacker, defender )
+        return vp.plot()
 
-
-    def luck_graph(self, pl, dt):
-        gid = self.game.id_str()
-        return url_for("luck_graph", game_id=gid, player=pl.id, dice_type=dt)
+    def luck_graph(self, player, dice_type):
+        lp = LuckPlot( self.game, player, DiceType.from_string(dice_type))
+        return lp.plot()
 
     def advantage_graph(self, use_initial):
-        gid = self.game.id_str()
-        return url_for("advantage", game_id=gid, initial=use_initial)
+        av = AdvantagePlot( self.game, use_initial)
+        return av.plot()
 
     def damage_graph(self):
-        gid = self.game.id_str()
-        return url_for("damage", game_id=gid)
+        dg = DamagePlot(self.game)
+        return dg.plot()
 
     def attack_set_subsets(self, modvalue=15):
         ret = []

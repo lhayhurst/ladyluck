@@ -203,16 +203,16 @@
         <table class="tg1">
             <tr>
                 <td class="tg-tr94">{{ player1.name }} attack luck; solid line = after rerolls/focuses
-                    <img src="{{ game_tape.luck_graph( player1, "R") }}"> </td>
+                    <img src="data:image/png;base64,{{ game_tape.luck_graph( player1, "R") }}"> </td>
                 <td class="tg-tr94">{{ player2.name }} attack luck;  solid line = after rerolls/focuses
-                    <img src="{{ game_tape.luck_graph( player2, "R") }}"> </td>
+                    <img src="data:image/png;base64,{{ game_tape.luck_graph( player2, "R") }}"> </td>
 
             </tr>
             <tr>
                 <td class="tg-tr94">{{ player1.name }} defense luck;  solid line = after rerolls/focuses
-                    <img src="{{ game_tape.luck_graph( player1, "G") }}"> </td>
+                    <img src="data:image/png;base64,{{ game_tape.luck_graph( player1, "G") }}"> </td>
                 <td class="tg-tr94">{{ player2.name }} defense luck;  solid line = after rerolls/focuses
-                    <img src="{{ game_tape.luck_graph( player2, "G") }}"> </td>
+                    <img src="data:image/png;base64,{{ game_tape.luck_graph( player2, "G") }}"> </td>
 
             </tr>
 
@@ -226,15 +226,15 @@
 
         <table class="tg1">
             <tr>
-                <td class="tg-tr94">Converted advantage over time, red = {{ player1.name }}, green = {{ player2.name }} <img src="{{ game_tape.advantage_graph(1) }}"></td>
-                <td class="tg-tr94">Damage over time, red = {{ player1.name }}, green = {{ player2.name }}<img src="{{ game_tape.damage_graph() }}"></td>
+                <td class="tg-tr94">Converted advantage over time, red = {{ player1.name }}, green = {{ player2.name }} <img src="data:image/png;base64,{{ game_tape.advantage_graph(1) }}"></td>
+                <td class="tg-tr94">Damage over time, red = {{ player1.name }}, green = {{ player2.name }}<img src="data:image/png;base64,{{ game_tape.damage_graph() }}"></td>
             </tr>
             <tr>
                 <td class="tg-tr94">{{ player1.name }} attack luck versus {{ player2.name }} defense luck
-                    <img src="{{ game_tape.versus_graph( attacker=player1, defender=player2) }}">
+                    <img src="data:image/png;base64,{{ game_tape.versus_graph( attacker=player1, defender=player2) }}">
                 </td>
                 <td class="tg-tr94">{{ player2.name }} attack luck versus {{ player1.name }} defense luck
-                    <img src="{{ game_tape.versus_graph( attacker=player2, defender=player1 ) }}">
+                    <img src="data:image/png;base64,{{ game_tape.versus_graph( attacker=player2, defender=player1 ) }}">
                 </td>
 
             </tr>

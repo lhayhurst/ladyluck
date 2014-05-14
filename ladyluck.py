@@ -120,9 +120,6 @@ def game():
     game_tape = GameTape(game)
     game_tape.score()
 
-    db.session.merge(game)
-    db.session.commit()
-
     return render_template( 'game_summary.html',
                             game=game,
                             player1=player1,
