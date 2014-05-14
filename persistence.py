@@ -154,7 +154,7 @@ class Game(Base):
     game_players = relationship(Player.__name__, secondary=GamePlayers)
     game_throws = relationship(DiceThrow.__name__)
     game_winner = relationship(Player.__name__, secondary=GameWinner, uselist=False)
-
+    self.game_tape = None
 
     def __init__(self, session, players, winner=None):
         self.game_played_time = time.strftime('%Y-%m-%d %H:%M:%S')
@@ -164,6 +164,8 @@ class Game(Base):
                                                  self.game_played_time)
         if winner is not None:
             self.game_winner = winner
+
+        self.game_tape = None
 
 
     def id_str(self):
