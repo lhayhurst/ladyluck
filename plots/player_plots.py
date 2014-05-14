@@ -40,6 +40,7 @@ class LuckPlot:
 
         output = StringIO.StringIO()
         fig.savefig(output, format='png')
+        plt.close()
         data = output.getvalue().encode('base64')
         return data
 
@@ -67,6 +68,7 @@ class DamagePlot:
 
         output = StringIO.StringIO()
         fig.savefig(output, format='png')
+        plt.close()
         data = output.getvalue().encode('base64')
         return data
 
@@ -99,6 +101,7 @@ class VersusPlot:
 
         output = StringIO.StringIO()
         fig.savefig(output, format='png')
+        plt.close()
         data = output.getvalue().encode('base64')
         return data
 
@@ -164,6 +167,8 @@ class AdvantagePlot:
 
         output = StringIO.StringIO()
         fig.savefig(output, format='png')
+        plt.close()
+
         data = output.getvalue().encode('base64')
         return data
 
