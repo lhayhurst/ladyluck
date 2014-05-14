@@ -2,7 +2,7 @@ __author__ = 'lhayhurst'
 import sys
 from parser import LogFileParser
 from persistence import Dice, DiceType, DiceFace, Player, Game, PersistenceManager, DiceThrowType, \
-    DiceThrowAdjustmentType
+    DiceThrowAdjustmentType, db_session
 import unittest
 
 
@@ -386,13 +386,13 @@ if __name__ == "__main__":
     if len (sys.argv) == 1:
         unittest.main()
     elif sys.argv[1] == 'create':
-        pm = PersistenceManager(True)
+        pm = PersistenceManager()
         pm.create_schema()
         pm.populate_reference_tables()
-        pm.session.commit()
-        pm.session.close_all()
+        db_session.commit()
+        db_session.close_all()
     elif sys.argv[1] == 'destroy':
-        pm = PersistenceManager(True)
+        pm = PersistenceManager()
         pm.drop_schema()
-        pm.session.commit()
-        pm.session.close_all()
+        db_session.commit()
+        db_session.close_all()
