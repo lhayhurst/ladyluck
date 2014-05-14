@@ -14,6 +14,9 @@ ALLOWED_EXTENSIONS = set( ['png'])
 
 app    = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['SQLALCHEMY_POOL_RECYCLE'] = 499
+app.config['SQLALCHEMY_POOL_TIMEOUT'] = 20
+
 here = os.path.dirname(__file__)
 static_dir = os.path.join( here, app.config['UPLOAD_FOLDER'] )
 db = PersistenceManager()
@@ -51,11 +54,9 @@ def add_game():
         return redirect(url_for('new'))
 
     try:
-        parser = LogFileParser(db.session)
+        parser = LogFileParser(db_session)
         parser.read_input_from_string(tape)
         parser.run_finite_state_machine()
-
-        session = PersistenceManager.CreateSession()
 
         game = Game( db_session, parser.get_players())
 
