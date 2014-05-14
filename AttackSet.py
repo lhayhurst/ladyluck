@@ -136,7 +136,10 @@ class AttackSet:
             initial_defend_score   = None
             initial_defend_counter = None
             if rec.defending_player is not None:
-                initial_defend_score = tape_stats[rec.defending_player.name][INITIAL][SCORE]
+                try:
+                    initial_defend_score = tape_stats[rec.defending_player.name][INITIAL][SCORE]
+                except:
+                    print ("foo")
                 initial_defend_counter = tape_stats[rec.defending_player.name][INITIAL][COUNTER]
 
             if rec.attack_roll is not None:

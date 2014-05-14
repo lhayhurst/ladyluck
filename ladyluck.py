@@ -1,5 +1,6 @@
 import os
 import uuid
+import MySQLdb
 
 from flask import Flask, render_template, request, url_for, redirect, Response, make_response
 
@@ -33,8 +34,13 @@ def about():
 
 @app.route("/games" )
 def games():
-    games = db.get_games()
-    return( render_template('games.html', games=games) )
+    try:
+        games = db.get_games()
+        return( render_template('games.html', games=games) )
+    except MySQLdb.OperationalError:
+        #give it another shot...
+        games = db.get_games()
+        return( render_template('games.html', games=games) )
 
 
 @app.route('/new', methods=['GET'])
