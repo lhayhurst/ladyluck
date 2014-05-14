@@ -1,12 +1,7 @@
 import StringIO
-
 import matplotlib
-# If you want to use a different backend, replace Agg with
-# Cairo, PS, SVG, GD, Paint etc.
-# Agg stands for "antigrain rendering" and produces PNG files
-#matplotlib.use('Agg')
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 matplotlib.use('AGG')
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 import matplotlib.pyplot as plt
 from persistence import DiceType
 
