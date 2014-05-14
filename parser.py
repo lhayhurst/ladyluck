@@ -4,7 +4,7 @@ from collections import OrderedDict
 import re
 from fsm import fsm
 from persistence import DiceType, DiceFace, DiceThrowType, DiceThrowAdjustmentType, DiceThrow, Player, Dice, \
-    DiceThrowResult, DiceThrowAdjustment, Session
+    DiceThrowResult, DiceThrowAdjustment
 
 
 class LogFileParser:

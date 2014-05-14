@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, url_for, redirect, Response, 
 
 from game_summary_stats import GameTape
 from parser import LogFileParser
-from persistence import PersistenceManager, Game
+from persistence import PersistenceManager, Game, db_session
 from plots.player_plots import LuckPlot, VersusPlot, AdvantagePlot, DamagePlot
 
 
@@ -19,6 +19,10 @@ static_dir = os.path.join( here, app.config['UPLOAD_FOLDER'] )
 db = PersistenceManager()
 
 ADMINS = ['sozinsky@gmail.com']
+
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db_session.remove()
 
 @app.route("/about")
 def about():
@@ -51,7 +55,9 @@ def add_game():
         parser.read_input_from_string(tape)
         parser.run_finite_state_machine()
 
-        game = Game( db.session, parser.get_players())
+        session = PersistenceManager.CreateSession()
+
+        game = Game( db_session, parser.get_players())
 
         p1 = game.game_players[0]
         p2 = game.game_players[1]
@@ -68,8 +74,8 @@ def add_game():
             game.game_throws.append(throw_result)
 
 
-        db.session.add(game)
-        db.session.commit()
+        db_session.add(game)
+        db_session.commit()
 
         return redirect( url_for('game', id=str(game.id) ) )
 

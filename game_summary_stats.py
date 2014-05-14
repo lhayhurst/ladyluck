@@ -4,7 +4,7 @@ from flask import url_for
 from AttackSet import AttackSet, INITIAL, SCORE, END
 from counter import Counter, COUNTER
 from parser import LogFileParser
-from persistence import Game, DiceThrowType, DiceThrowAdjustmentType, DiceFace, DiceType, Session
+from persistence import Game, DiceThrowType, DiceThrowAdjustmentType, DiceFace, DiceType
 from plots.player_plots import LuckPlot, AdvantagePlot, DamagePlot, VersusPlot
 from score import Score
 
