@@ -3,30 +3,31 @@ import uuid
 import MySQLdb
 
 from flask import Flask, render_template, request, url_for, redirect, Response, make_response
+from app import app, db
 
 from game_summary_stats import GameTape
 from parser import LogFileParser
-from persistence import PersistenceManager, Game, db_session
+from persistence import Game, PersistenceManager
 from plots.player_plots import LuckPlot, VersusPlot, AdvantagePlot, DamagePlot
 
 
 UPLOAD_FOLDER = "static"
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+UPLOAD_FOLDER = "static"
 ALLOWED_EXTENSIONS = set( ['png'])
 
-app    = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['SQLALCHEMY_POOL_RECYCLE'] = 499
-app.config['SQLALCHEMY_POOL_TIMEOUT'] = 20
+
+
+
 
 here = os.path.dirname(__file__)
 static_dir = os.path.join( here, app.config['UPLOAD_FOLDER'] )
-db = PersistenceManager()
 
 ADMINS = ['sozinsky@gmail.com']
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
-    db_session.remove()
+    db.session.remove()
 
 @app.route("/about")
 def about():
@@ -35,11 +36,11 @@ def about():
 @app.route("/games" )
 def games():
     try:
-        games = db.get_games()
+        games = PersistenceManager().get_games()
         return( render_template('games.html', games=games) )
     except MySQLdb.OperationalError:
         #give it another shot...
-        games = db.get_games()
+        games = PersistenceManager.get_games()
         return( render_template('games.html', games=games) )
 
 
@@ -60,11 +61,11 @@ def add_game():
         return redirect(url_for('new'))
 
     try:
-        parser = LogFileParser(db_session)
+        parser = LogFileParser(db.session)
         parser.read_input_from_string(tape)
         parser.run_finite_state_machine()
 
-        game = Game( db_session, parser.get_players())
+        game = Game( db.session, parser.get_players())
 
         p1 = game.game_players[0]
         p2 = game.game_players[1]
@@ -81,8 +82,8 @@ def add_game():
             game.game_throws.append(throw_result)
 
 
-        db_session.add(game)
-        db_session.commit()
+        db.session.add(game)
+        db.session.commit()
 
         return redirect( url_for('game', id=str(game.id) ) )
 
@@ -128,7 +129,7 @@ def download_game():
 @app.route('/game')
 def game():
     id = str(request.args.get('id'))
-    game = db.get_game(id)
+    game = PersistenceManager().get_game(id)
     if game == None:
         return redirect(url_for('add_game'))
 

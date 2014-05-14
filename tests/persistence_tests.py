@@ -1,8 +1,10 @@
+from app import db
+
 __author__ = 'lhayhurst'
 import sys
 from parser import LogFileParser
 from persistence import Dice, DiceType, DiceFace, Player, Game, PersistenceManager, DiceThrowType, \
-    DiceThrowAdjustmentType, db_session
+    DiceThrowAdjustmentType
 import unittest
 
 
@@ -389,10 +391,10 @@ if __name__ == "__main__":
         pm = PersistenceManager()
         pm.create_schema()
         pm.populate_reference_tables()
-        db_session.commit()
-        db_session.close_all()
+        db.session.commit()
+        db.session.close_all()
     elif sys.argv[1] == 'destroy':
         pm = PersistenceManager()
         pm.drop_schema()
-        db_session.commit()
-        db_session.close_all()
+        db.session.commit()
+        db.session.close_all()
