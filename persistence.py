@@ -14,7 +14,7 @@ from sqlalchemy.orm import sessionmaker, relationship, scoped_session
 
 url = os.getenv('LOCAL_DB_URL')
 engine = sqlalchemy.create_engine(url, pool_recycle=3600, convert_unicode=True)
-db_session = scoped_session(sessionmaker(autocommit=False,autoflush=False,bind=engine))
+db_session = scoped_session(sessionmaker(autocommit=False,autoflush=False,expire_on_commit=False,bind=engine))
 
 #static database objects
 Base = declarative_base()
