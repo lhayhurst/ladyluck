@@ -1,4 +1,5 @@
 import os
+import uuid
 
 from flask import Flask, render_template, request, url_for, redirect, Response, make_response
 
@@ -45,31 +46,40 @@ def add_game():
     if len(tape) == 0:
         return redirect(url_for('new'))
 
-    parser = LogFileParser(db.session)
-    parser.read_input_from_string(tape)
-    parser.run_finite_state_machine()
+    try:
+        parser = LogFileParser(db.session)
+        parser.read_input_from_string(tape)
+        parser.run_finite_state_machine()
 
-    game = Game( db.session, parser.get_players())
+        game = Game( db.session, parser.get_players())
 
-    p1 = game.game_players[0]
-    p2 = game.game_players[1]
+        p1 = game.game_players[0]
+        p2 = game.game_players[1]
 
-    winning_player = None
-    if winner is not None:
-        if winner == p1.name:
-            winning_player = p1
-        elif winner == p2.name:
-            winning_player = p2
-    game.game_winner = winning_player
+        winning_player = None
+        if winner is not None:
+            if winner == p1.name:
+                winning_player = p1
+            elif winner == p2.name:
+                winning_player = p2
+        game.game_winner = winning_player
 
-    for throw_result in parser.game_tape:
-        game.game_throws.append(throw_result)
+        for throw_result in parser.game_tape:
+            game.game_throws.append(throw_result)
 
 
-    db.session.add(game)
-    db.session.commit()
+        db.session.add(game)
+        db.session.commit()
 
-    return redirect( url_for('game', id=str(game.id)) )
+        return redirect( url_for('game', id=str(game.id) ) )
+
+    except Exception as err:
+        error_dir = os.path.join( static_dir, "bad_chat_logs")
+        error_file = os.path.join( error_dir, str(uuid.uuid4() ) + ".txt" )
+        fd = open( error_file, 'w' )
+        fd.write( tape.encode('ascii', 'ignore') )
+        fd.close()
+        return render_template( 'game_error.html', errortext=str(err) )
 
 def get_game_tape_text(game, make_header=True):
 
