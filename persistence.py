@@ -185,13 +185,6 @@ class Game(Base):
     def display_text(self):
         return "{0} v {1} at {2}".format(self.game_players[0].name, self.game_players[1].name, self.game_played_time)
 
-    #these methods are utility methods to help out the game_summary web page.
-    #todo: autoforward these along to the tape class
-
-    def __getattr__(self, aname):
-        return getattr(self.game_tape, aname)
-
-
 class PersistenceManager:
     def __init__(self, echo=False):
         url = os.getenv('LOCAL_DB_URL')
