@@ -9,3 +9,4 @@ app.config['SQLALCHEMY_POOL_RECYCLE'] = 499
 app.config['SQLALCHEMY_POOL_TIMEOUT'] = 20
 
 db = SQLAlchemy(app)
+db.session.expire_on_commit = False
