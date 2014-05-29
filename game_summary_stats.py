@@ -158,6 +158,8 @@ class GameTape(object):
 
             elif throw.throw_type == DiceThrowType.DEFEND:
                 attack_set = self.get_attack_set(throw.attack_set_num)
+                if attack_set is None: #happenswhen,for example,  I roll defense dice and then you roll defesnse dice
+                    continue
                 attack_set.add_defending_throw(throw)
                 for result in throw.results:
                     record = attack_set.get_record_for_dice_num( result.dice_num )
