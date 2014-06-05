@@ -6,7 +6,7 @@ __author__ = 'lhayhurst'
 
 import time
 from decl_enum import DeclEnum
-from sqlalchemy import Column, Integer, String, DateTime, Table
+from sqlalchemy import Column, Integer, String, DateTime, Table, desc
 from sqlalchemy import ForeignKey
 
 
@@ -201,7 +201,7 @@ class PersistenceManager:
             Dice(dice_type=DiceType.GREEN, dice_face=DiceFace.BLANK)])
 
     def get_games(self):
-        return db.session.query(Game).all()
+        return db.session.query(Game).order_by(desc(Game.game_played_time)).all()
 
     def get_game(self, game_id):
         return db.session.query(Game).filter_by(id=game_id).first()
