@@ -2,21 +2,19 @@ import os
 import uuid
 import MySQLdb
 
-from flask import Flask, render_template, request, url_for, redirect, Response, make_response
-from app import app, db
+from flask import render_template, request, url_for, redirect, Response, make_response
+import myapp
 
 from game_summary_stats import GameTape
 from parser import LogFileParser
 from persistence import Game, PersistenceManager
 from plots.player_plots import LuckPlot, VersusPlot, AdvantagePlot, DamagePlot
 
-
+app =  myapp.create_app()
 UPLOAD_FOLDER = "static"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 UPLOAD_FOLDER = "static"
 ALLOWED_EXTENSIONS = set( ['png'])
-
-
 
 
 
@@ -25,9 +23,11 @@ static_dir = os.path.join( here, app.config['UPLOAD_FOLDER'] )
 
 ADMINS = ['sozinsky@gmail.com']
 
+session = myapp.db_connector.get_session()
+
 @app.teardown_appcontext
 def shutdown_session(exception=None):
-    db.session.remove()
+    session.remove()
 
 @app.route("/about")
 def about():
@@ -36,11 +36,11 @@ def about():
 @app.route("/games" )
 def games():
     try:
-        games = PersistenceManager().get_games()
+        games = PersistenceManager().get_games(session)
         return( render_template('games.html', games=games) )
-    except MySQLdb.OperationalError:
+    except MySQLdb.dbOperationalError:
         #give it another shot...
-        games = PersistenceManager.get_games()
+        games = PersistenceManager.get_games(session)
         return( render_template('games.html', games=games) )
 
 
@@ -61,11 +61,11 @@ def add_game():
         return redirect(url_for('new'))
 
     try:
-        parser = LogFileParser(db.session)
+        parser = LogFileParser(session)
         parser.read_input_from_string(tape)
         parser.run_finite_state_machine()
 
-        game = Game( db.session, parser.get_players())
+        game = Game( session, parser.get_players())
 
         p1 = game.game_players[0]
         p2 = game.game_players[1]
@@ -82,8 +82,8 @@ def add_game():
             game.game_throws.append(throw_result)
 
 
-        db.session.add(game)
-        db.session.commit()
+        session.add(game)
+        session.commit()
 
         return redirect( url_for('game', id=str(game.id) ) )
 
@@ -117,7 +117,7 @@ def get_game_tape_text(game, make_header=True):
 @app.route('/download-game')
 def download_game():
     game_id = str(request.args.get('id'))
-    game = db.get_game(game_id)
+    game = PersistenceManager().get_game(session,game_id)
     def generate():
         rows = get_game_tape_text(game)
         for r in rows:
@@ -129,9 +129,9 @@ def download_game():
 @app.route('/game')
 def game():
     id = str(request.args.get('id'))
-    game = PersistenceManager().get_game(id)
+    game = PersistenceManager().get_game(session,id)
     if game == None:
-        return redirect(url_for('add_game'))
+        return redirect(url_for('new'))
 
     player1 = game.game_players[0]
     player2 = game.game_players[1]
@@ -154,7 +154,7 @@ def game():
 @app.route('/damage')
 def damage():
     id = str(request.args.get('game_id'))
-    game = db.get_game(id)
+    game = PersistenceManager().get_game(session, id)
 
     if game.game_tape is None:
         game_tape = GameTape(game)
@@ -170,7 +170,7 @@ def damage():
 def advantage():
     id = str(request.args.get('game_id'))
     use_initial = int(request.args.get('initial'))
-    game = db.get_game(id)
+    game = PersistenceManager().get_game(session,id)
 
     ap = AdvantagePlot( game, use_initial )
     output = ap.plot()
@@ -181,7 +181,7 @@ def advantage():
 @app.route('/versus')
 def versus():
     id = str(request.args.get('game_id'))
-    game = db.get_game(id)
+    game = PersistenceManager().get_game(session,id)
 
     attacker_id = long(request.args.get('attacker'))
     defender_id = long(request.args.get('defender'))
@@ -195,7 +195,7 @@ def versus():
 @app.route('/luck_graph')
 def luck_graph():
     id = str(request.args.get('game_id'))
-    game = db.get_game(id)
+    game = PersistenceManager().get_game(session,id)
 
     player_id = long(request.args.get('player'))
     dice_type = request.args.get('dice_type')

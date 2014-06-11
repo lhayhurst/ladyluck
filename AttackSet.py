@@ -1,5 +1,4 @@
 from counter import Counter, COUNTER
-from persistence import DiceType
 from score import Score
 
 __author__ = 'lhayhurst'
@@ -103,6 +102,7 @@ class AttackSet:
         evades = self.get_evades()
         num_evades = len(evades)
 
+
         #first cancel the hits
         for hit in hits:
             if num_evades > 0:
@@ -136,6 +136,7 @@ class AttackSet:
             initial_defend_score   = None
             initial_defend_counter = None
             if rec.defending_player is not None:
+
                 initial_defend_score = tape_stats[rec.defending_player.name][INITIAL][SCORE]
                 initial_defend_counter = tape_stats[rec.defending_player.name][INITIAL][COUNTER]
 

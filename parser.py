@@ -216,9 +216,10 @@ class LogFileParser:
         return re.search(r'^\* \*\*\*\s+.*?\s+[Rolls|Re-rolls|turns].*?\*\*\*',line)
 
     def player_rolling_dice(self, line):
-        match = re.match(r'^\* \*\*\*\s+(.*?)\s+.*?[Rolls|Re-rolls|turns].*?\*\*\*',line)
+        match = re.match(r'^\* \*\*\*\s+(.*?)\s+[Rolls|Re-rolls|turns].*?\*\*\*',line)
         if match:
             player = match.group(1)
+            player = re.sub('[\[\]]', '', player) #strip out pesky brackets
             self.players[player] = 1
             return player
         else:

@@ -1,6 +1,8 @@
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from UniqueMixin import UniqueMixin
-from app import db
+
+
 
 __author__ = 'lhayhurst'
 
@@ -23,12 +25,14 @@ dice_throw_table = "dice_throw"
 dice_throw_result_table = "dice_throw_result"
 dice_throw_adjustment_table = "dice_throw_adjustment"
 
-GamePlayers = Table(game_players_table, db.Model.metadata,
+Base = declarative_base()
+
+GamePlayers = Table(game_players_table, Base.metadata,
                     Column('game_id', Integer, ForeignKey('{0}.id'.format(game_table))),
                     Column('player_id', Integer, ForeignKey('{0}.id'.format(player_table)))
 )
 
-GameWinner = Table(game_winner_table, db.Model.metadata,
+GameWinner = Table(game_winner_table, Base.metadata,
                    Column('game_id', Integer, ForeignKey('{0}.id'.format(game_table))),
                    Column('player_id', Integer, ForeignKey('{0}.id'.format(player_table)))
 )
@@ -58,7 +62,9 @@ class DiceThrowAdjustmentType(DeclEnum):
     NONE = 'N', 'NONE'
 
 
-class Player(UniqueMixin, db.Model):
+
+
+class Player(UniqueMixin, Base):
     __tablename__ = player_table
     id = Column(Integer, primary_key=True )
     name = Column(String(64), unique=True)
@@ -78,7 +84,7 @@ class Player(UniqueMixin, db.Model):
         return query.filter(Player.name == name)
 
 
-class Dice(db.Model):
+class Dice(Base):
     __tablename__ = dice_table
     id = Column(Integer, primary_key=True)
     dice_type = Column(DiceType.db_type())
@@ -106,7 +112,7 @@ class Dice(db.Model):
         return self.dice_type == DiceType.GREEN
 
 
-class DiceThrowAdjustment(db.Model):
+class DiceThrowAdjustment(Base):
     __tablename__ = dice_throw_adjustment_table
     id = Column(Integer, primary_key=True)
     base_result_id = Column(Integer, ForeignKey('{0}.id'.format(dice_throw_result_table)))
@@ -117,7 +123,7 @@ class DiceThrowAdjustment(db.Model):
     to_dice = relationship(Dice.__name__, foreign_keys='DiceThrowAdjustment.to_dice_id')
 
 
-class DiceThrowResult(db.Model):
+class DiceThrowResult(Base):
     __tablename__ = dice_throw_result_table
     id = Column(Integer, primary_key=True)
     dice_throw_id = Column(Integer, ForeignKey('{0}.id'.format(dice_throw_table)))  #parent
@@ -129,7 +135,7 @@ class DiceThrowResult(db.Model):
     adjustments = relationship(DiceThrowAdjustment.__name__)
 
 
-class DiceThrow(db.Model):
+class DiceThrow(Base):
     __tablename__ = dice_throw_table
     id = Column(Integer, primary_key=True)
     game_id = Column(Integer, ForeignKey('{0}.id'.format(game_table)))
@@ -140,7 +146,7 @@ class DiceThrow(db.Model):
     results = relationship(DiceThrowResult.__name__)
 
 
-class Game(db.Model):
+class Game(Base):
     __tablename__ = game_table
     id = Column(Integer, primary_key=True)
     game_played_time = Column(DateTime)
@@ -183,15 +189,15 @@ class Game(db.Model):
 class PersistenceManager:
 
     def create_schema(self):
-        db.create_all()
+        Base.metadata.create_all()
 
     def drop_schema(self):
-        db.drop_all()
+        Base.metadata.drop_all()
 
 
-    def populate_reference_tables(self):
+    def populate_reference_tables(self, session):
         #return True
-        db.session.add_all([
+        session.add_all([
             Dice(dice_type=DiceType.RED, dice_face=DiceFace.HIT),
             Dice(dice_type=DiceType.RED, dice_face=DiceFace.CRIT),
             Dice(dice_type=DiceType.RED, dice_face=DiceFace.FOCUS),
@@ -200,17 +206,17 @@ class PersistenceManager:
             Dice(dice_type=DiceType.GREEN, dice_face=DiceFace.FOCUS),
             Dice(dice_type=DiceType.GREEN, dice_face=DiceFace.BLANK)])
 
-    def get_games(self):
-        return db.session.query(Game).order_by(desc(Game.game_played_time)).all()
+    def get_games(self, session):
+        return session.query(Game).order_by(desc(Game.game_played_time)).all()
 
-    def get_game(self, game_id):
-        return db.session.query(Game).filter_by(id=game_id).first()
+    def get_game(self, session, game_id):
+        return session.query(Game).filter_by(id=game_id).first()
 
-    def get_dice(self, dice_type, dice_face):
-        return db.session.query(Dice).filter_by(dice_type=dice_type, dice_face=dice_face).first()
+    def get_dice(self, session, dice_type, dice_face):
+        return session.query(Dice).filter_by(dice_type=dice_type, dice_face=dice_face).first()
 
-    def get_player(self, player):
-        return db.session.query(Player).filter_by(name=player.name).first()
+    def get_player(self, session, player):
+        return session.query(Player).filter_by(name=player.name).first()
 
 
 

@@ -3,18 +3,21 @@ import unittest
 
 from scipy.stats import binom
 
-from app.persistence import DiceType
+from persistence import DiceType
 
 
 HIT_NO_FOCUS = 4.0/8.0   #three hits, one crit
 CRIT_NO_FOCUS = 1.0/8.0 #1 crit
 MISS = 4.0/8.0  #2 blanks, 2 focuses
 HIT_FOCUS    = 6.0/8.0  #three hits, one crit, two focuses
+HIT_FOCUS_REROLL = 15.0/16.0 #the bestest!
 EVADE_NO_FOCUS = 3.0/8.0  #three evades
 MISS_NO_FOCUS  = 4.0/8.0 #two eyes, two blanks
 EVADE_FOCUS  = 5.0/8.0   #three evades, two eyes
 
-def get_hit_prob( focus ):
+def get_hit_prob( focus, target_lock ):
+    if focus and target_lock:
+        return HIT_FOCUS_REROLL
     if focus:
         return HIT_FOCUS
     return HIT_NO_FOCUS
@@ -26,20 +29,18 @@ def get_evade_prob( focus ):
 
 class XWingDiceProbabilityMassFunction:
 
-    def __init__ (self, dice_type, num_dice, use_focus=False, use_target_lock=False, num_hits=0):
+    def __init__ (self, dice_type, num_dice, use_focus=False, use_target_lock=False):
         self.num_dice = num_dice
         self.results = [ x for x in range(num_dice+1)]
         self.probability_of_success = 0
         if dice_type == DiceType.RED:
-            self.probability_of_success = get_hit_prob(use_focus)
+            self.probability_of_success = get_hit_prob(use_focus, use_target_lock)
         else:
             self.probability_of_success = get_evade_prob(use_focus)
 
-        if not use_target_lock:
-            self.pmf = binom.pmf( self.results, num_dice, self.probability_of_success)
-        else:
-            #implement me
-            return
+        self.pmf = binom.pmf( self.results, num_dice, self.probability_of_success)
+
+
 
 class MergedProbabilityMassFunction:
        #get the probability mass function results.
@@ -83,30 +84,24 @@ class TestProbs(unittest.TestCase):
         #for an explanation of the Big Idea, and the values used for the asserts below
         #thanks to VorpalSword for taking the time to write it up
 
-        hit_results = XWingDiceProbabilityMassFunction(DiceType.RED, 2)
+        hit_results = XWingDiceProbabilityMassFunction(DiceType.RED, 2, use_focus=True, use_target_lock=True)
+        evade_results = XWingDiceProbabilityMassFunction(DiceType.GREEN, 2, use_focus=True)
+        merged_results = MergedProbabilityMassFunction(hit_results, evade_results)
+
         self.assertEqual( .25, hit_results.pmf[0])
         self.assertEqual( .5, hit_results.pmf[1])
         self.assertEqual( .25, hit_results.pmf[2])
 
-        evade_results = XWingDiceProbabilityMassFunction(DiceType.GREEN, 2)
         self.assertEqual( .390625, evade_results.pmf[0])
         self.assertEqual( .46875, evade_results.pmf[1])
         self.assertEqual( .140625, evade_results.pmf[2])
 
-        merged_results = MergedProbabilityMassFunction(hit_results, evade_results)
         self.assertEqual( .58984375, merged_results.merged[0])
         self.assertEqual( .3125, merged_results.merged[1])
         self.assertEqual( .09765625, merged_results.merged[2])
 
         #and finally the average
         self.assertEqual( .5078125, merged_results.weighted_avg)
-
-        #now try it out with target locks
-        hit_results = XWingDiceProbabilityMassFunction(DiceType.RED,
-                                                       num_dice=2,
-                                                       num_hits=0,
-                                                       use_focus=False,
-                                                       use_target_lock=True)
 
 
 

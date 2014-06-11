@@ -1,4 +1,4 @@
-from app import db
+from myapp import db_connector
 
 __author__ = 'lhayhurst'
 import sys
@@ -14,9 +14,7 @@ class DatabaseTestCase(unittest.TestCase):
         self.persistence_manager = PersistenceManager(True)
 
         #just keep a top level reference to these guys for ease of use
-        self.engine = self.persistence_manager.engine
-        self.connection = self.persistence_manager.connection
-        self.session = self.persistence_manager.session
+        self.session = db_connector.get_session()
 
         #and then create the database schema, reference tables
         self.persistence_manager.create_schema()
@@ -385,16 +383,17 @@ class TestPersistence(DatabaseTestCase):
 
 
 if __name__ == "__main__":
+    session = db_connector.get_session()
     if len (sys.argv) == 1:
         unittest.main()
     elif sys.argv[1] == 'create':
         pm = PersistenceManager()
         pm.create_schema()
         pm.populate_reference_tables()
-        db.session.commit()
-        db.session.close_all()
+        session.commit()
+        session.close_all()
     elif sys.argv[1] == 'destroy':
         pm = PersistenceManager()
         pm.drop_schema()
-        db.session.commit()
-        db.session.close_all()
+        session.commit()
+        session.close_all()
