@@ -124,17 +124,25 @@ def get_game_tape_text(game, make_header=True):
 
     return rows
 
-@app.route('/download-game')
-def download_game():
-    game_id = str(request.args.get('id'))
-    game = PersistenceManager(myapp.db_connector).get_game(session,game_id)
-    def generate():
-        rows = get_game_tape_text(game)
-        for r in rows:
-           yield ",".join(r) + '\n'
+def generate( rows ):
+    for r in rows:
+        yield ",".join(r) + "\n"
 
-    disposition = "attachment; filename=game{0}_{1}_vs_{2}.csv".format(game.id_str(), game.game_players[0].name, game.game_players[1].name )
-    return Response(generate(), mimetype='text/csv', headers={'Content-Disposition': disposition} )
+@app.route('/download-dice')
+def download_game():
+    games = PersistenceManager(myapp.db_connector).get_games(myapp.db_connector.get_session())
+
+    rows = []
+    make_header = True
+    for g in games:
+        ret = get_game_tape_text(g, make_header)
+        for r in ret:
+            rows.append(r)
+        if make_header is True:
+            make_header = False
+
+    disposition = "attachment; filename=all_dice.csv"
+    return Response(generate(rows), mimetype='text/csv', headers={'Content-Disposition': disposition} )
 
 @app.route('/delete_game')
 def delete_game():
