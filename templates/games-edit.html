@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3>Games</h3>
+  <ul>
+  {%  for game in games  %}
+  <li>
+      <a href="{{ url_for("game", id=game.id) }}" > {{ game.display_text() }}</a>    <a href="{{ url_for("delete_game", id=game.id)}}">delete</a>
+  </li>
+  {%  endfor %}
+  </ul>
+{% endblock %}
