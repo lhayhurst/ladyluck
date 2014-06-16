@@ -36,12 +36,22 @@ def about():
 @app.route("/games" )
 def games():
     try:
-        games = PersistenceManager(myapp.db_connector).get_games(session)
+        games = PersistenceManager(myapp.db_connector).get_games(myapp.db_connector.get_session())
         return( render_template('games.html', games=games) )
     except MySQLdb.dbOperationalError:
         #give it another shot...
-        games = PersistenceManager(myapp.db_connector).get_games(session)
+        games = PersistenceManager(myapp.db_connector).get_games(myapp.db_connector.get_session())
         return( render_template('games.html', games=games) )
+
+@app.route("/editgames")
+def editgames():
+    try:
+        games = PersistenceManager(myapp.db_connector).get_games(myapp.db_connector.get_session())
+        return( render_template('games-edit.html', games=games) )
+    except MySQLdb.dbOperationalError:
+        #give it another shot...
+        games = PersistenceManager(myapp.db_connector).get_games(myapp.db_connector.get_session())
+        return( render_template('games-edit.html', games=games) )
 
 
 @app.route('/new', methods=['GET'])
@@ -125,6 +135,27 @@ def download_game():
 
     disposition = "attachment; filename=game{0}_{1}_vs_{2}.csv".format(game.id_str(), game.game_players[0].name, game.game_players[1].name )
     return Response(generate(), mimetype='text/csv', headers={'Content-Disposition': disposition} )
+
+@app.route('/delete_game')
+def delete_game():
+    id = str(request.args.get('id'))
+    game = PersistenceManager(myapp.db_connector).get_game(session,id)
+    if game == None:
+        return redirect(url_for('new'))
+    #doing this manually as I banged my head against the wall trying to get it to work using the sql alchemy cascade logic...
+    for throw in game.game_throws:
+        for result in throw.results:
+            for adjustment in result.adjustments:
+                myapp.db_connector.get_session().delete(adjustment)
+            myapp.db_connector.get_session().delete(result)
+        myapp.db_connector.get_session().delete(throw)
+    myapp.db_connector.get_session().delete(game)
+    myapp.db_connector.get_session().commit()
+
+    return redirect(url_for('editgames'))
+
+
+
 
 @app.route('/game')
 def game():
