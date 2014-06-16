@@ -36,11 +36,11 @@ def about():
 @app.route("/games" )
 def games():
     try:
-        games = PersistenceManager().get_games(session)
+        games = PersistenceManager(myapp.db_connector).get_games(session)
         return( render_template('games.html', games=games) )
     except MySQLdb.dbOperationalError:
         #give it another shot...
-        games = PersistenceManager.get_games(session)
+        games = PersistenceManager(myapp.db_connector).get_games(session)
         return( render_template('games.html', games=games) )
 
 
@@ -117,7 +117,7 @@ def get_game_tape_text(game, make_header=True):
 @app.route('/download-game')
 def download_game():
     game_id = str(request.args.get('id'))
-    game = PersistenceManager().get_game(session,game_id)
+    game = PersistenceManager(myapp.db_connector).get_game(session,game_id)
     def generate():
         rows = get_game_tape_text(game)
         for r in rows:
@@ -129,7 +129,7 @@ def download_game():
 @app.route('/game')
 def game():
     id = str(request.args.get('id'))
-    game = PersistenceManager().get_game(session,id)
+    game = PersistenceManager(myapp.db_connector).get_game(session,id)
     if game == None:
         return redirect(url_for('new'))
 

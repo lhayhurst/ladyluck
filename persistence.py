@@ -188,15 +188,21 @@ class Game(Base):
 
 class PersistenceManager:
 
+    db_connector = None
+
+    def __init__(self, db_connector):
+        self.db_connector = db_connector
+
     def create_schema(self):
-        Base.metadata.create_all()
+        self.db_connector.get_base().metadata.create_all(self.db_connector.get_engine())
 
     def drop_schema(self):
-        Base.metadata.drop_all()
+        self.db_connector.get_base().metadata.drop_all(self.db_connector.get_engine())
 
 
-    def populate_reference_tables(self, session):
+    def populate_reference_tables(self):
         #return True
+        session = self.db_connector.get_session()
         session.add_all([
             Dice(dice_type=DiceType.RED, dice_face=DiceFace.HIT),
             Dice(dice_type=DiceType.RED, dice_face=DiceFace.CRIT),

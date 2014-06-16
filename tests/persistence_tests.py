@@ -1,4 +1,5 @@
 from myapp import db_connector
+import myapp
 
 __author__ = 'lhayhurst'
 import sys
@@ -383,17 +384,16 @@ class TestPersistence(DatabaseTestCase):
 
 
 if __name__ == "__main__":
-    session = db_connector.get_session()
     if len (sys.argv) == 1:
         unittest.main()
     elif sys.argv[1] == 'create':
-        pm = PersistenceManager()
+        pm = PersistenceManager(db_connector)
         pm.create_schema()
         pm.populate_reference_tables()
-        session.commit()
-        session.close_all()
+        db_connector.get_session().commit()
+        db_connector.get_session().close_all()
     elif sys.argv[1] == 'destroy':
-        pm = PersistenceManager()
+        pm = PersistenceManager(db_connector)
         pm.drop_schema()
-        session.commit()
-        session.close_all()
+        db_connector.get_session().commit()
+        db_connector.get_session().close_all()
