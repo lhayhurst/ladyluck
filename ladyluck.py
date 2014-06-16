@@ -37,11 +37,11 @@ def about():
 def games():
     try:
         games = PersistenceManager(myapp.db_connector).get_games(myapp.db_connector.get_session())
-        return( render_template('games.html', games=games) )
+        return( render_template('games.html', num_games=len(games), games=games) )
     except MySQLdb.dbOperationalError:
         #give it another shot...
         games = PersistenceManager(myapp.db_connector).get_games(myapp.db_connector.get_session())
-        return( render_template('games.html', games=games) )
+        return( render_template('games.html', num_games=len(games), games=games) )
 
 @app.route("/editgames")
 def editgames():
