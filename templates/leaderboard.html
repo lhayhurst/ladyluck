@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h2>Leaderboard</h2>
+
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+
+.left_col {
+    float:left;
+    width:50%;
+}
+.right_col {
+    margin-left: 50%;
+}
+</style>
+
+<div class="left_col">
+    <h3>Worst green dice</h3>
+
+    <table class="tg">
+      <tr>
+        <th class="tg-031e">Rank</th>
+        <th class="tg-031e">Victim</th>
+        <th class="tg-031e">Game</th>
+        <th class="tg-031e">Initial</th>
+        <th class="tg-031e">Adjusted</th>
+      </tr>
+      {%  for leader in bottom_ten_greens %}
+      <tr>
+        <td class="tg-031e">{{ loop.index }}</td>
+        <td class="tg-031e">{{  leader.player.name }} </td>
+        <td class="tg-031e"><a href="{{ url_for("game", id=leader.game.id) }}" > {{ leader.game.game_players[0].name + " versus " + leader.game.game_players[1].name  }}</a></td>
+        <td class="tg-031e">{{ leader.initial_defense_luck }}</td>
+        <td class="tg-031e">{{ leader.final_defense_luck }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+        <h3>Best green dice</h3>
+        <table class="tg">
+          <tr>
+            <th class="tg-031e">Rank</th>
+            <th class="tg-031e">Fortunate</th>
+            <th class="tg-031e">Game</th>
+            <th class="tg-031e">Initial</th>
+            <th class="tg-031e">Adjusted</th>
+
+          </tr>
+          {%  for leader in top_ten_greens %}
+          <tr>
+            <td class="tg-031e">{{ loop.index }}</td>
+            <td class="tg-031e">{{  leader.player.name }} </td>
+            <td class="tg-031e"><a href="{{ url_for("game", id=leader.game.id) }}" > {{ leader.game.game_players[0].name + " versus " + leader.game.game_players[1].name  }}</a></td>
+            <td class="tg-031e">{{ leader.initial_defense_luck }}</td>
+            <td class="tg-031e">{{ leader.final_defense_luck }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+
+</div>
+<div class="right_col">
+    <h3>Worst red dice</h3>
+    <table class="tg">
+      <tr>
+        <th class="tg-031e">Rank</th>
+        <th class="tg-031e">Victim</th>
+        <th class="tg-031e">Game</th>
+        <th class="tg-031e">Initial</th>
+        <th class="tg-031e">Adjusted</th>
+
+      </tr>
+      {%  for leader in bottom_ten_reds %}
+      <tr>
+        <td class="tg-031e">{{ loop.index }}</td>
+        <td class="tg-031e">{{  leader.player.name }} </td>
+        <td class="tg-031e"><a href="{{ url_for("game", id=leader.game.id) }}" > {{ leader.game.game_players[0].name + " versus " + leader.game.game_players[1].name  }}</a></td>
+        <td class="tg-031e">{{ leader.initial_attack_luck }}</td>
+        <td class="tg-031e">{{ leader.final_attack_luck }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <h3>Best red dice</h3>
+    <table class="tg">
+      <tr>
+        <th class="tg-031e">Rank</th>
+        <th class="tg-031e">Fortunate</th>
+        <th class="tg-031e">Game</th>
+        <th class="tg-031e">Initial</th>
+        <th class="tg-031e">Adjusted</th>
+
+      </tr>
+      {%  for leader in top_ten_reds %}
+      <tr>
+        <td class="tg-031e">{{ loop.index }}</td>
+        <td class="tg-031e">{{  leader.player.name }} </td>
+        <td class="tg-031e"><a href="{{ url_for("game", id=leader.game.id) }}" > {{ leader.game.game_players[0].name + " versus " + leader.game.game_players[1].name  }}</a></td>
+        <td class="tg-031e">{{ leader.initial_attack_luck }}</td>
+        <td class="tg-031e">{{ leader.final_attack_luck }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+</div>
+
+
+
+
+{% endblock %}

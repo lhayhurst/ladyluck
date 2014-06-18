@@ -7,7 +7,7 @@ import myapp
 
 from game_summary_stats import GameTape
 from parser import LogFileParser
-from persistence import Game, PersistenceManager
+from persistence import Game, PersistenceManager, LuckResult, LuckMeasure
 from plots.player_plots import LuckPlot, VersusPlot, AdvantagePlot, DamagePlot
 
 app =  myapp.create_app()
@@ -162,6 +162,57 @@ def delete_game():
 
     return redirect(url_for('editgames'))
 
+@app.route('/leaderboard')
+def leaderboard():
+    bottom_ten_greens = PersistenceManager(myapp.db_connector).get_worst_green_luck_scores(myapp.db_connector.get_session()).all()[0:10]
+    bottom_ten_reds   = PersistenceManager(myapp.db_connector).get_worst_red_luck_scores(myapp.db_connector.get_session()).all()[0:10]
+    top_ten_greens    = PersistenceManager(myapp.db_connector).get_best_green_luck_scores(myapp.db_connector.get_session()).all()[0:10]
+    top_ten_reds      = PersistenceManager(myapp.db_connector).get_best_red_luck_scores(myapp.db_connector.get_session()).all()[0:10]
+
+
+    return render_template( 'leaderboard.html',
+                            bottom_ten_greens=bottom_ten_greens,
+                            bottom_ten_reds=bottom_ten_reds,
+                            top_ten_greens=top_ten_greens,
+                            top_ten_reds=top_ten_reds)
+
+def calculate_luck_result(game, score_tape=False):
+    game_tape = GameTape(game)
+    try:
+        if score_tape is True:
+            game_tape.score()
+    except:
+        print "couldn't score game id {0}.".format(game.id)
+        return None
+    for player in game.game_players:
+        luck_result = LuckResult()
+        luck_result.measure = LuckMeasure.DOZIN
+        luck_result.player = player
+        luck_result.game = game
+
+        initial_red_scores = game_tape.initial_red_scores(player)
+        luck_result.initial_attack_luck = initial_red_scores[-1]
+
+        final_red_scores = game_tape.final_red_scores(player)
+        luck_result.final_attack_luck = final_red_scores[-1]
+
+        initial_green_scores = game_tape.initial_green_scores(player)
+        luck_result.initial_defense_luck = initial_green_scores[-1]
+
+        final_green_scores = game_tape.final_green_scores(player)
+        luck_result.final_defense_luck = final_green_scores[-1]
+
+        return luck_result
+
+@app.route('/populate_luck_scores')
+def populate_luck_scores():
+    games = PersistenceManager(myapp.db_connector).get_games(myapp.db_connector.get_session())
+    for game in games:
+        luck_result = calculate_luck_result(game, score_tape=True)
+        if luck_result is not None:
+            myapp.db_connector.get_session().add( luck_result )
+    myapp.db_connector.get_session().commit()
+    return redirect(url_for('editgames'))
 
 
 
@@ -182,6 +233,11 @@ def game():
     #summary_stats = GameSummaryStats(game)
     game_tape = GameTape(game)
     game_tape.score()
+
+    luck_result = calculate_luck_result(game)
+    if luck_result is not None:
+        myapp.db_connector.get_session().add(luck_result)
+        myapp.db_connector.get_session().commit()
 
     return render_template( 'game_summary.html',
                             game=game,
@@ -241,9 +297,7 @@ def luck_graph():
 
     lp = LuckPlot( game, player_id, dice_type)
     return lp.plot()
-    #response = make_response(output.getvalue())
-    #response.mimetype = 'image/png'
-    #return response
+
 
 
 if __name__ == '__main__':

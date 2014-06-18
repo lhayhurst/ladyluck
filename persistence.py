@@ -1,14 +1,14 @@
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from UniqueMixin import UniqueMixin
-
+from myapp import db_connector
 
 
 __author__ = 'lhayhurst'
 
 import time
 from decl_enum import DeclEnum
-from sqlalchemy import Column, Integer, String, DateTime, Table, desc
+from sqlalchemy import Column, Integer, String, DateTime, Table, desc, Float, asc
 from sqlalchemy import ForeignKey
 
 
@@ -25,7 +25,7 @@ dice_throw_table = "dice_throw"
 dice_throw_result_table = "dice_throw_result"
 dice_throw_adjustment_table = "dice_throw_adjustment"
 
-Base = declarative_base()
+Base = db_connector.get_base()
 
 GamePlayers = Table(game_players_table, Base.metadata,
                     Column('game_id', Integer, ForeignKey('{0}.id'.format(game_table))),
@@ -61,7 +61,9 @@ class DiceThrowAdjustmentType(DeclEnum):
     CONVERT = 'C', 'CONVERT'
     NONE = 'N', 'NONE'
 
-
+class LuckMeasure(DeclEnum):
+    DOZIN = 'D', 'DOZIN',
+    BINOMIAL_DISTRIBUTION = 'B', 'BINOMIAL_DISTRIBUTION'
 
 
 class Player(UniqueMixin, Base):
@@ -145,7 +147,6 @@ class DiceThrow(Base):
     player = relationship(Player.__name__, uselist=False)
     results = relationship(DiceThrowResult.__name__)
 
-
 class Game(Base):
     __tablename__ = game_table
     id = Column(Integer, primary_key=True)
@@ -186,6 +187,23 @@ class Game(Base):
     def display_text(self):
         return "{0} v {1} at {2}".format(self.game_players[0].name, self.game_players[1].name, self.game_played_time)
 
+luck_result_table = "luck_result"
+class LuckResult(Base):
+    __tablename__        = luck_result_table
+    id = Column(Integer, primary_key=True)
+    player_id = Column(Integer, ForeignKey('{0}.id'.format(player_table)))
+    player               = relationship(Player.__name__, uselist=False)
+    game_id = Column(Integer, ForeignKey('{0}.id'.format(game_table)))
+    game                 = relationship(Game.__name__, uselist=False)
+    measure              = Column(LuckMeasure.db_type())
+    initial_attack_luck  = Column(Float)
+    initial_defense_luck = Column(Float)
+    final_attack_luck    = Column(Float)
+    final_defense_luck   = Column(Float)
+
+
+
+
 class PersistenceManager:
 
     db_connector = None
@@ -214,6 +232,18 @@ class PersistenceManager:
 
     def get_games(self, session):
         return session.query(Game).order_by(desc(Game.game_played_time)).all()
+
+    def get_worst_green_luck_scores(self, session):
+        return session.query(LuckResult).order_by(asc(LuckResult.final_defense_luck))
+
+    def get_worst_red_luck_scores(self, session):
+        return session.query(LuckResult).order_by(asc(LuckResult.final_attack_luck))
+
+    def get_best_green_luck_scores(self, session):
+        return session.query(LuckResult).order_by(desc(LuckResult.final_defense_luck))
+
+    def get_best_red_luck_scores(self, session):
+        return session.query(LuckResult).order_by(desc(LuckResult.final_attack_luck))
 
     def get_game(self, session, game_id):
         return session.query(Game).filter_by(id=game_id).first()
