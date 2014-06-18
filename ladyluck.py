@@ -185,14 +185,14 @@ def leaderboard():
                             top_ten_greens=top_ten_greens,
                             top_ten_reds=top_ten_reds)
 
-def calculate_luck_result(game, score_tape=False):
-    game_tape = GameTape(game)
-    try:
-        if score_tape is True:
+def calculate_luck_result(game, game_tape):
+    if game_tape is None:
+        try:
+            game_tape = GameTape(game)
             game_tape.score()
-    except:
-        print "couldn't score game id {0}.".format(game.id)
-        return None
+        except:
+            print "couldn't score game id {0}.".format(game.id)
+            return None
     for player in game.game_players:
         luck_result = LuckResult()
         luck_result.measure = LuckMeasure.DOZIN
@@ -243,7 +243,7 @@ def game():
     game_tape = GameTape(game)
     game_tape.score()
 
-    luck_result = calculate_luck_result(game)
+    luck_result = calculate_luck_result(game, game_tape)
     if luck_result is not None:
         myapp.db_connector.get_session().add(luck_result)
         myapp.db_connector.get_session().commit()
