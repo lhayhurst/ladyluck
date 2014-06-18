@@ -228,7 +228,8 @@ def populate_luck_scores():
 @app.route('/game')
 def game():
     id = str(request.args.get('id'))
-    game = PersistenceManager(myapp.db_connector).get_game(session,id)
+    pm = PersistenceManager(myapp.db_connector)
+    game = pm.get_game(session,id)
     if game == None:
         return redirect(url_for('new'))
 
@@ -243,10 +244,14 @@ def game():
     game_tape = GameTape(game)
     game_tape.score()
 
-    luck_result = calculate_luck_result(game, game_tape)
-    if luck_result is not None:
-        myapp.db_connector.get_session().add(luck_result)
-        myapp.db_connector.get_session().commit()
+    luck_result = pm.get_luck_score(session, game.id)
+
+    if luck_result is None:
+
+        luck_result = calculate_luck_result(game, game_tape)
+        if luck_result is not None:
+            myapp.db_connector.get_session().add(luck_result)
+            myapp.db_connector.get_session().commit()
 
     return render_template( 'game_summary.html',
                             game=game,
