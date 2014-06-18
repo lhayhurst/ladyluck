@@ -151,14 +151,23 @@ def delete_game():
     if game == None:
         return redirect(url_for('new'))
     #doing this manually as I banged my head against the wall trying to get it to work using the sql alchemy cascade logic...
+    luck_results = PersistenceManager(myapp.db_connector).get_luck_score(session, game.id)
+    if luck_results is not None:
+        for lr in luck_results:
+            myapp.db_connector.get_session().delete(lr)
+
     for throw in game.game_throws:
         for result in throw.results:
             for adjustment in result.adjustments:
                 myapp.db_connector.get_session().delete(adjustment)
             myapp.db_connector.get_session().delete(result)
         myapp.db_connector.get_session().delete(throw)
+
     myapp.db_connector.get_session().delete(game)
     myapp.db_connector.get_session().commit()
+
+
+
 
     return redirect(url_for('editgames'))
 
