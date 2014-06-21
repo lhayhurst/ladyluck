@@ -3,6 +3,7 @@ import uuid
 import MySQLdb
 
 from flask import render_template, request, url_for, redirect, Response, make_response
+from colorscale import colorscale
 import myapp
 
 from game_summary_stats import GameTape
@@ -63,6 +64,17 @@ def new():
 def index():
     return redirect(url_for('new') )
 
+def save_game_log( tape, is_good):
+    dir = None
+    if not is_good:
+        dir = os.path.join( static_dir, "bad_chat_logs")
+    else:
+        dir = os.path.join( static_dir, "good_chat_logs")
+    file = os.path.join( dir, str(uuid.uuid4() ) + ".txt" )
+    fd = open( file, 'w' )
+    fd.write( tape.encode('ascii', 'ignore') )
+    fd.close()
+
 @app.route('/add_game', methods=['POST'])
 def add_game():
     tape  = request.form['chatlog']
@@ -95,14 +107,11 @@ def add_game():
         session.add(game)
         session.commit()
 
+        save_game_log( tape, is_good=True)
         return redirect( url_for('game', id=str(game.id) ) )
 
     except Exception as err:
-        error_dir = os.path.join( static_dir, "bad_chat_logs")
-        error_file = os.path.join( error_dir, str(uuid.uuid4() ) + ".txt" )
-        fd = open( error_file, 'w' )
-        fd.write( tape.encode('ascii', 'ignore') )
-        fd.close()
+        save_game_log( tape, is_good=False)
         return render_template( 'game_error.html', errortext=str(err) )
 
 def get_game_tape_text(game, make_header=True):
@@ -258,7 +267,8 @@ def game():
                             player1=player1,
                             player2=player2,
                             winner=winning_player,
-                            game_tape=game_tape )
+                            game_tape=game_tape,
+                            colorscale=colorscale() )
 
 @app.route('/damage')
 def damage():

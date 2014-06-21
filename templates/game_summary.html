@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
 
+
+
+
+
 <b> {{ game.game_played_time }}: {{ player1.name }} versus {{ player2.name }}, won by {{ winner }} </b>
 <br>
 <hr>
@@ -33,6 +37,25 @@
         .tg1 .tg-6997{background-color:#ffffff;color:#000000;text-align:center}
         .tg1 .tg-zlxb{background-color:#ffffff;text-align:center}
         .tg1 .tg-bsv2{background-color:#efefef}
+        .tg1 .no_color{background-color:#ffffff;text-align:center;}
+        .tg1 .red1{background-color:#FFE6E6;text-align:center;}
+        .tg1 .red2{background-color:#FFCCCC;text-align:center;}
+        .tg1 .red3{background-color:#FFB2B2;text-align:center;}
+        .tg1 .red4{background-color:#FF9999;text-align:center;}
+        .tg1 .red5{background-color:#FF8080;text-align:center;}
+        .tg1 .red6{background-color:#FF6666;text-align:center;}
+        .tg1 .red7{background-color:#FF4D4D;text-align:center;}
+        .tg1 .red8{background-color:#FF3333;text-align:center;}
+        .tg1 .red9{background-color:#FF1919;text-align:center;}
+        .tg1 .green1{background-color:#E6FAF0;text-align:center;}
+        .tg1 .green2{background-color:#CCF5E0;text-align:center;}
+        .tg1 .green3{background-color:#B2F0D1;text-align:center;}
+        .tg1 .green4{background-color:#99EBC2;text-align:center;}
+        .tg1 .green5{background-color:#80E6B2;text-align:center;}
+        .tg1 .green6{background-color:#66E0A3;text-align:center;}
+        .tg1 .green7{background-color:#4DDB94;text-align:center;}
+        .tg1 .green8{background-color:#33D685;text-align:center;}
+        .tg1 .green9{background-color:#19D175;text-align:center;}
         .tg1 .tg-ek65{background-color:#ffffff;color:#000000}
         </style>
 
@@ -67,13 +90,13 @@
             <td class="tg-bsv2">hits</td>
             <td class="tg-ek65">{{ game_tape.expected_unmodified_hits(player1) }}</td>
             <td class="tg-ek65">{{ game_tape.expected_hits_after_rerolls(player1) }}</td>
-            <td class="tg-ek65">{{ game_tape.unmodified_hits(player1) }} </td>
-            <td class="tg-ek65">{{ game_tape.total_red_hits_after_rerolls(player1) }}</td>
-            <td class="tg-ek65">{{ game_tape.total_red_hits_after_converts(player1) }}</td>
+            <td class="{{ colorscale.colormap( game_tape.expected_unmodified_hits(player1), game_tape.unmodified_hits(player1) )  }}">{{ game_tape.unmodified_hits(player1) }}</td>
+            <td class="{{ colorscale.colormap( game_tape.expected_hits_after_rerolls(player1), game_tape.total_red_hits_after_rerolls(player1) )  }}">{{ game_tape.total_red_hits_after_rerolls(player1) }}</td>
+            <td class="{{ colorscale.colormap( game_tape.expected_hits_after_rerolls(player1), game_tape.total_red_hits_after_converts(player1) )  }}">{{ game_tape.total_red_hits_after_converts(player1) }}</td>
             <td class="tg-bsv2">hits</td>
             <td class="tg-ek65">{{ game_tape.expected_unmodified_hits(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.expected_hits_after_rerolls(player2) }}</td>
-            <td class="tg-ek65">{{ game_tape.unmodified_hits(player2) }}</td>
+            <td class="{{ colorscale.colormap( game_tape.expected_unmodified_hits(player2), game_tape.unmodified_hits(player2) )  }}">{{ game_tape.unmodified_hits(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.total_red_hits_after_rerolls(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.total_red_hits_after_converts(player2) }}</td>
 

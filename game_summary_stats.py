@@ -183,7 +183,6 @@ class GameTape(object):
         for ats in self.attack_sets:
             ats.net_results()
 
-
     def versus_graph(self, attacker, defender):
         vp = VersusPlot( self.game, attacker, defender )
         return vp.plot()
