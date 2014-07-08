@@ -87,6 +87,10 @@ def add_game():
         parser.read_input_from_string(tape)
         parser.run_finite_state_machine()
 
+        if len(parser.get_players() ) is not 2:
+            #this is not good, probably a result of a bad log file submission
+            return render_template('new_after_error.html', players=", ".join(parser.get_players()), tape=tape, winner=winner)
+
         game = Game( session, parser.get_players())
 
         p1 = game.game_players[0]
