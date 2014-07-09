@@ -234,19 +234,19 @@ class PersistenceManager:
         return session.query(Game).order_by(desc(Game.game_played_time)).all()
 
     def get_worst_green_luck_scores(self, session):
-        return session.query(LuckResult).order_by(asc(LuckResult.final_defense_luck))
+        return session.query(LuckResult).order_by(asc(LuckResult.initial_defense_luck))
 
     def get_worst_red_luck_scores(self, session):
-        return session.query(LuckResult).order_by(asc(LuckResult.final_attack_luck))
+        return session.query(LuckResult).order_by(asc(LuckResult.initial_attack_luck))
 
     def get_luck_score(self, session, game_id):
         return session.query(LuckResult).filter_by(game_id=game_id).all()
 
     def get_best_green_luck_scores(self, session):
-        return session.query(LuckResult).order_by(desc(LuckResult.final_defense_luck))
+        return session.query(LuckResult).order_by(desc(LuckResult.initial_defense_luck))
 
     def get_best_red_luck_scores(self, session):
-        return session.query(LuckResult).order_by(desc(LuckResult.final_attack_luck))
+        return session.query(LuckResult).order_by(desc(LuckResult.initial_attack_luck))
 
     def get_game(self, session, game_id):
         return session.query(Game).filter_by(id=game_id).first()
