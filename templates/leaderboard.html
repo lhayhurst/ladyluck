@@ -25,6 +25,8 @@
         <th class="tg-031e">Game</th>
         <th class="tg-031e">Initial</th>
         <th class="tg-031e">Adjusted</th>
+        <th class="tg-031e">Winner</th>
+
       </tr>
       {%  for leader in bottom_ten_greens %}
       <tr>
@@ -33,6 +35,7 @@
         <td class="tg-031e"><a href="{{ url_for("game", id=leader.game.id) }}" > {{ leader.game.game_players[0].name + " versus " + leader.game.game_players[1].name  }}</a></td>
         <td class="tg-031e">{{ leader.initial_defense_luck }}</td>
         <td class="tg-031e">{{ leader.final_defense_luck }}</td>
+        <td class="tg-031e">{{ leader.game.game_winner.name }}</td>
       </tr>
       {% endfor %}
     </table>
@@ -44,7 +47,7 @@
             <th class="tg-031e">Game</th>
             <th class="tg-031e">Initial</th>
             <th class="tg-031e">Adjusted</th>
-
+            <th class="tg-031e">Winner</th>
           </tr>
           {%  for leader in top_ten_greens %}
           <tr>
@@ -53,6 +56,7 @@
             <td class="tg-031e"><a href="{{ url_for("game", id=leader.game.id) }}" > {{ leader.game.game_players[0].name + " versus " + leader.game.game_players[1].name  }}</a></td>
             <td class="tg-031e">{{ leader.initial_defense_luck }}</td>
             <td class="tg-031e">{{ leader.final_defense_luck }}</td>
+            <td class="tg-031e">{{ leader.game.game_winner.name }}</td>
           </tr>
           {% endfor %}
         </table>
@@ -67,7 +71,7 @@
         <th class="tg-031e">Game</th>
         <th class="tg-031e">Initial</th>
         <th class="tg-031e">Adjusted</th>
-
+        <th class="tg-031e">Winner</th>
       </tr>
       {%  for leader in bottom_ten_reds %}
       <tr>
@@ -76,6 +80,7 @@
         <td class="tg-031e"><a href="{{ url_for("game", id=leader.game.id) }}" > {{ leader.game.game_players[0].name + " versus " + leader.game.game_players[1].name  }}</a></td>
         <td class="tg-031e">{{ leader.initial_attack_luck }}</td>
         <td class="tg-031e">{{ leader.final_attack_luck }}</td>
+         <td class="tg-031e">{{ leader.game.game_winner.name }}</td>
       </tr>
       {% endfor %}
     </table>
@@ -87,7 +92,7 @@
         <th class="tg-031e">Game</th>
         <th class="tg-031e">Initial</th>
         <th class="tg-031e">Adjusted</th>
-
+        <th class="tg-031e">Winner</th>
       </tr>
       {%  for leader in top_ten_reds %}
       <tr>
@@ -96,6 +101,7 @@
         <td class="tg-031e"><a href="{{ url_for("game", id=leader.game.id) }}" > {{ leader.game.game_players[0].name + " versus " + leader.game.game_players[1].name  }}</a></td>
         <td class="tg-031e">{{ leader.initial_attack_luck }}</td>
         <td class="tg-031e">{{ leader.final_attack_luck }}</td>
+        <td class="tg-031e">{{ leader.game.game_winner.name }}</td>
       </tr>
       {% endfor %}
     </table>
