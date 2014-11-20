@@ -1,3 +1,4 @@
+import json
 import os
 import uuid
 import MySQLdb
@@ -10,6 +11,8 @@ from game_summary_stats import GameTape
 from parser import LogFileParser
 from persistence import Game, PersistenceManager, LuckResult, LuckMeasure
 from plots.player_plots import LuckPlot, VersusPlot, AdvantagePlot, DamagePlot
+from xwingmetadata import XWingMetaData
+import xwingmetadata
 
 app =  myapp.create_app()
 UPLOAD_FOLDER = "static"
@@ -33,6 +36,24 @@ def shutdown_session(exception=None):
 @app.route("/about")
 def about():
     return render_template('about.html')
+
+@app.route("/worlds2014")
+def worlds():
+    m = XWingMetaData()
+    return render_template('worlds.html', meta=m, image_src="static/worlds/Worlds Flight 1/Aaron Bonar 5.jpeg" )
+
+@app.route("/add_squad",methods=['POST'])
+def add_squad():
+    list = xwingmetadata.XWingList(request.form )
+    print list.player
+    print list.faction
+    print list.points
+    i = 1
+    for ship in list.ships_submitted:
+        for upgrade in ship.keys():
+            print "Ship %d: %s : %s " % (i, upgrade, ship[upgrade ] )
+    return redirect(url_for('new'))
+
 
 @app.route("/games" )
 def games():

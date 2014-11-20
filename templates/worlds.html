@@ -1,0 +1,229 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <style>
+        .main-section {
+            width: 100%;
+            height: 500px;
+        }
+        .image {
+            width: 66%;
+            float: left;
+        }
+        .image img {
+            width: 100%;
+            height: auto;
+        }
+        .entries, .image {
+            height: 100%;
+            overflow-y: scroll;
+        }
+        .entries {
+            margin-left: 66%;
+            padding: 20px;
+        }
+        .template {
+            display: none;
+        }
+        .entry {
+            background-color: #eeeeee;
+            margin: 5px;
+            padding: 0 5px;
+        }
+    </style>
+    <script>
+        var entryCount = 0;
+        var data = {{ meta.ships_full()|tojson|safe }}
+        function addEntry() {
+            var entry = $('.entry.template').clone().removeClass('template').appendTo('.entry-group');
+            entry.find('.indexed').each(function(i, el) {
+                el.name = el.name + '.' + entryCount;
+                console.log(el);
+            });
+            var pilot = entry.find('.pilot')
+            pilot.empty();
+
+            entry.find('.ship').on("select2-close", function(e) {
+                pilot.empty();
+                var results = [];
+                var pilots = data[ e.target.value ]
+                jQuery.each( data[e.target.value], function(i,val) {
+                    pilot.append( '<option value="' + val + '.' + i + '">'+val+'</option>');
+                })
+                pilot.select2();
+            } );
+            entry.find('select').css({width:300}).select2();
+
+            entryCount++;
+            $('.count').val(entryCount);
+        }
+    </script>
+
+    <div class="main-section">
+        <div class="image">
+            <img src={{ image_src }}>
+        </div>
+        <div class="entries">
+
+
+            <form action="/add_squad" id="listForm" method=post class="add-entry">
+                <input type="hidden" name="count" class="count" value="0">
+                <div>
+                    <b>Player name</b><textarea rows="1" cols="30" name="player" required></textarea>
+                    <b>Faction</b><input type="radio" name="faction" id="Rebel" value="Rebel"required>Rebel</input><input type="radio" name="faction" id="Imperial" value="Imperial"required>Imperial</input>
+                    <b>points spent</b><textarea rows="1" cols="5" name="points" required></textarea>
+                </div>
+                <br>
+                <div class="entry-group">
+                    <div class="entry template">
+                        <b>Ship</b>
+                        <select name="ship" class="ship indexed" placeholder="Select a ship" >
+                            <option></option>
+                            {% for ship in meta.ships() %}
+                            <option value="{{ ship }}">{{ ship }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <b>Pilot</b>
+                        <select name="pilot" class="pilot indexed" placeholder="Select a pilot" >
+                            <option></option>
+                        </select>
+                        <br>
+                        <b>Title</b>
+                            <select name="title" class="title indexed" placeholder="Select a title">
+                                <option></option>
+                                {% for title in meta.titles() %}
+                                <option value="{{ title }}">{{ title }}</option>
+                                {% endfor %}
+                            </select>
+                        <br>
+                        <b>Droid</b>
+                        <select name="droid" class="droids indexed" placeholder="Select a droid">
+                            <option></option>
+                            {% for droid in meta.droids() %}
+                            <option value="{{ droid }}">{{ droid }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <b>Crew</b>
+                        <select name="crew_slot_1" class="crew indexed" placeholder="Select a crew">
+                            <option></option>
+                            {% for crew in meta.crew() %}
+                            <option value="{{ crew }}">{{ crew }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <b>Crew2</b>
+                        <select name="crew_slot_2" class="crew2 indexed" placeholder="Select another crew">
+                            <option></option>
+                            {% for crew in meta.crew() %}
+                            <option value="{{ crew }}">{{ crew }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <b>EPT</b>
+                        <select name="ept_slot1" class="ept indexed" placeholder="Select a ept">
+                            <option></option>
+                            {% for ept in meta.epts() %}
+                            <option value="{{ ept }}">{{ ept }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <b>EPT2</b>
+                        <select name="ept_slot2" class="ept2 indexed" placeholder="Select another ept">
+                            <option></option>
+                            {% for ept in meta.epts() %}
+                            <option value="{{ ept }}">{{ ept }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <b>Mods</b>
+                        <select name="mod" class="mods indexed" placeholder="Select a mod">
+                            <option></option>
+                            {% for mods in meta.mods() %}
+                            <option value="{{ mods }}">{{ mods }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <b>System</b>
+                        <select name="system" class="system indexed" placeholder="Select a system">
+                            <option></option>
+                            {% for system in meta.system_upgrades() %}
+                            <option value="{{ system }}">{{ system }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <b>Bomb/Mines</b>
+                        <select name="bomb" class="bombs indexed" placeholder="Select a bomb">
+                            <option></option>
+                            {% for bm in meta.bomb_mines() %}
+                            <option value="{{ bm }}">{{ bm }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <b>Cannon</b>
+                        <select name="cannon" class="cannons indexed" placeholder="Select a cannon">
+                            <option></option>
+                            {% for cannon in meta.cannons() %}
+                            <option value="{{ cannon }}">{{ cannon }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <b>Turret</b>
+                        <select name="turret" class="turrets indexed" placeholder="Select a turret">
+                            <option></option>
+                            {% for turret in meta.turrets() %}
+                            <option value="{{ turret }}">{{ turret }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <b>Torpedo</b>
+                        <select name="torpedo_slot_1" class="torpedo indexed" placeholder="Select a torpedo">
+                            <option></option>
+                            {% for torpedo in meta.torpedos() %}
+                            <option value="{{ torpedo }}">{{ torpedo }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <b>Torpedo2</b>
+                        <select name="torpedo_slot_2" class="torpedo2 indexed" placeholder="Select a torpedo">
+                            <option></option>
+                            {% for torpedo in meta.torpedos() %}
+                            <option value="{{ torpedo }}">{{ torpedo }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <b>Missile</b>
+                        <select name="missle_slot_1" class="missle indexed" placeholder="Select a missle">
+                            <option></option>
+                            {% for missle in meta.missiles() %}
+                            <option value="{{ missle }}">{{ missle }}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <b>Missile2</b>
+                        <select name="missle_slot_2" class="missle2 indexed" placeholder="Select a missle">
+                             <option></option>
+                            {% for missle in meta.missiles() %}
+                            <option value="{{ missle }}">{{ missle }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="addEntry(); return false">Add another</button>
+                <script>addEntry()</script>
+
+                <input type=submit value="Submit squad!">
+
+            </form>
+
+            <script>
+               $("#listForm").validate();
+            </script>
+
+        </div>
+    </div>
+
+
+{% endblock %}
