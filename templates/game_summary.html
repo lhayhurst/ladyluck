@@ -224,16 +224,16 @@
         <table class="tg1">
             <tr>
                 <td class="tg-tr94">{{ player1.name }} attack luck; solid line = after rerolls/focuses
-                    <img src="data:image/png;base64,{{ game_tape.luck_graph( player1, "R") }}"> </td>
+                    <img src="data:image/png;base64,{{ game_tape.luck_graph( player1, player2, "R") }}"> </td>
                 <td class="tg-tr94">{{ player2.name }} attack luck;  solid line = after rerolls/focuses
-                    <img src="data:image/png;base64,{{ game_tape.luck_graph( player2, "R") }}"> </td>
+                    <img src="data:image/png;base64,{{ game_tape.luck_graph( player2, player1, "R") }}"> </td>
 
             </tr>
             <tr>
                 <td class="tg-tr94">{{ player1.name }} defense luck;  solid line = after rerolls/focuses
-                    <img src="data:image/png;base64,{{ game_tape.luck_graph( player1, "G") }}"> </td>
+                    <img src="data:image/png;base64,{{ game_tape.luck_graph( player1, player2, "G") }}"> </td>
                 <td class="tg-tr94">{{ player2.name }} defense luck;  solid line = after rerolls/focuses
-                    <img src="data:image/png;base64,{{ game_tape.luck_graph( player2, "G") }}"> </td>
+                    <img src="data:image/png;base64,{{ game_tape.luck_graph( player2, player1, "G") }}"> </td>
 
             </tr>
 

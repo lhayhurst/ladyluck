@@ -187,8 +187,8 @@ class GameTape(object):
         vp = VersusPlot( self.game, attacker, defender )
         return vp.plot()
 
-    def luck_graph(self, player, dice_type):
-        lp = LuckPlot( self.game, player, DiceType.from_string(dice_type))
+    def luck_graph(self, player, plot_against_player, dice_type):
+        lp = LuckPlot( self.game, player, plot_against_player, DiceType.from_string(dice_type))
         return lp.plot()
 
     def advantage_graph(self, use_initial):

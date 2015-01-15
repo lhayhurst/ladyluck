@@ -10,9 +10,10 @@ FIGSIZE = (5,2)
 
 class LuckPlot:
 
-    def __init__(self,game, p1, dice_type):
+    def __init__(self,game, p1, plot_against_player, dice_type):
         self.game      = game
         self.p1        = p1
+        self.p2 = plot_against_player
         self.game_tape = game.game_tape
         self.dice_type = dice_type
 
@@ -22,17 +23,37 @@ class LuckPlot:
         adjusted_pl_data = []
         line_color = None
 
+        min_y = 0
+        max_y = 0
+        init_p1_data = None
+        init_p2_data = None
+        adjusted_p1_data = None
+        adjusted_p2_data = None
+
         if self.dice_type == DiceType.RED:
             init_pl_data     = self.game_tape.initial_red_scores(self.p1)
             adjusted_pl_data = self.game_tape.final_red_scores( self.p1 )
+            init_p2_data     = self.game_tape.initial_red_scores(self.p2)
+            adjusted_p2_data = self.game_tape.final_red_scores( self.p2 )
             line_color = 'r'
         else:
             init_pl_data     = self.game_tape.initial_green_scores(self.p1)
             adjusted_pl_data = self.game_tape.final_green_scores( self.p1 )
+            init_p2_data     = self.game_tape.initial_green_scores(self.p2)
+            adjusted_p2_data = self.game_tape.final_green_scores( self.p2 )
             line_color = 'g'
+
+        p1_init_min = min( init_pl_data )
+        p2_init_min = min( init_p2_data )
+        p1_adjusted_max = max(adjusted_pl_data)
+        p2_adjusted_max = max(adjusted_p2_data)
+
+        min_y = min( [p1_init_min, p2_init_min, p1_adjusted_max, p2_adjusted_max  ])
+        max_y = max( [p1_init_min, p2_init_min, p1_adjusted_max, p2_adjusted_max  ])
 
         fig = plt.figure(figsize=FIGSIZE)
         ax = fig.add_subplot(111)
+        ax.set_ylim( min_y, max_y)
         ax.plot( adjusted_pl_data, linewidth=3.0, color=line_color)
         ax.plot( init_pl_data, linewidth=3.0, linestyle='--', color='b'  )
 
