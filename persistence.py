@@ -146,11 +146,14 @@ class DiceThrowType(DeclEnum):
     ATTACK = 'A', 'ATTACK'
     DEFEND = 'D', 'DEFEND'
 
-
+#TODO: add turned enum to database
+# ALTER TABLE `sozin$ladyluck`.`dice_throw_adjustment`
+# CHANGE COLUMN `adjustment_type` `adjustment_type` ENUM('C', 'R', 'N', 'T') NULL DEFAULT NULL ;
 class DiceThrowAdjustmentType(DeclEnum):
     REROLL = 'R', 'REROLL'
     CONVERT = 'C', 'CONVERT'
     NONE = 'N', 'NONE'
+    TURNED = 'T', 'TURNED'
 
 class LuckMeasure(DeclEnum):
     DOZIN = 'D', 'DOZIN',

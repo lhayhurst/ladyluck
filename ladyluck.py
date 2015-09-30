@@ -60,7 +60,7 @@ def games():
     try:
         games = PersistenceManager(myapp.db_connector).get_games(myapp.db_connector.get_session())
         return( render_template('games.html', num_games=len(games), games=games) )
-    except MySQLdb.dbOperationalError:
+    except Exception:
         #give it another shot...
         games = PersistenceManager(myapp.db_connector).get_games(myapp.db_connector.get_session())
         return( render_template('games.html', num_games=len(games), games=games) )
@@ -70,7 +70,7 @@ def editgames():
     try:
         games = PersistenceManager(myapp.db_connector).get_games(myapp.db_connector.get_session())
         return( render_template('games-edit.html', games=games) )
-    except MySQLdb.dbOperationalError:
+    except Exception:
         #give it another shot...
         games = PersistenceManager(myapp.db_connector).get_games(myapp.db_connector.get_session())
         return( render_template('games-edit.html', games=games) )

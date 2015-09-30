@@ -1,7 +1,7 @@
 
 """ Generic finite state machine class
     Initialise the class with a list of tuples - or by adding transitions
-    Tony Flury - November 2012
+    authored by Tony Flury - November 2012
     Released under an MIT License - free to use so long as the author and other contributers are credited.
 """
 
@@ -47,9 +47,11 @@ class fsm(object):
             raise ValueError("StateMachine not Started - cannot process event")
 
         # get a list of transitions which are valid
+        # this is expressed more pithily as the following , but is easier to debug in its unwound form
         self.nextStates = [ x for x in self._states\
-                            if x[0] == self.currentState\
-        and (x[2]==True or (callable(x[2]) and x[2](value))) ]
+                                    if x[0] == self.currentState\
+                and (x[2]==True or (callable(x[2]) and x[2](value))) ]
+
 
         if not self.nextStates:
             raise ValueError("No Transition defined from state {0} with value '{1}'".format(self.currentState, value))

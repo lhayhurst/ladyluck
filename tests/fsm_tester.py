@@ -1,209 +1,159 @@
-import os
 import unittest
-import sqlalchemy
-from model import DiceRoll
+import myapp
 from parser import LogFileParser
+from persistence import DiceThrowType, DiceFace
+
 
 class TestFsm(unittest.TestCase):
-    @unittest.skip("demonstrating skipping")
-    def test_fsm(self):
-        parser = LogFileParser()
-        parser.read_input_from_file("logfiles/fsm_test_input.txt")
-        parser.run_finite_state_machine()
-        roll_sets = parser.get_roll_sets()
-        self.assertEqual( len(roll_sets), 4)
-
-        rs = roll_sets[0]
-        self.assertEqual( rs.attacking_player, "Ryan Krippendorf")
-        self.assertEqual( rs.defending_player, "sozin")
-        self.assertEqual( len(rs.attack_rolls), 2 )
-        self.assertEqual( len(rs.defense_rolls), 3 )
 
 
-        roll = rs.attack_rolls[0]
-        self.assertEqual( roll.player, "Ryan Krippendorf")
-        self.assertTrue( roll.was_modified() )
-        self.assertEqual( "Focus", roll.started_out_as() )
-        self.assertEqual( roll.get_result(), "Hit")
-        self.assertEqual( roll.num, 1 )
 
-        roll = rs.attack_rolls[1]
-        self.assertEqual( roll.player, "Ryan Krippendorf")
-        self.assertEqual( roll.get_result(), "Blank")
-        self.assertEqual( roll.num, 2 )
-
-        roll = rs.defense_rolls[0]
-        self.assertEqual( roll.player, "sozin")
-        self.assertEqual( roll.get_result(), "Evade")
-        self.assertEqual( roll.num, 1 )
-
-        roll = rs.defense_rolls[1]
-        self.assertEqual( roll.player, "sozin")
-        self.assertEqual( roll.get_result(), "Blank")
-        self.assertEqual( roll.num, 2 )
-
-        roll = rs.defense_rolls[2]
-        self.assertEqual( roll.player, "sozin")
-        self.assertEqual( roll.get_result(), "Evade")
-        self.assertEqual( roll.num, 3 )
-
-        rs = roll_sets[1]
-        self.assertEqual( rs.attacking_player, "Ryan Krippendorf")
-        self.assertEqual( rs.defending_player, "sozin")
-        self.assertEqual( len(rs.attack_rolls), 2 )
-        self.assertEqual( len(rs.defense_rolls), 1 )
-
-
-        roll = rs.attack_rolls[0]
-        self.assertEqual( roll.player, "Ryan Krippendorf")
-        self.assertEqual( roll.get_result(), "Hit")
-        self.assertEqual( roll.num, 1 )
-
-        roll = rs.attack_rolls[1]
-        self.assertEqual( roll.player, "Ryan Krippendorf")
-        self.assertEqual( roll.get_result(), "Crit")
-        self.assertEqual( roll.num, 2 )
-
-        roll = rs.defense_rolls[0]
-        self.assertEqual( roll.player, "sozin")
-        self.assertTrue( roll.was_modified())
-        self.assertEqual( "Focus", roll.started_out_as())
-        self.assertEqual( roll.get_result(), "Evade")
-        self.assertEqual( roll.num, 1 )
-
-        rs = roll_sets[2]
-        self.assertEqual( rs.attacking_player, "sozin")
-        self.assertEqual( rs.defending_player, "Ryan Krippendorf")
-        self.assertEqual( len(rs.attack_rolls), 2 )
-        self.assertEqual( len(rs.defense_rolls), 3 )
-
-        roll = rs.attack_rolls[0]
-        self.assertEqual( roll.player, "sozin")
-        self.assertEqual( roll.get_result(), "Hit")
-        self.assertTrue( roll.was_modified())
-        self.assertEqual( "Blank", roll.started_out_as())
-        self.assertEqual( roll.num, 1 )
-
-        roll = rs.attack_rolls[1]
-        self.assertEqual( roll.player, "sozin")
-        self.assertEqual( roll.get_result(), "Focus")
-        self.assertTrue( roll.was_modified())
-        self.assertEqual( "Blank", roll.started_out_as() )
-        self.assertEqual( roll.num, 2 )
-
-        roll = rs.defense_rolls[0]
-        self.assertEqual( roll.player, "Ryan Krippendorf")
-        self.assertEqual( roll.get_result(), "Evade")
-        self.assertTrue( roll.was_modified())
-        self.assertEqual( "Focus", roll.started_out_as() )
-        self.assertEqual( roll.num, 1 )
-
-        roll = rs.defense_rolls[1]
-        self.assertEqual( roll.player, "Ryan Krippendorf")
-        self.assertEqual( roll.get_result(), "Blank")
-        self.assertTrue( not roll.was_modified())
-        self.assertEqual( roll.num, 2 )
-
-        roll = rs.defense_rolls[2]
-        self.assertEqual( roll.player, "Ryan Krippendorf")
-        self.assertEqual( roll.get_result(), "Evade")
-        self.assertTrue( roll.was_modified())
-        self.assertEqual( "Focus", roll.started_out_as() )
-        self.assertEqual( roll.num, 3 )
-
-        rs = roll_sets[3]
-        self.assertEqual( rs.attacking_player, "sozin")
-        self.assertEqual( rs.defending_player, "Ryan Krippendorf")
-        self.assertEqual( len(rs.attack_rolls), 1 )
-        self.assertEqual( len(rs.defense_rolls), 3  )
-
-
-        roll = rs.attack_rolls[0]
-        self.assertEqual( roll.player, "sozin")
-        self.assertEqual( roll.get_result(), "Crit")
-        self.assertEqual( roll.num, 1 )
-
-    def test_mu0n_v_paul_game(self):
-        parser = LogFileParser()
-        parser.read_input_from_file("logfiles/ricky_v_val.txt")
+    #@unittest.skip("school")
+    def test_add_evade(self):
+        session = myapp.db_connector.get_session()
+        parser = LogFileParser(session)
+        parser.add_line("* *** sozin Rolls to Attack: [Blank] ***")
+        parser.add_line("* *** tal Rolls to Defend: [Blank], [Blank], [Focus], [], [], [], [] ***")
+        parser.add_line("* *** tal Re-Rolls Defense Die 1 (Blank) and gets a [Focus] ***")
+        parser.add_line("* *** tal Re-Rolls Defense Die 2 (Blank) and gets a [Focus] ***")
+        parser.add_line("* *** sozin used Focus on Defense Dice ***")
+        parser.add_line("* *** tal added an Evade ***")
         parser.run_finite_state_machine()
 
-    def test_game_tape(self):
-        parser = LogFileParser()
-        parser.read_input_from_file("logfiles/fsm_test_input.txt")
+        gt = parser.game_tape
+        self.assertEqual( 2, len(gt))
+        attack_throw = gt[0]
+        self.assertEqual( "sozin", attack_throw.player.name)
+        self.assertEqual( 1, attack_throw.attack_set_num)
+        self.assertEqual( attack_throw.throw_type, DiceThrowType.ATTACK)
+        results = attack_throw.results
+        self.assertEqual( 1, len(results))
+
+        defense_throw = gt[1]
+        self.assertEqual( "tal", defense_throw.player.name)
+        self.assertEqual( 1, defense_throw.attack_set_num)
+        self.assertEqual( defense_throw.throw_type, DiceThrowType.DEFEND)
+        results = defense_throw.results
+        self.assertEqual( 4, len(results))
+
+        d1 = results[0]
+        self.assertEqual( DiceFace.EVADE, d1.final_dice.dice_face )
+        d2 = results[1]
+        self.assertEqual( DiceFace.EVADE, d2.final_dice.dice_face)
+        d3 = results[2]
+        self.assertEqual( DiceFace.EVADE, d3.final_dice.dice_face)
+        d4 = results[3]
+        self.assertEqual( DiceFace.EVADE, d4.final_dice.dice_face)
+
+
+    def test_attack_roll_focus_reroll_turn(self):
+        session = myapp.db_connector.get_session()
+        parser = LogFileParser(session)
+        parser.add_line("* *** sozin Rolls to Attack: [Blank], [Blank], [Blank], [], [], [] ***")
+        parser.add_line("* *** sozin turns Attack Die 1 [Blank] into a [Hit] ***")
+        parser.add_line("* *** sozin turns Attack Die 2 [Blank] into a [Focus] ***")
+        parser.add_line("* *** sozin Re-Rolls Attack Die 3 [Blank] and gets a [Focus] ***")
+        parser.add_line("* *** sozin used Focus on Attack Dice ***")
+        parser.add_line("* *** sozin added a Crit ***")
+
         parser.run_finite_state_machine()
-        game_tape = parser.game_tape
+        gt = parser.game_tape
+        throw = gt[0]
+        results = throw.results
+        self.assertEqual( 4, len(results))
 
-        self.assertEqual( 24, len(game_tape) )
+        d1 = results[0]
+        self.assertEqual( DiceFace.HIT, d1.final_dice.dice_face )
+        d2 = results[1]
+        self.assertEqual( DiceFace.HIT, d2.final_dice.dice_face)
+        d3 = results[2]
+        self.assertEqual( DiceFace.HIT, d3.final_dice.dice_face)
+        d4 = results[3]
+        self.assertEqual( DiceFace.CRIT, d4.final_dice.dice_face)
 
-        ge = game_tape.tape[ 0 ]
-        self.assertEqual( LogFileParser.PLAYER_ATTACKING, ge.game_state)
-        self.assertEqual( 1, ge.attack_set_number)
-        self.assertEqual( "Ryan Krippendorf", ge.player)
-        self.assertEqual( GameTapeEntryType.ATTACK_DICE, ge.entry_type)
-        self.assertEqual(1, ge.dice_number)
-        self.assertEqual( DiceRoll.FOCUS, ge.dice_value)
+    #@unittest.skip("school")
+    def test_basic_add_attack_dice_three(self):
+        session = myapp.db_connector.get_session()
+        parser = LogFileParser(session)
+        parser.add_line("* *** sozin Rolls to Attack: [Blank] ***")
+        parser.add_line("* *** sozin added a Crit ***")
+        parser.add_line("* *** sozin added a Hit ***")
+        parser.add_line("* *** sozin added a Hit ***")
 
-        ge = game_tape.tape[ 1 ]
-        self.assertEqual( LogFileParser.PLAYER_ATTACKING, ge.game_state)
-        self.assertEqual( 1, ge.attack_set_number)
-        self.assertEqual( "Ryan Krippendorf", ge.player)
-        self.assertEqual( GameTapeEntryType.ATTACK_DICE, ge.entry_type)
-        self.assertEqual(2, ge.dice_number)
-        self.assertEqual( DiceRoll.BLANK, ge.dice_value)
+        parser.run_finite_state_machine()
 
+        gt = parser.game_tape
+        throw = gt[0]
+        self.assertEqual( "sozin", throw.player.name)
+        self.assertEqual( 1, throw.attack_set_num)
+        self.assertEqual( throw.throw_type, DiceThrowType.ATTACK)
+        results = throw.results
+        self.assertEqual( 4, len(results))
 
-        ge = game_tape.tape[ 2 ]
-        self.assertEqual( LogFileParser.PLAYER_MODIFYING_ATTACK_DICE, ge.game_state)
-        self.assertEqual( 1, ge.attack_set_number)
-        self.assertEqual( "Ryan Krippendorf", ge.player)
-        self.assertEqual( GameTapeEntryType.ATTACK_DICE_MODIFICATION, ge.entry_type)
-        self.assertEqual(1, ge.dice_number)
-        self.assertEqual( DiceRoll.HIT, ge.dice_value)
+        d1 = results[0]
+        self.assertEqual( DiceFace.BLANK, d1.final_dice.dice_face )
+        d2 = results[1]
+        self.assertEqual( DiceFace.CRIT, d2.final_dice.dice_face)
+        d3 = results[2]
+        self.assertEqual( DiceFace.HIT, d3.final_dice.dice_face)
+        d4 = results[3]
+        self.assertEqual( DiceFace.HIT, d4.final_dice.dice_face)
 
-        ge = game_tape.tape[ 3 ]
-        self.assertEqual( LogFileParser.PLAYER_DEFENDING, ge.game_state)
-        self.assertEqual( 1, ge.attack_set_number)
-        self.assertEqual( "sozin", ge.player)
-        self.assertEqual( GameTapeEntryType.DEFENSE_DICE, ge.entry_type)
-        self.assertEqual(1, ge.dice_number)
-        self.assertEqual( DiceRoll.EVADE, ge.dice_value)
+    #@unittest.skip("school")
+    def test_basic_add_attack_dice_two(self):
+        session = myapp.db_connector.get_session()
+        parser = LogFileParser(session)
+        parser.add_line("* *** sozin Rolls to Attack: [Blank], [Blank], [Blank], [], [], [] ***")
+        parser.add_line("* *** sozin added a Crit ***")
+        parser.add_line("* *** sozin Re-Rolls Attack Die 1 [Blank] and gets a [Focus] ***")
+        parser.add_line("* *** sozin Re-Rolls Attack Die 2 [Blank] and gets a [Crit] ***")
+        parser.add_line("* *** sozin Re-Rolls Attack Die 3 [Blank] and gets a [Focus] ***")
+        parser.add_line("* *** sozin used Focus on Attack Dice ***")
+        parser.run_finite_state_machine()
 
-        ge = game_tape.tape[ 4 ]
-        self.assertEqual( LogFileParser.PLAYER_DEFENDING, ge.game_state)
-        self.assertEqual( 1, ge.attack_set_number)
-        self.assertEqual( "sozin", ge.player)
-        self.assertEqual( GameTapeEntryType.DEFENSE_DICE, ge.entry_type)
-        self.assertEqual(2, ge.dice_number)
-        self.assertEqual( DiceRoll.BLANK, ge.dice_value)
+        gt = parser.game_tape
+        throw = gt[0]
+        self.assertEqual( "sozin", throw.player.name)
+        self.assertEqual( 1, throw.attack_set_num)
+        self.assertEqual( throw.throw_type, DiceThrowType.ATTACK)
+        results = throw.results
+        self.assertEqual( 4, len(results))
 
-        #skip ahead a bit to look for interesting cases
-        ge = game_tape.tape[ 6 ]
-        self.assertEqual( LogFileParser.PLAYER_ATTACKING, ge.game_state)
-        self.assertEqual( 2, ge.attack_set_number)
-        self.assertEqual( "Ryan Krippendorf", ge.player)
-        self.assertEqual( GameTapeEntryType.ATTACK_DICE, ge.entry_type)
-        self.assertEqual(1, ge.dice_number)
-        self.assertEqual( DiceRoll.HIT, ge.dice_value)
+        d1 = results[0]
+        self.assertEqual( DiceFace.HIT, d1.final_dice.dice_face )
+        d2 = results[1]
+        self.assertEqual( DiceFace.CRIT, d2.final_dice.dice_face)
+        d3 = results[2]
+        self.assertEqual( DiceFace.HIT, d3.final_dice.dice_face)
+        d4 = results[3]
+        self.assertEqual( DiceFace.CRIT, d4.final_dice.dice_face)
 
-        ge = game_tape.tape[ 8 ]
-        self.assertEqual( LogFileParser.PLAYER_DEFENDING, ge.game_state)
-        self.assertEqual( 2, ge.attack_set_number)
-        self.assertEqual( "sozin", ge.player)
-        self.assertEqual( GameTapeEntryType.DEFENSE_DICE, ge.entry_type)
-        self.assertEqual(1, ge.dice_number)
-        self.assertEqual( DiceRoll.FOCUS, ge.dice_value)
+    #@unittest.skip("school")
+    def test_basic_add_attack_dice(self):
+        session = myapp.db_connector.get_session()
+        parser = LogFileParser(session)
+        parser.add_line("* *** sozin Rolls to Attack: [Hit], [Focus], [Blank], [], [], [], [] ***")
+        parser.add_line("* *** sozin added a Crit ***")
+        parser.add_line("* *** sozin Re-Rolls Attack Die 3 [Blank] and gets a [Focus] ***")
+        parser.add_line("* *** sozin used Focus on Attack Dice ***")
+        parser.run_finite_state_machine()
 
-        ge = game_tape.tape[ 9 ]
-        self.assertEqual( LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE, ge.game_state)
-        self.assertEqual( 2, ge.attack_set_number)
-        self.assertEqual( "sozin", ge.player)
-        self.assertEqual( GameTapeEntryType.DEFENSE_DICE_MODIFICATION, ge.entry_type)
-        self.assertEqual(1, ge.dice_number)
-        self.assertEqual( DiceRoll.EVADE, ge.dice_value)
+        gt = parser.game_tape
+        throw = gt[0]
+        self.assertEqual( "sozin", throw.player.name)
+        self.assertEqual( 1, throw.attack_set_num)
+        self.assertEqual( throw.throw_type, DiceThrowType.ATTACK)
+        results = throw.results
+        self.assertEqual( 4, len(results))
 
-
-
+        d1 = results[0]
+        self.assertEqual( DiceFace.HIT, d1.final_dice.dice_face )
+        d2 = results[1]
+        self.assertEqual( DiceFace.HIT, d2.final_dice.dice_face)
+        d3 = results[2]
+        self.assertEqual( DiceFace.HIT, d3.final_dice.dice_face)
+        d4 = results[3]
+        self.assertEqual( DiceFace.CRIT, d4.final_dice.dice_face)
 
 if __name__ == "__main__":
     unittest.main()

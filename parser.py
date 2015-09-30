@@ -21,6 +21,9 @@ class LogFileParser:
     def get_players(self):
         return self.players.keys()
 
+    def add_line(self, line):
+        self.clean_up_lines([line])
+
     def read_input_from_string(self, input):
         lines = input.split('\n')[:-1]
         self.clean_up_lines( lines  )
@@ -47,10 +50,10 @@ class LogFileParser:
     PLAYER_DEFENDING = "Player Defending"
     PLAYER_MODIFYING_DEFENSE_DICE = "Player Modifying Defense Dice"
     PLAYER_MODIFYING_ATTACK_DICE = "Player Modifying Attack Dice"
-
+    PLAYER_ADDING_ATTACK_DICE = "Player Adding Attack Dice"
+    PLAYER_ADDING_DEFENSE_DICE = "Player Adding Defense Dice"
 
     def run_finite_state_machine(self ):
-
 
         fs = fsm( [
             (
@@ -60,36 +63,18 @@ class LogFileParser:
                 self.begin_attack_set
             ),
             (
-                LogFileParser.PLAYER_ATTACKING,
-                LogFileParser.START,
-                lambda x: not self.player_is_rolling_dice(x),
-                self.end_attack_set
-            ),
-            (
-                LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
-                LogFileParser.START,
-                lambda x: not self.player_is_rolling_dice(x),
-                self.end_attack_set
-            ),
-            (
-                LogFileParser.PLAYER_DEFENDING,
-                LogFileParser.START,
-                lambda x: not self.player_is_rolling_dice(x),
-                self.end_attack_set
-            ),
-            (
-                LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE,
-                LogFileParser.START,
-                lambda x: not self.player_is_rolling_dice(x),
-                self.end_attack_set
-            ),
-            (
                 LogFileParser.START,
                 LogFileParser.PLAYER_DEFENDING,
                 lambda x: self.player_is_defending(x)
             ),
             (
                 LogFileParser.PLAYER_ATTACKING,
+                LogFileParser.START,
+                lambda x: not self.player_is_rolling_dice(x),
+                self.end_attack_set
+            ),
+            (
+                LogFileParser.PLAYER_ATTACKING,
                 LogFileParser.PLAYER_ATTACKING,
                 lambda x: self.player_is_rolling_attack_dice(x),
                 self.end_attack_set_and_begin_new_attack_set
@@ -100,61 +85,152 @@ class LogFileParser:
                 lambda x: self.player_is_defending(x),
                 self.add_defense
             ),
-            (
-                LogFileParser.PLAYER_DEFENDING,
-                LogFileParser.PLAYER_ATTACKING,
-                lambda x: self.player_is_rolling_attack_dice(x),
-                self.end_attack_set_and_begin_new_attack_set
-            ),
-            (
-                LogFileParser.PLAYER_DEFENDING,
-                LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE,
-                lambda x: self.player_is_modifying_defense_dice(x),
-                self.add_defense_modification
-            ),
-            (
-                LogFileParser.PLAYER_DEFENDING,
-                LogFileParser.PLAYER_DEFENDING,
-                lambda x: self.player_is_defending(x),
-                self.add_defense
-            ),
-            (
-                LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE,
-                LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE,
-                lambda x: self.player_is_modifying_defense_dice(x),
-                self.add_defense_modification
-            ),
-            (
-                LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE,
-                LogFileParser.PLAYER_ATTACKING,
-                lambda x: self.player_is_rolling_attack_dice(x),
-                self.end_attack_set_and_begin_new_attack_set
-            ),
-            (
-                LogFileParser.PLAYER_ATTACKING,
-                LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
-                lambda x: self.player_is_modifying_attack_dice(x),
-                self.add_attack_modification
-            ),
-            (
-                LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
-                LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
-                lambda x: self.player_is_modifying_attack_dice(x),
-                self.add_attack_modification
-            ),
-            (
-                LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
-                LogFileParser.PLAYER_ATTACKING,
-                lambda x: self.player_is_rolling_attack_dice(x),
-                self.end_attack_set_and_begin_new_attack_set
-            ),
-            (
-                LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
-                LogFileParser.PLAYER_DEFENDING,
-                lambda x: self.player_is_defending(x),
-                self.add_defense
-            )
 
+            (
+                LogFileParser.PLAYER_ATTACKING,
+                LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
+                lambda x: self.player_is_modifying_attack_dice(x),
+                self.add_attack_modification
+            ),
+            (
+                LogFileParser.PLAYER_ATTACKING,
+                LogFileParser.PLAYER_ADDING_ATTACK_DICE,
+                lambda x: self.player_is_adding_attack_dice(x),
+                self.add_attack_dice
+            ),
+            (
+                LogFileParser.PLAYER_ADDING_ATTACK_DICE,
+                LogFileParser.START,
+                lambda x: not self.player_is_rolling_dice(x),
+                self.end_attack_set
+            ),
+            (
+                LogFileParser.PLAYER_ADDING_ATTACK_DICE,
+                LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
+                lambda x: self.player_is_modifying_attack_dice(x),
+                self.add_attack_modification
+            ),
+            (
+                LogFileParser.PLAYER_ADDING_ATTACK_DICE,
+                LogFileParser.PLAYER_ADDING_ATTACK_DICE,
+                lambda x: self.player_is_adding_attack_dice(x),
+                self.add_attack_dice
+            ),
+            (
+                LogFileParser.PLAYER_ADDING_ATTACK_DICE,
+                LogFileParser.PLAYER_DEFENDING,
+                lambda x: self.player_is_defending(x),
+                self.add_defense
+            ),
+            (
+                LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
+                LogFileParser.START,
+                lambda x: not self.player_is_rolling_dice(x),
+                self.end_attack_set
+            ),
+            (
+                LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
+                LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
+                lambda x: self.player_is_modifying_attack_dice(x),
+                self.add_attack_modification
+            ),
+            (
+                LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
+                LogFileParser.PLAYER_ADDING_ATTACK_DICE,
+                lambda x: self.player_is_adding_attack_dice(x),
+                self.add_attack_dice
+            ),
+            (
+                LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
+                LogFileParser.PLAYER_ATTACKING,
+                lambda x: self.player_is_rolling_attack_dice(x),
+                self.end_attack_set_and_begin_new_attack_set
+            ),
+            (
+                LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
+                LogFileParser.PLAYER_DEFENDING,
+                lambda x: self.player_is_defending(x),
+                self.add_defense
+            ),
+            (
+                LogFileParser.PLAYER_DEFENDING,
+                LogFileParser.START,
+                lambda x: not self.player_is_rolling_dice(x),
+                self.end_attack_set
+            ),
+            (
+                LogFileParser.PLAYER_DEFENDING,
+                LogFileParser.PLAYER_ATTACKING,
+                lambda x: self.player_is_rolling_attack_dice(x),
+                self.end_attack_set_and_begin_new_attack_set
+            ),
+            (
+                LogFileParser.PLAYER_DEFENDING,
+                LogFileParser.PLAYER_DEFENDING,
+                lambda x: self.player_is_defending(x),
+                self.add_defense
+            ),
+             (
+                LogFileParser.PLAYER_DEFENDING,
+                LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE,
+                lambda x: self.player_is_modifying_defense_dice(x),
+                self.add_defense_modification
+            ),
+             (
+                LogFileParser.PLAYER_DEFENDING,
+                LogFileParser.PLAYER_ADDING_DEFENSE_DICE,
+                lambda x: self.player_is_adding_defense_dice(x),
+                self.add_defense_dice
+            ),
+            (
+                LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE,
+                LogFileParser.START,
+                lambda x: not self.player_is_rolling_dice(x),
+                self.end_attack_set
+            ),
+            ( LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE,
+              LogFileParser.PLAYER_ADDING_DEFENSE_DICE,
+              lambda x: self.player_is_adding_defense_dice(x),
+              self.add_defense_dice
+            ),
+            (
+                LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE,
+                LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE,
+                lambda x: self.player_is_modifying_defense_dice(x),
+                self.add_defense_modification
+            ),
+
+            (
+                LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE,
+                LogFileParser.PLAYER_ATTACKING,
+                lambda x: self.player_is_rolling_attack_dice(x),
+                self.end_attack_set_and_begin_new_attack_set
+            ),
+
+            (
+                LogFileParser.PLAYER_ADDING_DEFENSE_DICE,
+                LogFileParser.PLAYER_ADDING_DEFENSE_DICE,
+                lambda x: self.player_is_adding_defense_dice(x),
+                self.add_defense_dice
+            ),
+            (
+                LogFileParser.PLAYER_ADDING_DEFENSE_DICE,
+                LogFileParser.PLAYER_MODIFYING_DEFENSE_DICE,
+                lambda x: self.player_is_modifying_defense_dice(x),
+                self.add_defense_modification
+            ),
+            (
+                LogFileParser.PLAYER_ADDING_DEFENSE_DICE,
+                LogFileParser.PLAYER_ATTACKING,
+                lambda x: self.player_is_rolling_attack_dice(x),
+                self.end_attack_set_and_begin_new_attack_set
+            ),
+            (
+                LogFileParser.PLAYER_ADDING_DEFENSE_DICE,
+                LogFileParser.START,
+                lambda x: not self.player_is_rolling_dice(x),
+                self.end_attack_set
+            ),
         ] )
 
         fs.start(LogFileParser.START)
@@ -171,9 +247,6 @@ class LogFileParser:
 
         fs.event("")
 
-
-    def get_roll_sets(self):
-        return self.attack_sets
 
     def is_player_one(self,line):
         player = self.player_rolling_dice(line)
@@ -204,16 +277,28 @@ class LogFileParser:
                       "Evade" : DiceFace.EVADE }
 
 
+    def get_dice_added(self, line):
+        dice_added = re.findall( r'added\s+a[n]*\s+(\w+)', line)
+        dice_added[:] = (LogFileParser.face_translate[value] for value in dice_added if len(value) > 0)
+        return dice_added[0]
+
     def get_dice_rolled(self, line):
-        #some players have the annoying habit of putting []'s in their names, for example 'sepyx [FR]
+        #some players have the habit of putting []'s in their names, for example 'sepyx [FR]
         #these have to be stripped out before providing them to the below
         pre, post = line.split(':')
         dice_rolled = re.findall(r'\[(.*?)\]', post)
         dice_rolled[:] = (LogFileParser.face_translate[value] for value in dice_rolled if len(value) > 0)
         return dice_rolled
 
+    def player_is_adding_attack_dice(self, line):
+        return re.search(r'^\* \*\*\*\s+.*?\s+added\s+a\s+[Hit|Crit|Focus|Blank].*?\*\*\*',line)
+
+    def player_is_adding_defense_dice(self, line):
+        return re.search(r'^\* \*\*\*\s+.*?\s+added\s+a[n]*\s+[Evade|Focus|Blank].*?\*\*\*',line)
+
+
     def player_is_rolling_dice(self, line):
-        return re.search(r'^\* \*\*\*\s+.*?\s+[Rolls|Re-rolls|turns].*?\*\*\*',line)
+        return re.search(r'^\* \*\*\*\s+.*?\s+[Rolls|Re-rolls|turns|added].*?\*\*\*',line)
 
     def player_rolling_dice(self, line):
         match = re.match(r'^\* \*\*\*\s+(.*?)\s+[Rolls|Re-rolls|turns].*?\*\*\*',line)
@@ -278,6 +363,7 @@ class LogFileParser:
     def end_attack_set_and_begin_new_attack_set(self, game_state, value):
         self.begin_attack_set(game_state, value)
 
+
     def add_defense(self, fss, value):
         dice_rolled = self.get_dice_rolled(value)
         defending_player = self.player_rolling_dice(value)
@@ -318,62 +404,97 @@ class LogFileParser:
 
     def player_is_modifying_attack_dice(self, value):
         return self.player_rerolled_attack_dice(value) or\
-               self.player_turned_attack_dice(value)
+               self.player_turned_attack_dice(value) or\
+               self.player_using_focus_token_on_attack(value)
 
-    def player_turned_attack_dice(self, line):
-        return re.search(r'^\* \*\*\*\s+.*?\s+turns\s+Attack\s+Die.*?\*\*\*',line) or \
-               self.player_using_focus_token_on_attack(line )
+    def p(self, line):
+        return re.search(r'^\* \*\*\*\s+.*?\s+turns\s+Attack\s+Die.*?\*\*\*',line)
 
     #* *** sozin Re-Rolls Attack Die 1 [Focus] and gets a [Hit] ***
     def get_attack_dice_rerolled(self, line):
         dice_rolled = re.findall(r'.*?Re-Rolls\s+Attack\s+Die\s+(\d+).*?and\s+gets\s+a\s+\[(.*?)\]', line)
         return dice_rolled
 
-    #* *** sozin turns Attack Die 1 (Focus) into a [Hit] ***
-    def get_attack_dice_changed_by_set(self, line):
-        dice_rolled = re.findall(r'.*?turns\s+Attack\s+Die\s+(\d+).*?into\s+a\s+\[(.*?)\]', line)
-        return dice_rolled
+    def add_defense_dice(self,fss,value):
+        dice_added = self.get_dice_added(value)
+        dice = Dice(dice_type=DiceType.GREEN, dice_face=dice_added)
+        evade_throw = self.current_throw
+        results = evade_throw.results
+        dice_number = len(results)+1
+        result = DiceThrowResult(dice_num=dice_number,
+                                           dice=dice,
+                                           final_dice=dice)
+        results.append(result)
 
+    def add_attack_dice(self, fss, value):
+        dice_added = self.get_dice_added(value)
+        #this is probably too blissful, but give it a chance!
+        dice = Dice(dice_type=DiceType.RED, dice_face=dice_added)
+        dice_number = len(self.current_throw.results)+1
+        throw_result = DiceThrowResult(dice_num=dice_number, dice=dice, final_dice=dice)
+        self.current_throw.results.append(throw_result)
 
-    def add_attack_modification(self,game_state,value):
-        if self.player_using_focus_token_on_attack(value):
-            return
-
-        dice = []
-        adjustment_type = None
-        if self.player_rerolled_attack_dice(value):
-            dice = self.get_attack_dice_rerolled(value)
-            adjustment_type = DiceThrowAdjustmentType.REROLL
-        elif self.player_turned_attack_dice(value):
-            dice = self.get_attack_dice_changed_by_set(value)
-            adjustment_type = DiceThrowAdjustmentType.CONVERT
-
+    def process_attack_dice_turn(self, value):
+        dice = self.get_attack_dice_changed_by_set(value)
+        adjustment_type = DiceThrowAdjustmentType.TURNED
         dice_number = int(dice[0][0])
         dice_value = LogFileParser.face_translate[dice[0][1]]
+        self.process_attack_dice_modify(adjustment_type, dice_number, dice_value)
 
+    def process_attack_reroll(self,value):
+        dice = self.get_attack_dice_rerolled(value)
+        adjustment_type = DiceThrowAdjustmentType.REROLL
+        dice_number = int(dice[0][0])
+        dice_value = LogFileParser.face_translate[dice[0][1]]
+        self.process_attack_dice_modify(adjustment_type, dice_number, dice_value)
+
+    def process_attack_dice_modify(self, adjustment_type, dice_number, dice_value):
         modified_result = None
 
         try:
-            modified_result = self.current_throw.results[ dice_number - 1 ]
+            modified_result = self.current_throw.results[dice_number - 1]
         except:
             print("foo")
 
 
-        #if there were no adjustments, then the from is just from the base result
-        #otherwise its from the last adjustment
-
+        # if there were no adjustments, then the from is just from the base result
+        # otherwise its from the last adjustment
         from_dice = None
         if len(modified_result.adjustments) == 0:
-            from_dice       = modified_result.dice
+            from_dice = modified_result.dice
         else:
-            from_dice       = modified_result.adjustments[-1].to_dice
-
-        to_dice         = Dice(dice_type=DiceType.RED, dice_face=dice_value)
+            from_dice = modified_result.adjustments[-1].to_dice
+        to_dice = Dice(dice_type=DiceType.RED, dice_face=dice_value)
         modified_result.final_dice = to_dice
         adjustment = DiceThrowAdjustment(adjustment_type=adjustment_type,
+                                         from_dice=from_dice,
+                                         to_dice=to_dice)
+        modified_result.adjustments.append(adjustment)
+        modified_result.final_dice = to_dice
+
+    def process_attack_focus(self):
+        for dtr in self.current_throw.results:
+            if dtr.final_dice.dice_face == DiceFace.FOCUS:
+                from_dice = None
+                if len(dtr.adjustments) == 0:
+                    from_dice       = dtr.dice
+                else:
+                    from_dice       = dtr.adjustments[-1].to_dice
+                to_dice    = Dice(dice_type=DiceType.RED, dice_face=DiceFace.HIT)
+                adjustment = DiceThrowAdjustment(adjustment_type=DiceThrowAdjustmentType.CONVERT,
                                         from_dice=from_dice,
                                         to_dice=to_dice)
-        modified_result.adjustments.append( adjustment )
+                dtr.adjustments.append( adjustment )
+                dtr.final_dice = to_dice
+
+    def add_attack_modification(self,game_state,value):
+        if self.player_rerolled_attack_dice(value):
+            self.process_attack_reroll(value)
+        elif self.player_using_focus_token_on_attack(value):
+            self.process_attack_focus()
+        elif self.player_turned_attack_dice(value):
+            self.process_attack_dice_turn(value)
+
 
     def get_defense_dice_rerolled(self, line):
         dice_rolled = re.findall(r'.*?Re-Rolls\s+Defense\s+Die\s+(\d+).*?and\s+gets\s+a\s+\[(.*?)\]', line)
@@ -383,19 +504,45 @@ class LogFileParser:
         dice_rolled = re.findall(r'.*?turns\s+Defense\s+Die\s+(\d+).*?into\s+a\s+\[(.*?)\]', line)
         return dice_rolled
 
+    def get_attack_dice_changed_by_set(self, line):
+        dice_rolled = re.findall(r'.*?turns\s+Attack\s+Die\s+(\d+).*?into\s+a\s+\[(.*?)\]', line)
+        return dice_rolled
+
+
     def add_defense_modification(self,game_state,value):
         if self.player_using_focus_token_on_defense(value):
-            return
-        dice = []
-        adjustment_type = None
+            self.process_defense_focus()
+        elif self.player_rerolled_defense_dice(value):
+            self.process_defense_reroll(value)
+        elif self.player_turned_defense_dice():
+            self.process_defense_dice_turn(value)
 
-        if self.player_rerolled_defense_dice(value):
-            dice = self.get_defense_dice_rerolled(value)
-            adjustment_type = DiceThrowAdjustmentType.REROLL
-        elif self.player_turned_defense_dice(value):
-            dice = self.get_defense_dice_changed_by_set(value)
-            adjustment_type = DiceThrowAdjustmentType.CONVERT
+    def process_defense_focus(self):
+        for dtr in self.current_throw.results:
+            if dtr.final_dice.dice_face == DiceFace.FOCUS:
+                from_dice = None
+                if len(dtr.adjustments) == 0:
+                    from_dice       = dtr.dice
+                else:
+                    from_dice       = dtr.adjustments[-1].to_dice
+                to_dice    = Dice(dice_type=DiceType.GREEN, dice_face=DiceFace.EVADE)
+                adjustment = DiceThrowAdjustment(adjustment_type=DiceThrowAdjustmentType.CONVERT,
+                                        from_dice=from_dice,
+                                        to_dice=to_dice)
+                dtr.adjustments.append( adjustment )
+                dtr.final_dice = to_dice
 
+    def process_defense_dice_turn(self, value):
+        dice = self.get_defense_dice_changed_by_set(value)
+        adjustment_type = DiceThrowAdjustmentType.CONVERT
+        self.process_defense_dice_modification( dice, adjustment_type)
+
+    def process_defense_reroll(self,value):
+        dice = self.get_defense_dice_rerolled(value)
+        adjustment_type = DiceThrowAdjustmentType.REROLL
+        self.process_defense_dice_modification( dice, adjustment_type)
+
+    def process_defense_dice_modification(self,dice,adjustment_type):
         dice_number = int(dice[0][0])
         dice_value = LogFileParser.face_translate[dice[0][1]]
 
