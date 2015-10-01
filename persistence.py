@@ -180,11 +180,25 @@ class Player(UniqueMixin, Base):
         return query.filter(Player.name == name)
 
 
+
 class Dice(Base):
     __tablename__ = dice_table
     id = Column(Integer, primary_key=True)
     dice_type = Column(DiceType.db_type())
     dice_face = Column(DiceFace.db_type())
+    dice_origination = Column(String(8))
+
+
+    #sources for dice origination.  note, I'm not making these enums because they are too @#^#ing annoying
+    ROLLED = "ROLLED"
+    ADDED  = "ADDED"
+
+    def was_rolled(self):
+        return self.dice_origination == Dice.ROLLED
+
+    def was_added(self):
+        return self.dice_origination == Dice.ADDED
+
 
     def is_hit(self):
         return self.dice_face == DiceFace.HIT

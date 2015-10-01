@@ -1,7 +1,7 @@
 import unittest
 import myapp
 from parser import LogFileParser
-from persistence import DiceThrowType, DiceFace
+from persistence import DiceThrowType, DiceFace, Dice
 
 
 class TestFsm(unittest.TestCase):
@@ -38,12 +38,16 @@ class TestFsm(unittest.TestCase):
 
         d1 = results[0]
         self.assertEqual( DiceFace.EVADE, d1.final_dice.dice_face )
+        self.assertEqual( Dice.ROLLED, d1.final_dice.dice_origination)
         d2 = results[1]
         self.assertEqual( DiceFace.EVADE, d2.final_dice.dice_face)
+        self.assertEqual( Dice.ROLLED, d2.final_dice.dice_origination)
         d3 = results[2]
         self.assertEqual( DiceFace.EVADE, d3.final_dice.dice_face)
+        self.assertEqual( Dice.ROLLED, d3.final_dice.dice_origination)
         d4 = results[3]
         self.assertEqual( DiceFace.EVADE, d4.final_dice.dice_face)
+        self.assertEqual( Dice.ADDED, d4.final_dice.dice_origination)
 
 
     def test_attack_roll_focus_reroll_turn(self):
@@ -64,12 +68,17 @@ class TestFsm(unittest.TestCase):
 
         d1 = results[0]
         self.assertEqual( DiceFace.HIT, d1.final_dice.dice_face )
+        self.assertEqual( Dice.ROLLED, d1.final_dice.dice_origination)
         d2 = results[1]
         self.assertEqual( DiceFace.HIT, d2.final_dice.dice_face)
+        self.assertEqual( Dice.ROLLED, d2.final_dice.dice_origination)
         d3 = results[2]
         self.assertEqual( DiceFace.HIT, d3.final_dice.dice_face)
+        self.assertEqual( Dice.ROLLED, d3.final_dice.dice_origination)
         d4 = results[3]
         self.assertEqual( DiceFace.CRIT, d4.final_dice.dice_face)
+        self.assertEqual( Dice.ADDED, d4.final_dice.dice_origination)
+
 
     #@unittest.skip("school")
     def test_basic_add_attack_dice_three(self):
@@ -92,12 +101,18 @@ class TestFsm(unittest.TestCase):
 
         d1 = results[0]
         self.assertEqual( DiceFace.BLANK, d1.final_dice.dice_face )
+        self.assertEqual( Dice.ROLLED, d1.final_dice.dice_origination)
         d2 = results[1]
         self.assertEqual( DiceFace.CRIT, d2.final_dice.dice_face)
+        self.assertEqual( Dice.ADDED, d2.final_dice.dice_origination)
+
         d3 = results[2]
         self.assertEqual( DiceFace.HIT, d3.final_dice.dice_face)
+        self.assertEqual( Dice.ADDED, d3.final_dice.dice_origination)
+
         d4 = results[3]
         self.assertEqual( DiceFace.HIT, d4.final_dice.dice_face)
+        self.assertEqual( Dice.ADDED, d4.final_dice.dice_origination)
 
     #@unittest.skip("school")
     def test_basic_add_attack_dice_two(self):

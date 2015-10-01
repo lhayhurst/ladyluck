@@ -65,10 +65,10 @@
         <table class="tg1">
           <tr>
             <th class="tg-tr94">{{ player1.name }}</th>
-            <th class="tg-6997" colspan="5">{{ game_tape.total_attack_sets(player1)}} attack sets rolled<br>red dice rolled: {{ game_tape.total_reds(player1) }}<br>after rerolls: {{ game_tape.total_reds_after_rerolls(player1) }}</th>
-            <th class="tg-ii5f" rowspan="6"></th>
+            <th class="tg-6997" colspan="6">{{ game_tape.total_attack_sets(player1)}} attack sets rolled<br>red dice rolled: {{ game_tape.total_reds(player1) }}<br>after rerolls: {{ game_tape.total_reds_after_rerolls(player1) }}</th>
+            <th class="tg-ii5f" rowspan="7"></th>
             <th class="tg-tr94">{{ player2.name }}</th>
-            <th class="tg-6997" colspan="5">{{ game_tape.total_attack_sets(player2)}} attack sets rolled<br>red dice rolled: {{ game_tape.total_reds(player2) }}<br>after rerolls: {{ game_tape.total_reds_after_rerolls(player2) }}</th>
+            <th class="tg-6997" colspan="6">{{ game_tape.total_attack_sets(player2)}} attack sets rolled<br>red dice rolled: {{ game_tape.total_reds(player2) }}<br>after rerolls: {{ game_tape.total_reds_after_rerolls(player2) }}</th>
 
           </tr>
           <tr>
@@ -78,12 +78,14 @@
             <td class="tg-tr94">actual</td>
             <td class="tg-tr94">actual after rerolls</td>
             <td class="tg-tr94">actual after converts</td>
+            <td class="tg-tr94">total added</td>
             <td class="tg-tr94">face</td>
             <td class="tg-tr94">expected</td>
             <td class="tg-tr94">expected after rerolls</td>
             <td class="tg-tr94">actual</td>
             <td class="tg-tr94">actual after rerolls</td>
             <td class="tg-tr94">actual after converts</td>
+            <td class="tg-tr94">total added</td>
 
           </tr>
           <tr>
@@ -93,12 +95,14 @@
             <td class="{{ colorscale.colormap( game_tape.expected_unmodified_hits(player1), game_tape.unmodified_hits(player1) )  }}">{{ game_tape.unmodified_hits(player1) }}</td>
             <td class="{{ colorscale.colormap( game_tape.expected_hits_after_rerolls(player1), game_tape.total_red_hits_after_rerolls(player1) )  }}">{{ game_tape.total_red_hits_after_rerolls(player1) }}</td>
             <td class="{{ colorscale.colormap( game_tape.expected_hits_after_rerolls(player1), game_tape.total_red_hits_after_converts(player1) )  }}">{{ game_tape.total_red_hits_after_converts(player1) }}</td>
+            <td class="tg-ek65">{{ game_tape.hits_added(player1) }}</td>
             <td class="tg-bsv2">hits</td>
             <td class="tg-ek65">{{ game_tape.expected_unmodified_hits(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.expected_hits_after_rerolls(player2) }}</td>
             <td class="{{ colorscale.colormap( game_tape.expected_unmodified_hits(player2), game_tape.unmodified_hits(player2) )  }}">{{ game_tape.unmodified_hits(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.total_red_hits_after_rerolls(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.total_red_hits_after_converts(player2) }}</td>
+            <td class="tg-ek65">{{ game_tape.hits_added(player2)}}</td>
 
           </tr>
           <tr>
@@ -108,12 +112,14 @@
             <td class="tg-ek65">{{ game_tape.unmodified_crits(player1) }} </td>
             <td class="tg-ek65">{{ game_tape.total_red_crits_after_rerolls(player1) }}</td>
             <td class="tg-ek65">{{ game_tape.total_red_crits_after_converts(player1) }}</td>
+            <td class="tg-ek65">{{ game_tape.crits_added(player1) }}</td>
             <td class="tg-bsv2">crits</td>
             <td class="tg-ek65">{{ game_tape.expected_unmodified_crits(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.expected_crits_after_rerolls(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.unmodified_crits(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.total_red_crits_after_rerolls(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.total_red_crits_after_converts(player2) }}</td>
+            <td class="tg-ek65">{{ game_tape.crits_added(player2) }}</td>
 
 
           </tr>
@@ -124,12 +130,14 @@
             <td class="tg-ek65">{{ game_tape.unmodified_focuses(player1) }} </td>
             <td class="tg-ek65">{{ game_tape.total_red_focuses_after_rerolls(player1) }}</td>
             <td class="tg-ek65">{{ game_tape.total_red_focuses_after_converts(player1) }}</td>
+            <td class="tg-ek65">0</td>
             <td class="tg-bsv2">focuses</td>
             <td class="tg-ek65">{{ game_tape.expected_unmodified_focuses(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.expected_focuses_after_rerolls(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.unmodified_focuses(player2) }} </td>
             <td class="tg-ek65">{{ game_tape.total_red_focuses_after_rerolls(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.total_red_focuses_after_converts(player2) }}</td>
+            <td class="tg-ek65">0</td>
           </tr>
           <tr>
             <td class="tg-bsv2">blanks</td>
@@ -138,23 +146,24 @@
             <td class="tg-ek65">{{ game_tape.unmodified_blanks(player1) }} </td>
             <td class="tg-ek65">{{ game_tape.total_red_blanks_after_rerolls(player1) }}</td>
             <td class="tg-ek65">{{ game_tape.total_red_blanks_after_converts(player1) }}</td>
+            <td class="tg-ek65">0</td>
             <td class="tg-bsv2">blanks</td>
             <td class="tg-ek65">{{ game_tape.expected_unmodified_blanks(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.expected_blanks_after_rerolls(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.unmodified_blanks(player2) }} </td>
             <td class="tg-ek65">{{ game_tape.total_red_blanks_after_rerolls(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.total_red_blanks_after_converts(player2) }}</td>
-
+            <td class="tg-ek65">0</td>
           </tr>
           <tr>
             <td class="tg-ii5f" colspan="14"></td>
           </tr>
           <tr>
             <td class="tg-tr94">{{ player1.name }}</td>
-            <td class="tg-zlxb" colspan="5">green dice rolled: {{  game_tape.total_greens(player1) }}<br>after rerolls: {{ game_tape.total_greens_after_rerolls(player1) }}</td>
+            <td class="tg-zlxb" colspan="6">green dice rolled: {{  game_tape.total_greens(player1) }}<br>after rerolls: {{ game_tape.total_greens_after_rerolls(player1) }}</td>
             <td class="tg-ii5f" rowspan="5"></td>
             <td class="tg-tr94">{{ player2.name }}</td>
-            <td class="tg-zlxb" colspan="5">green dice rolled: {{  game_tape.total_greens(player2) }}<br>after rerolls: {{ game_tape.total_greens_after_rerolls(player2) }}</td>
+            <td class="tg-zlxb" colspan="6">green dice rolled: {{  game_tape.total_greens(player2) }}<br>after rerolls: {{ game_tape.total_greens_after_rerolls(player2) }}</td>
           </tr>
           <tr>
             <td class="tg-tr94">face</td>
@@ -163,12 +172,14 @@
             <td class="tg-tr94">actual</td>
             <td class="tg-tr94">actual after rerolls</td>
             <td class="tg-tr94">actual after converts</td>
+            <td class="tg-tr94">total added</td>
             <td class="tg-tr94">face</td>
             <td class="tg-tr94">expected</td>
             <td class="tg-tr94">expected after rerolls</td>
             <td class="tg-tr94">actual</td>
             <td class="tg-tr94">actual after rerolls</td>
             <td class="tg-tr94">actual after converts</td>
+            <td class="tg-tr94">total added</td>
 
           </tr>
           <tr>
@@ -178,13 +189,15 @@
             <td class="tg-ek65">{{ game_tape.unmodified_evades(player1) }} </td>
             <td class="tg-ek65">{{ game_tape.total_green_evades_after_rerolls(player1) }}</td>
             <td class="tg-ek65">{{ game_tape.total_green_evades_after_converts(player1) }}</td>
-
+            <td class="tg-ek65">{{ game_tape.total_green_evades_added(player1) }}</td>
             <td class="tg-bsv2">evades</td>
             <td class="tg-ek65">{{ game_tape.expected_unmodified_evades(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.expected_green_evades_after_rerolls(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.unmodified_evades(player2) }} </td>
             <td class="tg-ek65">{{ game_tape.total_green_evades_after_rerolls(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.total_green_evades_after_converts(player2) }}</td>
+            <td class="tg-ek65">{{ game_tape.total_green_evades_added(player2) }}</td>
+
           </tr>
           <tr>
             <td class="tg-fdty">focuses</td>
@@ -193,13 +206,14 @@
             <td class="tg-ek65">{{ game_tape.unmodified_green_focuses(player1) }} </td>
             <td class="tg-ek65">{{ game_tape.total_green_focuses_after_rerolls(player1) }}</td>
             <td class="tg-ek65">{{ game_tape.total_green_focuses_after_converts(player1) }}</td>
+            <td class="tg-ek65">0</td>
             <td class="tg-bsv2">focuses</td>
             <td class="tg-ek65">{{ game_tape.expected_unmodified_green_focuses(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.expected_green_focuses_after_rerolls(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.unmodified_green_focuses(player2) }} </td>
             <td class="tg-ek65">{{ game_tape.total_green_focuses_after_rerolls(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.total_green_focuses_after_converts(player2) }}</td>
-
+            <td class="tg-ek65">0</td>
           </tr>
           <tr>
             <td class="tg-fdty">blanks</td>
@@ -208,12 +222,15 @@
             <td class="tg-ek65">{{ game_tape.unmodified_green_blanks(player1) }} </td>
             <td class="tg-ek65">{{ game_tape.total_green_blanks_after_rerolls(player1) }}</td>
             <td class="tg-ek65">{{ game_tape.total_green_blanks_after_converts(player1) }}</td>
+            <td class="tg-ek65">0</td>
             <td class="tg-bsv2">blanks</td>
             <td class="tg-ek65">{{ game_tape.expected_unmodified_green_blanks(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.expected_green_blanks_after_rerolls(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.unmodified_green_blanks(player2) }} </td>
             <td class="tg-ek65">{{ game_tape.total_green_blanks_after_rerolls(player2) }}</td>
             <td class="tg-ek65">{{ game_tape.total_green_blanks_after_converts(player2) }}</td>
+            <td class="tg-ek65">0</td>
+
        </tr>
         </table>
 

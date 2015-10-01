@@ -83,7 +83,7 @@ class LogFileParser:
                 LogFileParser.PLAYER_ATTACKING,
                 LogFileParser.PLAYER_DEFENDING,
                 lambda x: self.player_is_defending(x),
-                self.add_defense
+                self.add_defense_roll
             ),
 
             (
@@ -120,7 +120,7 @@ class LogFileParser:
                 LogFileParser.PLAYER_ADDING_ATTACK_DICE,
                 LogFileParser.PLAYER_DEFENDING,
                 lambda x: self.player_is_defending(x),
-                self.add_defense
+                self.add_defense_roll
             ),
             (
                 LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
@@ -150,7 +150,7 @@ class LogFileParser:
                 LogFileParser.PLAYER_MODIFYING_ATTACK_DICE,
                 LogFileParser.PLAYER_DEFENDING,
                 lambda x: self.player_is_defending(x),
-                self.add_defense
+                self.add_defense_roll
             ),
             (
                 LogFileParser.PLAYER_DEFENDING,
@@ -168,7 +168,7 @@ class LogFileParser:
                 LogFileParser.PLAYER_DEFENDING,
                 LogFileParser.PLAYER_DEFENDING,
                 lambda x: self.player_is_defending(x),
-                self.add_defense
+                self.add_defense_roll
             ),
              (
                 LogFileParser.PLAYER_DEFENDING,
@@ -347,7 +347,9 @@ class LogFileParser:
                                 player=Player.as_unique( self.session, name=attacking_player))
         for dice_value in dice_rolled:
 
-            dice = Dice(dice_type=DiceType.RED, dice_face=dice_value)
+            dice = Dice(dice_type=DiceType.RED,
+                        dice_face=dice_value,
+                        dice_origination=Dice.ROLLED)
             throw_result = DiceThrowResult(dice_num=dice_number, dice=dice, final_dice=dice)
             dice_throw.results.append(throw_result)
             dice_number += 1
@@ -364,7 +366,7 @@ class LogFileParser:
         self.begin_attack_set(game_state, value)
 
 
-    def add_defense(self, fss, value):
+    def add_defense_roll(self, fss, value):
         dice_rolled = self.get_dice_rolled(value)
         defending_player = self.player_rolling_dice(value)
 
@@ -375,7 +377,9 @@ class LogFileParser:
                                 attack_set_num=self.current_attack_set,
                                 player=Player.as_unique(self.session, name=defending_player))
         for dice_value in dice_rolled:
-            dice = Dice( dice_type=DiceType.GREEN,dice_face=dice_value)
+            dice = Dice( dice_type=DiceType.GREEN,
+                         dice_face=dice_value,
+                         dice_origination=Dice.ROLLED)
             throw_result = DiceThrowResult(dice_num=dice_number,
                                            dice=dice,
                                            final_dice=dice)
@@ -417,7 +421,9 @@ class LogFileParser:
 
     def add_defense_dice(self,fss,value):
         dice_added = self.get_dice_added(value)
-        dice = Dice(dice_type=DiceType.GREEN, dice_face=dice_added)
+        dice = Dice(dice_type=DiceType.GREEN,
+                    dice_face=dice_added,
+                    dice_origination=Dice.ADDED)
         evade_throw = self.current_throw
         results = evade_throw.results
         dice_number = len(results)+1
@@ -429,7 +435,9 @@ class LogFileParser:
     def add_attack_dice(self, fss, value):
         dice_added = self.get_dice_added(value)
         #this is probably too blissful, but give it a chance!
-        dice = Dice(dice_type=DiceType.RED, dice_face=dice_added)
+        dice = Dice(dice_type=DiceType.RED,
+                    dice_face=dice_added,
+                    dice_origination=Dice.ADDED)
         dice_number = len(self.current_throw.results)+1
         throw_result = DiceThrowResult(dice_num=dice_number, dice=dice, final_dice=dice)
         self.current_throw.results.append(throw_result)
@@ -464,7 +472,9 @@ class LogFileParser:
             from_dice = modified_result.dice
         else:
             from_dice = modified_result.adjustments[-1].to_dice
-        to_dice = Dice(dice_type=DiceType.RED, dice_face=dice_value)
+        to_dice = Dice(dice_type=DiceType.RED,
+                       dice_face=dice_value,
+                       dice_origination=from_dice.dice_origination)
         modified_result.final_dice = to_dice
         adjustment = DiceThrowAdjustment(adjustment_type=adjustment_type,
                                          from_dice=from_dice,
@@ -480,7 +490,9 @@ class LogFileParser:
                     from_dice       = dtr.dice
                 else:
                     from_dice       = dtr.adjustments[-1].to_dice
-                to_dice    = Dice(dice_type=DiceType.RED, dice_face=DiceFace.HIT)
+                to_dice    = Dice(dice_type=DiceType.RED,
+                                  dice_face=DiceFace.HIT,
+                                  dice_origination=from_dice.dice_origination)
                 adjustment = DiceThrowAdjustment(adjustment_type=DiceThrowAdjustmentType.CONVERT,
                                         from_dice=from_dice,
                                         to_dice=to_dice)
@@ -525,7 +537,9 @@ class LogFileParser:
                     from_dice       = dtr.dice
                 else:
                     from_dice       = dtr.adjustments[-1].to_dice
-                to_dice    = Dice(dice_type=DiceType.GREEN, dice_face=DiceFace.EVADE)
+                to_dice    = Dice(dice_type=DiceType.GREEN,
+                                  dice_face=DiceFace.EVADE,
+                                  dice_origination=from_dice.dice_origination)
                 adjustment = DiceThrowAdjustment(adjustment_type=DiceThrowAdjustmentType.CONVERT,
                                         from_dice=from_dice,
                                         to_dice=to_dice)
@@ -554,7 +568,9 @@ class LogFileParser:
         else:
             from_dice       = modified_result.adjustments[-1].to_dice
 
-        to_dice         = Dice(dice_type=DiceType.GREEN, dice_face=dice_value)
+        to_dice         = Dice(dice_type=DiceType.GREEN,
+                               dice_face=dice_value,
+                               dice_origination=from_dice.dice_origination)
         modified_result.final_dice = to_dice
         adjustment = DiceThrowAdjustment(adjustment_type=adjustment_type,
                                         from_dice=from_dice,

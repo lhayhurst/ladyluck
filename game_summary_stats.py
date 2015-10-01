@@ -4,7 +4,7 @@ from flask import url_for
 from AttackSet import AttackSet, INITIAL, SCORE, END
 from counter import Counter, COUNTER
 from parser import LogFileParser
-from persistence import Game, DiceThrowType, DiceThrowAdjustmentType, DiceFace, DiceType
+from persistence import Game, DiceThrowType, DiceThrowAdjustmentType, DiceFace, DiceType, Dice
 from plots.player_plots import LuckPlot, AdvantagePlot, DamagePlot, VersusPlot
 from score import Score
 
@@ -29,6 +29,10 @@ class GameTapeRecord:
         self.attack_reroll_luck = None
         self.attack_convert = None
         self.attack_convert_luck = None
+        self.attack_turn = None
+        self.defense_turn = None
+        self.attack_add = None
+        self.defense_add = None
         self.attack_end = None
         self.attack_end_luck = None
         self.defense_roll = None
@@ -47,7 +51,7 @@ class GameTapeRecord:
     def get_image(self, dice):
         if dice == None:
             return url_for(STATIC, filename='blank.png')
-        if dice.dice_type == DiceType.RED:
+        if dice.dice_type == DiceType.RED and dice.dice_origination == Dice.ROLLED:
             if dice.dice_face == DiceFace.HIT:
                 return url_for(STATIC, filename="red_hit.png")
             elif dice.dice_face == DiceFace.CRIT:
@@ -56,13 +60,21 @@ class GameTapeRecord:
                 return url_for(STATIC,filename="red_focus.png")
             elif dice.dice_face == DiceFace.BLANK:
                 return url_for(STATIC,filename="red_blank.png")
-        else:
+        elif dice.dice_type == DiceType.RED and dice.dice_origination == Dice.ADDED:
+            if dice.dice_face == DiceFace.HIT:
+                return url_for(STATIC, filename="added_hit.png")
+            elif dice.dice_face == DiceFace.CRIT:
+                return url_for(STATIC,filename="added_crit.png")
+        elif dice.dice_type == DiceType.GREEN and dice.dice_origination == Dice.ROLLED:
             if dice.dice_face == DiceFace.EVADE:
                 return url_for(STATIC,filename="green_evade.png")
             elif dice.dice_face == DiceFace.FOCUS:
                 return url_for(STATIC,filename="green_focus.png")
             elif dice.dice_face == DiceFace.BLANK:
                 return url_for(STATIC,filename="green_blank.png")
+        elif dice.dice_type == DiceType.GREEN and dice.dice_origination == Dice.ADDED:
+            if dice.dice_face == DiceFace.EVADE:
+                return url_for(STATIC,filename="added_evade.png")
 
     def final_as_image(self):
         if self.was_cancelled == True:
@@ -107,6 +119,11 @@ class GameTapeRecord:
                 self.attack_convert = adjustment.to_dice
             elif atype == DiceThrowType.DEFEND:
                 self.defense_convert = adjustment.to_dice
+        elif adjustment.adjustment_type == DiceThrowAdjustmentType.TURNED:
+            if atype == DiceThrowType.ATTACK:
+                self.attack_turn = adjustment.to_dice
+            elif atype == DiceThrowType.DEFEND:
+                self.defense_turn = adjustment.to_dice
 
     def was_not_a_hit_or_crit(self):
         if self.was_hit() == True or self.was_crit() == True:
@@ -356,6 +373,14 @@ class GameTape(object):
 
 
     #total helper methods methods
+    def crits_added(self,player):
+        return self.initial_player_counter(player).red_crits_added
+
+    def hits_added(self,player):
+        return self.initial_player_counter(player).red_hits_added
+
+    def total_green_evades_added(self, player):
+        return self.initial_player_counter(player).green_evades_added
 
     def unmodified_hits(self, player):
         return self.initial_player_counter(player).red_hits

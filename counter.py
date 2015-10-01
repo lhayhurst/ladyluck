@@ -19,6 +19,12 @@ class Counter:
         self.green_blanks = 0
         self.green_eyes   = 0
 
+        self.red_hits_added = 0
+        self.red_crits_added = 0
+        self.green_evades_added = 0
+        self.total_reds_added = 0
+        self.total_greens_added = 0
+
         if recursive_counter:
             self.reroll_counter  = Counter()
             self.convert_counter = Counter()
@@ -31,25 +37,35 @@ class Counter:
     def count_convert(self, roll):
         self.convert_counter.count(roll)
 
-    def count(self, roll ):
-        if roll.is_attack():
+    def count(self, dice ):
+        if dice.is_attack() and dice.was_rolled():
             self.total_reds += 1
-            if roll.is_hit():
+            if dice.is_hit():
                 self.red_hits += 1
-            elif roll.is_crit():
+            elif dice.is_crit():
                 self.red_crits += 1
-            elif roll.is_focus():
+            elif dice.is_focus():
                 self.red_eyes += 1
-            elif roll.is_blank():
+            elif dice.is_blank():
                 self.red_blanks += 1
-        elif roll.is_defense():
+        elif dice.is_defense() and dice.was_rolled():
             self.total_greens += 1
-            if roll.is_evade():
+            if dice.is_evade():
                 self.green_evades += 1
-            elif roll.is_focus():
+            elif dice.is_focus():
                 self.green_eyes += 1
-            elif roll.is_blank():
+            elif dice.is_blank():
                 self.green_blanks += 1
+        elif dice.is_attack() and dice.was_added():
+            self.total_reds_added +=1
+            if dice.is_hit():
+                self.red_hits_added +=1
+            elif dice.is_crit():
+                self.red_crits_added +=1
+        elif dice.is_defense() and dice.was_added():
+            self.total_greens_added +=1
+            if dice.is_evade():
+                self.green_evades_added +=1
         return self
 
     NUM_REDS_HITS    = 3.0 / 8.0
@@ -91,11 +107,8 @@ class Counter:
         #this one is interesting, as the total number of focuses could go down due to the converts
         return self.total_red_focuses_after_rerolls() - self.convert_counter.red_hits - self.convert_counter.red_crits
 
-
     def total_green_evades_after_rerolls(self):
         return self.green_evades + self.reroll_counter.green_evades
-
-
 
     def total_green_focuses_after_converts(self):
         #same logic as above
@@ -113,7 +126,6 @@ class Counter:
 
     def total_green_blanks_after_converts(self):
         return self.total_green_blanks_after_rerolls() + self.convert_counter.green_blanks
-
 
     def total_green_focuses_after_rerolls(self):
         return self.green_eyes + self.reroll_counter.green_eyes
