@@ -51,21 +51,21 @@ class AttackSet:
     def get_hits(self):
         ret = []
         for rec in self.records:
-            if rec.was_hit():
+            if rec.was_hit() and not rec.attack_cancel:
                 ret.append(rec)
         return ret
 
     def get_crits(self):
         ret = []
         for rec in self.records:
-            if rec.was_crit():
+            if rec.was_crit() and not rec.attack_cancel:
                 ret.append(rec)
         return ret
 
     def get_evades(self):
         ret = []
         for rec in self.records:
-            if rec.was_evade():
+            if rec.was_evade() and not rec.defense_cancel:
                 ret.append(rec)
         return ret
 
@@ -78,7 +78,7 @@ class AttackSet:
     def hits_comma_crits_string(self):
 
         nnh = self.num_net_hits()
-        nnc = self.net_crits
+        nnc = self.num_net_crits()
         if nnh == 0 and nnc == 0:
             return "0h,0c"
         if nnh >0 and nnc == 0:
@@ -122,11 +122,15 @@ class AttackSet:
             elif num_evades == 0:
                 break
 
+        #and then cancel any remaining dice that were cancelled
+
 
     def score(self, tape_stats ):
 
         self.end_counter               = Counter(True)
         self.end_score                 = Score()
+
+        added_dice_records = []
 
         for rec in self.records:
 
@@ -139,6 +143,7 @@ class AttackSet:
 
                 initial_defend_score = tape_stats[rec.defending_player.name][INITIAL][SCORE]
                 initial_defend_counter = tape_stats[rec.defending_player.name][INITIAL][COUNTER]
+
 
             if rec.attack_roll is not None:
                 self.cumulative_attack_begin_luck = initial_attack_score.eval(
@@ -162,22 +167,23 @@ class AttackSet:
             if rec.attack_convert is not None:
                 initial_attack_counter.count_convert( rec.attack_convert )
 
-            if rec.defense_convert is not None:
-                initial_defend_counter.count_convert( rec.defense_convert )
-
-            if rec.attack_end is not None:
+            if rec.attack_end is not None and rec.attack_cancel is None:
                 luck = self.end_score.eval( rec.attack_end.dice_type, self.end_counter.count(rec.attack_end))
                 rec.attack_end_luck = luck
 
                 end_attack_score       = tape_stats[rec.attacking_player.name][END][SCORE]
                 end_attack_counter     = tape_stats[rec.attacking_player.name][END][COUNTER]
-                self.cumulative_attack_end_luck = end_attack_score.eval( rec.attack_end.dice_type, end_attack_counter.count( rec.attack_end ))
+                self.cumulative_attack_end_luck = end_attack_score.eval( rec.attack_end.dice_type,
+                                                                         end_attack_counter.count( rec.attack_end ))
 
-
-            if rec.defense_end is not None:
+            if rec.defense_end is not None and rec.defense_cancel is None:
                 luck = self.end_score.eval( rec.defense_end.dice_type, self.end_counter.count(rec.defense_end))
                 rec.defense_end_luck = luck
                 end_defense_score   = tape_stats[rec.defending_player.name][END][SCORE]
                 end_defense_counter = tape_stats[rec.defending_player.name][END][COUNTER]
-                self.cumulative_defense_end_luck = end_defense_score.eval( rec.defense_end.dice_type,end_defense_counter.count( rec.defense_end ) )
+                self.cumulative_defense_end_luck = end_defense_score.eval( rec.defense_end.dice_type,
+                                                                           end_defense_counter.count( rec.defense_end )
+                                                                           )
+        #finally do the added dice at the very end
+
 

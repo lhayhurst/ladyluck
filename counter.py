@@ -83,7 +83,6 @@ class Counter:
     def total_greens_after_rerolls(self):
         return self.total_greens + self.reroll_counter.total_greens
 
-
     def total_red_hits_after_rerolls(self):
         return self.red_hits + self.reroll_counter.red_hits
 
@@ -119,7 +118,6 @@ class Counter:
 
     def total_green_blanks_after_rerolls(self):
         return self.green_blanks + self.reroll_counter.green_blanks
-
 
     def total_red_blanks_after_converts(self):
         return self.total_red_blanks_after_rerolls() + self.convert_counter.red_blanks

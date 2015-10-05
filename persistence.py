@@ -25,98 +25,7 @@ dice_throw_table = "dice_throw"
 dice_throw_result_table = "dice_throw_result"
 dice_throw_adjustment_table = "dice_throw_adjustment"
 
-#game entry
-tourney_table = "tourney"
-list_table = "list"
-ship_table = "ship"
-pilot_table = "pilot"
-upgrade_table = "ship_upgrade"
-tourney_list_table = "tourney_list"
-
-
 Base = db_connector.get_base()
-
-class Faction(DeclEnum):
-    IMPERIAL = "imperial", "imperial"
-    REBEL    = "rebel", "rebel"
-
-class UpgradeType(DeclEnum):
-    TITLE = "title", "title"
-    DROID = "droid" , "droid"
-    CREW1  = "crew1" , "crew1"
-    CREW2  = "crew2" , "crew2"
-    EPT1   = "ept1", "ept1"
-    EPT2   = "ept2", "ept2"
-    MOD    = "mod", "mod"
-    SYSTEM = "system", "system"
-    BOMB_MINES = "bomb_mines", "bomb_mines"
-    CANNON = "cannon", "cannon"
-    TURRET = "turret", "turret"
-    TORPEDO1 = "torpedo1", "torpedo1"
-    TORPEDO2 = "torpedo2", "torpedo2"
-    MISSILE1 = "missile1", "missile1"
-    MISSILE2 = "missile2", "missile2"
-
-class ShipTypeTable(DeclEnum):
-    XWING = "X-Wing", "X-Wing"
-    YWING = "Y-Wing", "Y-Wing"
-    AWING = "A-Wing", "A-Wing"
-    BWING = "B-Wing", "B-Wing"
-    EWING = "E-Wing", "E-Wing"
-    YT1300 = "YT-1300", "YT-1300"
-    YT2400 = "YT-2400", "YT-2400"
-    HWK290 = "HWK-290", "HWK-290"
-    Z95 = "Z95 Headhunter", "Z95"
-    TIEFIGHTER = "Tie Fighter", "Tie Fighter"
-    TIEADVANCED = "Tie Advanced", "Tie Advanced"
-    TIEINTERCEPTOR = "Tie Interceptor", "Tie Interceptor"
-    FIRESPRAY = "Firespray-31", "Firespray-31"
-    LAMDA = "Lamda Shuttle", "Lambda Shuttle"
-    TIEBOMBER = "Tie Bomber", "Tie Bomber"
-    TIEDEFENDER = "Tie Defender", "Tie Defender"
-    TIEPHANTOM = "Tie Phantom", "Tie Phantom"
-    DECIMATOR = "VT-49 Decimator", "VT-49 Decimator"
-
-class Pilot(Base):
-    __tablename__ = pilot_table
-    id = Column(Integer, primary_key=True)
-    name = Column(String(128))
-
-
-class Ship(Base):
-    __tablename__ = ship_table
-    id = Column(Integer, primary_key=True)
-    ship_type = Column(ShipTypeTable.db_type())
-    ship_pilot = Column(Integer, ForeignKey('{0}.id'.format(pilot_table)))
-    list_id = Column(Integer, ForeignKey('{0}.id'.format(list_table)))  #parent
-
-class ShipUpgrade(Base):
-    __tablename__ = upgrade_table
-    id = Column(Integer, primary_key=True)
-    ship_id = Column(Integer, ForeignKey('{0}.id'.format(ship_table)))
-    upgrade_type = Column(UpgradeType.db_type())
-
-
-
-class List(Base):
-    __tablename__ = list_table
-    id = Column(Integer, primary_key=True)
-    name   = Column(String(128))
-    author = Column(String(128))
-    image  = Column(String(128))
-    faction     = Column(Faction.db_type())
-    ships       = relationship(Ship.__name__)
-
-class Tourney(Base):
-    __tablename__ = tourney_table
-    id = Column(Integer, primary_key=True)
-    tourney_name  = Column(String(128))
-
-class TourneyList(Base):
-    __tablename__ = tourney_list_table
-    id = Column( Integer, primary_key=True)
-    tourney_id = Column(Integer, ForeignKey('{0}.id'.format(tourney_table)))
-    list_id    = Column(Integer, ForeignKey('{0}.id'.format(list_table)))
 
 GamePlayers = Table(game_players_table, Base.metadata,
                     Column('game_id', Integer, ForeignKey('{0}.id'.format(game_table))),
@@ -154,6 +63,7 @@ class DiceThrowAdjustmentType(DeclEnum):
     CONVERT = 'C', 'CONVERT'
     NONE = 'N', 'NONE'
     TURNED = 'T', 'TURNED'
+    CANCELLED = 'X', 'CANCELLED'
 
 class LuckMeasure(DeclEnum):
     DOZIN = 'D', 'DOZIN',
@@ -199,7 +109,6 @@ class Dice(Base):
     def was_added(self):
         return self.dice_origination == Dice.ADDED
 
-
     def is_hit(self):
         return self.dice_face == DiceFace.HIT
 
@@ -243,6 +152,13 @@ class DiceThrowResult(Base):
     dice = relationship(Dice.__name__, foreign_keys='DiceThrowResult.dice_result_id', uselist=False)
     final_dice = relationship(Dice.__name__, foreign_keys='DiceThrowResult.final_dice_result_id', uselist=False)
     adjustments = relationship(DiceThrowAdjustment.__name__)
+
+    def was_cancelled(self):
+        if len(self.adjustments) == 0:
+            return False
+        last_adjustment = self.adjustments[-1]
+        if last_adjustment.adjustment_type == DiceThrowAdjustmentType.CANCELLED:
+            return True
 
 
 class DiceThrow(Base):

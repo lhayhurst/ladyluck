@@ -36,14 +36,16 @@ class Score:
         elif dice_type == DiceType.GREEN:
             return self.eval_green(counter)
 
-    def eval_red(self, counter):
+    def eval_red(self, counter, is_final=False):
 
         exp_hits         = counter.expected_red_hits()
-        hit_dev          = counter.red_hits - exp_hits
+        num_hits         = counter.red_hits
+        hit_dev          = num_hits - exp_hits
         weighted_hit_dev = hit_dev * Score.HIT_WEIGHT
 
         exp_crits         = counter.expected_red_crits()
-        crit_dev          = counter.red_crits - exp_crits
+        num_crits         = counter.red_crits
+        crit_dev          = num_crits  - exp_crits
         weighted_crit_dev = crit_dev * Score.CRIT_WEIGHT
 
         exp_focus          = counter.expected_red_eyes()
@@ -60,9 +62,10 @@ class Score:
 
         return luck
 
-    def eval_green(self, counter):
+    def eval_green(self, counter, is_final=False):
         exp_evades         = counter.expected_green_evades()
-        evade_dev          = counter.green_evades - exp_evades
+        num_evades         = counter.green_evades
+        evade_dev          = num_evades - exp_evades
         weighted_evade_dev = evade_dev * Score.EVADE_WEIGHT
 
         exp_focus          = counter.expected_green_eyes()

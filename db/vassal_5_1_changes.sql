@@ -1,5 +1,5 @@
 ALTER TABLE `sozin$ladyluck`.`dice_throw_adjustment`
-CHANGE COLUMN `adjustment_type` `adjustment_type` ENUM('C', 'R', 'N', 'T') NULL DEFAULT NULL ;
+CHANGE COLUMN `adjustment_type` `adjustment_type` ENUM('C', 'R', 'N', 'T', 'X') NULL DEFAULT NULL ;
 
 
 ALTER TABLE `sozin$ladyluck`.`dice`

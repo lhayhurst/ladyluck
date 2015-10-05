@@ -28,6 +28,7 @@ class GameTapeRecord:
         self.attack_reroll = None
         self.attack_reroll_luck = None
         self.attack_convert = None
+        self.attack_cancel = None
         self.attack_convert_luck = None
         self.attack_turn = None
         self.defense_turn = None
@@ -43,6 +44,7 @@ class GameTapeRecord:
         self.defense_convert_luck = None
         self.defense_end = None
         self.defense_end_luck = None
+        self.defense_cancel = None
         self.was_cancelled = False
 
     def cancel(self):
@@ -93,8 +95,22 @@ class GameTapeRecord:
     def attack_convert_as_img(self):
         return self.get_image(self.attack_convert)
 
+    def attack_cancelled_as_img(self):
+        return self.get_image(self.attack_cancel)
+
+    def defense_cancelled_as_img(self):
+        return self.get_image(self.defense_cancel)
+
     def attack_end_as_img(self):
+        if self.attack_cancel:
+            return self.get_image(None)
         return self.get_image(self.attack_end)
+
+    def attack_added_as_img(self):
+        return self.get_image(self.attack_add)
+
+    def defense_added_as_img(self):
+        return self.get_image(self.defense_add)
 
     def defense_roll_as_img(self):
         return self.get_image(self.defense_roll)
@@ -124,6 +140,12 @@ class GameTapeRecord:
                 self.attack_turn = adjustment.to_dice
             elif atype == DiceThrowType.DEFEND:
                 self.defense_turn = adjustment.to_dice
+        elif adjustment.adjustment_type == DiceThrowAdjustmentType.CANCELLED:
+            self.cancel()
+            if atype == DiceThrowType.ATTACK:
+                self.attack_cancel = adjustment.to_dice
+            elif atype == DiceThrowType.DEFEND:
+                self.defense_cancel = adjustment.to_dice
 
     def was_not_a_hit_or_crit(self):
         if self.was_hit() == True or self.was_crit() == True:
@@ -165,14 +187,17 @@ class GameTape(object):
                 attack_set.attacking_player = throw.player
 
                 for result in throw.results:
-                    record = GameTapeRecord( attacking_player=attack_set.attacking_player, defending_player=attack_set.defending_player)
+                    record = GameTapeRecord( attacking_player=attack_set.attacking_player,
+                                             defending_player=attack_set.defending_player)
                     attack_set.records.append(record)
                     record.dice_num = result.dice_num
                     record.attack_roll = result.dice
                     record.attack_end = result.final_dice
+                    if result.final_dice.was_added():
+                        record.attack_add = result.dice
+                        record.attack_roll = None
                     for adjustment in result.adjustments:
                         record.visit(adjustment, DiceThrowType.ATTACK)
-
             elif throw.throw_type == DiceThrowType.DEFEND:
                 attack_set = self.get_attack_set(throw.attack_set_num)
                 if attack_set is None: #happenswhen,for example,  I roll defense dice and then you roll defesnse dice
@@ -185,6 +210,9 @@ class GameTape(object):
                         record.defending_player = throw.player
                         record.defense_roll = result.dice
                         record.defense_end = result.final_dice
+                        if result.final_dice.was_added():
+                            record.defense_add = result.dice
+                            record.defense_roll = None
                         for adjustment in result.adjustments:
                             record.visit(adjustment, DiceThrowType.DEFEND)
                     else:

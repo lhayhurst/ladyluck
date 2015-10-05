@@ -364,17 +364,21 @@
 
             <table class="tg">
               <tr>
-                <th class="tg-031e" colspan="5">Attacker: {{ attack_set.attacking_player.name }}</th>
+                <th class="tg-031e" colspan="7">Attacker: {{ attack_set.attacking_player.name }}</th>
                 <th class="tg-nkg8" rowspan="2"><br>Final<br>Result</th>
-                <th class="tg-031e" colspan="5">Defender: {{ attack_set.defending_player.name }}</th>
+                <th class="tg-031e" colspan="7">Defender: {{ attack_set.defending_player.name }}</th>
               </tr>
               <tr>
                 <td class="tg-nkg8">dice num</td>
                 <td class="tg-nkg8">roll</td>
                 <td class="tg-nkg8">reroll</td>
                 <td class="tg-nkg8">convert</td>
+                <td class="tg-nkg8">added</td>
+                <td class="tg-nkg8">cancelled</td>
                 <td class="tg-nkg8">end</td>
                 <td class="tg-nkg8">end</td>
+                <td class="tg-nkg8">cancelled</td>
+                <td class="tg-nkg8">added</td>
                 <td class="tg-nkg8">convert</td>
                 <td class="tg-nkg8">reroll</td>
                 <td class="tg-nkg8">roll</td>
@@ -386,9 +390,13 @@
                     <td class="tg-o2"><img src={{ rec.attack_roll_as_img()  }}></td>
                     <td class="tg-o3"><img src={{ rec.attack_reroll_as_img() }}></td>
                     <td class="tg-o4"><img src={{ rec.attack_convert_as_img() }}></td>
+                    <td class="tg-o4"><img src={{ rec.attack_added_as_img() }}></td>
+                    <td class="tg-o4"><img src={{ rec.attack_cancelled_as_img() }}></td>
                     <td class="tg-o5"><img src={{ rec.attack_end_as_img() }}></td>
                     <td class="tg-o6"><img src={{ rec.final_as_image() }}></td>
                     <td class="tg-o5"><img src={{ rec.defense_end_as_img() }}></td>
+                    <td class="tg-o4"><img src={{ rec.defense_cancelled_as_img() }}></td>
+                    <td class="tg-o4"><img src={{ rec.defense_added_as_img() }}></td>
                     <td class="tg-o4"><img src={{ rec.defense_convert_as_img() }}></td>
                     <td class="tg-o3"><img src={{ rec.defense_reroll_as_img() }}></td>
                     <td class="tg-o2"><img src={{ rec.defense_roll_as_img() }}></td>
@@ -400,9 +408,13 @@
                     <td class="tg-nkg8" border="0" ></td>
                     <td class="tg-nkg8" border="0" ></td>
                     <td class="tg-nkg8" border="0" ></td>
+                    <td class="tg-nkg8" border="0" ></td>
+                    <td class="tg-nkg8" border="0" ></td>
                     <td class="tg-nkg8" border="0" >{{ attack_set.total_attack_end_luck() }}</td>
                     <td class="tg-nkg8" border="0" >{{  attack_set.hits_comma_crits_string() }}</td>
                     <td class="tg-nkg8" border="0" >{{ attack_set.total_defense_end_luck() }}</td>
+                    <td class="tg-nkg8" border="0" ></td>
+                    <td class="tg-nkg8" border="0" ></td>
                     <td class="tg-nkg8" border="0" ></td>
                     <td class="tg-nkg8" border="0" ></td>
                     <td class="tg-nkg8" border="0" ></td>

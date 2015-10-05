@@ -1,7 +1,7 @@
 import unittest
 import myapp
 from parser import LogFileParser
-from persistence import DiceThrowType, DiceFace, Dice
+from persistence import DiceThrowType, DiceFace, Dice, DiceThrowAdjustmentType
 
 
 class TestFsm(unittest.TestCase):
@@ -48,6 +48,33 @@ class TestFsm(unittest.TestCase):
         d4 = results[3]
         self.assertEqual( DiceFace.EVADE, d4.final_dice.dice_face)
         self.assertEqual( Dice.ADDED, d4.final_dice.dice_origination)
+
+
+    def test_cancel(self):
+        session = myapp.db_connector.get_session()
+        parser = LogFileParser(session)
+        parser.add_line("* *** sozin Rolls to Attack: [Crit], [Hit], [Hit], [], [], [] ***")
+        parser.add_line("* *** tal cancelled a Hit ***")
+        parser.add_line("* *** tal cancelled a Hit ***")
+        parser.run_finite_state_machine()
+        gt = parser.game_tape
+        throw = gt[0]
+        results = throw.results
+        self.assertEqual( 3, len(results))
+
+        d1 = results[0]
+        self.assertEqual( DiceFace.CRIT, d1.final_dice.dice_face )
+        self.assertEqual( Dice.ROLLED, d1.final_dice.dice_origination)
+        d2 = results[1]
+        self.assertEqual( DiceFace.HIT, d2.final_dice.dice_face)
+        self.assertEqual( 1, len(d2.adjustments))
+        adj = d2.adjustments[0]
+        self.assertEqual(DiceThrowAdjustmentType.CANCELLED, adj.adjustment_type)
+        d3 = results[2]
+        self.assertEqual( DiceFace.HIT, d3.final_dice.dice_face)
+        self.assertEqual( Dice.ROLLED, d3.final_dice.dice_origination)
+        adj = d3.adjustments[0]
+        self.assertEqual(DiceThrowAdjustmentType.CANCELLED, adj.adjustment_type)
 
 
     def test_attack_roll_focus_reroll_turn(self):
