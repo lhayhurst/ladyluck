@@ -277,6 +277,7 @@ class LogFileParser:
                       "Evade" : DiceFace.EVADE }
 
 
+
     def get_dice_cancelled(self, line):
         dice_added = re.findall( r'cancels\s+.*?(\w+)\s+\*\*\*', line)
         dice_added[:] = (LogFileParser.face_translate[value] for value in dice_added if len(value) > 0)
