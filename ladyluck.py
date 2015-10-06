@@ -199,10 +199,6 @@ def delete_game():
 
     myapp.db_connector.get_session().delete(game)
     myapp.db_connector.get_session().commit()
-
-
-
-
     return redirect(url_for('editgames'))
 
 @app.route('/leaderboard')

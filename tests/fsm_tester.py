@@ -54,8 +54,8 @@ class TestFsm(unittest.TestCase):
         session = myapp.db_connector.get_session()
         parser = LogFileParser(session)
         parser.add_line("* *** sozin Rolls to Attack: [Crit], [Hit], [Hit], [], [], [] ***")
-        parser.add_line("* *** tal cancelled a Hit ***")
-        parser.add_line("* *** tal cancelled a Hit ***")
+        parser.add_line("* *** tal cancels Hit ***")
+        parser.add_line("* *** tal cancels Hit ***")
         parser.run_finite_state_machine()
         gt = parser.game_tape
         throw = gt[0]

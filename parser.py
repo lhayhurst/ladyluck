@@ -278,7 +278,7 @@ class LogFileParser:
 
 
     def get_dice_cancelled(self, line):
-        dice_added = re.findall( r'cancelled\s+a[n]*\s+(\w+)', line)
+        dice_added = re.findall( r'cancels\s+.*?(\w+)\s+\*\*\*', line)
         dice_added[:] = (LogFileParser.face_translate[value] for value in dice_added if len(value) > 0)
         return dice_added[0]
 
@@ -296,10 +296,10 @@ class LogFileParser:
         return dice_rolled
 
     def player_cancelled_attack_dice(self, line):
-        return re.search(r'^\* \*\*\*\s+.*?\s+cancelled\s+a\s+[Hit|Crit].*?\*\*\*',line)
+        return re.search(r'^\* \*\*\*\s+.*?\s+cancels\s+.*?[Hit|Crit|Focus|Blank].*?\*\*\*',line)
 
     def player_cancelled_defense_dice(self, line):
-        return re.search(r'^\* \*\*\*\s+.*?\s+cancelled\s+a[n]*\s+Evade.*?\*\*\*',line)
+        return re.search(r'^\* \*\*\*\s+.*?\s+cancels\s+.*?[Evade|Focus|Blank].*?\*\*\*',line)
 
     def player_added_attack_dice(self, line):
         return re.search(r'^\* \*\*\*\s+.*?\s+added\s+a\s+[Hit|Crit|Focus|Blank].*?\*\*\*',line)
@@ -309,7 +309,7 @@ class LogFileParser:
 
 
     def player_is_rolling_dice(self, line):
-        return re.search(r'^\* \*\*\*\s+.*?\s+[Rolls|Re-rolls|turns|added|cancelled].*?\*\*\*',line)
+        return re.search(r'^\* \*\*\*\s+.*?\s+[Rolls|Re-rolls|turns|added|cancels].*?\*\*\*',line)
 
     def player_rolling_dice(self, line):
         match = re.match(r'^\* \*\*\*\s+(.*?)\s+[Rolls|Re-rolls|turns].*?\*\*\*',line)
