@@ -37,23 +37,6 @@ def shutdown_session(exception=None):
 def about():
     return render_template('about.html')
 
-@app.route("/worlds2014")
-def worlds():
-    m = XWingMetaData()
-    return render_template('worlds.html', meta=m, image_src="static/worlds/Worlds Flight 1/Aaron Bonar 5.jpeg" )
-
-@app.route("/add_squad",methods=['POST'])
-def add_squad():
-    list = xwingmetadata.XWingList(request.form )
-    print list.player
-    print list.faction
-    print list.points
-    i = 1
-    for ship in list.ships_submitted:
-        for upgrade in ship.keys():
-            print "Ship %d: %s : %s " % (i, upgrade, ship[upgrade ] )
-    return redirect(url_for('new'))
-
 
 @app.route("/games" )
 def games():
@@ -285,7 +268,7 @@ def game():
 
     if luck_result is None:
 
-        luck_result = calculate_luck_result(game, game_tape)
+        luck_result = calculate_luck_result(game, game_tape=game_tape)
         if luck_result is not None:
             myapp.db_connector.get_session().add(luck_result)
             myapp.db_connector.get_session().commit()

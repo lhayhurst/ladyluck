@@ -544,7 +544,7 @@ class LogFileParser:
             self.process_defense_focus()
         elif self.player_rerolled_defense_dice(value):
             self.process_defense_reroll(value)
-        elif self.player_turned_defense_dice():
+        elif self.player_turned_defense_dice(value):
             self.process_defense_dice_turn(value)
 
     def process_defense_focus(self):
