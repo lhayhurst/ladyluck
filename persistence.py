@@ -257,6 +257,10 @@ class PersistenceManager:
     def get_games(self, session):
         return session.query(Game).order_by(desc(Game.game_played_time)).all()
 
+    def delete_all_luck_results(self, session):
+        session.query(LuckResult).delete()
+        session.commit()
+
     def get_worst_green_luck_scores(self, session):
         return session.query(LuckResult).order_by(asc(LuckResult.initial_defense_luck))
 

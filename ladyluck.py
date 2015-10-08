@@ -243,15 +243,22 @@ def calculate_luck_result(game, game_tape):
 
         return luck_result
 
-@app.route('/populate_luck_scores')
+@app.route('/generate_leaderboard')
 def populate_luck_scores():
+    pm = PersistenceManager(myapp.db_connector)
+    pm.delete_all_luck_results(myapp.db_connector.get_session())
     games = PersistenceManager(myapp.db_connector).get_games(myapp.db_connector.get_session())
+    i = 0
+    print "populating " + str(len(games)) + " luck results "
     for game in games:
-        luck_result = calculate_luck_result(game, score_tape=True)
+        if i % 100 == 0:
+            print "calculating luck result for " + str(i) + "th game"
+        i += 1
+        luck_result = calculate_luck_result(game, game_tape=None)
         if luck_result is not None:
             myapp.db_connector.get_session().add( luck_result )
     myapp.db_connector.get_session().commit()
-    return redirect(url_for('editgames'))
+    return redirect(url_for('leaderboard'))
 
 
 
